@@ -1,8 +1,8 @@
 #!/bin/bash
 
-SESSION=$(./session.sh)
-ENDPOINT="172.16.10.15"
 ID=$1
+SESSION=$(./drv.session.sh)
+HOST=$(cat nsx-credentials | jq -r .hostname)
 
 function isSuccess { # add CASE for multiple 2XX and 3XX codes
 	local STRING=${1}

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-SESSION=$(./session.sh)
-HOST=172.16.10.15
+SESSION=$(./drv.session.sh)
+HOST=$(cat nsx-credentials | jq -r .hostname)
+
 function isSuccess {
 	local STRING=${1}
 	REGEX='^(.*)([0-9]{3})$'

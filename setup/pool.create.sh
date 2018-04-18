@@ -1,9 +1,9 @@
 #!/bin/bash
 
-SESSION=$(./session.sh)
-ENDPOINT="172.16.10.15"
 NAME=$1
 CIDR=$2
+SESSION=$(./drv.session.sh)
+HOST=$(cat nsx-credentials | jq -r .hostname)
 
 REGEX='([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)[0-9]{1,3}\/[0-9]{2}'
 if [[ $CIDR =~ $REGEX ]]; then # naive match - for 24 only

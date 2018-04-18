@@ -1,8 +1,9 @@
 #!/bin/bash
 
 HOST=$1
-NSXM=172.16.10.15
-THUMBPRINT=$(./sslthumbprint.sh "$NSXM")
+NSXM=$(cat nsx-credentials | jq -r .hostname)
+THUMBPRINT=$(./thumbprint.sh "$NSXM")
+
 ssh root@${HOST} <<EOF
 	vsipioctl clearallfilters
 	/etc/init.d/netcpad stop

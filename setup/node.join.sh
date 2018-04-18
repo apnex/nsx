@@ -19,7 +19,7 @@ function isSuccess {
 	fi
 }
 
-URL="https://$ENDPOINT/api/v1/fabric/nodes"
+URL="https://$HOST/api/v1/fabric/nodes"
 printf "NSX join host [${1}] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {

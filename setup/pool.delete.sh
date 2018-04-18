@@ -1,7 +1,7 @@
 #!/bin/bash
 
-HOST=172.16.10.15
 ID=$1
+HOST=$(cat nsx-credentials | jq -r .hostname)
 
 function isSuccess {
 	local STRING=${1}
@@ -21,7 +21,7 @@ function isSuccess {
 }
 
 if [ -n "$ID" ]; then
-	SESSION=$(./session.sh)
+	SESSION=$(./drv.session.sh)
 	URL="https://$HOST/api/v1/pools/ip-pools/$ID"
 	printf "Retrieving [$URL]... " 1>&2
 	RESPONSE=$(curl -k -b cookies.txt -w "%{http_code}" -G -X DELETE \
