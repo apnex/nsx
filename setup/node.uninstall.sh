@@ -1,10 +1,7 @@
 #!/bin/bash
+source ./drv.source
 
-HOST=$1
-NSXM=$(cat nsx-credentials | jq -r .hostname)
-THUMBPRINT=$(./thumbprint.sh "$NSXM")
-
-ssh root@${HOST} <<EOF
+ssh root@${1} <<EOF
 	vsipioctl clearallfilters
 	/etc/init.d/netcpad stop
 	esxcli software vib remove \

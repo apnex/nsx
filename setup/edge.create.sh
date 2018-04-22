@@ -1,27 +1,10 @@
 #!/bin/bash
+source ./drv.core
 
-SESSION=$(./session.sh)
-ENDPOINT="172.16.10.15"
 HOSTNAME=$1
 ADDRESS=$2
 
-function isSuccess { # add CASE for multiple 2XX and 3XX codes
-	local STRING=${1}
-	REGEX='^(.*)([0-9]{3})$'
-	if [[ $STRING =~ $REGEX ]]; then
-		HTTPBODY=${BASH_REMATCH[1]}
-		HTTPCODE=${BASH_REMATCH[2]}
-		printf "[$HTTPCODE]" 1>&2
-	fi
-	if [[ $HTTPCODE -eq "200" ]]; then
-		printf " - SUCCESS\n" 1>&2
-	else
-		printf " - ERROR\n" 1>&2
-		printf "$HTTPBODY"
-	fi
-}
-
-URL="https://$ENDPOINT/api/v1/fabric/nodes"
+URL="https://$HOST/api/v1/fabric/nodes"
 printf "NSX create edge [$HOSTNAME:$ADDRESS] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
