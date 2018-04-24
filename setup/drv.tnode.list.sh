@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./drv.core
+source drv.core
 
 URL="https://$HOST/api/v1/transport-nodes"
 printf "Retrieving [$URL]... " 1>&2

@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./drv.pool.list.sh
+source drv.core
 
 URL="https://$HOST/api/v1/pools/ip-pools"
 printf "Retrieving [$URL]... " 1>&2

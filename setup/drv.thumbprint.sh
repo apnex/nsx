@@ -1,19 +1,15 @@
 #!/bin/bash
 
-HOST=$1
 OPT=$2
 PAYLOAD=$(echo -n | openssl s_client -connect "$1" 2>/dev/null)
 
 if [[ "$OPT" == "thumbprint" ]]; then
 	PRINT=$(echo "$PAYLOAD" | openssl x509 -noout -fingerprint -sha256)
-	#REGEX='^(.*)=(([0-9A-F:]{3}{32})$'
-	REGEX='^(.*)=([0-9A-F:]{63})$'
-	REGEX='^(.*)=(.*)$'
+	#REGEX='^(.*)=(.*)$'
+	REGEX='^(.*)=(([0-9A-Fa-f]{2}[:])+([0-9A-Fa-f]{2}))$'
 	if [[ $PRINT =~ $REGEX ]]; then
 		TYPE=${BASH_REMATCH[1]}
 		CODE=${BASH_REMATCH[2]}
-		#printf "[$TYPE]\n"
-		#printf "$CODE"
 	fi
 	echo $CODE | sed "s/\(.*\)/\L\1/g" | sed "s/://g"
 else

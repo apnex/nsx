@@ -1,35 +1,18 @@
 #!/bin/bash
+source drv.core
 
 NAME=$1
 SWITCH=$2
 TYPE=$3
-SESSION=$(./drv.session.sh)
-HOST=$(cat nsx-credentials | jq -r .hostname)
 
-function isSuccess { # add CASE for multiple 2XX and 3XX codes
-	local STRING=${1}
-	REGEX='^(.*)([0-9]{3})$'
-	if [[ $STRING =~ $REGEX ]]; then
-		HTTPBODY=${BASH_REMATCH[1]}
-		HTTPCODE=${BASH_REMATCH[2]}
-		printf "[$HTTPCODE]" 1>&2
-	fi
-	if [[ $HTTPCODE -eq "200" ]]; then
-		printf " - SUCCESS\n" 1>&2
-	else
-		printf " - ERROR\n" 1>&2
-		printf "$HTTPBODY"
-	fi
-}
-
-URL="https://$ENDPOINT/api/v1/transport-nodes"
-printf "NSX create transport-node [$NAME:$SWITCH:$TYPE] - [$URL]... " 1>&2
+URL="https://$HOST/api/v1/transport-nodes"
+printf "NSX CREATE transport-node [$NAME:$SWITCH:$TYPE] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
 	"resource_type": "TransportNode",
 	"display_name": "node-01.lab",
 	"description": "NSX configured Test Transport Node",
-	"node_id": "1f3af28a-8231-459f-9f47-377029ae6068",
+	"node_id": "bbea4ca7-9977-4313-ba95-15bfe837037c",
 	"host_switch_spec": {
 		"resource_type": "StandardHostSwitchSpec",
 		"host_switches": [

@@ -1,21 +1,21 @@
 #!/bin/bash
-source ./drv.core
-THUMBPRINT=$(./thumbprint.sh ${1})
+source drv.core
 
+ESXPRINT=$(./thumbprint.sh "$1")
 URL="https://$HOST/api/v1/fabric/nodes"
-printf "NSX join host [${1}] - [$URL]... " 1>&2
+printf "NSX join NODE [$1] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
 	"resource_type": "HostNode",
 	"display_name": "esx01.lab",
 	"ip_addresses": [
-		"172.16.10.101"
+		"$1"
 	],
 	"os_type": "ESXI",
 	"host_credential": {
 		"username": "root",
 		"password": "VMware1!",
-		"thumbprint": "${THUMBPRINT}"
+		"thumbprint": "$ESXPRINT"
 	}
 }
 CONFIG

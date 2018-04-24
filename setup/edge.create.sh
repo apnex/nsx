@@ -1,15 +1,25 @@
 #!/bin/bash
 source ./drv.core
 
-HOSTNAME=$1
-ADDRESS=$2
+EDGENAME=$1
+EDGEADDRESS=$2
+#context: {
+#	cluster
+#	host
+#	datastore
+#	vcenter
+#	management
+#	port1
+#	port2
+#	port3
+#}
 
 URL="https://$HOST/api/v1/fabric/nodes"
-printf "NSX create edge [$HOSTNAME:$ADDRESS] - [$URL]... " 1>&2
+printf "NSX create edge [$EDGENAME:$EDGEADDRESS] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
 	"resource_type": "EdgeNode",
-	"display_name": "$HOSTNAME",
+	"display_name": "$EDGENAME",
 	"deployment_type": "VIRTUAL_MACHINE",
 	"deployment_config": {
 		"form_factor": "SMALL",
@@ -23,7 +33,7 @@ read -r -d '' PAYLOAD <<CONFIG
 			"management_port_subnets": [
 				{
 					"ip_addresses": [
-						"$ADDRESS"
+						"$EDGEADDRESS"
 					],
 					"prefix_length": 24
 				}
@@ -37,7 +47,7 @@ read -r -d '' PAYLOAD <<CONFIG
 				"172.16.10.1"
 			],
 			"host_id": "host-10",
-			"hostname": "$HOSTNAME",
+			"hostname": "$EDGENAME",
 			"placement_type": "VsphereDeploymentConfig",
 			"storage_id": "datastore-11",
 			"vc_id": "93721424-4764-48ed-a76c-91ded5ac4d11"

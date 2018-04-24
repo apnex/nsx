@@ -3,7 +3,7 @@ USER=$(cat nsx-credentials | jq -r .username)
 PASS=$(cat nsx-credentials | jq -r .password)
 HOST=$(cat nsx-credentials | jq -r .hostname)
 DOMAIN=$(cat nsx-credentials | jq -r .domain)
-THUMBPRINT=$(./thumbprint.sh "$HOST")
+#THUMBPRINT=$(./thumbprint.sh "$HOST")
 
 function login {
 	URL="https://$HOST/api/session/create"

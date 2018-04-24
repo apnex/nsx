@@ -1,10 +1,11 @@
 #!/bin/bash
+source drv.core
 
-HOST=$(cat nsx-credentials | jq -r .hostname)
-SESSION=$(./drv.session.sh)
 URL="https://$HOST/api/v1/trust-management/certificates"
-
-curl -k -b cookies.txt -X GET \
+printf "Retrieving [$URL]... " 1>&2
+RESPONSE=$(curl -k -b cookies.txt -w "%{http_code}" -X GET \
 -H "`grep X-XSRF-TOKEN headers.txt`" \
 -H "Content-Type: application/json" \
-"$URL" 2>/dev/null
+"$URL" 2>/dev/null)
+isSuccess "$RESPONSE"
+echo "$HTTPBODY"
