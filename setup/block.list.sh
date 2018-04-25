@@ -1,12 +1,13 @@
 #!/bin/bash
 
 RAW=$1
-PAYLOAD=$(./drv.node.list.sh)
+
+PAYLOAD=$(./drv.block.list.sh)
 read -r -d '' JQSPEC <<CONFIG
 	.results |
-		["id", "resource_type", "display_name", "ip_address"]
-		,["-----", "-----", "-----", "-----"]
-		,(.[] | [.id, .resource_type, .display_name, .ip_addresses[0]])
+		["id", "display_name", "cidr"]
+		,["-----", "-----", "-----"]
+		,(.[] | [.id, .display_name, .cidr])
 	| @csv
 CONFIG
 if [[ "$RAW" == "json" ]]; then

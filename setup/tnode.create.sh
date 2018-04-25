@@ -1,16 +1,14 @@
 #!/bin/bash
 source drv.core
 
-NAME=$1
-SWITCH=$2
-TYPE=$3
+TNNAME=$1
 
 URL="https://$HOST/api/v1/transport-nodes"
-printf "NSX CREATE transport-node [$NAME:$SWITCH:$TYPE] - [$URL]... " 1>&2
+printf "NSX CREATE transport-node [$TNNAME] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
 	"resource_type": "TransportNode",
-	"display_name": "node-01.lab",
+	"display_name": "$TNNAME",
 	"description": "NSX configured Test Transport Node",
 	"node_id": "bbea4ca7-9977-4313-ba95-15bfe837037c",
 	"host_switch_spec": {

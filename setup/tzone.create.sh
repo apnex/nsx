@@ -1,18 +1,18 @@
 #!/bin/bash
 source drv.core
 
-NAME=$1
-SWITCH=$2
-TYPE=$3
+TZNAME=$1
+TZSWITCH=$2
+TZTYPE=$3
 
 URL="https://$HOST/api/v1/transport-zones"
-printf "NSX create zone [$NAME:$SWITCH:$TYPE] - [$URL]... " 1>&2
+printf "NSX create zone [$TZNAME:$TZSWITCH:$TZTYPE] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
-	"display_name":"$NAME",
-	"host_switch_name":"$SWITCH",
-	"description":"$TYPE Transport-Zone",
-	"transport_type":"$TYPE"
+	"display_name":"$TZNAME",
+	"host_switch_name":"$TZSWITCH",
+	"description":"$TZTYPE Transport-Zone",
+	"transport_type":"$TZTYPE"
 }
 CONFIG
 RESPONSE=$(curl -v -k -b cookies.txt -w "%{http_code}" -X POST \

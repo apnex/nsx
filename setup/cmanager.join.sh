@@ -1,19 +1,22 @@
 #!/bin/bash
 source drv.core
 
-VCSANAME=$1
-VCSAPRINT=$(./thumbprint.sh "$VCSANAME")
+VCSAHOST=$(cat vcsa-credentials | jq -r .hostname)
+VCSAUSER=$(cat vcsa-credentials | jq -r .username)
+VCSAPASS=$(cat vcsa-credentials | jq -r .password)
+VCSAPRINT=$(./thumbprint.sh "$VCSAHOST" | sed -e :a -e 's/\([0-9A-Fa-f]\{2\}\)\([0-9A-Fa-f]\{2\}\)/\1:\2/;ta')
 
 URL="https://$HOST/api/v1/fabric/compute-managers"
-printf "NSX join CMANAGER [$VCSANAME] - [$URL]... " 1>&2
+printf "NSX join CMANAGER [$VCSAHOST] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
-	"server": "$VCSANAME",
+	"server": "$VCSAHOST",
+	"display_name": "$VCSAHOST",
 	"origin_type": "vCenter",
 	"credential" : {
 		"credential_type" : "UsernamePasswordLoginCredential",
-		"username": "administrator@vsphere.local",
-		"password": "VMware1!VMware1!",
+		"username": "$VCSAUSER",
+		"password": "$VCSAPASS",
 		"thumbprint": "$VCSAPRINT"
 	}
 }

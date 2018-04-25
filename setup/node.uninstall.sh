@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./drv.source
+source drv.core
 
 ssh root@${1} <<EOF
 	vsipioctl clearallfilters

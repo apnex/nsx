@@ -1,32 +1,32 @@
 #!/bin/bash
-source ./drv.core
+source drv.core
 
-NAME=$1
-CIDR=$2
+POOLNAME=$1
+POOLCIDR=$2
 REGEX='([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)[0-9]{1,3}\/[0-9]{2}'
-if [[ $CIDR =~ $REGEX ]]; then # naive match - for 24 only
+if [[ $POOLCIDR =~ $REGEX ]]; then # naive match - for 24 only
 	OCTETS=${BASH_REMATCH[1]}
 fi
-START="$OCTETS"10
-END="$OCTETS"99
-GATEWAY="$OCTETS"1
+POOLSTART="$OCTETS"10
+POOLEND="$OCTETS"99
+POOLGW="$OCTETS"1
 
-URL="https://$ENDPOINT/api/v1/pools/ip-pools"
-printf "NSX create pool [$NAME] - [$URL]... " 1>&2
+URL="https://$HOST/api/v1/pools/ip-pools"
+printf "NSX create pool [$POOLNAME] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
-	"display_name": "$NAME",
-	"description": "$NAME",
+	"display_name": "$POOLNAME",
+	"description": "$POOLNAME",
 	"subnets": [
 		{
 			"allocation_ranges": [
 				{
-					"start": "$START",
-					"end": "$END"
+					"start": "$POOLSTART",
+					"end": "$POOLEND"
 				}
 			],
-			"gateway_ip": "$GATEWAY",
-			"cidr": "$CIDR"
+			"gateway_ip": "$POOLGW",
+			"cidr": "$POOLCIDR"
 		}
 	]
 }

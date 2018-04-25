@@ -1,18 +1,17 @@
 #!/bin/bash
-source ./drv.source
+source drv.core
 
-NAME=$1
-SWITCH=$2
-TYPE=$3
-SESSION=$(session)
+PFNAME=$1
+PFMTU=$2
+PFVLAN=$3
 
 URL="https://$HOST/api/v1/host-switch-profiles"
-printf "NSX create zone [$NAME:$SWITCH:$TYPE] - [$URL]... " 1>&2
+printf "NSX create zone [$PFNAME:$PFMTU:$PFVLAN] - [$URL]... " 1>&2
 read -r -d '' PAYLOAD <<CONFIG
 {
 	"resource_type": "UplinkHostSwitchProfile",
-	"display_name": "pf-uplink",
-	"mtu": 1700,
+	"display_name": "$PFNAME",
+	"mtu": $PFMTU,
 	"teaming": {
 		"standby_list": [],
 		"active_list": [
@@ -23,7 +22,7 @@ read -r -d '' PAYLOAD <<CONFIG
 		],
 		"policy": "FAILOVER_ORDER"
 	},
-	"transport_vlan": 0
+	"transport_vlan": $PFVLAN
 }
 CONFIG
 RESPONSE=$(curl -k -b cookies.txt -w "%{http_code}" -X POST \
