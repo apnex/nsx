@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./drv.core
+source drv.core
 
 EDGENAME=$1
 EDGEADDRESS=$2
@@ -14,8 +14,21 @@ EDGEADDRESS=$2
 #	port3
 #}
 
-URL="https://$HOST/api/v1/fabric/nodes"
-printf "NSX create edge [$EDGENAME:$EDGEADDRESS] - [$URL]... " 1>&2
+function getVC {
+	read -r -d '' JQSPEC <<-CONFIG
+		.results[]
+			| select(.server=="${VCHOST}").id
+	CONFIG
+	local CMANAGER=$(./drv.cmanager.list.sh 2>/dev/null | jq -r "$JQSPEC")
+	if [[ -n "${CMANAGER}" ]]; then
+		printf "INFO: found [compute-manager] with name [${VCHOST}] id [${CMANAGER}]\n" 1>&2
+		printf "${CMANAGER}"
+	else
+		printf "ERROR: Could not find [compute-manager] with name [${VCHOST}] - please join it to the NSX domain\n" 1>&2
+	fi
+}
+CMANAGER=$(getVC)
+
 read -r -d '' PAYLOAD <<CONFIG
 {
 	"resource_type": "EdgeNode",
@@ -50,14 +63,25 @@ read -r -d '' PAYLOAD <<CONFIG
 			"hostname": "$EDGENAME",
 			"placement_type": "VsphereDeploymentConfig",
 			"storage_id": "datastore-11",
-			"vc_id": "93721424-4764-48ed-a76c-91ded5ac4d11"
+			"vc_id": "${CMANAGER}"
 		}
 	}
 }
 CONFIG
-RESPONSE=$(curl -v -k -b cookies.txt -w "%{http_code}" -X POST \
--H "`grep X-XSRF-TOKEN headers.txt`" \
--H "Content-Type: application/json" \
--d "$PAYLOAD" \
-"$URL" 2>/dev/null)
-isSuccess "$RESPONSE"
+
+function request {
+	URL="https://$HOST/api/v1/fabric/nodes"
+	printf "NSX create edge [$EDGENAME:$EDGEADDRESS] - [$URL]... " 1>&2
+	RESPONSE=$(curl -v -k -b cookies.txt -w "%{http_code}" -X POST \
+	-H "`grep X-XSRF-TOKEN headers.txt`" \
+	-H "Content-Type: application/json" \
+	-d "$PAYLOAD" \
+	"$URL" 2>/dev/null)
+	isSuccess "$RESPONSE"
+}
+
+if [[ -n "${EDGENAME}" && "${EDGEADDRESS}" ]]; then
+	request
+else
+	printf "ERROR: command usage: ${ORANGE}edge.create${LIGHTCYAN} <edgename> <edgeaddress>${NC}\n" 1>&2
+fi

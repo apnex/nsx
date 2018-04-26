@@ -1,4 +1,9 @@
 #!/bin/bash
+
+VCUSER=$(cat vcsa-credentials | jq -r .username)
+VCPASS=$(cat vcsa-credentials | jq -r .password)
+VCHOST=$(cat vcsa-credentials | jq -r .hostname)
+VCDOMAIN=$(cat vcsa-credentials | jq -r .domain)
 USER=$(cat nsx-credentials | jq -r .username)
 PASS=$(cat nsx-credentials | jq -r .password)
 HOST=$(cat nsx-credentials | jq -r .hostname)
@@ -28,6 +33,7 @@ function session {
 		login
 	fi
 }
+session
 
 function isSuccess {
 	local STRING=${1}
@@ -45,4 +51,21 @@ function isSuccess {
 	fi
 }
 
-session
+NC='\033[0m' # no colour
+BLACK='\033[0;30m' # black
+RED='\033[0;31m' # red
+GREEN='\033[0;32m' # green
+ORANGE='\033[0;33m' # orange
+BLUE='\033[0;34m' # blue
+PURPLE='\033[0;35m' # purple
+CYAN='\033[0;36m' # cyan
+LIGHTGREY='\033[0;37m' # light grey
+DARKGREY='\033[0;30m' # dark grey
+LIGHTRED='\033[0;31m' # light red
+LIGHTGREEN='\033[0;32m' # light green
+YELLOW='\033[0;33m' # yellow
+LIGHTBLUE='\033[0;34m' # light blue
+LIGHTPURPLE='\033[0;35m' # light purple
+LIGHTCYAN='\033[0;36m' # light cyan
+WHITE='\033[0;37m' # white
+

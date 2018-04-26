@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./drv.core
+source drv.core
 
 # get the nodes
 URL="https://$HOST/api/v1/fabric/nodes"

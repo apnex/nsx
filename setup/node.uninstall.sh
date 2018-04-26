@@ -1,7 +1,7 @@
 #!/bin/bash
-source drv.core
+#source drv.core
 
-ssh root@${1} <<EOF
+ssh root@${1} <<-EOF
 	vsipioctl clearallfilters
 	/etc/init.d/netcpad stop
 	esxcli software vib remove \
