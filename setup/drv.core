@@ -8,7 +8,8 @@ USER=$(cat nsx-credentials | jq -r .username)
 PASS=$(cat nsx-credentials | jq -r .password)
 HOST=$(cat nsx-credentials | jq -r .hostname)
 DOMAIN=$(cat nsx-credentials | jq -r .domain)
-THUMBPRINT=$(./thumbprint.sh "$HOST")
+NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
+VCPING=$(ping -W 1 -c 1 "$VCHOST" &>/dev/null && echo 1 || echo 0)
 
 function login {
 	URL="https://$HOST/api/session/create"
@@ -33,6 +34,11 @@ function session {
 		login
 	fi
 }
+
+# if I have credentials, test ping
+# if ping succeeds, test SSL (use THUMBPRINT for test)
+# if SSL succeeds - proceed
+THUMBPRINT=$(./thumbprint.sh "$HOST")
 session
 
 function isSuccess {
@@ -49,6 +55,17 @@ function isSuccess {
 		printf " - ERROR\n" 1>&2
 		printf "$HTTPBODY\n" 1>&2
 	fi
+}
+
+function rPost {
+	local URL=${1}
+	local BODY=${2}
+	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
+	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
+	-H "Content-Type: application/json" \
+	-d "$BODY" \
+	"$URL" 2>/dev/null)
+	isSuccess "$RESPONSE" | jq --tab .
 }
 
 NC='\033[0m' # no colour

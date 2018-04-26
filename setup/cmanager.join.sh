@@ -6,24 +6,29 @@ VCSAUSER=$(cat vcsa-credentials | jq -r .username)
 VCSAPASS=$(cat vcsa-credentials | jq -r .password)
 VCSAPRINT=$(./thumbprint.sh "$VCSAHOST" | sed -e :a -e 's/\([0-9A-Fa-f]\{2\}\)\([0-9A-Fa-f]\{2\}\)/\1:\2/;ta')
 
-URL="https://$HOST/api/v1/fabric/compute-managers"
-printf "NSX join CMANAGER [$VCSAHOST] - [$URL]... " 1>&2
-read -r -d '' PAYLOAD <<CONFIG
-{
-	"server": "$VCSAHOST",
-	"display_name": "$VCSAHOST",
-	"origin_type": "vCenter",
-	"credential" : {
-		"credential_type" : "UsernamePasswordLoginCredential",
-		"username": "$VCSAUSER",
-		"password": "$VCSAPASS",
-		"thumbprint": "$VCSAPRINT"
+function makeBody {
+	read -r -d '' PAYLOAD <<-CONFIG
+	{
+		"server": "$VCSAHOST",
+		"display_name": "$VCSAHOST",
+		"origin_type": "vCenter",
+		"credential" : {
+			"credential_type" : "UsernamePasswordLoginCredential",
+			"username": "$VCSAUSER",
+			"password": "$VCSAPASS",
+			"thumbprint": "$VCSAPRINT"
+		}
 	}
+	CONFIG
+	echo "${PAYLOAD}"
 }
-CONFIG
-RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
--H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
--H "Content-Type: application/json" \
--d "$PAYLOAD" \
-"$URL" 2>/dev/null)
-isSuccess "$RESPONSE" | jq --tab .
+
+if [[ -n "${VCSAHOST}" && "${VCSAUSER}" && "${VCSAPASS}" && "${VCSAPRINT}" ]]; then
+	local BODY=$(makeBody)
+	local URL="https://$HOST/api/v1/fabric/compute-managers"
+	printf "NSX join CMANAGER [$VCSAHOST] - [$URL]... " 1>&2
+	rPost "${URL}" "${BODY}"
+else
+	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.create${LIGHTCYAN} <tnname> <nodeid>${NC}\n" 1>&2
+fi
+
