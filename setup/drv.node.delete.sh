@@ -33,7 +33,7 @@ function checkNodeType {
 			.results[]
 				| select(.id=="${NODEVC}")
 		CONFIG
-		CMANAGER=$(./drv.cmanager.list.sh | jq -r "$JQSPEC | .id")
+		CMANAGER=$(./drv.cmanager.list.sh 2>/dev/null | jq -r "$JQSPEC | .id")
 		if [[ -n "${CMANAGER}" ]]; then
 			printf "INFO: found [compute-manager] with name [${VCHOST}] id [${CMANAGER}]\n" 1>&2
 			deleteNode "${NODE}"
@@ -51,5 +51,5 @@ function checkNodeType {
 if [[ -n "${NODE}" ]]; then
 	checkNodeType "${NODE}"
 else
-	printf "ERROR: command usage: ${ORANGE}node.delete${LIGHTCYAN} <nodeid>${NC}\n" 1>&2
+	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}node.delete${LIGHTCYAN} <nodeid>${NC}\n" 1>&2
 fi

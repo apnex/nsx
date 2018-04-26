@@ -3,16 +3,6 @@ source drv.core
 
 EDGENAME=$1
 EDGEADDRESS=$2
-#context: {
-#	cluster
-#	host
-#	datastore
-#	vcenter
-#	management
-#	port1
-#	port2
-#	port3
-#}
 
 function getVC {
 	read -r -d '' JQSPEC <<-CONFIG
@@ -21,15 +11,46 @@ function getVC {
 	CONFIG
 	local CMANAGER=$(./drv.cmanager.list.sh 2>/dev/null | jq -r "$JQSPEC")
 	if [[ -n "${CMANAGER}" ]]; then
-		printf "INFO: found [compute-manager] with name [${VCHOST}] id [${CMANAGER}]\n" 1>&2
+		printf "[${GREEN}INFO${NC}]: found [${GREEN}compute-manager${NC}] with name [${GREEN}${VCHOST}${NC}] id [${GREEN}${CMANAGER}${NC}]\n" 1>&2
 		printf "${CMANAGER}"
 	else
-		printf "ERROR: Could not find [compute-manager] with name [${VCHOST}] - please join it to the NSX domain\n" 1>&2
+		printf "[${ORANGE}ERROR${NC}]: Could not find [${GREEN}compute-manager${NC}] with name [${GREEN}${VCHOST}${NC}] - please join it to the NSX domain\n" 1>&2
 	fi
 }
-CMANAGER=$(getVC)
 
-read -r -d '' PAYLOAD <<CONFIG
+function buildSpec {
+	# work in progress - not currently functional
+	local read -r -d '' CONTEXT <<-CONFIG
+	{
+		"name": "${EDGENAME}",
+		"password": "VMware1!",
+		"placement": {
+			"vcenter": "${VCHOST}",
+			"cluster": "mgmt",
+			"host": "esx01.lab",
+			"datastore": "datastore1"
+		},
+		"mgmt": {
+			"ip-address": "${EDGEADDRESS}"
+			"netmask": 24,
+			"gateway": "172.16.10.1"
+		}
+		"network": {
+			"mgmt": "pg-mgmt",
+			"data":	[
+				"pg-trunk",
+				"pg-trunk",
+				"pg-trunk"
+			]
+		}
+	}
+	CONFIG
+	INPUTPLACE=$(echo ${CONTEXT} | jq -r '.placement.vcenter')
+	FINALPLACE=$(echo ${CONTEXT} | jq -r '.value[] | select(.name=="mgmt").cluster)')
+}
+
+CMANAGER=$(getVC)
+read -r -d '' PAYLOAD <<-CONFIG
 {
 	"resource_type": "EdgeNode",
 	"display_name": "$EDGENAME",
@@ -80,8 +101,8 @@ function request {
 	isSuccess "$RESPONSE"
 }
 
-if [[ -n "${EDGENAME}" && "${EDGEADDRESS}" ]]; then
+if [[ -n "${EDGENAME}" && "${EDGEADDRESS}" && "${CMANAGER}" ]]; then
 	request
 else
-	printf "ERROR: command usage: ${ORANGE}edge.create${LIGHTCYAN} <edgename> <edgeaddress>${NC}\n" 1>&2
+	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}edge.create${LIGHTCYAN} <edgename> <edgeaddress>${NC}\n" 1>&2
 fi

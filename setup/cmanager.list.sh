@@ -7,7 +7,11 @@ read -r -d '' JQSPEC <<CONFIG
 		["id", "display_name", "ip_address", "origin_type", "version"]
 		,["-----", "-----", "-----", "-----", "-----"]
 		,(.[] | [.id, .display_name, .server, .origin_type,
-			(.origin_properties[] | select(.key=="version").value)
+			(if (.origin_properties | length) != 0 then
+				(.origin_properties[] | select(.key=="version").value)
+			else
+				"not-registered"
+			end)
 		])
 	| @csv
 CONFIG

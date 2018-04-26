@@ -18,7 +18,7 @@ function login {
 }
 
 function session {
-	SESSIONFILE='cookies.txt'
+	SESSIONFILE='nsx-cookies.txt'
 	printf "Validating existing session...\n" 1>&2
 	if [ -f $SESSIONFILE ]; then
 		MYDATE=$(stat -c %y "$SESSIONFILE")
