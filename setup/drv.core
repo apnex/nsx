@@ -12,7 +12,7 @@ THUMBPRINT=$(./thumbprint.sh "$HOST")
 
 function login {
 	URL="https://$HOST/api/session/create"
-	curl -k -c cookies.txt -D headers.txt -X POST \
+	curl -k -c nsx-cookies.txt -D nsx-headers.txt -X POST \
 	-d "j_username=$USER&j_password=$PASS" \
 	"$URL" 1>/dev/null 2>/dev/null
 }
@@ -68,4 +68,3 @@ LIGHTBLUE='\033[0;34m' # light blue
 LIGHTPURPLE='\033[0;35m' # light purple
 LIGHTCYAN='\033[0;36m' # light cyan
 WHITE='\033[0;37m' # white
-

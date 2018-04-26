@@ -25,8 +25,8 @@ read -r -d '' PAYLOAD <<CONFIG
 	"transport_vlan": $PFVLAN
 }
 CONFIG
-RESPONSE=$(curl -k -b cookies.txt -w "%{http_code}" -X POST \
--H "`grep X-XSRF-TOKEN headers.txt`" \
+RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
+-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 -H "Content-Type: application/json" \
 -d "$PAYLOAD" \
 "$URL" 2>/dev/null)

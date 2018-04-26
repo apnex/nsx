@@ -5,8 +5,8 @@ ID=$1
 if [ -n "$ID" ]; then
 	URL="https://$HOST/api/v1/transport-zones/$ID"
 	printf "NSX DELETE transport-zone [$ID] - [$URL]... " 1>&2
-	RESPONSE=$(curl -v -k -b cookies.txt -w "%{http_code}" -X DELETE \
-	-H "`grep X-XSRF-TOKEN headers.txt`" \
+	RESPONSE=$(curl -v -k -b nsx-cookies.txt -w "%{http_code}" -X DELETE \
+	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 	-H "Content-Type: application/json" \
 	"$URL" 2>/dev/null)
 	isSuccess "$RESPONSE"

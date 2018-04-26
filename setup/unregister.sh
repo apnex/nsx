@@ -29,7 +29,7 @@ function login {
 
 login
 
-#-H "`grep X-XSRF-TOKEN headers.txt`" \
+#-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 #"https://vcenter.lab/mob/?moid=ExtensionManager&method=unregisterExtension
 #-H "vmware-session-nonce: 527462e3-abe4-2671-3e9e-a989a32bd898"
 #-d "extensionKey=com.vmware.nsx.management.nsxt"

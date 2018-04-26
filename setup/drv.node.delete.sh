@@ -5,8 +5,8 @@ NODE=$1
 function deleteNode {
 	URL="https://$HOST/api/v1/fabric/nodes/${1}"
 	printf "DELETE node [${1}] - call [$URL]... " 1>&2
-	RESPONSE=$(curl -k -b cookies.txt -w "%{http_code}" -G -X DELETE \
-	-H "`grep X-XSRF-TOKEN headers.txt`" \
+	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X DELETE \
+	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 	--data-urlencode "unprepare_host=false" \
 	"$URL" 2>/dev/null)
 	isSuccess "$RESPONSE"

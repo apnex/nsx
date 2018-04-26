@@ -5,8 +5,8 @@ ID=$1
 if [ -n "$ID" ]; then
 	URL="https://$HOST/api/v1/pools/ip-pools/$ID"
 	printf "Retrieving [$URL]... " 1>&2
-	RESPONSE=$(curl -k -b cookies.txt -w "%{http_code}" -G -X DELETE \
-	-H "`grep X-XSRF-TOKEN headers.txt`" \
+	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X DELETE \
+	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 	--data-urlencode "force=true" \
 	"$URL" 2>/dev/null)
 	isSuccess "$RESPONSE"
