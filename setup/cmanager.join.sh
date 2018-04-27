@@ -24,8 +24,8 @@ function makeBody {
 }
 
 if [[ -n "${VCSAHOST}" && "${VCSAUSER}" && "${VCSAPASS}" && "${VCSAPRINT}" ]]; then
-	local BODY=$(makeBody)
-	local URL="https://$HOST/api/v1/fabric/compute-managers"
+ 	BODY=$(makeBody)
+	URL="https://$HOST/api/v1/fabric/compute-managers"
 	printf "NSX join CMANAGER [$VCSAHOST] - [$URL]... " 1>&2
 	rPost "${URL}" "${BODY}"
 else

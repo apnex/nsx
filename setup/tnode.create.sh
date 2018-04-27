@@ -16,7 +16,7 @@ PLRESULT=$(./drv.pool.list.sh 2>/dev/null)
 PLTEP=$(echo "${PLRESULT}" | jq -r '.results[] | select(.display_name=="tep-pool").id')
 
 DEVICENAME="vmnic1"
-DEVICENAME="fp-eth0"
+#DEVICENAME="fp-eth0"
 
 read -r -d '' CONTEXT <<-CONFIG
 {
@@ -81,8 +81,8 @@ function request {
 	isSuccess "$RESPONSE"
 }
 
-if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
-	request "${TNNAME}"
-else
-	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.create${LIGHTCYAN} <tnname> <nodeid>${NC}\n" 1>&2
-fi
+#if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
+# request "${TNNAME}"
+#else
+#	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.create${LIGHTCYAN} <tnname> <nodeid>${NC}\n" 1>&2
+#fi

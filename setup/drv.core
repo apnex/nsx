@@ -8,8 +8,6 @@ USER=$(cat nsx-credentials | jq -r .username)
 PASS=$(cat nsx-credentials | jq -r .password)
 HOST=$(cat nsx-credentials | jq -r .hostname)
 DOMAIN=$(cat nsx-credentials | jq -r .domain)
-NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
-VCPING=$(ping -W 1 -c 1 "$VCHOST" &>/dev/null && echo 1 || echo 0)
 
 function login {
 	URL="https://$HOST/api/session/create"
@@ -38,6 +36,8 @@ function session {
 # if I have credentials, test ping
 # if ping succeeds, test SSL (use THUMBPRINT for test)
 # if SSL succeeds - proceed
+NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
+VCPING=$(ping -W 1 -c 1 "$VCHOST" &>/dev/null && echo 1 || echo 0)
 THUMBPRINT=$(./thumbprint.sh "$HOST")
 session
 
