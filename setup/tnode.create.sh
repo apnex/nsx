@@ -6,8 +6,10 @@ TNNODEID=$2
 
 ## testing dynamic values - need to convert to nsx object tags!
 TZRESULT=$(./drv.tzone.list.sh 2>/dev/null)
-TZVLAN=$(echo "${TZRESULT}" | jq -r '.results[] | select(.transport_type=="VLAN").id')
-TZOVERLAY=$(echo "${TZRESULT}" | jq -r '.results[] | select(.transport_type=="OVERLAY").id')
+TZVLAN=$(echo "${TZRESULT}" | jq -r '.results[] | first(select(.transport_type=="VLAN")).id')
+TZOVERLAY=$(echo "${TZRESULT}" | jq -r '.results[] | first(select(.transport_type=="OVERLAY")).id')
+echo "$TZVLAN"
+echo "$TZOVERLAY"
 
 PFRESULT=$(./drv.profile.list.sh json 2>/dev/null)
 PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results[] | select(.display_name=="pf-uplink").id')
@@ -16,7 +18,7 @@ PLRESULT=$(./drv.pool.list.sh 2>/dev/null)
 PLTEP=$(echo "${PLRESULT}" | jq -r '.results[] | select(.display_name=="tep-pool").id')
 
 DEVICENAME="vmnic1"
-#DEVICENAME="fp-eth0"
+DEVICENAME="fp-eth0"
 
 read -r -d '' CONTEXT <<-CONFIG
 {
@@ -81,8 +83,8 @@ function request {
 	isSuccess "$RESPONSE"
 }
 
-#if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
-# request "${TNNAME}"
-#else
-#	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.create${LIGHTCYAN} <tnname> <nodeid>${NC}\n" 1>&2
-#fi
+if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
+	request "${TNNAME}"
+else
+	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.create${LIGHTCYAN} <tnname> <nodeid>${NC}\n" 1>&2
+fi
