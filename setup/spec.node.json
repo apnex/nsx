@@ -1,0 +1,47 @@
+{
+	"cursor": "003653b55e00-e5c1-11e5-a549-005056b18ef8nsx-edge2",
+	"result_count": 2,
+	"results": [
+		{
+			"resource_type": "HostNode",
+			"id": "74730a28-e52d-11e5-936e-6f061d405a28",
+			"display_name": "comp-01b",
+			"fqdn": "comp-01b.eng.abc.com",
+			"ip_addresses": [
+				"192.168.210.53"
+			],
+			"discovered_ip_addresses": [
+				"192.168.210.53"
+			],
+			"external_id": "74730a28-e52d-11e5-936e-6f061d405a28",
+			"os_type": "ESXI",
+			"os_version": "6.0.0",
+			"managed_by_server": "192.168.110.24",
+			"_last_modified_time": 1457470683936,
+			"_create_time": 1457470683936,
+			"_last_modified_user": "admin",
+			"_create_user": "admin",
+			"_revision": 0
+		},
+		{
+			"resource_type": "EdgeNode",
+			"id": "53b55e00-e5c1-11e5-a549-005056b18ef8",
+			"display_name": "nsx-edge2",
+			"fqdn": "nsx-edge2.eng.abc.com",
+			"ip_addresses": [
+				"192.168.110.37"
+			],
+			"discovered_ip_addresses": [
+				"192.168.110.37"
+			],
+			"external_id": "53b55e00-e5c1-11e5-a549-005056b18ef8",
+			"deployment_type": "VIRTUAL_MACHINE",
+			"_last_modified_time": 1457505420494,
+			"_create_time": 1457505420494,
+			"_last_modified_user": "admin",
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_revision": 0
+		}
+	]
+}

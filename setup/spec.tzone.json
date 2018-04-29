@@ -1,0 +1,40 @@
+{
+	"results": [
+		{
+			"_revision": 0,
+			"id": "c08d57bf-247d-4a5e-9acd-c5f2860e2872",
+			"resource_type": "TransportZone",
+			"transport_type": "OVERLAY",
+			"host_switch_name": "host2",
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1412873095391,
+			"_create_time": 1412873095391,
+			"_create_user": "admin",
+			"_schema": "/v1/schema/TransportZone"
+		},
+		{
+			"_revision": 0,
+			"id": "7c57c5a7-c742-4ee2-8fae-a9ac6a01309c",
+			"resource_type": "TransportZone",
+			"transport_type": "OVERLAY",
+			"host_switch_name": "host1",
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1412873062407,
+			"_create_time": 1412873062407,
+			"_create_user": "admin",
+			"_schema": "/v1/schema/TransportZone"
+		},
+		{
+			"_revision": 0,
+			"id": "c55ec097-0b53-4103-9426-18e135250c29",
+			"resource_type": "TransportZone",
+			"transport_type": "OVERLAY",
+			"host_switch_name": "host1",
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1412877285032,
+			"_create_time": 1412877285032,
+			"_create_user": "admin",
+			"_schema": "/v1/schema/TransportZone"
+		}
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"_revision": 0,
+	"id": "5a5f22a8-8293-4212-93df-99286d20e25c",
+	"display_name": "IPPool-IPV6-1",
+	"description": "IPPool-IPV6-1 Description",
+	"resource_type": "IpPool",
+	"subnets": [
+		{
+			"dns_nameservers": [
+				"2002:a70:cbfa:1:1:1:1:1"
+			],
+			"allocation_ranges": [
+				{
+					"start": "2002:a70:cbfa:0:0:0:0:1",
+					"end": "2002:a70:cbfa:0:0:0:0:5"
+				}
+			],
+			"gateway_ip": "2002:a80:cbfa:0:0:0:0:255",
+			"cidr": "2002:a70:cbfa:0:0:0:0:0/124"
+		}
+	],
+	"_last_modified_user": "admin",
+	"_last_modified_time": 1414691880507,
+	"_create_time": 1414691880507,
+	"_create_user": "admin"
+}

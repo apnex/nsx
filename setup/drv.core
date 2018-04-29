@@ -8,6 +8,7 @@ USER=$(cat nsx-credentials | jq -r .username)
 PASS=$(cat nsx-credentials | jq -r .password)
 HOST=$(cat nsx-credentials | jq -r .hostname)
 DOMAIN=$(cat nsx-credentials | jq -r .domain)
+OFFLINE=$(cat nsx-credentials | jq -r .offline)
 
 function login {
 	URL="https://$HOST/api/session/create"
@@ -17,28 +18,32 @@ function login {
 }
 
 function session {
-	SESSIONFILE='nsx-cookies.txt'
-	printf "Validating existing session...\n" 1>&2
-	if [ -f $SESSIONFILE ]; then
-		MYDATE=$(stat -c %y "$SESSIONFILE")
-		LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
-		printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
-		if [ "$LAPSE" -ge 600 ]; then
-			printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[AUTH]: offline mode\n" 1>&2
+	else
+		SESSIONFILE='nsx-cookies.txt'
+		printf "Validating existing session...\n" 1>&2
+		if [ -f $SESSIONFILE ]; then
+			MYDATE=$(stat -c %y "$SESSIONFILE")
+			LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
+			printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
+			if [ "$LAPSE" -ge 600 ]; then
+				printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
+				login
+			fi
+		else
+			printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
 			login
 		fi
-	else
-		printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
-		login
 	fi
 }
 
 # if I have credentials, test ping
 # if ping succeeds, test SSL (use THUMBPRINT for test)
 # if SSL succeeds - proceed
-NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
-VCPING=$(ping -W 1 -c 1 "$VCHOST" &>/dev/null && echo 1 || echo 0)
-THUMBPRINT=$(./thumbprint.sh "$HOST")
+#NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
+#VCPING=$(ping -W 1 -c 1 "$VCHOST" &>/dev/null && echo 1 || echo 0)
+#THUMBPRINT=$(./thumbprint.sh "$HOST")
 session
 
 function isSuccess {
@@ -58,14 +63,71 @@ function isSuccess {
 }
 
 function rPost {
-	local URL=${1}
-	local BODY=${2}
-	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
-	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-	-H "Content-Type: application/json" \
-	-d "$BODY" \
-	"$URL" 2>/dev/null)
-	isSuccess "$RESPONSE" | jq --tab .
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[RPOST]: offline mode\n" 1>&2
+	else
+		local URL=${1}
+		local BODY=${2}
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
+		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
+		-H "Content-Type: application/json" \
+		-d "$BODY" \
+		"$URL" 2>/dev/null)
+		isSuccess "$RESPONSE" | jq --tab .
+	fi
+}
+
+function rGet {
+	local STRING="${1}"
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[RGET]: offline mode\n" 1>&2
+		SPEC=$(cat "${STRING}")
+		printf "$SPEC"
+	else
+		#local URL=${1}
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
+		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
+		-H "Content-Type: application/json" \
+		"$URL" 2>/dev/null)
+		isSuccess "$RESPONSE"
+		echo "$HTTPBODY"
+	fi
+}
+
+function buildURL {
+	local ENDPOINT=${1}
+	local BASE="https://$HOST/api/v1/"
+	local URL=""
+	case "${ENDPOINT}" in
+		"transport-nodes")
+			URL="spec.tnode.json"
+		;;
+		"transport-zones")
+			URL="spec.tzone.json"
+		;;
+		"fabric/compute-managers")
+			URL="spec.cmanager.json"
+		;;
+		"fabric/nodes")
+			URL="spec.node.json"
+		;;
+		"host-switch-profiles")
+			URL="spec.profile.json"
+		;;
+		"pools/ip-pools")
+			URL="spec.pool.json"
+		;;
+		"pools/ip-blocks")
+			URL="spec.block.json"
+		;;
+		"logical-routers")
+			URL="spec.router.json"
+		;;
+		"logical-switches")
+			URL="spec.switch.json"
+		;;
+	esac
+	printf "$URL"
 }
 
 NC='\033[0m' # no colour

@@ -1,11 +1,17 @@
 #!/bin/bash
 source drv.core
 
-URL="https://$HOST/api/v1/transport-nodes"
-printf "Retrieving [$URL]... " 1>&2
-RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
--H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
--H "Content-Type: application/json" \
-"$URL" 2>/dev/null)
-isSuccess "$RESPONSE"
-echo "$HTTPBODY"
+function green {
+        local STRING=${1}
+        printf "${GREEN}${STRING}${NC}"
+}
+
+if [[ -n "${HOST}" ]]; then
+	# get variables - if null do not proceed
+	ITEM="transport-nodes"
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		printf "[$(green "INFO")]: nsx [$(green "list")] ${ITEM} - [$(green "$URL")]... " 1>&2
+		rGet "${URL}"
+	fi
+fi

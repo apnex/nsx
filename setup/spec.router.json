@@ -1,0 +1,28 @@
+{
+	"cursor": "00364c87219e-7361-4fa4-9b4e-c612ed56f1fdtier-0",
+	"result_count": 1,
+	"results": [
+		{
+			"resource_type": "LogicalRouter",
+			"description": "",
+			"id": "4c87219e-7361-4fa4-9b4e-c612ed56f1fd",
+			"display_name": "tier-0",
+			"tags": [],
+			"edge_cluster_id": "a9dc562c-effd-4225-883d-3f7d2c887c6b",
+			"advanced_config": {
+				"external_transit_networks": [
+					"100.64.0.0/10"
+				],
+				"internal_transit_network": "169.254.0.0/28"
+			},
+			"router_type": "TIER0",
+			"high_availability_mode": "ACTIVE_ACTIVE",
+			"_last_modified_time": 1457505773124,
+			"_create_time": 1457505741221,
+			"_last_modified_user": "admin",
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_revision": 1
+		}
+	]
+}

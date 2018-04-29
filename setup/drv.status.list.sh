@@ -19,32 +19,20 @@ FINAL=""
 COMMA=""
 for key in $(echo ${NODES} | jq -r '.results[] | .id'); do
 	#get node
-	read -r -d '' JQSPEC <<-CONFIG # collapse into single line
-		.results[]
-			| select(.id=="${key}")
-	CONFIG
-	NODE=$(echo ${NODES} | jq -r "$JQSPEC")
+	NODE=$(echo ${NODES} | jq -r ".results[] | select(.id=='${key}'")
 
 	# get node status
 	RESULT=$(getStatus "$key")
 
 	# build node record
-	read -r -d '' JQSPEC <<-CONFIG # collapse into single line?
-		.
-			| [.id, .resource_type, .display_name, .ip_addresses[0]]
-	CONFIG
-	NODEREC=$(echo "${NODE}" | jq --tab -r "$JQSPEC")
+	NODEREC=$(echo "${NODE}" | jq --tab -r "[.id, .resource_type, .display_name, .ip_addresses[0]]")
 
 	# build node record
-	read -r -d '' JQSPEC <<-CONFIG # collapse into single line?
-		.
-			| [.host_node_deployment_status, .software_version]
-	CONFIG
-	NODESTAT=$(echo "${RESULT}" | jq --tab -r "$JQSPEC")
+	NODESTAT=$(echo "${RESULT}" | jq --tab -r "[.host_node_deployment_status, .software_version]")
 	MYBLAH=$(echo "$NODEREC$NODESTAT" |jq -s '. | add')
 
-	FINAL+="$COMMA$MYBLAH"
-	#echo "$FINAL"
+	# add to list
+	FINAL+="$COMMA$(echo "$NODEREC$NODESTAT" | jq -s '. | add')"
 	COMMA=","
 done
 FINAL="[$FINAL]"
@@ -57,17 +45,3 @@ read -r -d '' JQSPEC <<CONFIG
 	| @csv
 CONFIG
 echo "$FINAL" | jq -r "$JQSPEC" | sed 's/"//g' | column -s ',' -t
-
-read -r -d '' JQSPEC <<CONFIG
-	.results |
-		["id", "display_name", "ip_address", "origin_type", "version"]
-		,["-----", "-----", "-----", "-----", "-----"]
-		,(.[] | [.id, .display_name, .server, .origin_type,
-			(if (.origin_properties | length) != 0 then
-				(.origin_properties[] | select(.key=="version").value)
-			else
-				"not-registered"
-			end)
-		])
-	| @csv
-CONFIG

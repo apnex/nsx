@@ -1,0 +1,45 @@
+{
+	"cursor": "0036849e339e-64b7-47cb-9480-33068f70dc5als-demo",
+	"result_count": 1,
+	"results": [
+		{
+			"id": "849e339e-64b7-47cb-9480-33068f70dc5a",
+			"display_name": "ls-demo",
+			"description": "1st logical Switch",
+			"resource_type": "LogicalSwitch",
+			"address_bindings": [],
+			"transport_zone_id": "cfaec4c7-45c2-439b-b7c6-2c3aeabd9976",
+			"replication_mode": "MTEP",
+			"admin_state": "UP",
+			"vni": 11144,
+			"switching_profile_ids": [
+				{
+					"value": "49781ebb-6f76-464a-9a7e-c365ba26128b",
+					"key": "IpDiscoverySwitchingProfile"
+				},
+				{
+					"value": "fad98876-d7ff-11e4-b9d6-1681e6b88ec1",
+					"key": "SpoofGuardSwitchingProfile"
+				},
+				{
+					"value": "93b4b7e8-f116-415d-a50c-3364611b5d09",
+					"key": "PortMirroringSwitchingProfile"
+				},
+				{
+					"value": "fbc4fb17-83d9-4b53-a286-ccdf04301888",
+					"key": "SwitchSecuritySwitchingProfile"
+				},
+				{
+					"value": "f313290b-eba8-4262-bd93-fab5026e9495",
+					"key": "QosSwitchingProfile"
+				}
+			],
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1435282408187,
+			"_create_time": 1435282408187,
+			"_create_user": "admin",
+			"_revision": 0,
+			"_schema": "/v1/schema/LogicalSwitch"
+		}
+	]
+}

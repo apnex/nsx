@@ -1,23 +1,18 @@
 #!/bin/bash
 source drv.core
 
-# get the nodes
-URL="https://$HOST/api/v1/fabric/nodes"
-printf "Retrieving [$URL]... " 1>&2
-RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
--H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
--H "Content-Type: application/json" \
-"$URL" 2>/dev/null)
-isSuccess "$RESPONSE"
-echo "$HTTPBODY"
+function green {
+        local STRING=${1}
+        printf "${GREEN}${STRING}${NC}"
+}
 
-# get the status
-#URL="https://$HOST/api/v1/fabric/nodes/<node-id>/status"
-#printf "Retrieving [$URL]... " 1>&2
-#RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
-#-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-#-H "Content-Type: application/json" \
-#"$URL" 2>/dev/null)
-#isSuccess "$RESPONSE"
-#echo "$HTTPBODY"
-
+if [[ -n "${HOST}" ]]; then
+	# get variables - if null do not proceed
+	ITEM="fabric/nodes"
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		#logINFO
+		printf "[$(green "INFO")]: nsx [$(green "list")] ${ITEM} - [$(green "$URL")]... " 1>&2
+		rGet "${URL}"
+	fi
+fi

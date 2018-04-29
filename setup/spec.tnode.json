@@ -1,0 +1,48 @@
+{
+	"results": [
+		{
+			"resource_type": "ComputeCollectionTransportNodeTemplate",
+			"description": "Compute Collection Transport Node Template 1",
+			"id": "46ea1ae3-b067-4985-bd9e-6e1d4b1b2ec1",
+			"display_name": "TNTemplate-1",
+			"host_switch_spec": {
+				"resource_type": "StandardHostSwitchSpec",
+				"host_switches": [
+					{
+						"host_switch_profile_ids": [
+							{
+								"value": "0a26d126-7116-11e5-9d70-feff819cdc9f",
+								"key": "UplinkHostSwitchProfile"
+							}
+						],
+						"host_switch_name": "hs-1",
+						"pnics": [
+							{
+								"device_name": "vmnic1",
+								"uplink_name": "uplink-1"
+							}
+						],
+						"ip_assignment_spec": {
+							"resource_type": "AssignedByDhcp"
+						}
+					}
+				]
+			},
+			"compute_collection_ids": [
+				"33dbf426-c282-42a0-9ae2-5e924b8a78b4:domain-c38"
+			],
+			"transport_zone_endpoints": [
+				{
+					"transport_zone_id": "0840e9c6-3c7b-46a9-aea7-82bb1190709d"
+				}
+			],
+			"_create_user": "admin",
+			"_create_time": 1495147708462,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1495147708462,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}
