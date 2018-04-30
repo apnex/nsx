@@ -4,15 +4,16 @@
 echo "Exporting all known nsx specs.."
 
 read -r -d '' SPECS <<-CONFIG
-	"drv.node.list.sh"
+	"drv.node.status.sh"
+	"drv.cmanager.list.sh"
 	"drv.tnode.list.sh"
 	"drv.tzone.list.sh"
 	"drv.pool.list.sh"
 	"drv.block.list.sh"
 	"drv.profile.list.sh"
+	"drv.edge-cluster.list.sh"
 	"drv.router.list.sh"
 	"drv.switch.list.sh"
-	"drv.cmanager.list.sh"
 CONFIG
 for key in $(echo ${SPECS}); do
 	RUNFILE="./${key}"

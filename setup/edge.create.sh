@@ -1,6 +1,6 @@
 #!/bin/bash
-EDGENAME=$1
-EDGEADDRESS=$2
+ENAME=$1
+EADDRESS=$2
 
 function getVC {
 	read -r -d '' JQSPEC <<-CONFIG
@@ -9,7 +9,7 @@ function getVC {
 	CONFIG
 	local CMANAGER=$(./drv.cmanager.list.sh 2>/dev/null | jq -r "$JQSPEC")
 	if [[ -n "${CMANAGER}" ]]; then
-		printf "[${GREEN}INFO${NC}]: found [${GREEN}compute-manager${NC}] with name [${GREEN}${VCHOST}${NC}] id [${GREEN}${CMANAGER}${NC}]\n" 1>&2
+		printf "[$(cgreen "INFO")]: found [$(cgreen "compute-manager")] name [$(cgreen "${VCHOST}")] uuid [$(cgreen "${CMANAGER}")]\n" 1>&2
 		printf "${CMANAGER}"
 	else
 		printf "[${ORANGE}ERROR${NC}]: fould not find [${GREEN}compute-manager${NC}] with name [${GREEN}${VCHOST}${NC}] - please join it to the NSX domain\n" 1>&2
@@ -48,10 +48,10 @@ function buildSpec {
 }
 
 function makeBody {
-	read -r -d '' PAYLOAD <<-CONFIG
+	read -r -d '' BODY <<-CONFIG
 	{
 		"resource_type": "EdgeNode",
-		"display_name": "$EDGENAME",
+		"display_name": "$ENAME",
 		"deployment_type": "VIRTUAL_MACHINE",
 		"deployment_config": {
 			"form_factor": "SMALL",
@@ -65,21 +65,21 @@ function makeBody {
 				"management_port_subnets": [
 					{
 						"ip_addresses": [
-							"$EDGEADDRESS"
+							"$EADDRESS"
 						],
 						"prefix_length": 24
 					}
 				],
 				"data_network_ids": [
 					"dvportgroup-34",
-						"dvportgroup-34",
+					"dvportgroup-34",
 					"dvportgroup-34"
 			],
 				"default_gateway_addresses": [
 					"172.16.10.1"
 				],
 				"host_id": "host-10",
-				"hostname": "$EDGENAME",
+				"hostname": "$ENAME",
 				"placement_type": "VsphereDeploymentConfig",
 				"storage_id": "datastore-11",
 				"vc_id": "${CMANAGER}"
@@ -87,23 +87,21 @@ function makeBody {
 		}
 	}
 	CONFIG
-	echo "${PAYLOAD}"
-}
-
-function green {
-	local STRING=${1}
-	printf "${GREEN}${STRING}${NC}"
+	echo "${BODY}"
 }
 
 source drv.core
-if [[ -n "${EDGENAME}" && "${EDGEADDRESS}" ]]; then
+if [[ -n "${ENAME}" && "${EADDRESS}" ]]; then
 	CMANAGER=$(getVC)
 	if [[ -n "${CMANAGER}" && "${HOST}" ]]; then
-	 	BODY=$(makeBody)
-		URL="https://$HOST/api/v1/fabric/nodes"
-		printf "[$(green "INFO")]: nsx [$(green "create")] edge vm [$(green "$EDGENAME"):$(green "$EDGEADDRESS")] - [$(green "$URL")]... " 1>&2
-		rPost "${URL}" "${BODY}"
+		BODY=$(makeBody)
+		ITEM="fabric/nodes"
+		URL=$(buildURL "${ITEM}")
+		if [[ -n "${URL}" ]]; then
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
+			rPost "${URL}" "${BODY}"
+		fi
 	fi
 else
-	printf "[${ORANGE}ERROR${NC}]: command usage: ${GREEN}edge.create${LIGHTCYAN} <edgename> <edgeaddress>${NC}\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "edge.create") $(ccyan "<name> <cidr>")\n" 1>&2
 fi

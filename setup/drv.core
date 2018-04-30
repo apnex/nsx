@@ -51,14 +51,14 @@ function login {
 
 function session {
 	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(cgreen "INFO")]: nsx offline mode\n" 1>&2
+		printf "[$(cgreen "INFO")] - nsx offline mode\n" 1>&2
 	else
 		SESSIONFILE='nsx-cookies.txt'
-		printf "Validating existing session...\n" 1>&2
+		#printf "Validating existing session...\n" 1>&2
 		if [ -f $SESSIONFILE ]; then
 			MYDATE=$(stat -c %y "$SESSIONFILE")
 			LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
-			printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
+			#printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
 			if [ "$LAPSE" -ge 600 ]; then
 				printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
 				login
@@ -76,7 +76,9 @@ function session {
 #NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
 #VCPING=$(ping -W 1 -c 1 "$VCHOST" &>/dev/null && echo 1 || echo 0)
 #THUMBPRINT=$(./thumbprint.sh "$HOST")
-session
+
+# look at moving session to get, post, delete functions
+#session
 
 function isSuccess {
 	local STRING=${1}
@@ -105,6 +107,12 @@ function getFile {
 		;;
 		*"fabric/compute-managers"*)
 			NSXOUT="spec.cmanager.json"
+		;;
+		*"edge-clusters"*)
+			NSXOUT="spec.edge-clusters.json"
+		;;
+		*"cluster-profiles"*)
+			NSXOUT="spec.cluster-profiles.json"
 		;;
 		*"fabric/nodes"*)
 			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
@@ -136,6 +144,7 @@ function getFile {
 }
 
 function buildURL {
+	session
 	local ENDPOINT=${1}
 	local BASE="https://$HOST/api/v1/"
 	if [[ "$OFFLINE" == "true" ]]; then

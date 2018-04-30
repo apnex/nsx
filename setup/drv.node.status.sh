@@ -1,7 +1,7 @@
 #!/bin/bash
 source drv.core
 
-NODES=$(./drv.node.list.sh 2>/dev/null)
+NODES=$(./drv.node.list.sh)
 
 function getStatus {
 	local NODEID=${1}

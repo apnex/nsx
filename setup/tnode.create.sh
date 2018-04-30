@@ -1,4 +1,5 @@
 #!/bin/bash
+source drv.core
 TNNAME=$1
 TNNODEID=$2
 
@@ -93,7 +94,6 @@ function makeBody {
 	printf "${BODY}"
 }
 
-source drv.core
 if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
 	if [[ -n "${HOST}" ]]; then
 		BODY=$(makeBody)
