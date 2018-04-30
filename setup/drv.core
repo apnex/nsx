@@ -30,12 +30,16 @@ LIGHTCYAN='\033[0;36m' # light cyan
 WHITE='\033[0;37m' # white
 
 function corange {
-        local STRING=${1}
-        printf "${ORANGE}${STRING}${NC}"
+	local STRING=${1}
+	printf "${ORANGE}${STRING}${NC}"
 }
 function cgreen {
-        local STRING=${1}
-        printf "${GREEN}${STRING}${NC}"
+	local STRING=${1}
+	printf "${GREEN}${STRING}${NC}"
+}
+function ccyan {
+	local STRING=${1}
+	printf "${CYAN}${STRING}${NC}"
 }
 
 function login {
@@ -80,7 +84,7 @@ function isSuccess {
 	if [[ $STRING =~ $REGEX ]]; then
 		HTTPBODY=${BASH_REMATCH[1]}
 		HTTPCODE=${BASH_REMATCH[2]}
-		printf "[$HTTPCODE]" 1>&2
+		printf "[$(ccyan "${HTTPCODE}")]" 1>&2
 	fi
 	if [[ $HTTPCODE =~ 2..$ ]]; then
 		printf " - SUCCESS\n" 1>&2
@@ -93,13 +97,13 @@ function isSuccess {
 function getFile {
 	local ENDPOINT=${1}
 	case "${ENDPOINT}" in
-		*"transport-nodes")
+		*"transport-nodes"*)
 			NSXOUT="spec.tnode.json"
 		;;
-		*"transport-zones")
+		*"transport-zones"*)
 			NSXOUT="spec.tzone.json"
 		;;
-		*"fabric/compute-managers")
+		*"fabric/compute-managers"*)
 			NSXOUT="spec.cmanager.json"
 		;;
 		*"fabric/nodes"*)
@@ -112,7 +116,7 @@ function getFile {
 				NSXOUT="spec.node.json"
 			fi
 		;;
-		*"host-switch-profiles")
+		*"host-switch-profiles"*)
 			NSXOUT="spec.profile.json"
 		;;
 		*"pools/ip-pools")
@@ -145,10 +149,10 @@ function buildURL {
 
 function rPost {
 	local URL=${1}
+	local BODY=${2}
 	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(corange "OFFLINE")] - SUCCESS\n" 1>&2
+		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
 	else
-		local BODY=${2}
 		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
 		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 		-H "Content-Type: application/json" \
@@ -158,11 +162,30 @@ function rPost {
 	fi
 }
 
+function rDelete {
+	local URL=${1}
+	local BODY=${2}
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
+		#NSXFILE="${URL}"
+	else
+		#NSXFILE=$(getFile "${1}")
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X DELETE \
+		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
+		-H "Content-Type: application/x-form-urlencoded" \
+		--data-urlencode "$BODY" \
+		"$URL" 2>/dev/null)
+		isSuccess "$RESPONSE" | jq --tab .
+	fi
+	#work out state synch for deletes
+	#printf "rm ${NSXFILE}"
+}
+
 function rGet {
 	local URL=${1}
 	local NSXFILE
 	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(corange "OFFLINE")] - SUCCESS\n" 1>&2
+		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
 		RESULT=$(cat "${URL}")
 		NSXFILE="${URL}"
 	else

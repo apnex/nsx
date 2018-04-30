@@ -1,33 +1,31 @@
 #!/bin/bash
-source drv.core
-
 TZNAME=$1
 TZSWITCH=$2
 TZTYPE=$3
 
-read -r -d '' PAYLOAD <<-CONFIG
-{
-	"display_name":"$TZNAME",
-	"host_switch_name":"$TZSWITCH",
-	"description":"$TZTYPE Transport-Zone",
-	"transport_type":"$TZTYPE"
-}
-CONFIG
-
-function request {
-	URL="https://$HOST/api/v1/transport-zones"
-	printf "[INFO] nsx [create] transport-zone [$TZNAME:$TZSWITCH:$TZTYPE] - [$URL]... " 1>&2
-	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
-	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-	-H "Content-Type: application/json" \
-	-d "$PAYLOAD" \
-	"$URL" 2>/dev/null)
-	isSuccess "$RESPONSE"
+function makeBody {
+	read -r -d '' BODY <<-CONFIG
+	{
+		"display_name":"$TZNAME",
+		"host_switch_name":"$TZSWITCH",
+		"description":"$TZTYPE Transport-Zone",
+		"transport_type":"$TZTYPE"
+	}
+	CONFIG
+	printf "${BODY}"
 }
 
+source drv.core
 if [[ -n "${TZNAME}" && "${TZSWITCH}" && "${TZTYPE}" ]]; then
-	request
+	if [[ -n "${HOST}" ]]; then
+		BODY=$(makeBody)
+		ITEM="transport-zones"
+		URL=$(buildURL "${ITEM}")
+		if [[ -n "${URL}" ]]; then
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+			rPost "${URL}" "${BODY}"
+		fi
+	fi
 else
-	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tzone.create${LIGHTCYAN} <tzname> <tzswitch> <tztype>${NC}\n" 1>&2
+	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tzone.create${LIGHTCYAN} <name> <mtu> <vlan>${NC}\n" 1>&2
 fi
-

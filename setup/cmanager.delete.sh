@@ -1,15 +1,17 @@
 #!/bin/bash
-source drv.core
+ID=${1}
 
-ID=$1
-if [ -n "$ID" ]; then
-	URL="https://$HOST/api/v1/fabric/compute-managers/$ID"
-	printf "NSX DELETE compute-manager [$ID] - [$URL]... " 1>&2
-	RESPONSE=$(curl -v -k -b nsx-cookies.txt -w "%{http_code}" -X DELETE \
-	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-	-H "Content-Type: application/json" \
-	"$URL" 2>/dev/null)
-	isSuccess "$RESPONSE"
+source drv.core
+if [[ -n "${ID}" ]]; then
+	if [[ -n "${HOST}" ]]; then
+		ITEM="fabric/compute-managers"
+		CALL="/${ID}"
+		URL=$(buildURL "${ITEM}${CALL}")
+		if [[ -n "${URL}" ]]; then
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+			rDelete "${URL}"
+		fi
+	fi
 else
-	echo "Please provide a [compute-manager] ID"
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "cmanager.delete") $(ccyan "<uuid>")\n" 1>&2
 fi

@@ -4,7 +4,7 @@ ID=${1}
 source drv.core
 if [[ -n "${ID}" ]]; then
 	if [[ -n "${HOST}" ]]; then
-		ITEM="transport-zones"
+		ITEM="host-switch-profiles"
 		CALL="/${ID}"
 		URL=$(buildURL "${ITEM}${CALL}")
 		if [[ -n "${URL}" ]]; then
@@ -13,5 +13,5 @@ if [[ -n "${ID}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "tzone.delete") $(ccyan "<uuid>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "profile.delete") $(ccyan "<uuid>")\n" 1>&2
 fi

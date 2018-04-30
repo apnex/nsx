@@ -1,14 +1,15 @@
 #!/bin/bash
 source drv.core
 
-NODES=$(./drv.node.list.sh)
+NODES=$(./drv.node.list.sh 2>/dev/null)
 
 function getStatus {
 	local NODEID=${1}
-	ITEM="fabric/nodes/${NODEID}/status"
-	URL=$(buildURL "${ITEM}")
+	ITEM="fabric/nodes"
+	CALL="/${NODEID}/status"
+	URL=$(buildURL "${ITEM}${CALL}")
 	if [[ -n "${URL}" ]]; then
-		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 		rGet "${URL}"
 	fi
 }

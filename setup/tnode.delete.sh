@@ -1,22 +1,17 @@
 #!/bin/bash
+ID=${1}
+
 source drv.core
-
-TNID=$1
-
-function request {
-	local TNID=${1}
-	URL="https://$HOST/api/v1/transport-nodes/${TNID}"
-	printf "[INFO] nsx [delete] transport-node [${TNID}] - [$URL]... " 1>&2
-	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X DELETE \
-	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-	-H "Content-Type: application/json" \
-	"$URL" 2>/dev/null)
-	isSuccess "$RESPONSE"
-}
-
-if [[ -n "${TNID}" ]]; then
-        request "${TNID}"
+if [[ -n "${ID}" ]]; then
+	if [[ -n "${HOST}" ]]; then
+		ITEM="transport-nodes"
+		CALL="/${ID}"
+		URL=$(buildURL "${ITEM}${CALL}")
+		if [[ -n "${URL}" ]]; then
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+			rDelete "${URL}"
+		fi
+	fi
 else
-    	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.delete${LIGHTCYAN} <tnid>${NC}\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "tnode.delete") $(ccyan "<tnode-uuid>")\n" 1>&2
 fi
-

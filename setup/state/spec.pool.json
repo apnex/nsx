@@ -5,7 +5,8 @@
 	"results": [
 		{
 			"resource_type": "IpPool",
-			"id": "4da7fa96-a5ff-49a3-bf52-e1617156015f",
+			"description": "tep-pool",
+			"id": "cd4be1d2-e61a-40d8-97a8-54956b324a25",
 			"display_name": "tep-pool",
 			"subnets": [
 				{
@@ -16,18 +17,19 @@
 						}
 					],
 					"cidr": "172.16.12.0/24",
+					"gateway_ip": "172.16.12.1",
 					"dns_nameservers": []
 				}
 			],
 			"pool_usage": {
 				"total_ids": 90,
-				"free_ids": 90,
-				"allocated_ids": 0
+				"free_ids": 89,
+				"allocated_ids": 1
 			},
 			"_create_user": "admin",
-			"_create_time": 1523890979648,
+			"_create_time": 1525097252100,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1523890979648,
+			"_last_modified_time": 1525097252100,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0

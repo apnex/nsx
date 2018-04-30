@@ -1,16 +1,17 @@
 #!/bin/bash
+ID=${1}
+
 source drv.core
-
-ID=$1
-if [ -n "$ID" ]; then
-	URL="https://$HOST/api/v1/pools/ip-pools/$ID"
-	printf "Retrieving [$URL]... " 1>&2
-	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X DELETE \
-	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-	--data-urlencode "force=true" \
-	"$URL" 2>/dev/null)
-	isSuccess "$RESPONSE"
+if [[ -n "${ID}" ]]; then
+	if [[ -n "${HOST}" ]]; then
+		ITEM="pools/ip-pools"
+		CALL="/${ID}"
+		URL=$(buildURL "${ITEM}${CALL}")
+		if [[ -n "${URL}" ]]; then
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+			rDelete "${URL}"
+		fi
+	fi
 else
-	echo "Please specify a [ip-pool] ID"
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "pool.delete") $(ccyan "<uuid>")\n" 1>&2
 fi
-

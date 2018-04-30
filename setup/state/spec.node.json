@@ -1,73 +1,29 @@
 {
-	"result_count": 2,
+	"result_count": 1,
 	"results": [
 		{
-			"resource_type": "EdgeNode",
-			"id": "3461ef94-f560-44df-99e3-443dc7a5440e",
-			"display_name": "edge01",
-			"ip_addresses": [
-				"172.16.10.18"
-			],
-			"external_id": "3461ef94-f560-44df-99e3-443dc7a5440e",
-			"deployment_type": "VIRTUAL_MACHINE",
-			"deployment_config": {
-				"vm_deployment_config": {
-					"placement_type": "VsphereDeploymentConfig",
-					"vc_id": "72a56a55-a445-4945-b428-15dafe5836b8",
-					"management_network_id": "dvportgroup-18",
-					"default_gateway_addresses": [
-						"172.16.10.1"
-					],
-					"hostname": "edge01",
-					"compute_id": "domain-c7",
-					"storage_id": "datastore-11",
-					"management_port_subnets": [
-						{
-							"ip_addresses": [
-								"172.16.10.18"
-							],
-							"prefix_length": 24
-						}
-					],
-					"data_network_ids": [
-						"dvportgroup-34",
-						"dvportgroup-34",
-						"dvportgroup-34"
-					],
-					"host_id": "host-10"
-				},
-				"form_factor": "SMALL",
-				"node_user_settings": {}
-			},
-			"_create_user": "admin",
-			"_create_time": 1524820598829,
-			"_last_modified_user": "5bc56f28-49b8-4696-90f7-00fe883b9df3",
-			"_last_modified_time": 1524820636673,
-			"_system_owned": false,
-			"_protection": "NOT_PROTECTED",
-			"_revision": 2
-		},
-		{
 			"resource_type": "HostNode",
-			"id": "c205547a-d26e-413b-86ab-cfeca490c261",
+			"id": "3ff61de3-0c1e-471e-9a2d-1d1f86f869b8",
 			"display_name": "esx01.lab",
 			"fqdn": "esx01.lab",
 			"ip_addresses": [
 				"172.16.10.101"
 			],
-			"external_id": "c205547a-d26e-413b-86ab-cfeca490c261",
+			"external_id": "3ff61de3-0c1e-471e-9a2d-1d1f86f869b8",
 			"discovered_ip_addresses": [
 				"172.16.10.101",
-				"172.16.11.101"
+				"172.16.11.101",
+				"169.254.1.1",
+				"172.16.12.10"
 			],
-			"discovered_node_id": "1a07b95c-34ba-4953-a7fd-5ba196d8ec84:host-1024",
+			"discovered_node_id": "2c7bcd74-41e9-4f1a-aea0-35d415cd5047:host-1024",
 			"os_type": "ESXI",
 			"os_version": "6.5.0",
 			"managed_by_server": "172.16.0.13",
 			"_create_user": "admin",
-			"_create_time": 1524821071756,
+			"_create_time": 1525091811025,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1524821071756,
+			"_last_modified_time": 1525091811025,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
 		}

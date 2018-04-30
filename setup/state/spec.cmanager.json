@@ -4,7 +4,7 @@
 		{
 			"resource_type": "ComputeManager",
 			"description": "",
-			"id": "1a07b95c-34ba-4953-a7fd-5ba196d8ec84",
+			"id": "2c7bcd74-41e9-4f1a-aea0-35d415cd5047",
 			"display_name": "vcenter.lab",
 			"server": "vcenter.lab",
 			"credential": {
@@ -79,11 +79,11 @@
 			],
 			"origin_type": "vCenter",
 			"_create_user": "admin",
-			"_create_time": 1525076833337,
+			"_create_time": 1525098602278,
 			"_last_modified_user": "CMINV",
-			"_last_modified_time": 1525088579190,
+			"_last_modified_time": 1525098630278,
 			"_protection": "NOT_PROTECTED",
-			"_revision": 7
+			"_revision": 2
 		}
 	]
 }
