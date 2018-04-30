@@ -2,21 +2,22 @@
 
 # export nsx configuration for offline cli use
 echo "Exporting all known nsx specs.."
-ITEM=$(./node.list.sh json)
-echo "$ITEM" | jq --tab . > spec.node.json
-ITEM=$(./tnode.list.sh json)
-echo "$ITEM" | jq --tab . > spec.tnode.json
-ITEM=$(./tzone.list.sh json)
-echo "$ITEM" | jq --tab . > spec.tzone.json
-ITEM=$(./pool.list.sh json)
-echo "$ITEM" | jq --tab . > spec.pool.json
-ITEM=$(./block.list.sh json)
-echo "$ITEM" | jq --tab . > spec.block.json
-ITEM=$(./profile.list.sh json)
-echo "$ITEM" | jq --tab . > spec.profile.json
-ITEM=$(./router.list.sh json)
-echo "$ITEM" | jq --tab . > spec.router.json
-ITEM=$(./switch.list.sh json)
-echo "$ITEM" | jq --tab . > spec.switch.json
+
+read -r -d '' SPECS <<-CONFIG
+	"drv.node.list.sh"
+	"drv.tnode.list.sh"
+	"drv.tzone.list.sh"
+	"drv.pool.list.sh"
+	"drv.block.list.sh"
+	"drv.profile.list.sh"
+	"drv.router.list.sh"
+	"drv.switch.list.sh"
+	"drv.cmanager.list.sh"
+CONFIG
+for key in $(echo ${SPECS}); do
+	RUNFILE="./${key}"
+	eval ${RUNFILE} 1>/dev/null
+done
+
 echo "Export completed"
 

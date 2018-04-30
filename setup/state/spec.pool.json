@@ -1,0 +1,36 @@
+{
+	"sort_ascending": true,
+	"sort_by": "displayName",
+	"result_count": 1,
+	"results": [
+		{
+			"resource_type": "IpPool",
+			"id": "4da7fa96-a5ff-49a3-bf52-e1617156015f",
+			"display_name": "tep-pool",
+			"subnets": [
+				{
+					"allocation_ranges": [
+						{
+							"start": "172.16.12.10",
+							"end": "172.16.12.99"
+						}
+					],
+					"cidr": "172.16.12.0/24",
+					"dns_nameservers": []
+				}
+			],
+			"pool_usage": {
+				"total_ids": 90,
+				"free_ids": 90,
+				"allocated_ids": 0
+			},
+			"_create_user": "admin",
+			"_create_time": 1523890979648,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1523890979648,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

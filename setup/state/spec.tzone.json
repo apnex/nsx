@@ -1,0 +1,79 @@
+{
+	"sort_ascending": true,
+	"sort_by": "displayName",
+	"result_count": 3,
+	"results": [
+		{
+			"resource_type": "TransportZone",
+			"description": "OVERLAY Transport-Zone",
+			"id": "66ef3573-e6ef-4132-bc47-22fc7a4e801b",
+			"display_name": "test-zone",
+			"nested_nsx": false,
+			"host_switch_name": "hs-test",
+			"transport_type": "OVERLAY",
+			"transport_zone_profile_ids": [
+				{
+					"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+					"resource_type": "BfdHealthMonitoringProfile"
+				}
+			],
+			"host_switch_mode": "STANDARD",
+			"_create_user": "admin",
+			"_create_time": 1525078195137,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1525078195137,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0,
+			"_schema": "/v1/schema/TransportZone"
+		},
+		{
+			"resource_type": "TransportZone",
+			"description": "OVERLAY Transport-Zone",
+			"id": "9a7ece00-3a4b-4a21-a811-f07e6a60b9e9",
+			"display_name": "tz-overlay",
+			"nested_nsx": false,
+			"host_switch_name": "hs-fabric",
+			"transport_type": "OVERLAY",
+			"transport_zone_profile_ids": [
+				{
+					"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+					"resource_type": "BfdHealthMonitoringProfile"
+				}
+			],
+			"host_switch_mode": "STANDARD",
+			"_create_user": "admin",
+			"_create_time": 1524755872976,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1524755872976,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0,
+			"_schema": "/v1/schema/TransportZone"
+		},
+		{
+			"resource_type": "TransportZone",
+			"description": "VLAN Transport-Zone",
+			"id": "c769876e-4c83-4bd1-b6f3-debac7c9a110",
+			"display_name": "tz-vlan",
+			"nested_nsx": false,
+			"host_switch_name": "hs-fabric",
+			"transport_type": "VLAN",
+			"transport_zone_profile_ids": [
+				{
+					"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+					"resource_type": "BfdHealthMonitoringProfile"
+				}
+			],
+			"host_switch_mode": "STANDARD",
+			"_create_user": "admin",
+			"_create_time": 1523890297784,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1523890297784,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0,
+			"_schema": "/v1/schema/TransportZone"
+		}
+	]
+}

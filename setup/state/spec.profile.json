@@ -1,0 +1,30 @@
+{
+	"sort_ascending": true,
+	"sort_by": "displayName",
+	"result_count": 1,
+	"results": [
+		{
+			"resource_type": "UplinkHostSwitchProfile",
+			"id": "2bf3522e-3332-4671-8e4a-d841259c1fab",
+			"display_name": "pf-uplink",
+			"transport_vlan": 0,
+			"teaming": {
+				"active_list": [
+					{
+						"uplink_type": "PNIC",
+						"uplink_name": "uplink1"
+					}
+				],
+				"policy": "FAILOVER_ORDER"
+			},
+			"mtu": 1700,
+			"_create_user": "admin",
+			"_create_time": 1523962820186,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1523962820186,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

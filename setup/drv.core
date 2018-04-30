@@ -10,6 +10,34 @@ HOST=$(cat nsx-credentials | jq -r .hostname)
 DOMAIN=$(cat nsx-credentials | jq -r .domain)
 OFFLINE=$(cat nsx-credentials | jq -r .offline)
 
+# COLOURS
+NC='\033[0m' # no colour
+BLACK='\033[0;30m' # black
+RED='\033[0;31m' # red
+GREEN='\033[0;32m' # green
+ORANGE='\033[0;33m' # orange
+BLUE='\033[0;34m' # blue
+PURPLE='\033[0;35m' # purple
+CYAN='\033[0;36m' # cyan
+LIGHTGREY='\033[0;37m' # light grey
+DARKGREY='\033[0;30m' # dark grey
+LIGHTRED='\033[0;31m' # light red
+LIGHTGREEN='\033[0;32m' # light green
+YELLOW='\033[0;33m' # yellow
+LIGHTBLUE='\033[0;34m' # light blue
+LIGHTPURPLE='\033[0;35m' # light purple
+LIGHTCYAN='\033[0;36m' # light cyan
+WHITE='\033[0;37m' # white
+
+function corange {
+        local STRING=${1}
+        printf "${ORANGE}${STRING}${NC}"
+}
+function cgreen {
+        local STRING=${1}
+        printf "${GREEN}${STRING}${NC}"
+}
+
 function login {
 	URL="https://$HOST/api/session/create"
 	curl -k -c nsx-cookies.txt -D nsx-headers.txt -X POST \
@@ -19,7 +47,7 @@ function login {
 
 function session {
 	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[AUTH]: offline mode\n" 1>&2
+		printf "[$(cgreen "INFO")]: nsx offline mode\n" 1>&2
 	else
 		SESSIONFILE='nsx-cookies.txt'
 		printf "Validating existing session...\n" 1>&2
@@ -62,11 +90,64 @@ function isSuccess {
 	fi
 }
 
-function rPost {
+function getFile {
+	local ENDPOINT=${1}
+	case "${ENDPOINT}" in
+		*"transport-nodes")
+			NSXOUT="spec.tnode.json"
+		;;
+		*"transport-zones")
+			NSXOUT="spec.tzone.json"
+		;;
+		*"fabric/compute-managers")
+			NSXOUT="spec.cmanager.json"
+		;;
+		*"fabric/nodes"*)
+			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				NSXOUT="spec.node.${ITEMID}.${ITEMCM}.json"
+			else
+				NSXOUT="spec.node.json"
+			fi
+		;;
+		*"host-switch-profiles")
+			NSXOUT="spec.profile.json"
+		;;
+		*"pools/ip-pools")
+			NSXOUT="spec.pool.json"
+		;;
+		*"pools/ip-blocks")
+			NSXOUT="spec.block.json"
+		;;
+		*"logical-routers")
+			NSXOUT="spec.router.json"
+		;;
+		*"logical-switches")
+			NSXOUT="spec.switch.json"
+		;;
+	esac
+	printf "state/$NSXOUT"
+}
+
+function buildURL {
+	local ENDPOINT=${1}
+	local BASE="https://$HOST/api/v1/"
 	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[RPOST]: offline mode\n" 1>&2
+		local NSXFILE=$(getFile "${1}")
+		URL="${NSXFILE}"
 	else
-		local URL=${1}
+		URL="$BASE$ENDPOINT"
+	fi
+	printf "$URL"
+}
+
+function rPost {
+	local URL=${1}
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[$(corange "OFFLINE")] - SUCCESS\n" 1>&2
+	else
 		local BODY=${2}
 		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
 		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
@@ -78,72 +159,21 @@ function rPost {
 }
 
 function rGet {
-	local STRING="${1}"
+	local URL=${1}
+	local NSXFILE
 	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[RGET]: offline mode\n" 1>&2
-		SPEC=$(cat "${STRING}")
-		printf "$SPEC"
+		printf "[$(corange "OFFLINE")] - SUCCESS\n" 1>&2
+		RESULT=$(cat "${URL}")
+		NSXFILE="${URL}"
 	else
-		#local URL=${1}
+		NSXFILE=$(getFile "${1}")
 		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
 		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 		-H "Content-Type: application/json" \
 		"$URL" 2>/dev/null)
-		isSuccess "$RESPONSE"
-		echo "$HTTPBODY"
+		isSuccess "${RESPONSE}"
+		RESULT="${HTTPBODY}"
 	fi
+	printf "${RESULT}\n" | jq --tab . > "${NSXFILE}"
+	printf "${RESULT}\n"
 }
-
-function buildURL {
-	local ENDPOINT=${1}
-	local BASE="https://$HOST/api/v1/"
-	local URL=""
-	case "${ENDPOINT}" in
-		"transport-nodes")
-			URL="spec.tnode.json"
-		;;
-		"transport-zones")
-			URL="spec.tzone.json"
-		;;
-		"fabric/compute-managers")
-			URL="spec.cmanager.json"
-		;;
-		"fabric/nodes")
-			URL="spec.node.json"
-		;;
-		"host-switch-profiles")
-			URL="spec.profile.json"
-		;;
-		"pools/ip-pools")
-			URL="spec.pool.json"
-		;;
-		"pools/ip-blocks")
-			URL="spec.block.json"
-		;;
-		"logical-routers")
-			URL="spec.router.json"
-		;;
-		"logical-switches")
-			URL="spec.switch.json"
-		;;
-	esac
-	printf "$URL"
-}
-
-NC='\033[0m' # no colour
-BLACK='\033[0;30m' # black
-RED='\033[0;31m' # red
-GREEN='\033[0;32m' # green
-ORANGE='\033[0;33m' # orange
-BLUE='\033[0;34m' # blue
-PURPLE='\033[0;35m' # purple
-CYAN='\033[0;36m' # cyan
-LIGHTGREY='\033[0;37m' # light grey
-DARKGREY='\033[0;30m' # dark grey
-LIGHTRED='\033[0;31m' # light red
-LIGHTGREEN='\033[0;32m' # light green
-YELLOW='\033[0;33m' # yellow
-LIGHTBLUE='\033[0;34m' # light blue
-LIGHTPURPLE='\033[0;35m' # light purple
-LIGHTCYAN='\033[0;36m' # light cyan
-WHITE='\033[0;37m' # white
