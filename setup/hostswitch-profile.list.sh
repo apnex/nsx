@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RAW=$1
-PAYLOAD=$(./drv.profile.list.sh)
+PAYLOAD=$(./drv.hostswitch-profile.list.sh)
 read -r -d '' JQSPEC <<CONFIG
 	.results |
 		["id", "display_name", "resource_type", "transport_vlan", "mtu"]

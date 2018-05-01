@@ -51,7 +51,7 @@ function login {
 
 function session {
 	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(cgreen "INFO")] - nsx offline mode\n" 1>&2
+		printf "[$(cgreen "INFO")]: nsx offline mode\n" 1>&2
 	else
 		SESSIONFILE='nsx-cookies.txt'
 		#printf "Validating existing session...\n" 1>&2

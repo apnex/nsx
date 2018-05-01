@@ -3,6 +3,7 @@
 # export nsx configuration for offline cli use
 echo "Exporting all known nsx specs.."
 
+rm ./state/*json
 read -r -d '' SPECS <<-CONFIG
 	"drv.node.status.sh"
 	"drv.cmanager.list.sh"

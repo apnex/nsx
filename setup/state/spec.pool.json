@@ -23,8 +23,8 @@
 			],
 			"pool_usage": {
 				"total_ids": 90,
-				"free_ids": 87,
-				"allocated_ids": 3
+				"free_ids": 88,
+				"allocated_ids": 2
 			},
 			"_create_user": "admin",
 			"_create_time": 1525097252100,

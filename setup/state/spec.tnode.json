@@ -1,12 +1,12 @@
 {
 	"sort_ascending": true,
 	"sort_by": "displayName",
-	"result_count": 3,
+	"result_count": 2,
 	"results": [
 		{
 			"resource_type": "TransportNode",
 			"description": "NSX configured Test Transport Node",
-			"id": "cfd21b14-1b69-4b6c-b742-cd2c4e976e19",
+			"id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
 			"display_name": "tn-edge01",
 			"host_switch_spec": {
 				"resource_type": "StandardHostSwitchSpec",
@@ -80,11 +80,11 @@
 					"static_ip_pool_id": "cd4be1d2-e61a-40d8-97a8-54956b324a25"
 				}
 			],
-			"node_id": "cfd21b14-1b69-4b6c-b742-cd2c4e976e19",
+			"node_id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
 			"_create_user": "admin",
-			"_create_time": 1525100840489,
+			"_create_time": 1525165931248,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1525100840489,
+			"_last_modified_time": 1525165931248,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
@@ -92,93 +92,7 @@
 		{
 			"resource_type": "TransportNode",
 			"description": "NSX configured Test Transport Node",
-			"id": "7e3be149-5542-42f3-93b7-a22b72d9ad47",
-			"display_name": "tn-edge02",
-			"host_switch_spec": {
-				"resource_type": "StandardHostSwitchSpec",
-				"host_switches": [
-					{
-						"host_switch_profile_ids": [
-							{
-								"value": "6f3c6c31-550f-4fed-be38-414c38b1f945",
-								"key": "UplinkHostSwitchProfile"
-							},
-							{
-								"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
-								"key": "LldpHostSwitchProfile"
-							}
-						],
-						"host_switch_name": "hs-fabric",
-						"pnics": [
-							{
-								"device_name": "fp-eth0",
-								"uplink_name": "uplink1"
-							}
-						],
-						"ip_assignment_spec": {
-							"resource_type": "StaticIpPoolSpec",
-							"ip_pool_id": "cd4be1d2-e61a-40d8-97a8-54956b324a25"
-						},
-						"cpu_config": []
-					}
-				]
-			},
-			"maintenance_mode": "DISABLED",
-			"transport_zone_endpoints": [
-				{
-					"transport_zone_id": "c769876e-4c83-4bd1-b6f3-debac7c9a110",
-					"transport_zone_profile_ids": [
-						{
-							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
-							"resource_type": "BfdHealthMonitoringProfile"
-						}
-					]
-				},
-				{
-					"transport_zone_id": "9a7ece00-3a4b-4a21-a811-f07e6a60b9e9",
-					"transport_zone_profile_ids": [
-						{
-							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
-							"resource_type": "BfdHealthMonitoringProfile"
-						}
-					]
-				}
-			],
-			"host_switches": [
-				{
-					"host_switch_profile_ids": [
-						{
-							"value": "6f3c6c31-550f-4fed-be38-414c38b1f945",
-							"key": "UplinkHostSwitchProfile"
-						},
-						{
-							"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
-							"key": "LldpHostSwitchProfile"
-						}
-					],
-					"host_switch_name": "hs-fabric",
-					"pnics": [
-						{
-							"device_name": "fp-eth0",
-							"uplink_name": "uplink1"
-						}
-					],
-					"static_ip_pool_id": "cd4be1d2-e61a-40d8-97a8-54956b324a25"
-				}
-			],
-			"node_id": "7e3be149-5542-42f3-93b7-a22b72d9ad47",
-			"_create_user": "admin",
-			"_create_time": 1525101559972,
-			"_last_modified_user": "admin",
-			"_last_modified_time": 1525101559972,
-			"_system_owned": false,
-			"_protection": "NOT_PROTECTED",
-			"_revision": 0
-		},
-		{
-			"resource_type": "TransportNode",
-			"description": "NSX configured Test Transport Node",
-			"id": "3ff61de3-0c1e-471e-9a2d-1d1f86f869b8",
+			"id": "24be4739-9bf1-4c7b-8754-130a38fa5988",
 			"display_name": "tn-esx01",
 			"host_switch_spec": {
 				"resource_type": "StandardHostSwitchSpec",
@@ -252,11 +166,11 @@
 					"static_ip_pool_id": "cd4be1d2-e61a-40d8-97a8-54956b324a25"
 				}
 			],
-			"node_id": "3ff61de3-0c1e-471e-9a2d-1d1f86f869b8",
+			"node_id": "24be4739-9bf1-4c7b-8754-130a38fa5988",
 			"_create_user": "admin",
-			"_create_time": 1525098422724,
+			"_create_time": 1525167253003,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1525098422724,
+			"_last_modified_time": 1525167253003,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0

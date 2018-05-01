@@ -26,7 +26,7 @@ function makeBody {
 	TZOVERLAY=$(echo "${TZRESULT}" | jq -r '.results | map(select(.transport_type=="OVERLAY").id) | .[0]')
 
 	# get uplink profile
-	PFRESULT=$(./drv.profile.list.sh json 2>/dev/null)
+	PFRESULT=$(./drv.hostswitch-profile.list.sh json 2>/dev/null)
 	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-uplink").id) | .[0]')
 
 	# get tep pool
@@ -100,7 +100,7 @@ if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
 		ITEM="transport-nodes"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 			rPost "${URL}" "${BODY}"
 		fi
 	fi

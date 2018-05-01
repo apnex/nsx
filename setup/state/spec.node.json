@@ -1,14 +1,14 @@
 {
-	"result_count": 3,
+	"result_count": 2,
 	"results": [
 		{
 			"resource_type": "EdgeNode",
-			"id": "cfd21b14-1b69-4b6c-b742-cd2c4e976e19",
+			"id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
 			"display_name": "edge01",
 			"ip_addresses": [
 				"172.16.10.18"
 			],
-			"external_id": "cfd21b14-1b69-4b6c-b742-cd2c4e976e19",
+			"external_id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
 			"deployment_type": "VIRTUAL_MACHINE",
 			"deployment_config": {
 				"vm_deployment_config": {
@@ -40,68 +40,22 @@
 				"node_user_settings": {}
 			},
 			"_create_user": "admin",
-			"_create_time": 1525099653605,
-			"_last_modified_user": "ec1d02ad-3322-4adc-adda-7a00423f188a",
-			"_last_modified_time": 1525099693576,
-			"_system_owned": false,
-			"_protection": "NOT_PROTECTED",
-			"_revision": 2
-		},
-		{
-			"resource_type": "EdgeNode",
-			"id": "7e3be149-5542-42f3-93b7-a22b72d9ad47",
-			"display_name": "edge02",
-			"ip_addresses": [
-				"172.16.10.19"
-			],
-			"external_id": "7e3be149-5542-42f3-93b7-a22b72d9ad47",
-			"deployment_type": "VIRTUAL_MACHINE",
-			"deployment_config": {
-				"vm_deployment_config": {
-					"placement_type": "VsphereDeploymentConfig",
-					"vc_id": "2c7bcd74-41e9-4f1a-aea0-35d415cd5047",
-					"management_network_id": "dvportgroup-18",
-					"default_gateway_addresses": [
-						"172.16.10.1"
-					],
-					"hostname": "edge02",
-					"compute_id": "domain-c7",
-					"storage_id": "datastore-11",
-					"management_port_subnets": [
-						{
-							"ip_addresses": [
-								"172.16.10.19"
-							],
-							"prefix_length": 24
-						}
-					],
-					"data_network_ids": [
-						"dvportgroup-34",
-						"dvportgroup-34",
-						"dvportgroup-34"
-					],
-					"host_id": "host-10"
-				},
-				"form_factor": "SMALL",
-				"node_user_settings": {}
-			},
-			"_create_user": "admin",
-			"_create_time": 1525101429048,
-			"_last_modified_user": "bd9c17d2-281e-418d-89c8-a27e6d4fcae8",
-			"_last_modified_time": 1525101468678,
+			"_create_time": 1525163873659,
+			"_last_modified_user": "3f23bdb4-19e5-4dc2-a148-2440bcd57bfe",
+			"_last_modified_time": 1525163917569,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 2
 		},
 		{
 			"resource_type": "HostNode",
-			"id": "3ff61de3-0c1e-471e-9a2d-1d1f86f869b8",
+			"id": "24be4739-9bf1-4c7b-8754-130a38fa5988",
 			"display_name": "esx01.lab",
 			"fqdn": "esx01.lab",
 			"ip_addresses": [
 				"172.16.10.101"
 			],
-			"external_id": "3ff61de3-0c1e-471e-9a2d-1d1f86f869b8",
+			"external_id": "24be4739-9bf1-4c7b-8754-130a38fa5988",
 			"discovered_ip_addresses": [
 				"172.16.10.101",
 				"172.16.11.101",
@@ -113,9 +67,9 @@
 			"os_version": "6.5.0",
 			"managed_by_server": "172.16.0.13",
 			"_create_user": "admin",
-			"_create_time": 1525091811025,
+			"_create_time": 1525167066825,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1525091811025,
+			"_last_modified_time": 1525167066825,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
 		}

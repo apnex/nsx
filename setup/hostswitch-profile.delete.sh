@@ -13,5 +13,5 @@ if [[ -n "${ID}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "profile.delete") $(ccyan "<uuid>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "hostswitch-profile.delete") $(ccyan "<uuid>")\n" 1>&2
 fi

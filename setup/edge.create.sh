@@ -103,5 +103,5 @@ if [[ -n "${ENAME}" && "${EADDRESS}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "edge.create") $(ccyan "<name> <cidr>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "edge.create") $(ccyan "<name> <ip-address>")\n" 1>&2
 fi

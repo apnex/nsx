@@ -8,7 +8,7 @@ if [[ -n "${ID}" ]]; then
 		CALL="/${ID}"
 		URL=$(buildURL "${ITEM}${CALL}")
 		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 			rDelete "${URL}"
 		fi
 	fi
