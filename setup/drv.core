@@ -50,9 +50,9 @@ function login {
 }
 
 function session {
-	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(cgreen "INFO")]: nsx offline mode\n" 1>&2
-	else
+	if [[ "$OFFLINE" == "false" ]]; then
+	#	printf "[$(cgreen "INFO")]: nsx offline mode\n" 1>&2
+	#else
 		SESSIONFILE='nsx-cookies.txt'
 		#printf "Validating existing session...\n" 1>&2
 		if [ -f $SESSIONFILE ]; then
@@ -114,6 +114,9 @@ function getFile {
 		*"cluster-profiles"*)
 			NSXOUT="spec.cluster-profiles.json"
 		;;
+		*"trust-management/certificates"*)
+			NSXOUT="spec.certificates.json"
+		;;
 		*"fabric/nodes"*)
 			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
 			if [[ ${ENDPOINT} =~ $REGEX ]]; then
@@ -133,11 +136,14 @@ function getFile {
 		*"pools/ip-blocks")
 			NSXOUT="spec.block.json"
 		;;
-		*"logical-routers")
+		*"logical-routers"*)
 			NSXOUT="spec.router.json"
 		;;
-		*"logical-switches")
+		*"logical-switches"*)
 			NSXOUT="spec.switch.json"
+		;;
+		*"spec/openapi/nsx_api.json"*)
+			NSXOUT="nsx_api.json"
 		;;
 	esac
 	printf "state/$NSXOUT"
@@ -162,7 +168,7 @@ function rPost {
 	if [[ "$OFFLINE" == "true" ]]; then
 		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
 	else
-		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X POST \
 		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 		-H "Content-Type: application/json" \
 		-d "$BODY" \
@@ -206,6 +212,6 @@ function rGet {
 		isSuccess "${RESPONSE}"
 		RESULT="${HTTPBODY}"
 	fi
-	printf "${RESULT}\n" | jq --tab . > "${NSXFILE}"
-	printf "${RESULT}\n"
+	printf "%s\n" "${RESULT}" | jq --tab . > "${NSXFILE}"
+	printf "%s\n" "${RESULT}"
 }

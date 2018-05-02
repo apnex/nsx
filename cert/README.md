@@ -1,13 +1,14 @@
 #### 1: Set up NSX manager credentials
 Modify the `nsx-credentials` file to reflect the parameters for your lab. I recommended using an IP address for the `hostname`.
-The `domain` property will be used in generating a certificate for the NSX Manager - i.e `*.corp.local` in this example.
+The `domain` property will be used in generating a certificate for the NSX Manager - i.e `*.lab` in this example.
 
 ```json
 {
 	"hostname": "172.16.10.15",
 	"username": "admin",
 	"password": "VMware1!VMware1!",
-	"domain": "corp.local"
+	"domain": "lab",
+	"offline": "false"
 }
 ```
 
@@ -33,7 +34,7 @@ The `domain` property will be used in generating a certificate for the NSX Manag
 
 #### 6: Apply newly uploaded certificate to the HTTP API service - NSX web service will restart
 ```
-./cert.apply.sh <cert-id>
+./cert.apply.sh <cert-uuid>
 ```
 
 #### 7: Check that certificate is now applied to API HTTP service

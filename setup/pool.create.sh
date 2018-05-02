@@ -38,7 +38,7 @@ if [[ -n "${PLNAME}" && "${PLCIDR}" ]]; then
 		ITEM="pools/ip-pools"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} - [$(cgreen "${URL}")]... " 1>&2
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
 			rPost "${URL}" "${BODY}"
 		fi
 	fi

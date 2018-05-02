@@ -5,13 +5,15 @@ echo "Exporting all known nsx specs.."
 
 rm ./state/*json
 read -r -d '' SPECS <<-CONFIG
+	"drv.openapi.list.sh"
 	"drv.node.status.sh"
 	"drv.cmanager.list.sh"
 	"drv.tnode.list.sh"
 	"drv.tzone.list.sh"
 	"drv.pool.list.sh"
 	"drv.block.list.sh"
-	"drv.profile.list.sh"
+	"drv.hostswitch-profile.list.sh"
+	"drv.cluster-profile.list.sh"
 	"drv.edge-cluster.list.sh"
 	"drv.router.list.sh"
 	"drv.switch.list.sh"
