@@ -1,0 +1,87 @@
+{
+	"result_count": 3,
+	"results": [
+		{
+			"resource_type": "LogicalRouter",
+			"id": "b662b52f-0260-48b5-9c4c-78d18c294354",
+			"display_name": "t0-pks",
+			"edge_cluster_id": "09355755-e148-492d-a0c1-071c851fe258",
+			"firewall_sections": [
+				{
+					"is_valid": true,
+					"target_type": "FirewallSection",
+					"target_id": "eaabe891-2c24-4ecf-9f6e-4c0f4c4a3b5c"
+				}
+			],
+			"preferred_edge_cluster_member_index": 0,
+			"advanced_config": {
+				"external_transit_networks": [
+					"100.64.0.0/16"
+				],
+				"internal_transit_network": "169.254.0.0/28"
+			},
+			"router_type": "TIER0",
+			"high_availability_mode": "ACTIVE_STANDBY",
+			"failover_mode": "PREEMPTIVE",
+			"_create_user": "admin",
+			"_create_time": 1525255280078,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1525255280078,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"resource_type": "LogicalRouter",
+			"id": "501cf8c3-ab78-4c72-b550-5e16f2a80a5f",
+			"display_name": "t1-pks-mgmt",
+			"edge_cluster_id": "09355755-e148-492d-a0c1-071c851fe258",
+			"firewall_sections": [
+				{
+					"is_valid": true,
+					"target_type": "FirewallSection",
+					"target_id": "2c8995c6-9411-4261-8a95-5336f5e34c42"
+				}
+			],
+			"advanced_config": {
+				"internal_transit_network": "169.254.0.0/28"
+			},
+			"router_type": "TIER1",
+			"high_availability_mode": "ACTIVE_STANDBY",
+			"failover_mode": "PREEMPTIVE",
+			"_create_user": "admin",
+			"_create_time": 1525257553178,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1525257553178,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"resource_type": "LogicalRouter",
+			"id": "3e6f5be2-3fee-40f4-bc48-ec5045cbddaa",
+			"display_name": "t1-pks-service",
+			"edge_cluster_id": "09355755-e148-492d-a0c1-071c851fe258",
+			"firewall_sections": [
+				{
+					"is_valid": true,
+					"target_type": "FirewallSection",
+					"target_id": "d3c01f5e-f97d-4aac-a6f4-091441f06f46"
+				}
+			],
+			"advanced_config": {
+				"internal_transit_network": "169.254.0.0/28"
+			},
+			"router_type": "TIER1",
+			"high_availability_mode": "ACTIVE_STANDBY",
+			"failover_mode": "PREEMPTIVE",
+			"_create_user": "admin",
+			"_create_time": 1525257575697,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1525257575697,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

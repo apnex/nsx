@@ -22,10 +22,10 @@ if [[ -n "${TZNAME}" && "${TZSWITCH}" && "${TZTYPE}" ]]; then
 		ITEM="transport-zones"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 			rPost "${URL}" "${BODY}"
 		fi
 	fi
 else
-	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tzone.create${LIGHTCYAN} <name> <mtu> <vlan>${NC}\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "tnode.create") $(ccyan "<name> <hostswitch> <type>")\n" 1>&2
 fi

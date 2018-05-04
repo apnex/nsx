@@ -168,7 +168,7 @@ function rPost {
 	if [[ "$OFFLINE" == "true" ]]; then
 		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
 	else
-		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X POST \
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
 		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 		-H "Content-Type: application/json" \
 		-d "$BODY" \
