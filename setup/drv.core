@@ -100,7 +100,14 @@ function getFile {
 	local ENDPOINT=${1}
 	case "${ENDPOINT}" in
 		*"transport-nodes"*)
-			NSXOUT="spec.tnode.json"
+			REGEX='transport-nodes/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				NSXOUT="spec.tnode.${ITEMID}.${ITEMCM}.json"
+			else
+				NSXOUT="spec.tnode.json"
+			fi
 		;;
 		*"transport-zones"*)
 			NSXOUT="spec.tzone.json"

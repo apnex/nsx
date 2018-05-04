@@ -4,15 +4,14 @@ NODEID=$1
 
 if [[ -n "${NODEID}" ]]; then
 	if [[ -n "${HOST}" ]]; then
-		BODY=$(makeBody)
 		ITEM="transport-nodes"
-		CALL="/${NODEID}/status"
+		CALL="/${NODEID}?action=resync_host_config"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			rPost "${URL}" "${BODY}"
+			rPost "${URL}${CALL}"
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "tnode.create") $(ccyan "<name> <node-uuid>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "tnode.resync") $(ccyan "<uuid>")\n" 1>&2
 fi
