@@ -51,21 +51,25 @@ function login {
 
 function session {
 	if [[ "$OFFLINE" == "false" ]]; then
-	#	printf "[$(cgreen "INFO")]: nsx offline mode\n" 1>&2
-	#else
-		SESSIONFILE='nsx-cookies.txt'
-		#printf "Validating existing session...\n" 1>&2
-		if [ -f $SESSIONFILE ]; then
-			MYDATE=$(stat -c %y "$SESSIONFILE")
-			LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
-			#printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
-			if [ "$LAPSE" -ge 600 ]; then
-				printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
+		NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
+		printf "$NSXPING\n" 1>&2
+		if [[ "$NSXPING" == 1 ]]; then
+			THUMBPRINT=$(./thumbprint.sh "$HOST")
+			printf "$THUMBPRINT\n" 1>&2
+			SESSIONFILE='nsx-cookies.txt'
+			#printf "Validating existing session...\n" 1>&2
+			if [ -f $SESSIONFILE ]; then
+				MYDATE=$(stat -c %y "$SESSIONFILE")
+				LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
+				#printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
+				if [ "$LAPSE" -ge 600 ]; then
+					printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
+					login
+				fi
+			else
+				printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
 				login
 			fi
-		else
-			printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
-			login
 		fi
 	fi
 }

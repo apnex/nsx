@@ -4,7 +4,7 @@ RAW=$1
 PAYLOAD=$(./drv.tnode.status.sh)
 read -r -d '' JQSPEC <<CONFIG
 	.
-		| ["id", "display-name", "node-id", "ip-address", "state", "device-name", "ip-address"]
+		| ["id", "display-name", "node-id", "host-switch", "state", "device-name", "ip-address"]
 		, ["-----", "-----", "-----", "-----", "-----", "-----", "-----"]
 		, (.[] | [.[0], .[1], .[2], .[3], .[4], .[5], .[6]])
 	| @csv
