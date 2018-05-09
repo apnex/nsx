@@ -1,0 +1,96 @@
+#!/bin/bash
+VCUSER=$(cat vcsa-credentials | jq -r .username)
+VCPASS=$(cat vcsa-credentials | jq -r .password)
+VCHOST=$(cat vcsa-credentials | jq -r .hostname)
+VCDOMAIN=$(cat vcsa-credentials | jq -r .domain)
+USER=$(cat nsx-credentials | jq -r .username)
+PASS=$(cat nsx-credentials | jq -r .password)
+HOST=$(cat nsx-credentials | jq -r .hostname)
+DOMAIN=$(cat nsx-credentials | jq -r .domain)
+OFFLINE=$(cat nsx-credentials | jq -r .offline)
+
+function login {
+	URL="https://$HOST/api/session/create"
+	curl -k -c nsx-cookies.txt -D nsx-headers.txt -X POST \
+	-d "j_username=$USER&j_password=$PASS" \
+	"$URL" 1>/dev/null 2>/dev/null
+}
+
+function session {
+	if [[ "$OFFLINE" == "false" ]]; then
+		NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
+		printf "$NSXPING\n" 1>&2
+		if [[ "$NSXPING" == 1 ]]; then
+			THUMBPRINT=$(./thumbprint.sh "$HOST")
+			printf "$THUMBPRINT\n" 1>&2
+			SESSIONFILE='nsx-cookies.txt'
+			#printf "Validating existing session...\n" 1>&2
+			if [ -f $SESSIONFILE ]; then
+				MYDATE=$(stat -c %y "$SESSIONFILE")
+				LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
+				#printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
+				if [ "$LAPSE" -ge 600 ]; then
+					printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
+					login
+				fi
+			else
+				printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
+				login
+			fi
+		fi
+	fi
+}
+
+function rPost {
+	local URL=${1}
+	local BODY=${2}
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
+	else
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X POST \
+		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
+		-H "Content-Type: application/json" \
+		-d "$BODY" \
+		"$URL" 2>/dev/null)
+		isSuccess "$RESPONSE" | jq --tab .
+	fi
+}
+
+function rDelete {
+	local URL=${1}
+	local BODY=${2}
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
+		#NSXFILE="${URL}"
+	else
+		#NSXFILE=$(getFile "${1}")
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X DELETE \
+		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
+		-H "Content-Type: application/x-form-urlencoded" \
+		--data-urlencode "$BODY" \
+		"$URL" 2>/dev/null)
+		isSuccess "$RESPONSE" | jq --tab .
+	fi
+	#work out state synch for deletes
+	#printf "rm ${NSXFILE}"
+}
+
+function rGet {
+	local URL=${1}
+	local NSXFILE
+	if [[ "$OFFLINE" == "true" ]]; then
+		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
+		RESULT=$(cat "${URL}")
+		NSXFILE="${URL}"
+	else
+		NSXFILE=$(getFile "${1}")
+		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
+		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
+		-H "Content-Type: application/json" \
+		"$URL" 2>/dev/null)
+		isSuccess "${RESPONSE}"
+		RESULT="${HTTPBODY}"
+	fi
+	printf "%s\n" "${RESULT}" | jq --tab . > "${NSXFILE}"
+	printf "%s\n" "${RESULT}"
+}

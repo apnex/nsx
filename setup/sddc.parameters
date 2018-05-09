@@ -1,0 +1,20 @@
+{
+	"dns": "172.16.0.1",
+	"domain": "lab",
+	"endpoints": [
+		{
+			"type": "nsx",
+			"hostname": "nsxm01",
+			"username": "admin",
+			"password": "VMware1!VMware1!",
+			"online": "true"
+		},
+		{
+			"type": "vsp",
+			"hostname": "vcenter",
+			"username": "administrator@vsphere.local",
+			"password": "VMware1!",
+			"online": "true"
+		}
+	]
+}

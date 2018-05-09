@@ -1,6 +1,5 @@
 #!/bin/bash
 source drv.core
-
 NODES=$(./drv.node.list.sh)
 
 function getStatus {

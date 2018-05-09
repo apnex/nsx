@@ -8,10 +8,10 @@
 			"status": "UP"
 		}
 	],
-	"last_heartbeat_timestamp": 1525351415723,
+	"last_heartbeat_timestamp": 1525855765803,
 	"system_status": {
-		"mem_used": 1588824,
-		"system_time": 1525445669000,
+		"mem_used": 1599588,
+		"system_time": 1525874110000,
 		"file_systems": [
 			{
 				"file_system": "udev",
@@ -30,7 +30,7 @@
 			{
 				"file_system": "/dev/sda2",
 				"total": 19554584,
-				"used": 1337024,
+				"used": 1345216,
 				"type": "ext4",
 				"mount": "/"
 			},
@@ -56,13 +56,6 @@
 				"mount": "/sys/fs/cgroup"
 			},
 			{
-				"file_system": "/dev/sda1",
-				"total": 967320,
-				"used": 8420,
-				"type": "ext4",
-				"mount": "/boot"
-			},
-			{
 				"file_system": "/dev/sda3",
 				"total": 19554584,
 				"used": 44992,
@@ -70,11 +63,18 @@
 				"mount": "/os_bak"
 			},
 			{
-				"file_system": "/dev/mapper/nsx-image",
-				"total": 19551512,
-				"used": 44992,
+				"file_system": "/dev/sda1",
+				"total": 967320,
+				"used": 8420,
 				"type": "ext4",
-				"mount": "/image"
+				"mount": "/boot"
+			},
+			{
+				"file_system": "/dev/mapper/nsx-var+log",
+				"total": 9710112,
+				"used": 418524,
+				"type": "ext4",
+				"mount": "/var/log"
 			},
 			{
 				"file_system": "/dev/mapper/nsx-tmp",
@@ -84,39 +84,39 @@
 				"mount": "/tmp"
 			},
 			{
+				"file_system": "/dev/mapper/nsx-image",
+				"total": 19551512,
+				"used": 44992,
+				"type": "ext4",
+				"mount": "/image"
+			},
+			{
+				"file_system": "/dev/mapper/nsx-config",
+				"total": 19551512,
+				"used": 45864,
+				"type": "ext4",
+				"mount": "/config"
+			},
+			{
 				"file_system": "/dev/mapper/nsx-config__bak",
 				"total": 19551512,
 				"used": 44992,
 				"type": "ext4",
 				"mount": "/config_bak"
-			},
-			{
-				"file_system": "/dev/mapper/nsx-config",
-				"total": 19551512,
-				"used": 45844,
-				"type": "ext4",
-				"mount": "/config"
-			},
-			{
-				"file_system": "/dev/mapper/nsx-var+log",
-				"total": 9710112,
-				"used": 339404,
-				"type": "ext4",
-				"mount": "/var/log"
 			}
 		],
 		"load_average": [
-			1.25,
-			1.2200000286102295,
-			1.2699999809265137
+			1.090000033378601,
+			1.2300000190734863,
+			1.190000057220459
 		],
 		"swap_total": 3997692,
-		"mem_cache": 252784,
+		"mem_cache": 283552,
 		"cpu_cores": 8,
 		"source": "cached",
 		"mem_total": 4043656,
 		"swap_used": 0,
-		"uptime": 5691000
+		"uptime": 18449000
 	},
 	"software_version": "2.1.0.0.0.7395502",
 	"host_node_deployment_status": "NODE_READY"

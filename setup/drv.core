@@ -51,25 +51,19 @@ function login {
 
 function session {
 	if [[ "$OFFLINE" == "false" ]]; then
-		NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
-		printf "$NSXPING\n" 1>&2
-		if [[ "$NSXPING" == 1 ]]; then
-			THUMBPRINT=$(./thumbprint.sh "$HOST")
-			printf "$THUMBPRINT\n" 1>&2
-			SESSIONFILE='nsx-cookies.txt'
-			#printf "Validating existing session...\n" 1>&2
-			if [ -f $SESSIONFILE ]; then
-				MYDATE=$(stat -c %y "$SESSIONFILE")
-				LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
-				#printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
-				if [ "$LAPSE" -ge 600 ]; then
-					printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
-					login
-				fi
-			else
-				printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
+		SESSIONFILE='nsx-cookies.txt'
+		#printf "Validating existing session...\n" 1>&2
+		if [ -f $SESSIONFILE ]; then
+			MYDATE=$(stat -c %y "$SESSIONFILE")
+			LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
+			#printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
+			if [ "$LAPSE" -ge 600 ]; then
+				printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
 				login
 			fi
+		else
+			printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
+			login
 		fi
 	fi
 }
@@ -86,18 +80,16 @@ function session {
 
 function isSuccess {
 	local STRING=${1}
-	REGEX='^(.*)([0-9]{3})$'
-	if [[ $STRING =~ $REGEX ]]; then
-		HTTPBODY=${BASH_REMATCH[1]}
-		HTTPCODE=${BASH_REMATCH[2]}
-		printf "[$(ccyan "${HTTPCODE}")]" 1>&2
+	if [[ $STRING =~ ^(.*)([0-9]{3})$ ]]; then
+		local BODY=${BASH_REMATCH[1]}
+		local CODE=${BASH_REMATCH[2]}
 	fi
-	if [[ $HTTPCODE =~ 2..$ ]]; then
-		printf " - SUCCESS\n" 1>&2
+	if [[ $CODE =~ 2..$ ]]; then
+		printf "[$(ccyan "${CODE}")] - SUCCESS\n" 1>&2
 	else
-		printf " - ERROR\n" 1>&2
-		printf "$HTTPBODY\n" 1>&2
+		printf "[$(ccyan "${CODE}")] - ERROR\n" 1>&2
 	fi
+	printf "%s\n" "${BODY}"
 }
 
 function getFile {
@@ -108,50 +100,50 @@ function getFile {
 			if [[ ${ENDPOINT} =~ $REGEX ]]; then
 				local ITEMID=${BASH_REMATCH[1]}
 				local ITEMCM=${BASH_REMATCH[2]}
-				NSXOUT="spec.tnode.${ITEMID}.${ITEMCM}.json"
+				NSXOUT="state.tnode.${ITEMID}.${ITEMCM}.json"
 			else
-				NSXOUT="spec.tnode.json"
+				NSXOUT="state.tnode.json"
 			fi
 		;;
 		*"transport-zones"*)
-			NSXOUT="spec.tzone.json"
+			NSXOUT="state.tzone.json"
 		;;
 		*"fabric/compute-managers"*)
-			NSXOUT="spec.cmanager.json"
+			NSXOUT="state.cmanager.json"
 		;;
 		*"edge-clusters"*)
-			NSXOUT="spec.edge-clusters.json"
+			NSXOUT="state.edge-clusters.json"
 		;;
 		*"cluster-profiles"*)
-			NSXOUT="spec.cluster-profiles.json"
+			NSXOUT="state.cluster-profiles.json"
 		;;
 		*"trust-management/certificates"*)
-			NSXOUT="spec.certificates.json"
+			NSXOUT="state.certificates.json"
 		;;
 		*"fabric/nodes"*)
 			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
 			if [[ ${ENDPOINT} =~ $REGEX ]]; then
 				local ITEMID=${BASH_REMATCH[1]}
 				local ITEMCM=${BASH_REMATCH[2]}
-				NSXOUT="spec.node.${ITEMID}.${ITEMCM}.json"
+				NSXOUT="state.node.${ITEMID}.${ITEMCM}.json"
 			else
-				NSXOUT="spec.node.json"
+				NSXOUT="state.node.json"
 			fi
 		;;
 		*"host-switch-profiles"*)
-			NSXOUT="spec.profile.json"
+			NSXOUT="state.profile.json"
 		;;
 		*"pools/ip-pools")
-			NSXOUT="spec.pool.json"
+			NSXOUT="state.pool.json"
 		;;
 		*"pools/ip-blocks")
-			NSXOUT="spec.block.json"
+			NSXOUT="state.block.json"
 		;;
 		*"logical-routers"*)
-			NSXOUT="spec.router.json"
+			NSXOUT="state.router.json"
 		;;
 		*"logical-switches"*)
-			NSXOUT="spec.switch.json"
+			NSXOUT="state.switch.json"
 		;;
 		*"spec/openapi/nsx_api.json"*)
 			NSXOUT="nsx_api.json"
@@ -184,8 +176,9 @@ function rPost {
 		-H "Content-Type: application/json" \
 		-d "$BODY" \
 		"$URL" 2>/dev/null)
-		isSuccess "$RESPONSE" | jq --tab .
+		RESULT=$(isSuccess "$RESPONSE")
 	fi
+	printf "%s\n" "${RESULT}" | jq --tab .
 }
 
 function rDelete {
@@ -201,28 +194,28 @@ function rDelete {
 		-H "Content-Type: application/x-form-urlencoded" \
 		--data-urlencode "$BODY" \
 		"$URL" 2>/dev/null)
-		isSuccess "$RESPONSE" | jq --tab .
+		RESULT=$(isSuccess "${RESPONSE}")
 	fi
+	printf "%s\n" "${RESULT}" | jq --tab .
 	#work out state synch for deletes
 	#printf "rm ${NSXFILE}"
 }
 
 function rGet {
 	local URL=${1}
-	local NSXFILE
+	local STATE
 	if [[ "$OFFLINE" == "true" ]]; then
 		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
 		RESULT=$(cat "${URL}")
-		NSXFILE="${URL}"
+		STATE="${URL}"
 	else
-		NSXFILE=$(getFile "${1}")
 		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
 		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
 		-H "Content-Type: application/json" \
 		"$URL" 2>/dev/null)
-		isSuccess "${RESPONSE}"
-		RESULT="${HTTPBODY}"
+		RESULT=$(isSuccess "${RESPONSE}")
+		STATE=$(getFile "${URL}")
 	fi
-	printf "%s\n" "${RESULT}" | jq --tab . > "${NSXFILE}"
+	printf "%s\n" "${RESULT}" | jq --tab . > "${STATE}"
 	printf "%s\n" "${RESULT}"
 }
