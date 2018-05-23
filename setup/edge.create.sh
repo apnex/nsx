@@ -1,18 +1,21 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
+source drv.vsp.client
 ENAME=$1
 EADDRESS=$2
 
 function getVC {
 	read -r -d '' JQSPEC <<-CONFIG
 		.results[]
-			| select(.server=="${VCHOST}").id
+			| select(.server=="${VSPHOST}").id
 	CONFIG
 	local CMANAGER=$(./drv.cmanager.list.sh 2>/dev/null | jq -r "$JQSPEC")
 	if [[ -n "${CMANAGER}" ]]; then
-		printf "[$(cgreen "INFO")]: found [$(cgreen "compute-manager")] name [$(cgreen "${VCHOST}")] uuid [$(cgreen "${CMANAGER}")]\n" 1>&2
+		printf "[$(cgreen "INFO")]: found [$(cgreen "compute-manager")] name [$(cgreen "${VSPHOST}")] uuid [$(cgreen "${CMANAGER}")]\n" 1>&2
 		printf "${CMANAGER}"
 	else
-		printf "[${ORANGE}ERROR${NC}]: fould not find [${GREEN}compute-manager${NC}] with name [${GREEN}${VCHOST}${NC}] - please join it to the NSX domain\n" 1>&2
+		printf "[$(corange "ERROR")]: fould not find [$(cgreen "compute-manager")] with name [$(cgreen "${VSPHOST}")] - please join it to the NSX domain\n" 1>&2
 	fi
 }
 
@@ -23,7 +26,7 @@ function buildSpec {
 		"name": "${EDGENAME}",
 		"password": "VMware1!",
 		"placement": {
-			"vcenter": "${VCHOST}",
+			"vcenter": "${VSPHOST}",
 			"cluster": "mgmt",
 			"host": "esx01.lab",
 			"datastore": "datastore1"
@@ -90,16 +93,15 @@ function makeBody {
 	echo "${BODY}"
 }
 
-source drv.core
 if [[ -n "${ENAME}" && "${EADDRESS}" ]]; then
 	CMANAGER=$(getVC)
-	if [[ -n "${CMANAGER}" && "${HOST}" ]]; then
+	if [[ -n "${CMANAGER}" && "${NSXHOST}" ]]; then
 		BODY=$(makeBody)
 		ITEM="fabric/nodes"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
-			rPost "${URL}" "${BODY}"
+			nsxPost "${URL}" "${BODY}"
 		fi
 	fi
 else

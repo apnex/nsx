@@ -1,11 +1,12 @@
 #!/bin/bash
 source drv.core
+source drv.nsx.client
 
-if [[ -n "${HOST}" ]]; then
-	ITEM="fabric/nodes"
+if [[ -n "${NSXHOST}" ]]; then
+	ITEM="logical-router-ports"
 	URL=$(buildURL "${ITEM}")
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-		rGet "${URL}"
+		nsxGet "${URL}"
 	fi
 fi

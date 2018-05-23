@@ -1,4 +1,6 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
 CLSTNAME=$1
 TNID=$2
 
@@ -35,15 +37,14 @@ function makeBody {
 	printf "${BODY}"
 }
 
-source drv.core
 if [[ -n "${CLSTNAME}" && "${TNID}" ]]; then
-	if [[ -n "${HOST}" ]]; then
+	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody)
 		ITEM="edge-clusters"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} - [$(cgreen "${URL}")]... " 1>&2
-			rPost "${URL}" "${BODY}"
+			nsxPost "${URL}" "${BODY}"
 		fi
 	fi
 else

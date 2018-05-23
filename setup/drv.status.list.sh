@@ -1,5 +1,6 @@
 #!/bin/bash
 source drv.core
+source drv.nsx.client
 
 NODES=$(./drv.node.list.sh)
 

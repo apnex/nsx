@@ -29,7 +29,7 @@ function buildItem {
 				CHECKREV="${BASH_REMATCH[1]}"
 			fi
 		fi
-		printf "[$(cgreen "INFO")]: ${TYPE} [$(cgreen "status")] health [$(cgreen "${NSXHOST}")]... [$(ccyan "SERVICES")] - SUCCESS\n" 1>&2
+		printf "[$(cgreen "INFO")]: ${TYPE} [$(cgreen "status")] health [$(cgreen "${HOST}")]... [$(ccyan "SERVICES")] - SUCCESS\n" 1>&2
 		PING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
 		if [[ "$PING" == 1 ]]; then
 			PRINT=$(getThumbprint "$HOST":443 thumbprint 2>/dev/null)

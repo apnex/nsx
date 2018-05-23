@@ -1,15 +1,16 @@
 #!/bin/bash
-ID=${1}
-
 source drv.core
+source drv.nsx.client
+
+ID=${1}
 if [[ -n "${ID}" ]]; then
-	if [[ -n "${HOST}" ]]; then
+	if [[ -n "${NSXHOST}" ]]; then
 		ITEM="trust-management/certificates"
 		CALL="/${ID}"
 		URL=$(buildURL "${ITEM}${CALL}")
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			rDelete "${URL}"
+			nsxDelete "${URL}"
 		fi
 	fi
 else

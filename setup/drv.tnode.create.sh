@@ -86,13 +86,14 @@ if [[ "$RAW" == "json" ]]; then
 	echo "${CONTEXT}" | jq --tab .
 else
 	source drv.core
+source drv.nsx.client
 	if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
 		# get other variables
-		if [[ -n "${HOST}" ]]; then
+		if [[ -n "${NSXHOST}" ]]; then
 		 	BODY=$(makeBody)
 			URL="https://$HOST/api/v1/transport-nodes"
 			printf "[$(green "INFO")]: nsx [$(green "create")] transport-node [$(green "${$TNNAME}"):$(green "${$TNNODEID}")] - [$(green "$URL")]... " 1>&2
-			#rPost "${URL}" "${BODY}"
+			#nsxPost "${URL}" "${BODY}"
 		fi
 	else
 		printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.create${LIGHTCYAN} <tnname> <nodeid>${NC}\n" 1>&2

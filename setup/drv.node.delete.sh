@@ -1,16 +1,7 @@
 #!/bin/bash
 source drv.core
+source drv.nsx.client
 ID=${1}
-
-function deleteNode {
-	URL="https://$HOST/api/v1/fabric/nodes/${1}"
-	printf "DELETE node [${1}] - call [$URL]... " 1>&2
-	RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X DELETE \
-	-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-	--data-urlencode "unprepare_host=false" \
-	"$URL" 2>/dev/null)
-	isSuccess "$RESPONSE"
-}
 
 function checkNodeType {
 	local NODE=${1}
@@ -36,7 +27,7 @@ function checkNodeType {
 		CONFIG
 		CMANAGER=$(./drv.cmanager.list.sh 2>/dev/null | jq -r "$JQSPEC | .id")
 		if [[ -n "${CMANAGER}" ]]; then
-			printf "[$(cgreen "INFO")]: found [$(cgreen "compute-manager")] name [$(cgreen "${VCHOST}")] id [$(cgreen "${CMANAGER}")]\n" 1>&2
+			printf "[$(cgreen "INFO")]: found [$(cgreen "compute-manager")] name [$(cgreen "${VSPHOST}")] id [$(cgreen "${CMANAGER}")]\n" 1>&2
 		else
 			printf "[$(corange "WARNING")]: could not find [$(cgreen "compute-manager")] id [$(cgreen "${NODEVC}")]\n" 1>&2
 			printf "[$(corange "WARNING")]: EdgeNode vm [$(cgreen "${NODENAME}")] is now orphaned and will need to be manually deleted\n" 1>&2
@@ -47,14 +38,14 @@ function checkNodeType {
 }
 
 if [[ -n "${ID}" ]]; then
-	if [[ -n "${HOST}" ]]; then
+	if [[ -n "${NSXHOST}" ]]; then
 		checkNodeType "${ID}"
 		ITEM="fabric/nodes"
 		CALL="/${ID}"
 		URL=$(buildURL "${ITEM}${CALL}")
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
-			rDelete "${URL}" "unprepare_host=false"
+			nsxDelete "${URL}" "unprepare_host=false"
 		fi
 	fi
 else

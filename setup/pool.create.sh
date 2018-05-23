@@ -33,13 +33,13 @@ function makeBody {
 
 source drv.core
 if [[ -n "${PLNAME}" && "${PLCIDR}" ]]; then
-	if [[ -n "${HOST}" ]]; then
+	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody)
 		ITEM="pools/ip-pools"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
-			rPost "${URL}" "${BODY}"
+			nsxPost "${URL}" "${BODY}"
 		fi
 	fi
 else

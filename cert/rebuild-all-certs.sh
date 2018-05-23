@@ -1,17 +1,35 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
 
 DEVICE="nsxm"
-DOMAIN=$(cat nsx-credentials | jq -r .domain)
+DIR="state"
+
+function makeBody {
+	local CRT=${1}
+	local KEY=${2}
+	local DEVICECRT=$(cat "${DIR}"/$CRT | sed ':a;N;$!ba;s/\n/\\n/g')
+	local DEVICEKEY=$(cat "${DIR}"/$KEY | sed ':a;N;$!ba;s/\n/\\n/g')
+	printf "Writing [$DIR/cert-import.json]\n" 1>&2
+	read -r -d '' SPEC <<-CONFIG
+	{
+		"display_name": "$CRT",
+		"pem_encoded": "$DEVICECRT",
+		"private_key": "$DEVICEKEY"
+	}
+	CONFIG
+	printf "%s\n" "$SPEC"
+}
 
 # create and sign rootCA cert
-openssl genrsa -out rootCA.key 2048
-openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.pem -subj "/C=US/ST=CA/L=Palo Alto/O=vmware/OU=IT/CN=root.$DOMAIN"
+openssl genrsa -out "${DIR}"/rootCA.key 2048
+openssl req -x509 -new -nodes -key "${DIR}"/rootCA.key -sha256 -days 3650 -out "${DIR}"/rootCA.pem -subj "/C=US/ST=CA/L=Palo Alto/O=vmware/OU=IT/CN=root.$DOMAIN"
 
 # create and sign nsxm cert
-openssl genrsa -out "$DEVICE".key 2048
-openssl req -new -key "$DEVICE".key -out "$DEVICE".csr -subj "/C=US/ST=CA/L=Palo Alto/O=vmware/OU=IT/CN=*.$DOMAIN"
-openssl x509 -req -in "$DEVICE".csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out "$DEVICE".pem -days 3650 -sha256
+openssl genrsa -out "${DIR}"/"$DEVICE".key 2048
+openssl req -new -key "${DIR}"/"$DEVICE".key -out "${DIR}"/"$DEVICE".csr -subj "/C=US/ST=CA/L=Palo Alto/O=vmware/OU=IT/CN=*.$DOMAIN"
+openssl x509 -req -in "${DIR}"/"$DEVICE".csr -CA "${DIR}"/rootCA.pem -CAkey "${DIR}"/rootCA.key -CAcreateserial -out "${DIR}"/"$DEVICE".pem -days 3650 -sha256
 
 # validate cert and prepare certbody.json
-openssl verify -verbose -CAfile rootCA.pem "$DEVICE".pem
-./build-certbody.sh "$DEVICE".pem "$DEVICE".key > cert-import.json
+openssl verify -verbose -CAfile "${DIR}"/rootCA.pem "${DIR}"/"$DEVICE".pem
+makeBody "$DEVICE".pem "$DEVICE".key >"${DIR}"/cert-import.json

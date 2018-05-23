@@ -3,14 +3,16 @@
 	"results": [
 		{
 			"resource_type": "EdgeCluster",
-			"id": "09355755-e148-492d-a0c1-071c851fe258",
+			"description": "",
+			"id": "44ac1bae-7842-4ad2-b1a5-eb772ed11053",
 			"display_name": "edge-cluster",
+			"tags": [],
 			"deployment_type": "VIRTUAL_MACHINE",
 			"member_node_type": "EDGE_NODE",
 			"members": [
 				{
 					"member_index": 0,
-					"transport_node_id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9"
+					"transport_node_id": "f39ef916-f51a-4713-bb14-3aeb673d56ed"
 				}
 			],
 			"cluster_profile_bindings": [
@@ -20,9 +22,9 @@
 				}
 			],
 			"_create_user": "admin",
-			"_create_time": 1525166353881,
+			"_create_time": 1527005161576,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1525166353881,
+			"_last_modified_time": 1527005161576,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0

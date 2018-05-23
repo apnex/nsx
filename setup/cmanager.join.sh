@@ -27,7 +27,7 @@ if [[ -n "${VCSAHOST}" && "${VCSAUSER}" && "${VCSAPASS}" && "${VCSAPRINT}" ]]; t
  	BODY=$(makeBody)
 	URL="https://$HOST/api/v1/fabric/compute-managers"
 	printf "NSX join CMANAGER [$VCSAHOST] - [$URL]... " 1>&2
-	rPost "${URL}" "${BODY}"
+	nsxPost "${URL}" "${BODY}"
 else
 	printf "[${ORANGE}ERROR${NC}]: Command usage: ${GREEN}tnode.create${LIGHTCYAN} <tnname> <nodeid>${NC}\n" 1>&2
 fi

@@ -1,9 +1,16 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
 
 # export nsx configuration for offline cli use
 echo "Exporting all known nsx specs.."
 
-rm ./state/*json
+if [[ "${NSXONLINE}" == "true" ]]; then
+	printf "[$(cgreen "INFO")]: nsx [$(cgreen "online")]... [$(ccyan "TRUE")] - SUCCESS\n" 1>&2
+	rm ./state/*json
+else
+	printf "[$(corange "WARN")]: nsx [$(cgreen "online")]... [$(ccyan "FALSE")] - SUCCESS\n" 1>&2
+fi
 read -r -d '' SPECS <<-CONFIG
 	"drv.openapi.list.sh"
 	"drv.node.status.sh"
@@ -16,6 +23,7 @@ read -r -d '' SPECS <<-CONFIG
 	"drv.cluster-profile.list.sh"
 	"drv.edge-cluster.list.sh"
 	"drv.router.list.sh"
+	"drv.router-port.list.sh"
 	"drv.switch.list.sh"
 CONFIG
 for key in $(echo ${SPECS}); do

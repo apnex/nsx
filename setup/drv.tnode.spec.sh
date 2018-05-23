@@ -1,5 +1,6 @@
 #!/bin/bash
 source drv.core
+source drv.nsx.client
 
 TNNAME=$1
 TNNODEID=$2

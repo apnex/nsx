@@ -5,9 +5,10 @@
 	"results": [
 		{
 			"resource_type": "TransportNode",
-			"description": "NSX configured Test Transport Node",
-			"id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
+			"description": "",
+			"id": "f39ef916-f51a-4713-bb14-3aeb673d56ed",
 			"display_name": "tn-edge01",
+			"tags": [],
 			"host_switch_spec": {
 				"resource_type": "StandardHostSwitchSpec",
 				"host_switches": [
@@ -80,11 +81,11 @@
 					"static_ip_pool_id": "cd4be1d2-e61a-40d8-97a8-54956b324a25"
 				}
 			],
-			"node_id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
+			"node_id": "f39ef916-f51a-4713-bb14-3aeb673d56ed",
 			"_create_user": "admin",
-			"_create_time": 1525165931248,
+			"_create_time": 1527005143429,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1525165931248,
+			"_last_modified_time": 1527005143429,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0

@@ -1,47 +1,52 @@
 {
-	"lcp_connectivity_status": "UNKNOWN",
-	"mpa_connectivity_status": "DOWN",
-	"last_sync_time": 1525447171839,
-	"mpa_connectivity_status_details": "Client has not responded to 2 consecutive heartbeats",
-	"lcp_connectivity_status_details": [],
+	"lcp_connectivity_status": "UP",
+	"mpa_connectivity_status": "UP",
+	"last_sync_time": 1527005680567,
+	"mpa_connectivity_status_details": "Client is responding to heartbeats",
+	"lcp_connectivity_status_details": [
+		{
+			"control_node_ip": "172.16.10.16",
+			"status": "UP"
+		}
+	],
 	"inventory_sync_paused": false,
-	"last_heartbeat_timestamp": 1525855825770,
+	"last_heartbeat_timestamp": 1526997496760,
 	"system_status": {
-		"mem_used": 1928616,
-		"system_time": 1525855631000,
+		"mem_used": 1932536,
+		"system_time": 1527006095000,
 		"file_systems": [
 			{
 				"file_system": "root",
 				"total": 32768,
-				"used": 764,
+				"used": 2740,
 				"type": "ramdisk",
 				"mount": "/"
 			},
 			{
 				"file_system": "etc",
 				"total": 28672,
-				"used": 296,
+				"used": 300,
 				"type": "ramdisk",
 				"mount": "/etc"
 			},
 			{
 				"file_system": "opt",
 				"total": 32768,
-				"used": 0,
+				"used": 812,
 				"type": "ramdisk",
 				"mount": "/opt"
 			},
 			{
 				"file_system": "var",
 				"total": 49152,
-				"used": 452,
+				"used": 460,
 				"type": "ramdisk",
 				"mount": "/var"
 			},
 			{
 				"file_system": "tmp",
 				"total": 262144,
-				"used": 40,
+				"used": 44,
 				"type": "ramdisk",
 				"mount": "/tmp"
 			},
@@ -55,20 +60,20 @@
 			{
 				"file_system": "hostdstats",
 				"total": 210944,
-				"used": 1964,
+				"used": 2088,
 				"type": "ramdisk",
 				"mount": "/var/lib/vmware/hostd/stats"
 			},
 			{
 				"file_system": "nestdb",
 				"total": 524288,
-				"used": 16,
+				"used": 20,
 				"type": "ramdisk",
 				"mount": "/var/lib/vmware/nsx/nestdb/db"
 			}
 		],
 		"load_average": [
-			0.07999999821186066,
+			0,
 			0,
 			0
 		],
@@ -78,8 +83,8 @@
 		"source": "cached",
 		"mem_total": 16776692,
 		"swap_used": 0,
-		"uptime": 64000
+		"uptime": 8709000
 	},
 	"software_version": "2.1.0.0.0.7395497",
-	"host_node_deployment_status": "INSTALL_FAILED"
+	"host_node_deployment_status": "INSTALL_SUCCESSFUL"
 }

@@ -1,0 +1,9 @@
+{
+	"display_name": "SWNAME",
+	"description": "SWNAME",
+	"transport_zone_id": "SWTZ",
+	"replication_mode": "MTEP",
+	"admin_state": ["UP", "DOWN"],
+	"vlan": "SWVLAN"
+}
+

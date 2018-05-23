@@ -3,12 +3,12 @@
 	"results": [
 		{
 			"resource_type": "EdgeNode",
-			"id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
+			"id": "f39ef916-f51a-4713-bb14-3aeb673d56ed",
 			"display_name": "edge01",
 			"ip_addresses": [
 				"172.16.10.18"
 			],
-			"external_id": "0e774391-91c2-49f9-afeb-6ffe1a1a86a9",
+			"external_id": "f39ef916-f51a-4713-bb14-3aeb673d56ed",
 			"deployment_type": "VIRTUAL_MACHINE",
 			"deployment_config": {
 				"vm_deployment_config": {
@@ -40,9 +40,9 @@
 				"node_user_settings": {}
 			},
 			"_create_user": "admin",
-			"_create_time": 1525163873659,
-			"_last_modified_user": "3f23bdb4-19e5-4dc2-a148-2440bcd57bfe",
-			"_last_modified_time": 1525163917569,
+			"_create_time": 1527004140808,
+			"_last_modified_user": "5fdbb541-8658-4d4e-891d-d204f2ce614b",
+			"_last_modified_time": 1527004180686,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 2

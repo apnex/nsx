@@ -1,14 +1,8 @@
 #!/bin/bash
 
-VCUSER=$(cat vcsa-credentials | jq -r .username)
-VCPASS=$(cat vcsa-credentials | jq -r .password)
-VCHOST=$(cat vcsa-credentials | jq -r .hostname)
-VCDOMAIN=$(cat vcsa-credentials | jq -r .domain)
-USER=$(cat nsx-credentials | jq -r .username)
-PASS=$(cat nsx-credentials | jq -r .password)
-HOST=$(cat nsx-credentials | jq -r .hostname)
-DOMAIN=$(cat nsx-credentials | jq -r .domain)
-OFFLINE=$(cat nsx-credentials | jq -r .offline)
+if [ ! -d state ]; then
+        mkdir state;
+fi
 
 # COLOURS
 NC='\033[0m' # no colour
@@ -42,173 +36,128 @@ function ccyan {
 	printf "${CYAN}${STRING}${NC}"
 }
 
-function login {
-	URL="https://$HOST/api/session/create"
-	curl -k -c nsx-cookies.txt -D nsx-headers.txt -X POST \
-	-d "j_username=$USER&j_password=$PASS" \
-	"$URL" 1>/dev/null 2>/dev/null
-}
-
-function session {
-	if [[ "$OFFLINE" == "false" ]]; then
-	#	printf "[$(cgreen "INFO")]: nsx offline mode\n" 1>&2
-	#else
-		SESSIONFILE='nsx-cookies.txt'
-		#printf "Validating existing session...\n" 1>&2
-		if [ -f $SESSIONFILE ]; then
-			MYDATE=$(stat -c %y "$SESSIONFILE")
-			LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
-			#printf "File [$SESSIONFILE] exists - age [$LAPSE]\n" 1>&2
-			if [ "$LAPSE" -ge 600 ]; then
-				printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
-				login
-			fi
-		else
-			printf "File [$SESSIONFILE] does not exist - authenticating...\n" 1>&2
-			login
-		fi
-	fi
-}
-
-# if I have credentials, test ping
-# if ping succeeds, test SSL (use THUMBPRINT for test)
-# if SSL succeeds - proceed
-#NSXPING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
-#VCPING=$(ping -W 1 -c 1 "$VCHOST" &>/dev/null && echo 1 || echo 0)
-#THUMBPRINT=$(./thumbprint.sh "$HOST")
-
-# look at moving session to get, post, delete functions
-#session
-
 function isSuccess {
 	local STRING=${1}
 	REGEX='^(.*)([0-9]{3})$'
 	if [[ $STRING =~ $REGEX ]]; then
-		HTTPBODY=${BASH_REMATCH[1]}
-		HTTPCODE=${BASH_REMATCH[2]}
-		printf "[$(ccyan "${HTTPCODE}")]" 1>&2
+		local BODY=${BASH_REMATCH[1]}
+		local CODE=${BASH_REMATCH[2]}
 	fi
-	if [[ $HTTPCODE =~ 2..$ ]]; then
-		printf " - SUCCESS\n" 1>&2
+	if [[ $CODE =~ 2..$ ]]; then
+		printf "[$(ccyan "${CODE}")] - SUCCESS\n" 1>&2
 	else
-		printf " - ERROR\n" 1>&2
-		printf "$HTTPBODY\n" 1>&2
+		printf "[$(ccyan "${CODE}")] - ERROR\n" 1>&2
 	fi
+	printf "%s\n" "${BODY}"
 }
 
 function getFile {
 	local ENDPOINT=${1}
 	case "${ENDPOINT}" in
 		*"transport-nodes"*)
-			NSXOUT="spec.tnode.json"
+			REGEX='transport-nodes/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.tnode.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.tnode.json"
+			fi
 		;;
 		*"transport-zones"*)
-			NSXOUT="spec.tzone.json"
+			STATE="state.tzone.json"
 		;;
 		*"fabric/compute-managers"*)
-			NSXOUT="spec.cmanager.json"
+			STATE="state.cmanager.json"
 		;;
 		*"edge-clusters"*)
-			NSXOUT="spec.edge-clusters.json"
+			STATE="state.edge-clusters.json"
 		;;
 		*"cluster-profiles"*)
-			NSXOUT="spec.cluster-profiles.json"
+			STATE="state.cluster-profiles.json"
 		;;
 		*"trust-management/certificates"*)
-			NSXOUT="spec.certificates.json"
+			STATE="state.certificates.json"
 		;;
 		*"fabric/nodes"*)
 			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
 			if [[ ${ENDPOINT} =~ $REGEX ]]; then
 				local ITEMID=${BASH_REMATCH[1]}
 				local ITEMCM=${BASH_REMATCH[2]}
-				NSXOUT="spec.node.${ITEMID}.${ITEMCM}.json"
+				STATE="state.node.${ITEMID}.${ITEMCM}.json"
 			else
-				NSXOUT="spec.node.json"
+				STATE="state.node.json"
 			fi
 		;;
 		*"host-switch-profiles"*)
-			NSXOUT="spec.profile.json"
+			STATE="state.profile.json"
 		;;
 		*"pools/ip-pools")
-			NSXOUT="spec.pool.json"
+			STATE="state.pool.json"
 		;;
 		*"pools/ip-blocks")
-			NSXOUT="spec.block.json"
+			STATE="state.block.json"
 		;;
 		*"logical-routers"*)
-			NSXOUT="spec.router.json"
+			STATE="state.router.json"
+		;;
+		*"logical-ports"*)
+			REGEX='logical-ports/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.port.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.ports.json"
+			fi
+		;;
+		*"logical-router-ports"*)
+			REGEX='logical-router-ports/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.router-port.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.router-ports.json"
+			fi
 		;;
 		*"logical-switches"*)
-			NSXOUT="spec.switch.json"
+			STATE="state.switch.json"
+		;;
+		*"spec/openapi/nsx_api.json"*)
+			STATE="nsx-api.json"
 		;;
 	esac
-	printf "state/$NSXOUT"
+	printf "state/$STATE"
 }
 
 function buildURL {
-	session
 	local ENDPOINT=${1}
-	local BASE="https://$HOST/api/v1/"
-	if [[ "$OFFLINE" == "true" ]]; then
-		local NSXFILE=$(getFile "${1}")
-		URL="${NSXFILE}"
-	else
+	local BASE="https://$NSXHOST/api/v1/"
+	if [[ "$NSXONLINE" == "true" ]]; then
+		nsxSession
 		URL="$BASE$ENDPOINT"
+	else
+		URL=$(getFile "${ENDPOINT}")
 	fi
 	printf "$URL"
 }
 
-function rPost {
-	local URL=${1}
-	local BODY=${2}
-	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
-	else
-		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X POST \
-		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-		-H "Content-Type: application/json" \
-		-d "$BODY" \
-		"$URL" 2>/dev/null)
-		isSuccess "$RESPONSE" | jq --tab .
+function getThumbprint {
+	local HOST="${1}"
+	PAYLOAD=$(echo -n | openssl s_client -connect "${HOST}" 2>/dev/null)
+	PRINT=$(echo "$PAYLOAD" | openssl x509 -noout -fingerprint -sha256)
+	REGEX='^(.*)=(([0-9A-Fa-f]{2}[:])+([0-9A-Fa-f]{2}))$'
+	if [[ $PRINT =~ $REGEX ]]; then
+		TYPE=${BASH_REMATCH[1]}
+		CODE=${BASH_REMATCH[2]}
 	fi
+	printf "%s\n" "${CODE}" |  sed "s/\(.*\)/\L\1/g" | sed "s/://g"
 }
 
-function rDelete {
-	local URL=${1}
-	local BODY=${2}
-	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
-		#NSXFILE="${URL}"
-	else
-		#NSXFILE=$(getFile "${1}")
-		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -G -X DELETE \
-		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-		-H "Content-Type: application/x-form-urlencoded" \
-		--data-urlencode "$BODY" \
-		"$URL" 2>/dev/null)
-		isSuccess "$RESPONSE" | jq --tab .
-	fi
-	#work out state synch for deletes
-	#printf "rm ${NSXFILE}"
-}
-
-function rGet {
-	local URL=${1}
-	local NSXFILE
-	if [[ "$OFFLINE" == "true" ]]; then
-		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
-		RESULT=$(cat "${URL}")
-		NSXFILE="${URL}"
-	else
-		NSXFILE=$(getFile "${1}")
-		RESPONSE=$(curl -k -b nsx-cookies.txt -w "%{http_code}" -X GET \
-		-H "`grep X-XSRF-TOKEN nsx-headers.txt`" \
-		-H "Content-Type: application/json" \
-		"$URL" 2>/dev/null)
-		isSuccess "${RESPONSE}"
-		RESULT="${HTTPBODY}"
-	fi
-	printf "%s\n" "${RESULT}" | jq --tab . > "${NSXFILE}"
-	printf "%s\n" "${RESULT}"
+function getCertificate {
+	local HOST="${1}"
+	PAYLOAD=$(echo -n | openssl s_client -connect "${HOST}" 2>/dev/null)
+	RESULT=$(echo "${PAYLOAD}" |  sed -e '1h;2,$H;$!d;g' -e 's/.*\(-----BEGIN\sCERTIFICATE-----.*-----END\sCERTIFICATE-----\).*/\1/g')
+	printf "%s\n" "$RESULT" | sed ':a;N;$!ba;s/\n/\\\\n/g'
 }

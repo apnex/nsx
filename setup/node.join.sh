@@ -29,11 +29,11 @@ function green {
 source drv.core
 if [[ -n "${NODE}" ]]; then
 	ESXPRINT=$(./thumbprint.sh "$1")
-	if [[ -n "${HOST}" && "${ESXPRINT}" ]]; then
+	if [[ -n "${NSXHOST}" && "${ESXPRINT}" ]]; then
 	 	BODY=$(makeBody "${NODE}")
-		URL="https://$HOST/api/v1/fabric/nodes"
+		URL="https://${NSXHOST}/api/v1/fabric/nodes"
 		printf "[$(green "INFO")]: nsx [$(green "create")] node [$(green "${NODE}"):$(green "HostNode")] - [$(green "$URL")]... " 1>&2
-		rPost "${URL}" "${BODY}"
+		nsxPost "${URL}" "${BODY}"
 	fi
 else
 	printf "[${ORANGE}ERROR${NC}]: command usage: ${GREEN}node.join${LIGHTCYAN} <ip-address>${NC}\n" 1>&2
