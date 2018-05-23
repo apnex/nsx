@@ -1,7 +1,10 @@
 #### 1: Set up sddc endpoints and parameters
 Modify the `sddc.parameters` file to reflect the parameters for your lab accordingly.
+
 The `dns` field will be used to verify forward and reverse dns entries for each endpoint.
+
 The `domain` property will be used in generating a certificate for the NSX Manager - i.e `*.lab` in this example.
+
 For NSX certificate operations, the **vsp** is optional and not required.
 ```json
 {
@@ -28,7 +31,9 @@ For NSX certificate operations, the **vsp** is optional and not required.
 
 #### 2: Verify sddc status
 This will perform a forward and reverse dns tests for each endpoint against the server @ `dns`.
+
 It will also perform a **ping** to the `hostname`.`domain` - if hostname is alphanumeric, or simply `hostname` if an IP address is specified.
+
 The SSL thumprint and certificate is also tested/extracted to indicate correct connectivity.
 ```
 ./sddc.status.sh
