@@ -1,0 +1,48 @@
+{
+	"result_count": 2,
+	"results": [
+		{
+			"resource_type": "certificate_self_signed",
+			"description": "Client certificate for TLS authentication with KeyManager",
+			"id": "5989fdc3-0434-42b7-846b-3099bc5b318d",
+			"display_name": "NSX MP Client Certificate for Key Manager",
+			"pem_encoded": "-----BEGIN CERTIFICATE-----\nMIIDmzCCAoOgAwIBAgIGAWK+XkAHMA0GCSqGSIb3DQEBCwUAMHoxJzAlBgNVBAMM\nHlZNd2FyZSBOU1hBUEkgVHJ1c3QgTWFuYWdlbWVudDETMBEGA1UECgwKVk13YXJl\nIEluYzEMMAoGA1UECwwDTlNYMQswCQYDVQQGEwJVUzELMAkGA1UECAwCQ0ExEjAQ\nBgNVBAcMCVBhbG8gQWx0bzAeFw0xODA0MTMwOTM3NTBaFw0yODA0MTAwOTM3NTBa\nMHoxJzAlBgNVBAMMHlZNd2FyZSBOU1hBUEkgVHJ1c3QgTWFuYWdlbWVudDETMBEG\nA1UECgwKVk13YXJlIEluYzEMMAoGA1UECwwDTlNYMQswCQYDVQQGEwJVUzELMAkG\nA1UECAwCQ0ExEjAQBgNVBAcMCVBhbG8gQWx0bzCCASIwDQYJKoZIhvcNAQEBBQAD\nggEPADCCAQoCggEBAI/bE9uqNReIkHmx0SeA/CLWG9fYhkQx2ZLi2KRIXq95LJmr\n43MpZFjyCOVEQBrdFQcfey8GcRzPAhTqQ8nwAiS/arlNy4PFmsBcEqia61zlvI2I\nnjdWDBQflSEwXNgHw4OKloAuN8/6S9aLrq2PR5Nhqlh97DDnjGcvUCNla4laMyo2\nRIQJiAktgDX1xHhpRgsyRRJsH5tn0cdToR2bg92VHWNzc7ew49c4P2Tx2A/xiQIA\nzeDa5Rs/nadDzQ4Xx+zn0z8nLUQ5wXovGgXCz4PKQTsiE4JOwO+yrZzE+KXyE3Yr\nUpLJOGPN4BONc2qucMdT8OJbelZer+u/Ddqg+MsCAwEAAaMnMCUwDgYDVR0PAQH/\nBAQDAgeAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMA0GCSqGSIb3DQEBCwUAA4IBAQBu\nTdmmBJB+/4sSIBBJ3CspjieaxwIWlEC3/Kj9TySJ8J0gjXD/ITnTqw33mDO9Td0q\nHR+m3TyTrV8oZeuWAirVipfu99crunQQcg7Z+Ly2z6F1Ynn0bZWQ/nYPQ5CmvT3Z\nVbLr3hHxs/4CJr836Qtel8Izigm7heL0tN8FQ7F8wAE6J3X5VuPw+Bl8L+/RnQnQ\ngtN933deXjnrRr2r89sZuCsSWUsnhplbc/X22goZMF12KAkt+ier5/SU4uUdDiDB\nc6BepVCeQ0Q8dAXfW4YheUrCPykL+PLwdNnW+RT2rlY9Xnt8Wy08QVi9KC5CmgWm\nFLcEq5FmtCuB+E9cVzcg\n-----END CERTIFICATE-----\n",
+			"used_by": [
+				{
+					"service_types": [
+						"MGMT_PLANE_DNE"
+					],
+					"node_id": "421ACE8D-9FAF-8B51-7315-129ADF8192A0"
+				}
+			],
+			"_create_user": "system",
+			"_create_time": 1523612270621,
+			"_last_modified_user": "node-mgmt",
+			"_last_modified_time": 1527084677304,
+			"_system_owned": true,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 13
+		},
+		{
+			"resource_type": "certificate_signed",
+			"id": "9655c0bd-d578-4398-9457-cfa799c3d892",
+			"display_name": "nsxm.pem",
+			"pem_encoded": "-----BEGIN CERTIFICATE-----\nMIIDNzCCAh8CCQCPpCM2GKjgaDANBgkqhkiG9w0BAQsFADBfMQswCQYDVQQGEwJV\nUzELMAkGA1UECAwCQ0ExEjAQBgNVBAcMCVBhbG8gQWx0bzEPMA0GA1UECgwGdm13\nYXJlMQswCQYDVQQLDAJJVDERMA8GA1UEAwwIcm9vdC5sYWIwHhcNMTgwNTIzMDQx\nNTI5WhcNMjgwNTIwMDQxNTI5WjBcMQswCQYDVQQGEwJVUzELMAkGA1UECAwCQ0Ex\nEjAQBgNVBAcMCVBhbG8gQWx0bzEPMA0GA1UECgwGdm13YXJlMQswCQYDVQQLDAJJ\nVDEOMAwGA1UEAwwFKi5sYWIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQC6adnVYL3Ft6a3gnWlUCaU2A/ne2REQ+ri3rbYG0CVnIE2XO0iVIwJ5eoRu8J2\n0tydtVkG69EdffEoFnrzJXsdB5hQP8gmPv7FOOEpTw0xEU7vE4EyIRuMBjLLo3Kz\nNKOSLPrXNhiXbmfNZN7R9KS2I4NLjTCkkH1NVjkSpzIsAvNCKlngEFmISAl6Z1FG\nHbwzWwMjPNuKB91OAXYT0pY+XVQVF4SGiNSQ78YvHF6FOA6gG/p6LJY8MskRSRt/\nytZQxuFKoalq1CNRj6v9IOWMJ6U5iDVCU4sTDVK5lI4u7Ek4thaLsZQElG8+hHBH\nelFkLq4VaCov1+VNW0Jk9AajAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHZiC475\nDPqUfhnS9NXRs9IsLhclL8tWok+y3PxAxBe62auW9uBgFcktZlJwGPJ8vomayVW0\n9oJj6VqYhl5MGZcCSNBFB+2ujgMDA5DOAXbAKnChVlbuUXmen5BX/jnohNfZmexv\nZv/NGmUd3sOZ+kmdrTOTxhBB4YkldFiXijw1ohWt75V5FRlYscgEtICUol+RST13\n1TQvLgMzua4pgq3M56RYIEoURxLndPn/3opPbzqiSQCdhQKqUBqdd6ucP4cudZjJ\nLGt+oo6nG5K4pKaEGF5vVSiRBoSbJ5hGBs4gvpSP2ydJTIjyFWR1iaszsKNXcOQw\n3GNffURGVSngRlU=\n-----END CERTIFICATE-----",
+			"used_by": [
+				{
+					"service_types": [
+						"API"
+					],
+					"node_id": "421ACE8D-9FAF-8B51-7315-129ADF8192A0"
+				}
+			],
+			"_create_user": "admin",
+			"_create_time": 1527084666013,
+			"_last_modified_user": "node-mgmt",
+			"_last_modified_time": 1527084677306,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 1
+		}
+	]
+}

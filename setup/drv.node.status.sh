@@ -9,7 +9,7 @@ function getStatus {
 	CALL="/${NODEID}/status"
 	URL=$(buildURL "${ITEM}${CALL}")
 	if [[ -n "${URL}" ]]; then
-		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "status")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 		nsxGet "${URL}"
 	fi
 }

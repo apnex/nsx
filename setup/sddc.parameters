@@ -7,7 +7,7 @@
 			"hostname": "nsxm01",
 			"username": "admin",
 			"password": "VMware1!VMware1!",
-			"online": "false"
+			"online": "true"
 		},
 		{
 			"type": "vsp",
