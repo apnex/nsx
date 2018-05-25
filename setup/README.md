@@ -1,27 +1,44 @@
-#### 1: Set up VCSA credentials
-Modify the `vcsa-credentials` file to reflect the parameters for your lab.
-I recommended using an FQDN of vcenter for the `hostname`.
+#### 1: Set up sddc endpoints and parameters
+Modify the `sddc.parameters` file to reflect the parameters for your lab accordingly.
 
+The `dns` field will be used to verify forward and reverse dns entries for each endpoint.
+
+The `domain` property will be used in generating a certificate for the NSX Manager - i.e `*.lab` in this example.
 ```json
 {
-	"hostname": "vcenter.lab",
-	"username": "administrator@vsphere.local",
-	"password": "VMware1!",
-	"domain": "lab"
+	"dns": "172.16.0.1",
+	"domain": "lab",
+	"endpoints": [
+		{
+			"type": "nsx",
+			"hostname": "nsxm01",
+			"username": "admin",
+			"password": "VMware1!VMware1!",
+			"online": "true"
+		},
+		{
+			"type": "vsp",
+			"hostname": "vcenter",
+			"username": "administrator@vsphere.local",
+			"password": "VMware1!",
+			"online": "true"
+		}
+	]
 }
 ```
 
-#### 2: Set up NSXM credentials
-Modify the `nsx-credentials` file to reflect the parameters for your lab. I recommended using an IP address for the `hostname`.
-The `domain` property will be used in generating a certificate for the NSX Manager - i.e `*.lab` in this example.
+#### 2: Verify sddc status
+This will perform a forward and reverse dns tests for each endpoint against the server @ `dns`.
 
-```json
-{
-	"hostname": "172.16.10.15",
-	"username": "admin",
-	"password": "VMware1!VMware1!",
-	"domain": "lab"
-}
+It will also perform a **ping** to the `hostname`.`domain` - if hostname is alphanumeric, or simply `hostname` if an IP address is specified.
+
+The SSL thumprint and certificate is also tested/extracted to indicate correct connectivity.
+```
+./sddc.status.sh
+```
+To view extended parameters (credentials / certificate) issue the following:
+```
+./sddc.status.sh json
 ```
 
 #### 3: Deploy NSX Manager and Controller OVAs
@@ -76,4 +93,3 @@ This will inform `nsx-manager` to tell the `compute-manager` to create a new edg
 ./tzone.create.sh tz-vlan hs-fabric VLAN
 ./tzone.list.sh
 ```
-
