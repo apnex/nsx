@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<script>
+		<style type="text/css">
+			<![CDATA[
+				.st1 {
+					fill: var(--fill, transparent);
+					stroke: var(--outer, #00bb66);
+				}
+				.st2 {
+					fill: var(--inner, #00bb66);
+					stroke: var(--inner, #00bb66);
+				}
+				.mon {
+					--outer: #00bb66;
+					--inner: #00bb66;
+					--fill: #000000;
+				}
+				.mof {
+					--outer: #668866;
+					--inner: #668866;
+					--fill: #ffffff;
+				}
+				@keyframes fadein {
+					from {
+						--outer: #00bb66;
+						--inner: #00bb66;
+						--fill: #000000;
+						opacity: 0;
+					}
+					to {
+						--outer: #668866;
+						--inner: #668866;
+						--fill: #ffffff;
+						opacity: 1;
+					}
+				}
+				.new {
+					--inner: #00ff00;
+					transition: all 5s ease;
+				}
+				.new:hover {
+					--inner: #ff0000;
+				}
+			]]>
+		</style>
+	</script>
+	<rect width="100%" height="100%" fill="white"/> 
+	<defs>
+		<g id="vxlan" transform="scale(2) translate(-12.7, -12.7)">
+			<circle class="st1" cx="12.7" cy="12.7" r="12"/>
+			<g>
+				<path class="st2" d="M17.3,8.1c0,0.1-0.1,0.2-0.2,0.2l-6.5,0c0,0-0.1,0-0.1,0.1V9v0.7c0,0,0,0.1,0.1,0.1l6.5,0     c0.1,0,0.2,0.1,0.2,0.2v0.9c0,0.1,0.1,0.1,0.1,0.1l1.8-1.8c0.1-0.1,0.1-0.2,0-0.3l-1.8-1.8c0,0-0.1,0-0.1,0.1V8.1z"/>
+				<path class="st2" d="M17.3,13c0,0.1-0.1,0.2-0.2,0.2l-6.5,0c0,0-0.1,0-0.1,0.1V14v0.7c0,0,0,0.1,0.1,0.1l6.5,0     c0.1,0,0.2,0.1,0.2,0.2v0.9c0,0.1,0.1,0.1,0.1,0.1l1.8-1.8c0.1-0.1,0.1-0.2,0-0.3l-1.8-1.8c0,0-0.1,0-0.1,0.1V13z"/>
+				<path class="st2" d="M8.2,10.5c0,0.1,0.1,0.2,0.2,0.2l6.5,0c0,0,0.1,0,0.1,0.1v0.7v0.7c0,0,0,0.1-0.1,0.1l-6.5,0     c-0.1,0-0.2,0.1-0.2,0.2v0.9c0,0.1-0.1,0.1-0.1,0.1l-1.8-1.8c-0.1-0.1-0.1-0.2,0-0.3l1.8-1.8c0,0,0.1,0,0.1,0.1V10.5z"/>
+				<path class="st2" d="M8.2,15.5c0,0.1,0.1,0.2,0.2,0.2l6.5,0c0,0,0.1,0,0.1,0.1v0.7v0.7c0,0,0,0.1-0.1,0.1l-6.5,0     c-0.1,0-0.2,0.1-0.2,0.2v0.9c0,0.1-0.1,0.1-0.1,0.1l-1.8-1.8c-0.1-0.1-0.1-0.2,0-0.3l1.8-1.8c0,0,0.1,0,0.1,0.1V15.5z"/>
+			</g>
+		</g>
+		<g id="test3">
+			<circle class="st1" style="stroke-width:6" r="70"/>
+			<g transform="translate(-14,-34.5)" style="stroke-width:3">
+				<path id="arrow" class="st2" d="M2 8 L38 8 Q40 8 40 6 L40 2 Q40 0 42 1 L54 11 Q56 12 54 13 L42 23 Q40 24 40 22 L40 18 Q40 16 38 16 L2 16 Q0 16 0 14 L0 10 Q0 8 2 8 Z"/>
+				<use xlink:href="#arrow" y="30"/>
+				<use xlink:href="#arrow" transform="rotate(180 0 12)" x="-28" y="-15"/>
+				<use xlink:href="#arrow" transform="rotate(180 0 12)" x="-28" y="-45"/>
+			</g>
+		</g>
+		<g id="test2" transform="translate(0, 0)">
+			<path id="arrow" class="st2" d="M2 8 L38 8 Q40 8 40 6 L40 2 Q40 0 42 1 L54 11 Q56 12 54 13 L42 23 Q40 24 40 22 L40 18 Q40 16 38 16 L2 16 Q0 16 0 14 L0 10 Q0 8 2 8 Z"/>
+			<use xlink:href="#arrow" transform="rotate(90 5 12)" x="0" y="0"/>
+			<use xlink:href="#arrow" transform="rotate(180 5 12)" x="0" y="0"/>
+			<use xlink:href="#arrow" transform="rotate(270 5 12)" x="0" y="0"/>
+		</g>
+	</defs>
+	<use xlink:href="#test3" x="100" y="100" class="mon"/>
+</svg>
