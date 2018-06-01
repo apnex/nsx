@@ -1,8 +1,0 @@
-HTTP/1.1 200 
-Set-Cookie: JSESSIONID=50AC001036D72F2D6F97FA3DD904F7AC; Path=/; Secure; HttpOnly
-X-XSRF-TOKEN: 31271fc9-fd0d-4842-a646-9afd54a43ad8
-Content-Type: application/json
-Content-Length: 107
-Date: Fri, 25 May 2018 11:35:11 GMT
-Server: NSX
-
