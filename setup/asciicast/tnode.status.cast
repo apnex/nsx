@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "width": 211,
+  "duration": 7.099316,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/bash"
+  },
+  "stdout": [
+    [
+      0.062504,
+      "\u001b]777;notify;Command completed;./node.status.sh\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007"
+    ],
+    [
+      0.000139,
+      "[root@obpc setup]# "
+    ],
+    [
+      2.330817,
+      "."
+    ],
+    [
+      0.07141,
+      "/"
+    ],
+    [
+      0.561932,
+      "t"
+    ],
+    [
+      0.166244,
+      "n"
+    ],
+    [
+      0.182746,
+      "o"
+    ],
+    [
+      0.139673,
+      "d"
+    ],
+    [
+      0.181675,
+      "e"
+    ],
+    [
+      0.199701,
+      "."
+    ],
+    [
+      0.203024,
+      "s"
+    ],
+    [
+      0.182649,
+      "t"
+    ],
+    [
+      0.139805,
+      "a"
+    ],
+    [
+      0.087969,
+      "t"
+    ],
+    [
+      0.237405,
+      "u"
+    ],
+    [
+      0.156086,
+      "s"
+    ],
+    [
+      0.448094,
+      "."
+    ],
+    [
+      0.538595,
+      "s"
+    ],
+    [
+      0.104583,
+      "h"
+    ],
+    [
+      0.966447,
+      "\r\n"
+    ],
+    [
+      0.053265,
+      "[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mlist\u001b[0m] transport-nodes [\u001b[0;32mstate/state.tnode.json\u001b[0m]... "
+    ],
+    [
+      0.000321,
+      "[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+    ],
+    [
+      0.020003,
+      "[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mstatus\u001b[0m] transport-nodes [\u001b[0;32mstate/state.tnode.f39ef916-f51a-4713-bb14-3aeb673d56ed.state.json\u001b[0m]... "
+    ],
+    [
+      0.000356,
+      "[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+    ],
+    [
+      0.028545,
+      "[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mstatus\u001b[0m] transport-nodes [\u001b[0;32mstate/state.tnode.66148b6a-3ad3-41cb-9c26-7e72e856ddb2.state.json\u001b[0m]... "
+    ],
+    [
+      0.000841,
+      "[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+    ],
+    [
+      0.024295,
+      "id                                    display-name  node-id                               host-switch  state    device-name    ip-address\r\n-----                                 -----         -----                                 -----        -----    -----          -----\r\nf39ef916-f51a-4713-bb14-3aeb673d56ed  tn-edge01     f39ef916-f51a-4713-bb14-3aeb673d56ed  hs-fabric    success  nsx-edge-vtep  172.16.12.11\r\n66148b6a-3ad3-41cb-9c26-7e72e856ddb2  tn-esx01      66148b6a-3ad3-41cb-9c26-7e72e856ddb2  hs-fabric    success  vmk10          172.16.12.10\r\n"
+    ],
+    [
+      0.008754,
+      "\u001b]777;notify;Command completed;./tnode.status.sh\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007"
+    ],
+    [
+      9.9e-05,
+      "[root@obpc setup]# "
+    ]
+  ],
+  "height": 52,
+  "title": null,
+  "command": null
+}

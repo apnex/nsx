@@ -12,12 +12,12 @@
       <defs>
         <symbol id="1">
           <text y="1.67" class="f">[root@obpc</text>
-          <text x="11.022" y="1.67" class="f">api-vsp]#</text>
+          <text x="11.022" y="1.67" class="f">nsx]#</text>
         </symbol>
         <symbol id="2">
           <text y="1.67" class="f">[root@obpc</text>
-          <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-          <text x="21.042" y="1.67" class="f">./sddc.status.sh</text>
+          <text x="11.022" y="1.67" class="f">nsx]#</text>
+          <text x="17.034" y="1.67" class="f">./sddc.status.sh</text>
         </symbol>
         <symbol id="3">
           <text y="1.67" class="f">[</text>
@@ -76,7 +76,7 @@
         <symbol id="7">
           <text y="1.67" class="f">nsx</text>
           <text x="7.014" y="1.67" class="f">nsxm01</text>
-          <text x="17.034" y="1.67" class="f">false</text>
+          <text x="17.034" y="1.67" class="f">true</text>
           <text x="25.05" y="1.67" class="f">172.16.10.15</text>
           <text x="39.078" y="1.67" class="f">nsxm01.lab.</text>
           <text x="53.106" y="1.67" class="f">REACHABLE</text>
@@ -85,7 +85,7 @@
         <symbol id="8">
           <text y="1.67" class="f">vsp</text>
           <text x="7.014" y="1.67" class="f">vcenter</text>
-          <text x="17.034" y="1.67" class="f">false</text>
+          <text x="17.034" y="1.67" class="f">true</text>
           <text x="25.05" y="1.67" class="f">172.16.0.13</text>
           <text x="39.078" y="1.67" class="f">vcenter.lab.</text>
           <text x="53.106" y="1.67" class="f">REACHABLE</text>
@@ -107,117 +107,117 @@
           </svg>
           <svg x="129">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="20.996"/>
+            <use xlink:href="#b" x="16.996"/>
             <use xlink:href="#1"/>
           </svg>
           <svg x="258">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="21.996"/>
+            <use xlink:href="#b" x="17.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">.</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">.</text>
           </svg>
           <svg x="387">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="22.996"/>
+            <use xlink:href="#b" x="18.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./</text>
           </svg>
           <svg x="516">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="23.996"/>
+            <use xlink:href="#b" x="19.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./s</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./s</text>
           </svg>
           <svg x="645">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="24.996"/>
+            <use xlink:href="#b" x="20.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sd</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sd</text>
           </svg>
           <svg x="774">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="25.996"/>
+            <use xlink:href="#b" x="21.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sdd</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sdd</text>
           </svg>
           <svg x="903">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="26.996"/>
+            <use xlink:href="#b" x="22.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc</text>
           </svg>
           <svg x="1032">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="27.996"/>
+            <use xlink:href="#b" x="23.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.</text>
           </svg>
           <svg x="1161">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="28.996"/>
+            <use xlink:href="#b" x="24.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.s</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.s</text>
           </svg>
           <svg x="1290">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="29.996"/>
+            <use xlink:href="#b" x="25.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.st</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.st</text>
           </svg>
           <svg x="1419">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="30.996"/>
+            <use xlink:href="#b" x="26.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.sta</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.sta</text>
           </svg>
           <svg x="1548">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="31.996"/>
+            <use xlink:href="#b" x="27.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.stat</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.stat</text>
           </svg>
           <svg x="1677">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="32.996"/>
+            <use xlink:href="#b" x="28.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.statu</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.statu</text>
           </svg>
           <svg x="1806">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="33.996"/>
+            <use xlink:href="#b" x="29.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.status</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.status</text>
           </svg>
           <svg x="1935">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="34.996"/>
+            <use xlink:href="#b" x="30.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.status.</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.status.</text>
           </svg>
           <svg x="2064">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="35.996"/>
+            <use xlink:href="#b" x="31.996"/>
             <text y="1.67" class="f">[root@obpc</text>
-            <text x="11.022" y="1.67" class="f">api-vsp]#</text>
-            <text x="21.042" y="1.67" class="f">./sddc.status.s</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.status.s</text>
           </svg>
           <svg x="2193">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="36.996"/>
+            <use xlink:href="#b" x="32.996"/>
             <use xlink:href="#2"/>
           </svg>
           <svg x="2322">
@@ -278,7 +278,7 @@
           </svg>
           <svg x="3225">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="20.996" y="15.172"/>
+            <use xlink:href="#b" x="16.996" y="15.172"/>
             <use xlink:href="#2"/>
             <use xlink:href="#3" y="2.171"/>
             <use xlink:href="#4" y="4.342"/>
@@ -290,7 +290,7 @@
           </svg>
           <svg x="3354">
             <use xlink:href="#a"/>
-            <use xlink:href="#b" x="20.996" y="15.172"/>
+            <use xlink:href="#b" x="16.996" y="15.172"/>
             <use xlink:href="#2"/>
             <use xlink:href="#3" y="2.171"/>
             <use xlink:href="#4" y="4.342"/>

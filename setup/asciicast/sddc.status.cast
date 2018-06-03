@@ -2,7 +2,7 @@
 	"stdout": [
 		[
 			0.1,
-			"[root@obpc api-vsp]# "
+			"[root@obpc nsx]# "
 		],
 		[
 			0.1,
@@ -90,15 +90,15 @@
 		],
 		[
 			0.01,
-			"nsx    nsxm01    false   172.16.10.15  nsxm01.lab.   REACHABLE  a78fc2492c230facdfdffa6d2efbf6adb4eb1ca09766ad33631cd604a8fb1938\r\n"
+			"nsx    nsxm01    true    172.16.10.15  nsxm01.lab.   REACHABLE  a78fc2492c230facdfdffa6d2efbf6adb4eb1ca09766ad33631cd604a8fb1938\r\n"
 		],
 		[
 			0.01,
-			"vsp    vcenter   false   172.16.0.13   vcenter.lab.  REACHABLE  30d7aeda98eb09c598a116d8ee45a9a92e525e64d260ec77ca53aad0d1ef2be8\r\n"
+			"vsp    vcenter   true    172.16.0.13   vcenter.lab.  REACHABLE  30d7aeda98eb09c598a116d8ee45a9a92e525e64d260ec77ca53aad0d1ef2be8\r\n"
 		],
 		[
 			0.1,
-			"[root@obpc api-vsp]# "
+			"[root@obpc nsx]# "
 		],
 		[
 			5.0,
@@ -113,5 +113,6 @@
 		"TERM": "xterm-256color",
 		"SHELL": "/bin/bash"
 	},
-	"width": 211
+	"width": 211,
+	"duration": 1
 }

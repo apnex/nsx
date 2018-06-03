@@ -1,0 +1,130 @@
+{
+	"duration": 1,
+	"version": 1,
+	"env": {
+		"TERM": "xterm-256color",
+		"SHELL": "/bin/bash"
+	},
+	"title": null,
+	"command": null,
+	"stdout": [
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"/"
+		],
+		[
+			0.1,
+			"n"
+		],
+		[
+			0.1,
+			"o"
+		],
+		[
+			0.1,
+			"d"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"t"
+		],
+		[
+			0.1,
+			"a"
+		],
+		[
+			0.1,
+			"t"
+		],
+		[
+			0.1,
+			"u"
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"h"
+		],
+		[
+			0.1,
+			"\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mlist\u001b[0m] fabric/nodes [\u001b[0;32mstate/state.node.json\u001b[0m]... "
+		],
+		[
+			0.1,
+			"[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mstatus\u001b[0m] fabric/nodes [\u001b[0;32mstate/state.node.f39ef916-f51a-4713-bb14-3aeb673d56ed.status.json\u001b[0m]... "
+		],
+		[
+			0.1,
+			"[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mstatus\u001b[0m] fabric/nodes [\u001b[0;32mstate/state.node.66148b6a-3ad3-41cb-9c26-7e72e856ddb2.status.json\u001b[0m]... "
+		],
+		[
+			0.1,
+			"[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"id                                    resource_type  display_name  ip_address     status          version\r\n"
+		],
+		[
+			0.1,
+			"-----                                 -----          -----         -----          -----\r\n"
+		],
+		[
+			0.1,
+			"f39ef916-f51a-4713-bb14-3aeb673d56ed  EdgeNode       edge01        172.16.10.18   NODE_READY      2.1.0.0.0.7395502\r\n66148b6a-3ad3-41cb-9c26-7e72e856ddb2  HostNode       esx01.lab     172.16.10.101  INSTALL_FAILED  2.1.0.0.0.7395497\r\n"
+		],
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			5,
+			""
+		]
+	],
+	"width": 211,
+	"height": 52
+}
