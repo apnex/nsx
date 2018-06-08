@@ -7,6 +7,7 @@ fi
 VSPUSER=$(cat sddc.parameters | jq -r '.endpoints[] | select(.type=="vsp").username')
 VSPPASS=$(cat sddc.parameters | jq -r '.endpoints[] | select(.type=="vsp").password')
 VSPONLINE=$(cat sddc.parameters | jq -r '.endpoints[] | select(.type=="vsp").online')
+VSPPRINT=$(./drv.sddc.status.sh | jq -r '.[] | select(.type=="vsp").thumbprint')
 VSPSESSION='state/vmware-api-session-id'
 if [ ! -d state ]; then
 	mkdir state;
