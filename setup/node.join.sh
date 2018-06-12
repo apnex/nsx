@@ -1,4 +1,6 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
 NODE=${1}
 
 function makeBody {
@@ -21,20 +23,14 @@ function makeBody {
 	printf "${PAYLOAD}"
 }
 
-function green {
-	local STRING=${1}
-	printf "${GREEN}${STRING}${NC}"
-}
-
-source drv.core
 if [[ -n "${NODE}" ]]; then
-	ESXPRINT=$(./thumbprint.sh "$1")
+	ESXPRINT=$(getThumbprint "${NODE}":443)
 	if [[ -n "${NSXHOST}" && "${ESXPRINT}" ]]; then
 	 	BODY=$(makeBody "${NODE}")
 		URL="https://${NSXHOST}/api/v1/fabric/nodes"
-		printf "[$(green "INFO")]: nsx [$(green "create")] node [$(green "${NODE}"):$(green "HostNode")] - [$(green "$URL")]... " 1>&2
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] node [$(cgreen "${NODE}"):$(cgreen "HostNode")] - [$(cgreen "$URL")]... " 1>&2
 		nsxPost "${URL}" "${BODY}"
 	fi
 else
-	printf "[${ORANGE}ERROR${NC}]: command usage: ${GREEN}node.join${LIGHTCYAN} <ip-address>${NC}\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "node.join") $(ccyan "<ip-address>")\n" 1>&2
 fi

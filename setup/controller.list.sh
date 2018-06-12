@@ -1,12 +1,12 @@
 #!/bin/bash
 
 RAW=$1
-PAYLOAD=$(./drv.switch.list.sh)
+PAYLOAD=$(./drv.controller.list.sh)
 read -r -d '' JQSPEC <<CONFIG
 	.results |
-		["id", "display_name", "vni", "vlan", "admin_state"]
+		["id", "hostname", "role", "form_factor", "ip_address"]
 		,["-----", "-----", "-----", "-----", "-----"]
-		,(.[] | [.id, .display_name, .vni, .vlan, .admin_state])
+		,(.[] | [.vm_id, .deployment_config.hostname, .roles[0], .form_factor, .deployment_config.management_port_subnets[0].ip_addresses[0]])
 	| @csv
 CONFIG
 if [[ "$RAW" == "json" ]]; then

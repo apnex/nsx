@@ -32,7 +32,7 @@ function makeBody {
 if [[ -n "${VSPHOST}" && "${VSPUSER}" && "${VSPPASS}" && "${VSPPRINT}" ]]; then
  	BODY=$(makeBody)
 	URL="https://$NSXHOST/api/v1/fabric/compute-managers"
-	printf "[$(cgreen "INFO") nsx [$(cgreen "join")] compute-manager [$(cgreen "$VSPHOST")] [$(cgreen "$URL")]... " 1>&2
+	printf "[$(cgreen "INFO")]: nsx [$(cgreen "join")] compute-manager [$(cgreen "$VSPHOST")] [$(cgreen "$URL")]... " 1>&2
 	nsxPost "${URL}" "${BODY}"
 else
 	printf "[$(cgreen "ERROR")]: Command usage: $(cgreen "cmanager.join") $(ccyan "<tnname> <nodeid>")\n" 1>&2

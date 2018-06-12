@@ -1,0 +1,226 @@
+{
+	"title": null,
+	"version": 1,
+	"command": null,
+	"width": 282,
+	"stdout": [
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"/"
+		],
+		[
+			0.1,
+			"c"
+		],
+		[
+			0.1,
+			"m"
+		],
+		[
+			0.1,
+			"a"
+		],
+		[
+			0.1,
+			"n"
+		],
+		[
+			0.1,
+			"a"
+		],
+		[
+			0.1,
+			"g"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"j"
+		],
+		[
+			0.1,
+			"o"
+		],
+		[
+			0.1,
+			"i"
+		],
+		[
+			0.1,
+			"n"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"h"
+		],
+		[
+			0.1,
+			"\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mstatus\u001b[0m] health [\u001b[0;32mnsxm01.lab\u001b[0m]... [\u001b[0;36mSERVICES\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: vsp [\u001b[0;32mstatus\u001b[0m] health [\u001b[0;32mvcenter.lab\u001b[0m]... [\u001b[0;36mSERVICES\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mjoin\u001b[0m] compute-manager [\u001b[0;32mvcenter.lab\u001b[0m] [\u001b[0;32mhttps://nsxm01.lab/api/v1/fabric/compute-managers\u001b[0m]... "
+		],
+		[
+			0.1,
+			"[\u001b[0;36m201\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"\u001b[1;39m{\r\n\t\u001b[0m\u001b[34;1m\"resource_type\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"ComputeManager\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"description\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"id\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"0dee84ba-c224-4057-ac6a-269588bc95f6\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"display_name\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"vcenter.lab\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"server\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"vcenter.lab\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"credential\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m{\r\n\t\t\u001b[0m\u001b[34;1m\"credential_type\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"UsernamePasswordLoginCredential\"\u001b[0m\u001b[1;39m,\r\n"
+		],
+		[
+			0.1,
+			"\t\t\u001b[0m\u001b[34;1m\"thumbprint\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"E5:3A:AF:D5:35:25:DF:2F:B3:6B:7E:DC:BF:C7:39:EC:5A:68:48:18:84:89:19:30:4E:FA:17:13:51:DD:DF:6B\"\u001b[0m\u001b[1;39m\r\n\t\u001b[1;39m}\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"origin_type\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"vCenter\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"_create_time\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;39m1528809548195\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"_last_modified_user\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"admin\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"_last_modified_time\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;39m1528809548195\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"_create_user\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"admin\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"_protection\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"NOT_PROTECTED\"\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"_revision\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;39m0\u001b[0m\u001b[1;39m\r\n\u001b[1;39m}\u001b[0m\r\n"
+		],
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			3,
+			"."
+		],
+		[
+			0.1,
+			"/"
+		],
+		[
+			0.1,
+			"c"
+		],
+		[
+			0.1,
+			"m"
+		],
+		[
+			0.1,
+			"a"
+		],
+		[
+			0.1,
+			"n"
+		],
+		[
+			0.1,
+			"a"
+		],
+		[
+			0.1,
+			"g"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"l"
+		],
+		[
+			0.1,
+			"i"
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"t"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"h"
+		],
+		[
+			0.1,
+			"\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mlist\u001b[0m] fabric/compute-managers [\u001b[0;32mhttps://nsxm01.lab/api/v1/fabric/compute-managers\u001b[0m]... "
+		],
+		[
+			0.1,
+			"[\u001b[0;36m200\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"id                                    display_name  ip_address   origin_type  version\r\n"
+		],
+		[
+			0.1,
+			"-----                                 -----         -----        -----        -----\r\n"
+		],
+		[
+			0.1,
+			"0dee84ba-c224-4057-ac6a-269588bc95f6  vcenter.lab   vcenter.lab  vCenter      6.7.0\r\n"
+		],
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			5,
+			""
+		]
+	],
+	"env": {
+		"TERM": "xterm-256color",
+		"SHELL": "/bin/bash"
+	},
+	"height": 74,
+	"duration": 1
+}

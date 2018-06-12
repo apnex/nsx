@@ -1,4 +1,6 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
 TZNAME=$1
 TZSWITCH=$2
 TZTYPE=$3
@@ -15,7 +17,6 @@ function makeBody {
 	printf "${BODY}"
 }
 
-source drv.core
 if [[ -n "${TZNAME}" && "${TZSWITCH}" && "${TZTYPE}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody)

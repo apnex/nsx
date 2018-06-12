@@ -123,6 +123,9 @@ function getFile {
 		*"spec/openapi/nsx_api.json"*)
 			STATE="nsx-api.json"
 		;;
+		*)
+			STATE="other.json"
+		;;
 	esac
 	printf "state/$STATE"
 }
