@@ -1,4 +1,6 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
 SWNAME=${1}
 SWTZ=${2}
 SWVLAN=${3}
@@ -17,7 +19,6 @@ function makeBody {
 	printf "${BODY}"
 }
 
-source drv.core
 if [[ -n "${SWNAME}" && "${SWTZ}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody)

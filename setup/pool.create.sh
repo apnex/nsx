@@ -1,4 +1,7 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
+
 PLNAME=$1
 PLCIDR=$2
 REGEX='([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)[0-9]{1,3}\/[0-9]{2}'
@@ -31,7 +34,6 @@ function makeBody {
 	printf "${BODY}"
 }
 
-source drv.core
 if [[ -n "${PLNAME}" && "${PLCIDR}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody)
