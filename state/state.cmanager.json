@@ -1,0 +1,89 @@
+{
+	"result_count": 1,
+	"results": [
+		{
+			"resource_type": "ComputeManager",
+			"description": "",
+			"id": "0dee84ba-c224-4057-ac6a-269588bc95f6",
+			"display_name": "vcenter.lab",
+			"server": "vcenter.lab",
+			"credential": {
+				"credential_type": "UsernamePasswordLoginCredential",
+				"thumbprint": "E5:3A:AF:D5:35:25:DF:2F:B3:6B:7E:DC:BF:C7:39:EC:5A:68:48:18:84:89:19:30:4E:FA:17:13:51:DD:DF:6B"
+			},
+			"origin_properties": [
+				{
+					"value": "VMware vCenter Server 6.7.0 build-8170161",
+					"key": "fullName"
+				},
+				{
+					"value": "INTL",
+					"key": "localeVersion"
+				},
+				{
+					"value": "6.7.0",
+					"key": "version"
+				},
+				{
+					"value": "",
+					"key": "originComputeManagerDescription"
+				},
+				{
+					"value": "6.7",
+					"key": "apiVersion"
+				},
+				{
+					"value": "8170161",
+					"key": "build"
+				},
+				{
+					"value": "VMware, Inc.",
+					"key": "vendor"
+				},
+				{
+					"value": "VMware VirtualCenter Server",
+					"key": "licenseProductName"
+				},
+				{
+					"value": "VMware vCenter Server",
+					"key": "name"
+				},
+				{
+					"value": "linux-x64",
+					"key": "osType"
+				},
+				{
+					"value": "e82ec57b-f17b-49f0-81bf-0c456ec46ffb",
+					"key": "instanceUuid"
+				},
+				{
+					"value": "VMware vCenter Server",
+					"key": "originComputeManagerName"
+				},
+				{
+					"value": "000",
+					"key": "localeBuild"
+				},
+				{
+					"value": "6.0",
+					"key": "licenseProductVersion"
+				},
+				{
+					"value": "VirtualCenter",
+					"key": "apiType"
+				},
+				{
+					"value": "vpx",
+					"key": "productLineId"
+				}
+			],
+			"origin_type": "vCenter",
+			"_create_time": 1528809548195,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1528809548195,
+			"_create_user": "admin",
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

@@ -1,0 +1,67 @@
+{
+	"sort_ascending": true,
+	"sort_by": "displayName",
+	"result_count": 2,
+	"results": [
+		{
+			"resource_type": "IpPool",
+			"description": "tep-pool",
+			"id": "cd4be1d2-e61a-40d8-97a8-54956b324a25",
+			"display_name": "tep-pool",
+			"subnets": [
+				{
+					"allocation_ranges": [
+						{
+							"start": "172.16.12.10",
+							"end": "172.16.12.99"
+						}
+					],
+					"cidr": "172.16.12.0/24",
+					"gateway_ip": "172.16.12.1",
+					"dns_nameservers": []
+				}
+			],
+			"pool_usage": {
+				"total_ids": 90,
+				"free_ids": 88,
+				"allocated_ids": 2
+			},
+			"_create_user": "admin",
+			"_create_time": 1525097252100,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1525097252100,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"resource_type": "IpPool",
+			"id": "95e75e94-a689-45df-b72a-1e0d07b56b28",
+			"display_name": "vip-pool",
+			"subnets": [
+				{
+					"allocation_ranges": [
+						{
+							"start": "172.30.0.10",
+							"end": "172.30.0.99"
+						}
+					],
+					"cidr": "172.30.0.0/24",
+					"dns_nameservers": []
+				}
+			],
+			"pool_usage": {
+				"total_ids": 90,
+				"free_ids": 90,
+				"allocated_ids": 0
+			},
+			"_create_user": "admin",
+			"_create_time": 1525257795330,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1525257795330,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

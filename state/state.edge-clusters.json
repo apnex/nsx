@@ -1,0 +1,33 @@
+{
+	"result_count": 1,
+	"results": [
+		{
+			"resource_type": "EdgeCluster",
+			"description": "",
+			"id": "44ac1bae-7842-4ad2-b1a5-eb772ed11053",
+			"display_name": "edge-cluster",
+			"tags": [],
+			"deployment_type": "VIRTUAL_MACHINE",
+			"member_node_type": "EDGE_NODE",
+			"members": [
+				{
+					"member_index": 0,
+					"transport_node_id": "f39ef916-f51a-4713-bb14-3aeb673d56ed"
+				}
+			],
+			"cluster_profile_bindings": [
+				{
+					"profile_id": "91bcaa06-47a1-11e4-8316-17ffc770799b",
+					"resource_type": "EdgeHighAvailabilityProfile"
+				}
+			],
+			"_create_user": "admin",
+			"_create_time": 1527005161576,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1527005161576,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

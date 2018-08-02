@@ -1,0 +1,24 @@
+{
+	"state": "success",
+	"host_switch_states": [
+		{
+			"endpoints": [
+				{
+					"default_gateway": "172.16.12.1",
+					"device_name": "nsx-edge-vtep",
+					"ip": "172.16.12.11",
+					"subnet_mask": "255.255.255.0",
+					"label": 59396
+				}
+			],
+			"transport_zone_ids": [
+				"9a7ece00-3a4b-4a21-a811-f07e6a60b9e9",
+				"c769876e-4c83-4bd1-b6f3-debac7c9a110"
+			],
+			"host_switch_name": "hs-fabric",
+			"host_switch_id": "ec41d430-00a9-4c5d-b93f-2a759256cd0a"
+		}
+	],
+	"transport_node_id": "f39ef916-f51a-4713-bb14-3aeb673d56ed",
+	"maintenance_mode_state": "DISABLED"
+}
