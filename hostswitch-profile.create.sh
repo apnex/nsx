@@ -1,4 +1,6 @@
 #!/bin/bash
+source drv.core
+source drv.nsx.client
 PFNAME=$1
 PFMTU=$2
 PFVLAN=$3
@@ -25,7 +27,6 @@ function makeBody {
 	printf "${BODY}"
 }
 
-source drv.core
 if [[ -n "${PFNAME}" && "${PFMTU}" && "${PFVLAN}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody)

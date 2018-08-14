@@ -28,7 +28,7 @@ function buildSpec {
 		"placement": {
 			"vcenter": "${VSPHOST}",
 			"cluster": "mgmt",
-			"host": "esx01.lab",
+			"host": "sddc.lab",
 			"datastore": "datastore1"
 		},
 		"mgmt": {
@@ -64,7 +64,7 @@ function makeBody {
 			},
 			"vm_deployment_config" : {
 				"compute_id": "domain-c7",
-				"management_network_id": "dvportgroup-18",
+				"management_network_id": "dvportgroup-62",
 				"management_port_subnets": [
 					{
 						"ip_addresses": [
@@ -74,9 +74,9 @@ function makeBody {
 					}
 				],
 				"data_network_ids": [
-					"dvportgroup-34",
-					"dvportgroup-34",
-					"dvportgroup-34"
+					"dvportgroup-82",
+					"dvportgroup-82",
+					"dvportgroup-82"
 			],
 				"default_gateway_addresses": [
 					"172.16.10.1"
