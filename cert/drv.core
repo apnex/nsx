@@ -60,39 +60,92 @@ function isSuccess {
 
 function getFile {
 	local ENDPOINT=${1}
-	local STATE="state.default"
 	case "${ENDPOINT}" in
-		*"vm"*)
-			REGEX='vm/([^\/]+)/([^\/]+)$'
+		*"transport-nodes"*)
+			REGEX='transport-nodes/([^\/]+)/([^\/]+)$'
 			if [[ ${ENDPOINT} =~ $REGEX ]]; then
 				local ITEMID=${BASH_REMATCH[1]}
 				local ITEMCM=${BASH_REMATCH[2]}
-				STATE="state.vm.${ITEMID}.${ITEMCM}.json"
+				STATE="state.tnode.${ITEMID}.${ITEMCM}.json"
 			else
-				STATE="state.vm.json"
+				STATE="state.tnode.json"
 			fi
 		;;
-		*"cluster"*)
-			STATE="state.cluster.json"
+		*"transport-zones"*)
+			STATE="state.tzone.json"
 		;;
-		*"network"*)
-			STATE="state.network.json"
+		*"fabric/compute-managers"*)
+			STATE="state.cmanager.json"
 		;;
-		*"host"*)
-			STATE="state.host.json"
+		*"edge-clusters"*)
+			STATE="state.edge-clusters.json"
 		;;
-		*"datastore"*)
-			STATE="state.datastore.json"
+		*"cluster-profiles"*)
+			STATE="state.cluster-profiles.json"
+		;;
+		*"trust-management/certificates"*)
+			STATE="state.certificates.json"
+		;;
+		*"fabric/nodes"*)
+			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.node.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.node.json"
+			fi
+		;;
+		*"host-switch-profiles"*)
+			STATE="state.profile.json"
+		;;
+		*"pools/ip-pools")
+			STATE="state.pool.json"
+		;;
+		*"pools/ip-blocks")
+			STATE="state.block.json"
+		;;
+		*"logical-routers"*)
+			STATE="state.router.json"
+		;;
+		*"logical-ports"*)
+			REGEX='logical-ports/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.port.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.ports.json"
+			fi
+		;;
+		*"logical-router-ports"*)
+			REGEX='logical-router-ports/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.router-port.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.router-ports.json"
+			fi
+		;;
+		*"logical-switches"*)
+			STATE="state.switch.json"
+		;;
+		*"spec/openapi/nsx_api.json"*)
+			STATE="nsx-api.json"
+		;;
+		*)
+			STATE="other.json"
 		;;
 	esac
 	printf "state/$STATE"
 }
 
 function buildURL {
-	local ENDPOINT="${1}"
-	local BASE="https://vmc.vmware.com/vmc/api/"
-	if [[ "$VMCONLINE" == "true" ]]; then
-		vmcSession
+	local ENDPOINT=${1}
+	local BASE="https://$NSXHOST/api/v1/"
+	if [[ "$NSXONLINE" == "true" ]]; then
+		nsxSession
 		URL="$BASE$ENDPOINT"
 	else
 		URL=$(getFile "${ENDPOINT}")
