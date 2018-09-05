@@ -21,16 +21,17 @@ function nsxLogin {
 }
 
 function nsxSession {
-	if [[ "$NSXONLINE" == "true" ]]; then
-		if [ -f $NSXSESSION ]; then
-			local MYDATE=$(stat -c %y "$NSXSESSION")
-			local LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
-			if [ "$LAPSE" -ge 600 ]; then
+	local SESSION=$NSXSESSION
+	local ONLINE=$NSXONLINE
+	if [[ "$ONLINE" == "true" ]]; then
+		if [ -f $SESSION ]; then
+			local RUNFIND="$(find ${SESSION} -cmin +10)"
+			if [ -n "$RUNFIND" ]; then
 				printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
 				nsxLogin
 			fi
 		else
-			printf "File [$NSXSESSION] does not exist - authenticating...\n" 1>&2
+			printf "File [$SESSION] does not exist - authenticating...\n" 1>&2
 			nsxLogin
 		fi
 	fi

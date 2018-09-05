@@ -1,0 +1,9 @@
+{
+	"lcp_connectivity_status": "UNKNOWN",
+	"mpa_connectivity_status": "DOWN",
+	"mpa_connectivity_status_details": "Client has not responded to heartbeats yet",
+	"lcp_connectivity_status_details": [],
+	"inventory_sync_paused": false,
+	"software_version": "VERSION_UNKNOWN",
+	"host_node_deployment_status": "INSTALL_FAILED"
+}

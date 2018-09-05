@@ -1,0 +1,83 @@
+{
+	"result_count": 3,
+	"results": [
+		{
+			"resource_type": "LogicalRouter",
+			"id": "6034a475-ff0e-4542-b1d2-f02ae2ede8d4",
+			"display_name": "t0-core",
+			"edge_cluster_id": "4ff71eb8-613d-44fa-8e8e-6d963a718520",
+			"firewall_sections": [
+				{
+					"is_valid": true,
+					"target_type": "FirewallSection",
+					"target_id": "6a17dd03-3942-42da-a0ad-3b42c386a6de"
+				}
+			],
+			"advanced_config": {
+				"external_transit_networks": [
+					"100.64.0.0/16"
+				],
+				"internal_transit_network": "169.254.0.0/28"
+			},
+			"router_type": "TIER0",
+			"high_availability_mode": "ACTIVE_STANDBY",
+			"failover_mode": "PREEMPTIVE",
+			"_create_time": 1534781853094,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1534781853094,
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"resource_type": "LogicalRouter",
+			"id": "6ba967c3-f7e7-4f93-becf-f7f2cf7e3cae",
+			"display_name": "t1-tenant-A",
+			"edge_cluster_id": "4ff71eb8-613d-44fa-8e8e-6d963a718520",
+			"firewall_sections": [
+				{
+					"is_valid": true,
+					"target_type": "FirewallSection",
+					"target_id": "263f91b6-e5bd-4bdd-89ff-e412b3fd6af4"
+				}
+			],
+			"advanced_config": {
+				"internal_transit_network": "169.254.0.0/28"
+			},
+			"router_type": "TIER1",
+			"high_availability_mode": "ACTIVE_STANDBY",
+			"failover_mode": "PREEMPTIVE",
+			"_create_time": 1534781939048,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1534939176111,
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_protection": "NOT_PROTECTED",
+			"_revision": 2
+		},
+		{
+			"resource_type": "LogicalRouter",
+			"id": "2510e112-ffa3-41de-a978-4bdf0859fc6b",
+			"display_name": "t1-tenant-B",
+			"firewall_sections": [
+				{
+					"is_valid": true,
+					"target_type": "FirewallSection",
+					"target_id": "6c48b87f-4e58-4f1e-b257-0dea055b6e28"
+				}
+			],
+			"advanced_config": {
+				"internal_transit_network": "169.254.0.0/28"
+			},
+			"router_type": "TIER1",
+			"_create_time": 1534782139818,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1534782139818,
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

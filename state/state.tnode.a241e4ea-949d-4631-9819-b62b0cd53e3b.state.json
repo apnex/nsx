@@ -1,0 +1,24 @@
+{
+	"state": "success",
+	"host_switch_states": [
+		{
+			"endpoints": [
+				{
+					"default_gateway": "172.16.11.1",
+					"device_name": "vmk10",
+					"ip": "172.16.11.11",
+					"subnet_mask": "255.255.255.0",
+					"label": 10242
+				}
+			],
+			"transport_zone_ids": [
+				"27b0d557-e940-4aa2-81b1-4955c0320d23",
+				"7fcfb963-56cd-4429-92bf-5ea64abc10d0"
+			],
+			"host_switch_name": "hs-fabric",
+			"host_switch_id": "be e3 e7 41 7e 76 46 06-a8 7f 44 db 1b 04 67 ec"
+		}
+	],
+	"transport_node_id": "a241e4ea-949d-4631-9819-b62b0cd53e3b",
+	"maintenance_mode_state": "DISABLED"
+}

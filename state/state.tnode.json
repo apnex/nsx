@@ -1,0 +1,281 @@
+{
+	"sort_ascending": true,
+	"sort_by": "displayName",
+	"result_count": 3,
+	"results": [
+		{
+			"resource_type": "TransportNode",
+			"description": "NSX configured Test Transport Node",
+			"id": "65938f9b-9e7f-49ea-b627-96e13aec8a16",
+			"display_name": "tn-edge01",
+			"host_switch_spec": {
+				"resource_type": "StandardHostSwitchSpec",
+				"host_switches": [
+					{
+						"host_switch_profile_ids": [
+							{
+								"value": "eea5637f-c415-4f9e-8f91-7b2120a81d06",
+								"key": "UplinkHostSwitchProfile"
+							},
+							{
+								"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
+								"key": "LldpHostSwitchProfile"
+							}
+						],
+						"host_switch_name": "hs-fabric",
+						"pnics": [
+							{
+								"device_name": "fp-eth0",
+								"uplink_name": "uplink1"
+							}
+						],
+						"ip_assignment_spec": {
+							"resource_type": "StaticIpPoolSpec",
+							"ip_pool_id": "dc938830-1698-4373-8002-c273274e6125"
+						},
+						"cpu_config": []
+					}
+				]
+			},
+			"maintenance_mode": "DISABLED",
+			"transport_zone_endpoints": [
+				{
+					"transport_zone_id": "7fcfb963-56cd-4429-92bf-5ea64abc10d0",
+					"transport_zone_profile_ids": [
+						{
+							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+							"resource_type": "BfdHealthMonitoringProfile"
+						}
+					]
+				},
+				{
+					"transport_zone_id": "27b0d557-e940-4aa2-81b1-4955c0320d23",
+					"transport_zone_profile_ids": [
+						{
+							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+							"resource_type": "BfdHealthMonitoringProfile"
+						}
+					]
+				}
+			],
+			"host_switches": [
+				{
+					"host_switch_profile_ids": [
+						{
+							"value": "eea5637f-c415-4f9e-8f91-7b2120a81d06",
+							"key": "UplinkHostSwitchProfile"
+						},
+						{
+							"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
+							"key": "LldpHostSwitchProfile"
+						}
+					],
+					"host_switch_name": "hs-fabric",
+					"pnics": [
+						{
+							"device_name": "fp-eth0",
+							"uplink_name": "uplink1"
+						}
+					],
+					"static_ip_pool_id": "dc938830-1698-4373-8002-c273274e6125"
+				}
+			],
+			"node_id": "65938f9b-9e7f-49ea-b627-96e13aec8a16",
+			"_create_time": 1534781731760,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1534781731760,
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"resource_type": "TransportNode",
+			"description": "NSX configured Test Transport Node",
+			"id": "28a72d62-e01f-40cd-9b77-8f0bce12e700",
+			"display_name": "tn-esx01",
+			"host_switch_spec": {
+				"resource_type": "StandardHostSwitchSpec",
+				"host_switches": [
+					{
+						"host_switch_profile_ids": [
+							{
+								"value": "eea5637f-c415-4f9e-8f91-7b2120a81d06",
+								"key": "UplinkHostSwitchProfile"
+							},
+							{
+								"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
+								"key": "LldpHostSwitchProfile"
+							},
+							{
+								"value": "8cb3de94-2834-414c-b07d-c034d878db56",
+								"key": "NiocProfile"
+							}
+						],
+						"host_switch_name": "hs-fabric",
+						"pnics": [
+							{
+								"device_name": "vmnic1",
+								"uplink_name": "uplink1"
+							}
+						],
+						"ip_assignment_spec": {
+							"resource_type": "StaticIpPoolSpec",
+							"ip_pool_id": "dc938830-1698-4373-8002-c273274e6125"
+						},
+						"cpu_config": []
+					}
+				]
+			},
+			"maintenance_mode": "DISABLED",
+			"transport_zone_endpoints": [
+				{
+					"transport_zone_id": "7fcfb963-56cd-4429-92bf-5ea64abc10d0",
+					"transport_zone_profile_ids": [
+						{
+							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+							"resource_type": "BfdHealthMonitoringProfile"
+						}
+					]
+				},
+				{
+					"transport_zone_id": "27b0d557-e940-4aa2-81b1-4955c0320d23",
+					"transport_zone_profile_ids": [
+						{
+							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+							"resource_type": "BfdHealthMonitoringProfile"
+						}
+					]
+				}
+			],
+			"host_switches": [
+				{
+					"host_switch_profile_ids": [
+						{
+							"value": "eea5637f-c415-4f9e-8f91-7b2120a81d06",
+							"key": "UplinkHostSwitchProfile"
+						},
+						{
+							"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
+							"key": "LldpHostSwitchProfile"
+						},
+						{
+							"value": "8cb3de94-2834-414c-b07d-c034d878db56",
+							"key": "NiocProfile"
+						}
+					],
+					"host_switch_name": "hs-fabric",
+					"pnics": [
+						{
+							"device_name": "vmnic1",
+							"uplink_name": "uplink1"
+						}
+					],
+					"static_ip_pool_id": "dc938830-1698-4373-8002-c273274e6125"
+				}
+			],
+			"node_id": "28a72d62-e01f-40cd-9b77-8f0bce12e700",
+			"_create_time": 1534781556859,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1534781556859,
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"resource_type": "TransportNode",
+			"description": "NSX configured Test Transport Node",
+			"id": "a241e4ea-949d-4631-9819-b62b0cd53e3b",
+			"display_name": "tn-esx02",
+			"host_switch_spec": {
+				"resource_type": "StandardHostSwitchSpec",
+				"host_switches": [
+					{
+						"host_switch_profile_ids": [
+							{
+								"value": "eea5637f-c415-4f9e-8f91-7b2120a81d06",
+								"key": "UplinkHostSwitchProfile"
+							},
+							{
+								"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
+								"key": "LldpHostSwitchProfile"
+							},
+							{
+								"value": "8cb3de94-2834-414c-b07d-c034d878db56",
+								"key": "NiocProfile"
+							}
+						],
+						"host_switch_name": "hs-fabric",
+						"pnics": [
+							{
+								"device_name": "vmnic1",
+								"uplink_name": "uplink1"
+							}
+						],
+						"ip_assignment_spec": {
+							"resource_type": "StaticIpPoolSpec",
+							"ip_pool_id": "dc938830-1698-4373-8002-c273274e6125"
+						},
+						"cpu_config": []
+					}
+				]
+			},
+			"maintenance_mode": "DISABLED",
+			"transport_zone_endpoints": [
+				{
+					"transport_zone_id": "7fcfb963-56cd-4429-92bf-5ea64abc10d0",
+					"transport_zone_profile_ids": [
+						{
+							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+							"resource_type": "BfdHealthMonitoringProfile"
+						}
+					]
+				},
+				{
+					"transport_zone_id": "27b0d557-e940-4aa2-81b1-4955c0320d23",
+					"transport_zone_profile_ids": [
+						{
+							"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a",
+							"resource_type": "BfdHealthMonitoringProfile"
+						}
+					]
+				}
+			],
+			"host_switches": [
+				{
+					"host_switch_profile_ids": [
+						{
+							"value": "eea5637f-c415-4f9e-8f91-7b2120a81d06",
+							"key": "UplinkHostSwitchProfile"
+						},
+						{
+							"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb",
+							"key": "LldpHostSwitchProfile"
+						},
+						{
+							"value": "8cb3de94-2834-414c-b07d-c034d878db56",
+							"key": "NiocProfile"
+						}
+					],
+					"host_switch_name": "hs-fabric",
+					"pnics": [
+						{
+							"device_name": "vmnic1",
+							"uplink_name": "uplink1"
+						}
+					],
+					"static_ip_pool_id": "dc938830-1698-4373-8002-c273274e6125"
+				}
+			],
+			"node_id": "a241e4ea-949d-4631-9819-b62b0cd53e3b",
+			"_create_time": 1534781583826,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1534781583826,
+			"_system_owned": false,
+			"_create_user": "admin",
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	]
+}

@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# get OSNAME
+OSNAME="$(uname -s)"
+case "${OSNAME}" in
+	Linux*)
+		#printf "HAHA you run ${OSNAME}\n" 1>&2
+	;;
+	Darwin*)
+		#printf "HAHA you run a ${OSNAME}\n" 1>&2
+	;;
+esac
+
 # COLOURS
 NC='\033[0m' # no colour
 BLACK='\033[0;30m' # black
@@ -49,92 +60,39 @@ function isSuccess {
 
 function getFile {
 	local ENDPOINT=${1}
+	local STATE="state.default"
 	case "${ENDPOINT}" in
-		*"transport-nodes"*)
-			REGEX='transport-nodes/([^\/]+)/([^\/]+)$'
+		*"vm"*)
+			REGEX='vm/([^\/]+)/([^\/]+)$'
 			if [[ ${ENDPOINT} =~ $REGEX ]]; then
 				local ITEMID=${BASH_REMATCH[1]}
 				local ITEMCM=${BASH_REMATCH[2]}
-				STATE="state.tnode.${ITEMID}.${ITEMCM}.json"
+				STATE="state.vm.${ITEMID}.${ITEMCM}.json"
 			else
-				STATE="state.tnode.json"
+				STATE="state.vm.json"
 			fi
 		;;
-		*"transport-zones"*)
-			STATE="state.tzone.json"
+		*"cluster"*)
+			STATE="state.cluster.json"
 		;;
-		*"fabric/compute-managers"*)
-			STATE="state.cmanager.json"
+		*"network"*)
+			STATE="state.network.json"
 		;;
-		*"edge-clusters"*)
-			STATE="state.edge-clusters.json"
+		*"host"*)
+			STATE="state.host.json"
 		;;
-		*"cluster-profiles"*)
-			STATE="state.cluster-profiles.json"
-		;;
-		*"trust-management/certificates"*)
-			STATE="state.certificates.json"
-		;;
-		*"fabric/nodes"*)
-			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
-			if [[ ${ENDPOINT} =~ $REGEX ]]; then
-				local ITEMID=${BASH_REMATCH[1]}
-				local ITEMCM=${BASH_REMATCH[2]}
-				STATE="state.node.${ITEMID}.${ITEMCM}.json"
-			else
-				STATE="state.node.json"
-			fi
-		;;
-		*"host-switch-profiles"*)
-			STATE="state.profile.json"
-		;;
-		*"pools/ip-pools")
-			STATE="state.pool.json"
-		;;
-		*"pools/ip-blocks")
-			STATE="state.block.json"
-		;;
-		*"logical-routers"*)
-			STATE="state.router.json"
-		;;
-		*"logical-ports"*)
-			REGEX='logical-ports/([^\/]+)/([^\/]+)$'
-			if [[ ${ENDPOINT} =~ $REGEX ]]; then
-				local ITEMID=${BASH_REMATCH[1]}
-				local ITEMCM=${BASH_REMATCH[2]}
-				STATE="state.port.${ITEMID}.${ITEMCM}.json"
-			else
-				STATE="state.ports.json"
-			fi
-		;;
-		*"logical-router-ports"*)
-			REGEX='logical-router-ports/([^\/]+)/([^\/]+)$'
-			if [[ ${ENDPOINT} =~ $REGEX ]]; then
-				local ITEMID=${BASH_REMATCH[1]}
-				local ITEMCM=${BASH_REMATCH[2]}
-				STATE="state.router-port.${ITEMID}.${ITEMCM}.json"
-			else
-				STATE="state.router-ports.json"
-			fi
-		;;
-		*"logical-switches"*)
-			STATE="state.switch.json"
-		;;
-		*"spec/openapi/nsx_api.json"*)
-			STATE="nsx-api.json"
-		;;
-		*)
-			STATE="other.json"
+		*"datastore"*)
+			STATE="state.datastore.json"
 		;;
 	esac
 	printf "state/$STATE"
 }
 
 function buildURL {
-	local ENDPOINT=${1}
-	local BASE="https://$NSXHOST/api/v1/"
-	if [[ "$NSXONLINE" == "true" ]]; then
-		nsxSession
+	local ENDPOINT="${1}"
+	local BASE="https://vmc.vmware.com/vmc/api/"
+	if [[ "$VMCONLINE" == "true" ]]; then
+		vmcSession
 		URL="$BASE$ENDPOINT"
 	else
 		URL=$(getFile "${ENDPOINT}")

@@ -1,0 +1,38 @@
+{
+	"result_count": 1,
+	"results": [
+		{
+			"user_settings": {
+				"cli_password": "[redacted]",
+				"root_password": "[redacted]",
+				"cli_username": "admin"
+			},
+			"vm_id": "f02d9f98-340f-45e5-a792-1e091e12eb00",
+			"roles": [
+				"CONTROLLER"
+			],
+			"deployment_config": {
+				"placement_type": "VsphereClusterNodeVMDeploymentConfig",
+				"vc_id": "206d8d37-7811-486e-ada2-53eada6e4e8a",
+				"management_network_id": "dvportgroup-62",
+				"enable_ssh": true,
+				"default_gateway_addresses": [
+					"172.16.10.1"
+				],
+				"hostname": "controller-1",
+				"compute_id": "domain-c7",
+				"storage_id": "datastore-11",
+				"allow_ssh_root_login": true,
+				"management_port_subnets": [
+					{
+						"ip_addresses": [
+							"172.16.10.16"
+						],
+						"prefix_length": 24
+					}
+				]
+			},
+			"form_factor": "SMALL"
+		}
+	]
+}

@@ -8,7 +8,7 @@ function makeBody {
 	read -r -d '' PAYLOAD <<-CONFIG
 	{
 		"resource_type": "HostNode",
-		"display_name": "esx01.lab",
+		"display_name": "esx02.lab",
 		"ip_addresses": [
 			"${NODE}"
 		],

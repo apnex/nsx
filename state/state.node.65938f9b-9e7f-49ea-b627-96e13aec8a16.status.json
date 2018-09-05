@@ -1,0 +1,123 @@
+{
+	"lcp_connectivity_status": "UP",
+	"mpa_connectivity_status": "UP",
+	"mpa_connectivity_status_details": "Client is responding to heartbeats",
+	"lcp_connectivity_status_details": [
+		{
+			"control_node_ip": "172.16.10.16",
+			"status": "UP"
+		}
+	],
+	"last_heartbeat_timestamp": 1536077584842,
+	"system_status": {
+		"mem_used": 1563168,
+		"system_time": 1536147537000,
+		"file_systems": [
+			{
+				"file_system": "udev",
+				"total": 1485480,
+				"used": 0,
+				"type": "devtmpfs",
+				"mount": "/dev"
+			},
+			{
+				"file_system": "tmpfs",
+				"total": 404436,
+				"used": 5812,
+				"type": "tmpfs",
+				"mount": "/run"
+			},
+			{
+				"file_system": "/dev/sda2",
+				"total": 19554584,
+				"used": 1810892,
+				"type": "ext4",
+				"mount": "/"
+			},
+			{
+				"file_system": "tmpfs",
+				"total": 2022176,
+				"used": 540,
+				"type": "tmpfs",
+				"mount": "/dev/shm"
+			},
+			{
+				"file_system": "tmpfs",
+				"total": 5120,
+				"used": 0,
+				"type": "tmpfs",
+				"mount": "/run/lock"
+			},
+			{
+				"file_system": "tmpfs",
+				"total": 2022176,
+				"used": 0,
+				"type": "tmpfs",
+				"mount": "/sys/fs/cgroup"
+			},
+			{
+				"file_system": "/dev/sda1",
+				"total": 967320,
+				"used": 8420,
+				"type": "ext4",
+				"mount": "/boot"
+			},
+			{
+				"file_system": "/dev/sda3",
+				"total": 19554584,
+				"used": 44992,
+				"type": "ext4",
+				"mount": "/os_bak"
+			},
+			{
+				"file_system": "/dev/mapper/nsx-config__bak",
+				"total": 19551512,
+				"used": 44992,
+				"type": "ext4",
+				"mount": "/config_bak"
+			},
+			{
+				"file_system": "/dev/mapper/nsx-config",
+				"total": 19551512,
+				"used": 45944,
+				"type": "ext4",
+				"mount": "/config"
+			},
+			{
+				"file_system": "/dev/mapper/nsx-image",
+				"total": 19551512,
+				"used": 44992,
+				"type": "ext4",
+				"mount": "/image"
+			},
+			{
+				"file_system": "/dev/mapper/nsx-tmp",
+				"total": 3869352,
+				"used": 7832,
+				"type": "ext4",
+				"mount": "/tmp"
+			},
+			{
+				"file_system": "/dev/mapper/nsx-var+log",
+				"total": 9710112,
+				"used": 203852,
+				"type": "ext4",
+				"mount": "/var/log"
+			}
+		],
+		"load_average": [
+			0.029999999329447746,
+			0.10000000149011612,
+			0.05999999865889549
+		],
+		"swap_total": 3997692,
+		"mem_cache": 248572,
+		"cpu_cores": 2,
+		"source": "cached",
+		"mem_total": 4044352,
+		"swap_used": 0,
+		"uptime": 658000
+	},
+	"software_version": "2.2.0.0.0.8680783",
+	"host_node_deployment_status": "NODE_READY"
+}

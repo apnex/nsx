@@ -1,0 +1,92 @@
+{
+	"lcp_connectivity_status": "UNKNOWN",
+	"mpa_connectivity_status": "UP",
+	"last_sync_time": 1534776190126,
+	"mpa_connectivity_status_details": "Client is responding to heartbeats",
+	"lcp_connectivity_status_details": [],
+	"inventory_sync_paused": false,
+	"last_heartbeat_timestamp": 1534776156165,
+	"system_status": {
+		"mem_used": 1606024,
+		"system_time": 1534776247000,
+		"file_systems": [
+			{
+				"file_system": "root",
+				"total": 32768,
+				"used": 3008,
+				"type": "ramdisk",
+				"mount": "/"
+			},
+			{
+				"file_system": "etc",
+				"total": 28672,
+				"used": 300,
+				"type": "ramdisk",
+				"mount": "/etc"
+			},
+			{
+				"file_system": "opt",
+				"total": 32768,
+				"used": 916,
+				"type": "ramdisk",
+				"mount": "/opt"
+			},
+			{
+				"file_system": "var",
+				"total": 49152,
+				"used": 428,
+				"type": "ramdisk",
+				"mount": "/var"
+			},
+			{
+				"file_system": "tmp",
+				"total": 262144,
+				"used": 12,
+				"type": "ramdisk",
+				"mount": "/tmp"
+			},
+			{
+				"file_system": "iofilters",
+				"total": 32768,
+				"used": 0,
+				"type": "ramdisk",
+				"mount": "/var/run/iofilters"
+			},
+			{
+				"file_system": "shm",
+				"total": 1048576,
+				"used": 0,
+				"type": "ramdisk",
+				"mount": "/var/run/shm"
+			},
+			{
+				"file_system": "hostdstats",
+				"total": 116736,
+				"used": 1964,
+				"type": "ramdisk",
+				"mount": "/var/lib/vmware/hostd/stats"
+			},
+			{
+				"file_system": "nestdb",
+				"total": 524288,
+				"used": 16,
+				"type": "ramdisk",
+				"mount": "/var/lib/vmware/nsx/nestdb/db"
+			}
+		],
+		"load_average": [
+			0,
+			0.009999999776482582,
+			0
+		],
+		"swap_total": 0,
+		"mem_cache": 0,
+		"cpu_cores": 4,
+		"source": "cached",
+		"mem_total": 8388016,
+		"swap_used": 0,
+		"uptime": 2396000
+	},
+	"software_version": "2.2.0.0.0.8680789",
+	"host_node_deployment_status": "INSTALL_SUCCESSFUL"
+}

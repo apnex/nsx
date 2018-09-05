@@ -2,11 +2,12 @@
 DOMAIN=$(cat sddc.parameters | jq -r '.domain')
 VSPHOST=$(cat sddc.parameters | jq -r '.endpoints[] | select(.type=="vsp").hostname')
 if [[ ! "$VSPHOST" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-	VSPHOST+=".$DOMAIN"
+	VSPHOST+=".$DOMAIN" #if not an IP, append domain
 fi
 VSPUSER=$(cat sddc.parameters | jq -r '.endpoints[] | select(.type=="vsp").username')
 VSPPASS=$(cat sddc.parameters | jq -r '.endpoints[] | select(.type=="vsp").password')
 VSPONLINE=$(cat sddc.parameters | jq -r '.endpoints[] | select(.type=="vsp").online')
+VSPPRINT=$(./drv.sddc.status.sh | jq -r '.[] | select(.type=="vsp").thumbprint')
 VSPSESSION='state/vmware-api-session-id'
 if [ ! -d state ]; then
 	mkdir state;
@@ -20,17 +21,18 @@ function vspLogin {
 }
 
 function vspSession {
-	if [[ "$VSPONLINE" == "true" ]]; then
-		if [ -f $VSPSESSION ]; then
-			local MYDATE=$(stat -c %y "$VSPSESSION")
-			local LAPSE="$(($(date '+%s') - $(date -d "$MYDATE" '+%s')))"
-			if [ "$LAPSE" -ge 600 ]; then
+	local SESSION=$VSPSESSION
+	local ONLINE=$VSPONLINE
+	if [[ "$ONLINE" == "true" ]]; then
+		if [ -f $SESSION ]; then
+			local RUNFIND="$(find ${SESSION} -cmin +10)"
+			if [ -n "$RUNFIND" ]; then
 				printf "Session older than [600] seconds, reauthenticating...\n" 1>&2
-				vspLogin | jq -r '.value' >"$VSPSESSION"
+				vspLogin | jq -r '.value' >"$SESSION"
 			fi
 		else
-			printf "File [$VSPSESSION] does not exist - authenticating...\n" 1>&2
-			vspLogin | jq -r '.value' >"$VSPSESSION"
+			printf "File [$SESSION] does not exist - authenticating...\n" 1>&2
+			vspLogin | jq -r '.value' >"$SESSION"
 		fi
 	fi
 }

@@ -1,5 +1,36 @@
-#### 1: Deploy NSX Manager OVAs
-First, download the NSX manager from **my.vmware.com** - either via a browser or use the `myvmw` CLI utility: <https://github.com/apnex/myvmw>  
+#### 1: Ensure you have JQ and CURL installed
+Ensure you meet the pre-requisites on linux to execute to scripts.
+Currently, these have been tested on Centos.
+
+##### Centos
+```shell
+yum install curl jq
+```
+
+##### Ubuntu
+```shell
+apt-get install curl jq
+```
+
+##### Mac OSX
+Install brew
+```shell
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+```
+
+Install curl & jq
+```shell
+brew install curl jq
+```
+
+#### 2: Clone repository from GitHub
+Perform the following command to download the scripts - this will create a directory `nsx` on your local machine
+```shell
+git clone https://github.com/apnex/nsx
+```
+
+#### 3: Deploy NSX Manager OVAs
+First, download the NSX manager from **my.vmware.com** - either via a browser or use the `vmw-cli` CLI tool: <https://github.com/apnex/vmw-cli>  
 The following steps use the file `nsx-unified-appliance-2.2.0.0.0.8680778.ova`  
 Next, import the OVA into vCenter - either manually through the UI or using ovftool as follows  
 (edit parameters as appropriate):  
@@ -31,7 +62,7 @@ ovftool \
 
 This will provision a powered-off NSX manager VM. Modify any memory reservations as required and power on.  
 
-#### 2: Set up sddc endpoints and parameters
+#### 4: Set up sddc endpoints and parameters
 Modify the `sddc.parameters` file to reflect the parameters for your lab accordingly.  
 The `dns` field will be used to verify forward and reverse dns entries for each endpoint.  
 The `domain` property will be used in generating a certificate for the NSX Manager - i.e `*.lab` in this example.  
@@ -59,7 +90,7 @@ For NSX certificate operations, the **vsp** endpoint is optional and not require
 }
 ```
 
-#### 3: Verify sddc status
+#### 5: Verify sddc status
 This will perform a forward and reverse dns tests for each endpoint against the server @ `dns`.  
 It will also perform a **ping** to the `hostname`.`domain` - if hostname is alphanumeric, or simply `hostname` if an IP address is specified.  
 The SSL thumprint and certificate is also tested/extracted to indicate correct connectivity.  
@@ -76,7 +107,7 @@ To view extended parameters (credentials / certificate) issue the following:
 <b>sddc.status.sh json</b>
 </pre>
 
-#### 4: Add vcenter.lab as a compute-manager to `nsx-manager`  
+#### 6: Add vcenter.lab as a compute-manager to `nsx-manager`  
 <pre>
 <b>cmanager.list.sh
 cmanager.join.sh
@@ -90,7 +121,7 @@ A successful join will show the version of vcenter under the `version` column.
 A failed join will show `not-registered` in the `version` column.  
 If this occurs, it is likely vcenter had an old NSX extension already registered - view the `nsx-manager` UI to resolve.
 
-#### 5: Provision a new NSX controller
+#### 7: Provision a new NSX controller
 This command creates a new controller node.  
 A valid `compute-manager` must be joined to the NSX manager.  
 
@@ -103,7 +134,7 @@ controller.list.sh</b>
 
 ![controller.create](asciicast/controller.create.svg)
 
-#### 6: Add esx01.lab node to nsx manager
+#### 8: Add esx01.lab node to nsx manager
 command usage: **node.join `<ip-address>`**
 <pre>
 <b>node.status.sh</b>
@@ -111,7 +142,7 @@ command usage: **node.join `<ip-address>`**
 <b>node.status.sh</b>
 </pre>
 
-#### 7: Create new `edge01` node  
+#### 9: Create new `edge01` node  
 This command creates a new VM edge node.  
 A valid `compute-manager` must be joined to the NSX manager.
 
@@ -124,7 +155,7 @@ command usage: **edge.create `<node-name>` `<ip-address>`**
 
 This will inform `nsx-manager` to tell the `compute-manager` to create a new edge vm and join the node to the fabric.
 
-#### 8: Create transport-zones  
+#### 10: Create transport-zones  
 command usage: **tzone.create `<tz-name>` `<hs-name>` `<type>`**
 <pre>
 <b>tzone.list.sh</b>
@@ -133,7 +164,7 @@ command usage: **tzone.create `<tz-name>` `<hs-name>` `<type>`**
 <b>tzone.list.sh</b>
 </pre>
 
-#### 9: Create transport-nodes  
+#### 11: Create transport-nodes  
 command usage: **tnode.create `<tn-name>` `<node-uuid>`**
 <pre>
 <b>tnode.status.sh</b>

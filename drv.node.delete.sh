@@ -45,7 +45,8 @@ if [[ -n "${ID}" ]]; then
 		URL=$(buildURL "${ITEM}${CALL}")
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			nsxDelete "${URL}" "unprepare_host=true"
+			nsxDelete "${URL}" "unprepare_host=false"
+			#nsxDelete "${URL}" "unprepare_host=true"
 		fi
 	fi
 else
