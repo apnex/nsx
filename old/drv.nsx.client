@@ -37,6 +37,19 @@ function nsxSession {
 	fi
 }
 
+function buildURL {
+	local ENDPOINT=${1}
+	local BASE="https://$NSXHOST/api/v1/"
+	if [[ "$NSXONLINE" == "true" ]]; then
+		nsxSession
+		URL="$BASE$ENDPOINT"
+	else
+		local FILE=$(getFile "${ENDPOINT}")
+		URL="state/nsx${FILE}"
+	fi
+	printf "$URL"
+}
+
 function nsxPost {
 	local URL=${1}
 	local BODY=${2}

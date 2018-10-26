@@ -1,14 +1,22 @@
 #!/bin/bash
-source drv.core
+if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
+	WORKDIR=${BASH_REMATCH[1]}
+fi
+source ${WORKDIR}/drv.core
 
-DOMAIN=$(cat sddc.parameters | jq -r .domain)
-DNS=$(cat sddc.parameters | jq -r .dns)
+if [ -z ${SDDCDIR} ]; then
+	SDDCDIR=${WORKDIR}
+fi
+PARAMS=$(cat ${SDDCDIR}/sddc.parameters)
+DOMAIN=$(echo "$PARAMS" | jq -r .domain)
+DNS=$(echo "$PARAMS" | jq -r .dns)
 
 # 1 get the parameters
-# 2 resolve the hostname in dns
+# 2 get API endpoint (via drv.client?)
+# 3 resolve endpoint
 # 3 ping the hostname || or if IP - ping the IP address
 # 4 get the SSL thumbprint
-# 5 attempt auth?
+# 5 attempt auth? maybe default command
 function buildItem {
 	local SPEC=${1}
 	local HOST=$(echo "${SPEC}" | jq -r '.hostname')
@@ -19,7 +27,9 @@ function buildItem {
 		if [[ "$HOST" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 			CHECKFWD="$HOST"
 		else
-			HOST+=".$DOMAIN"
+			if [[ ! "$HOST" =~ [.] ]]; then
+				HOST+=".$DOMAIN"
+			fi
 			if [[ "$(host -t A -W 1 "$HOST" "$DNS")" =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$ ]]; then
 				CHECKFWD="${BASH_REMATCH[1]}"
 			fi
@@ -31,8 +41,8 @@ function buildItem {
 		fi
 		printf "[$(cgreen "INFO")]: ${TYPE} [$(cgreen "status")] health [$(cgreen "${HOST}")]... [$(ccyan "SERVICES")] - SUCCESS\n" 1>&2
 		PING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
-		if [[ "$PING" == 1 ]]; then
-			PRINT=$(getThumbprint "$HOST":443 thumbprint 2>/dev/null)
+		PRINT=$(getThumbprint "$HOST":443 thumbprint 2>/dev/null)
+		if [[ -n "${PRINT}" ]]; then
 			CERT=$(getCertificate "$HOST":443 2>/dev/null)
 		fi
 		read -r -d '' JQSPEC <<-CONFIG
@@ -63,10 +73,10 @@ function buildItem {
 
 FINAL=""
 COMMA=""
-for KEY in $(cat sddc.parameters | jq -c '.endpoints[]'); do
+for KEY in $(echo "$PARAMS" | jq -c '.endpoints[]'); do
 	FINAL+="$COMMA"
 	FINAL+=$(buildItem "$KEY")
 	COMMA=","
 done
-printf "[${FINAL}]" | jq --tab . >"state/state.sddc.status.json"
+printf "[${FINAL}]" | jq --tab . >"state/sddc.status.json"
 printf "[${FINAL}]" | jq --tab .

@@ -5,7 +5,7 @@ PAYLOAD=$(./drv.node.status.sh)
 read -r -d '' JQSPEC <<CONFIG
 	.
 		| ["id", "resource_type", "display_name", "ip_address", "status", "version"]
-		, ["-----", "-----", "-----", "-----", "-----"]
+		, ["-----", "-----", "-----", "-----", "-----", "-----"]
 		, (.[] | [.[0], .[1], .[2], .[3], .[4], .[5]])
 	| @csv
 CONFIG
