@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1330" height="277.1">
+  <rect width="1330" height="277.1" rx="5" ry="5" class="a"/>
+  <svg y="0%" x="0%">
+    <circle cx="20" cy="20" r="6" fill="#ff5f58"/>
+    <circle cx="40" cy="20" r="6" fill="#ffbd2e"/>
+    <circle cx="60" cy="20" r="6" fill="#18c132"/>
+  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="217.1" viewBox="0 0 129 21.71" width="1290" x="15" y="50">
+    <style>@keyframes k{0%{transform:translateX(0)}1.4%{transform:translateX(-129px)}2.7%{transform:translateX(-258px)}4.1%{transform:translateX(-387px)}5.4%{transform:translateX(-516px)}6.8%{transform:translateX(-645px)}8.2%{transform:translateX(-774px)}9.5%{transform:translateX(-903px)}10.9%{transform:translateX(-1032px)}12.3%{transform:translateX(-1161px)}13.6%{transform:translateX(-1290px)}15%{transform:translateX(-1419px)}16.3%{transform:translateX(-1548px)}17.7%{transform:translateX(-1677px)}19.1%{transform:translateX(-1806px)}20.4%{transform:translateX(-1935px)}21.8%{transform:translateX(-2064px)}23.2%{transform:translateX(-2193px)}24.5%{transform:translateX(-2322px)}27.2%{transform:translateX(-2451px)}30%{transform:translateX(-2580px)}30.1%{transform:translateX(-2709px)}30.2%{transform:translateX(-2838px)}30.4%{transform:translateX(-2967px)}30.5%{transform:translateX(-3096px)}31.9%{transform:translateX(-3225px)}to{transform:translateX(-3354px)}}.a{fill:#282d35}.f{fill:#00ff00}.g{fill:#a8cc8c}.h{fill:#66c2cd}</style>
+    <g font-size="1.67" font-family="Monaco,Consolas,Menlo,'Bitstream Vera Sans Mono','Powerline Symbols',monospace">
+      <defs>
+        <symbol id="1">
+          <text y="1.67" class="f">[root@obpc</text>
+          <text x="11.022" y="1.67" class="f">nsx]#</text>
+        </symbol>
+        <symbol id="2">
+          <text y="1.67" class="f">[root@obpc</text>
+          <text x="11.022" y="1.67" class="f">nsx]#</text>
+          <text x="17.034" y="1.67" class="f">./sddc.status.sh</text>
+        </symbol>
+        <symbol id="3">
+          <text y="1.67" class="f">[</text>
+          <text x="1.002" y="1.67" class="g">INFO</text>
+          <text x="5.01" y="1.67" class="f">]:</text>
+          <text x="8.016" y="1.67" class="f">nsx</text>
+          <text x="12.024" y="1.67" class="f">[</text>
+          <text x="13.026" y="1.67" class="g">status</text>
+          <text x="19.038" y="1.67" class="f">]</text>
+          <text x="21.042" y="1.67" class="f">health</text>
+          <text x="28.056" y="1.67" class="f">[</text>
+          <text x="29.058" y="1.67" class="g">nsxm01</text>
+          <text x="35.07" y="1.67" class="f">]...</text>
+          <text x="40.08" y="1.67" class="f">[</text>
+          <text x="41.082" y="1.67" class="h">SERVICES</text>
+          <text x="49.098" y="1.67" class="f">]</text>
+          <text x="51.102" y="1.67" class="f">-</text>
+          <text x="53.106" y="1.67" class="f">SUCCESS</text>
+        </symbol>
+        <symbol id="4">
+          <text y="1.67" class="f">[</text>
+          <text x="1.002" y="1.67" class="g">INFO</text>
+          <text x="5.01" y="1.67" class="f">]:</text>
+          <text x="8.016" y="1.67" class="f">vsp</text>
+          <text x="12.024" y="1.67" class="f">[</text>
+          <text x="13.026" y="1.67" class="g">status</text>
+          <text x="19.038" y="1.67" class="f">]</text>
+          <text x="21.042" y="1.67" class="f">health</text>
+          <text x="28.056" y="1.67" class="f">[</text>
+          <text x="29.058" y="1.67" class="g">vcenter</text>
+          <text x="36.072" y="1.67" class="f">]...</text>
+          <text x="41.082" y="1.67" class="f">[</text>
+          <text x="42.084" y="1.67" class="h">SERVICES</text>
+          <text x="50.1" y="1.67" class="f">]</text>
+          <text x="52.104" y="1.67" class="f">-</text>
+          <text x="54.108" y="1.67" class="f">SUCCESS</text>
+        </symbol>
+        <symbol id="5">
+          <text y="1.67" class="f">type</text>
+          <text x="7.014" y="1.67" class="f">hostname</text>
+          <text x="17.034" y="1.67" class="f">online</text>
+          <text x="25.05" y="1.67" class="f">dnsfwd</text>
+          <text x="39.078" y="1.67" class="f">dnsrev</text>
+          <text x="53.106" y="1.67" class="f">ping</text>
+          <text x="64.128" y="1.67" class="f">thumbprint</text>
+        </symbol>
+        <symbol id="6">
+          <text y="1.67" class="f">-----</text>
+          <text x="7.014" y="1.67" class="f">-----</text>
+          <text x="17.034" y="1.67" class="f">-----</text>
+          <text x="25.05" y="1.67" class="f">-----</text>
+          <text x="39.078" y="1.67" class="f">-----</text>
+          <text x="53.106" y="1.67" class="f">-----</text>
+          <text x="64.128" y="1.67" class="f">-----</text>
+        </symbol>
+        <symbol id="7">
+          <text y="1.67" class="f">nsx</text>
+          <text x="7.014" y="1.67" class="f">nsxm01</text>
+          <text x="17.034" y="1.67" class="f">true</text>
+          <text x="25.05" y="1.67" class="f">172.16.10.15</text>
+          <text x="39.078" y="1.67" class="f">nsxm01.lab.</text>
+          <text x="53.106" y="1.67" class="f">REACHABLE</text>
+          <text x="64.128" y="1.67" class="f">a78fc2492c230facdfdffa6d2efbf6adb4eb1ca09766ad33631cd604a8fb1938</text>
+        </symbol>
+        <symbol id="8">
+          <text y="1.67" class="f">vsp</text>
+          <text x="7.014" y="1.67" class="f">vcenter</text>
+          <text x="17.034" y="1.67" class="f">true</text>
+          <text x="25.05" y="1.67" class="f">172.16.0.13</text>
+          <text x="39.078" y="1.67" class="f">vcenter.lab.</text>
+          <text x="53.106" y="1.67" class="f">REACHABLE</text>
+          <text x="64.128" y="1.67" class="f">30d7aeda98eb09c598a116d8ee45a9a92e525e64d260ec77ca53aad0d1ef2be8</text>
+        </symbol>
+        <symbol id="a">
+          <path fill="transparent" d="M0 0h129v11H0z"/>
+        </symbol>
+        <symbol id="b">
+          <path fill="#6f7683" d="M0 0h1.102v2.171H0z"/>
+        </symbol>
+      </defs>
+      <path class="a" d="M0 0h129v21.71H0z"/>
+      <g style="animation-duration:7.34s;animation-iteration-count:infinite;animation-name:k;animation-timing-function:steps(1,end)">
+        <svg width="3483">
+          <svg>
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004"/>
+          </svg>
+          <svg x="129">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="16.996"/>
+            <use xlink:href="#1"/>
+          </svg>
+          <svg x="258">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="17.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">.</text>
+          </svg>
+          <svg x="387">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="18.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./</text>
+          </svg>
+          <svg x="516">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="19.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./s</text>
+          </svg>
+          <svg x="645">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="20.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sd</text>
+          </svg>
+          <svg x="774">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="21.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sdd</text>
+          </svg>
+          <svg x="903">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="22.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc</text>
+          </svg>
+          <svg x="1032">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="23.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.</text>
+          </svg>
+          <svg x="1161">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="24.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.s</text>
+          </svg>
+          <svg x="1290">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="25.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.st</text>
+          </svg>
+          <svg x="1419">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="26.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.sta</text>
+          </svg>
+          <svg x="1548">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="27.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.stat</text>
+          </svg>
+          <svg x="1677">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="28.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.statu</text>
+          </svg>
+          <svg x="1806">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="29.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.status</text>
+          </svg>
+          <svg x="1935">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="30.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.status.</text>
+          </svg>
+          <svg x="2064">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="31.996"/>
+            <text y="1.67" class="f">[root@obpc</text>
+            <text x="11.022" y="1.67" class="f">nsx]#</text>
+            <text x="17.034" y="1.67" class="f">./sddc.status.s</text>
+          </svg>
+          <svg x="2193">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="32.996"/>
+            <use xlink:href="#2"/>
+          </svg>
+          <svg x="2322">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004" y="2.146"/>
+            <use xlink:href="#2"/>
+          </svg>
+          <svg x="2451">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004" y="4.317"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+          </svg>
+          <svg x="2580">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004" y="6.488"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+            <use xlink:href="#4" y="4.342"/>
+          </svg>
+          <svg x="2709">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004" y="8.659"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+            <use xlink:href="#4" y="4.342"/>
+            <use xlink:href="#5" y="6.513"/>
+          </svg>
+          <svg x="2838">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004" y="10.83"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+            <use xlink:href="#4" y="4.342"/>
+            <use xlink:href="#5" y="6.513"/>
+            <use xlink:href="#6" y="8.684"/>
+          </svg>
+          <svg x="2967">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004" y="13.001"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+            <use xlink:href="#4" y="4.342"/>
+            <use xlink:href="#5" y="6.513"/>
+            <use xlink:href="#6" y="8.684"/>
+            <use xlink:href="#7" y="10.855"/>
+          </svg>
+          <svg x="3096">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="-.004" y="15.172"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+            <use xlink:href="#4" y="4.342"/>
+            <use xlink:href="#5" y="6.513"/>
+            <use xlink:href="#6" y="8.684"/>
+            <use xlink:href="#7" y="10.855"/>
+            <use xlink:href="#8" y="13.026"/>
+          </svg>
+          <svg x="3225">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="16.996" y="15.172"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+            <use xlink:href="#4" y="4.342"/>
+            <use xlink:href="#5" y="6.513"/>
+            <use xlink:href="#6" y="8.684"/>
+            <use xlink:href="#7" y="10.855"/>
+            <use xlink:href="#8" y="13.026"/>
+            <use xlink:href="#1" y="15.197"/>
+          </svg>
+          <svg x="3354">
+            <use xlink:href="#a"/>
+            <use xlink:href="#b" x="16.996" y="15.172"/>
+            <use xlink:href="#2"/>
+            <use xlink:href="#3" y="2.171"/>
+            <use xlink:href="#4" y="4.342"/>
+            <use xlink:href="#5" y="6.513"/>
+            <use xlink:href="#6" y="8.684"/>
+            <use xlink:href="#7" y="10.855"/>
+            <use xlink:href="#8" y="13.026"/>
+            <use xlink:href="#1" y="15.197"/>
+          </svg>
+        </svg>
+      </g>
+    </g>
+  </svg>
+</svg>

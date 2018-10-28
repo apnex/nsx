@@ -1,0 +1,162 @@
+{
+  "title": null,
+  "stdout": [
+    [
+      0.078356,
+      "\u001b]777;notify;Command completed;ssh root@172.16.0.1\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/asciicast\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/asciicast\u0007"
+    ],
+    [
+      0.000215,
+      "[root@obpc asciicast]# "
+    ],
+    [
+      4.700707,
+      "s"
+    ],
+    [
+      0.22714,
+      "k"
+    ],
+    [
+      0.000161,
+      "s"
+    ],
+    [
+      0.139252,
+      "k"
+    ],
+    [
+      0.000206,
+      "j"
+    ],
+    [
+      0.067552,
+      "d"
+    ],
+    [
+      0.000232,
+      "s"
+    ],
+    [
+      0.071191,
+      "j"
+    ],
+    [
+      0.082239,
+      "f"
+    ],
+    [
+      0.053972,
+      "k"
+    ],
+    [
+      0.000219,
+      "j"
+    ],
+    [
+      0.060579,
+      "d"
+    ],
+    [
+      0.000172,
+      "s"
+    ],
+    [
+      0.138601,
+      "f"
+    ],
+    [
+      0.176389,
+      " "
+    ],
+    [
+      0.17933,
+      "r"
+    ],
+    [
+      0.110191,
+      "u"
+    ],
+    [
+      0.157665,
+      "n"
+    ],
+    [
+      0.133823,
+      "n"
+    ],
+    [
+      0.126312,
+      "i"
+    ],
+    [
+      0.110153,
+      "n"
+    ],
+    [
+      0.053909,
+      "g"
+    ],
+    [
+      0.126766,
+      " "
+    ],
+    [
+      0.099045,
+      "c"
+    ],
+    [
+      0.069527,
+      "o"
+    ],
+    [
+      0.126769,
+      "m"
+    ],
+    [
+      0.131538,
+      "a"
+    ],
+    [
+      0.208562,
+      "n"
+    ],
+    [
+      0.091983,
+      "d"
+    ],
+    [
+      0.046509,
+      "s"
+    ],
+    [
+      0.127859,
+      "\r\n"
+    ],
+    [
+      0.005165,
+      "bash: skskjdsjfkjdsf: command not found..."
+    ],
+    [
+      0.000103,
+      "\r\n"
+    ],
+    [
+      0.177631,
+      "\u001b]777;notify;Command completed;skskjdsjfkjdsf running comands\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/asciicast\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/asciicast\u0007"
+    ],
+    [
+      3.8e-05,
+      "[root@obpc asciicast]# "
+    ]
+  ],
+  "height": 52,
+  "width": 211,
+  "version": 1,
+  "duration": 7.881132,
+  "env": {
+    "SHELL": "/bin/bash",
+    "TERM": "xterm-256color"
+  },
+  "command": null
+}

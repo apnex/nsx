@@ -1,0 +1,173 @@
+#!/bin/bash
+
+# get OSNAME
+OSNAME="$(uname -s)"
+case "${OSNAME}" in
+	Linux*)
+		#printf "HAHA you run ${OSNAME}\n" 1>&2
+	;;
+	Darwin*)
+		#printf "HAHA you run a ${OSNAME}\n" 1>&2
+	;;
+esac
+
+# COLOURS
+NC='\033[0m' # no colour
+BLACK='\033[0;30m' # black
+RED='\033[0;31m' # red
+GREEN='\033[0;32m' # green
+ORANGE='\033[0;33m' # orange
+BLUE='\033[0;34m' # blue
+PURPLE='\033[0;35m' # purple
+CYAN='\033[0;36m' # cyan
+LIGHTGREY='\033[0;37m' # light grey
+DARKGREY='\033[0;30m' # dark grey
+LIGHTRED='\033[0;31m' # light red
+LIGHTGREEN='\033[0;32m' # light green
+YELLOW='\033[0;33m' # yellow
+LIGHTBLUE='\033[0;34m' # light blue
+LIGHTPURPLE='\033[0;35m' # light purple
+LIGHTCYAN='\033[0;36m' # light cyan
+WHITE='\033[0;37m' # white
+
+function corange {
+	local STRING=${1}
+	printf "${ORANGE}${STRING}${NC}"
+}
+function cgreen {
+	local STRING=${1}
+	printf "${GREEN}${STRING}${NC}"
+}
+function ccyan {
+	local STRING=${1}
+	printf "${CYAN}${STRING}${NC}"
+}
+
+function isSuccess {
+	local STRING=${1}
+	REGEX='^(.*)([0-9]{3})$'
+	if [[ $STRING =~ $REGEX ]]; then
+		local BODY=${BASH_REMATCH[1]}
+		local CODE=${BASH_REMATCH[2]}
+	fi
+	if [[ $CODE =~ 2..$ ]]; then
+		printf "[$(ccyan "${CODE}")] - SUCCESS\n" 1>&2
+	else
+		printf "[$(ccyan "${CODE}")] - ERROR\n" 1>&2
+	fi
+	printf "%s\n" "${BODY}"
+}
+
+function getFile {
+	local ENDPOINT=${1}
+	case "${ENDPOINT}" in
+		*"transport-nodes"*)
+			REGEX='transport-nodes/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.tnode.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.tnode.json"
+			fi
+		;;
+		*"transport-zones"*)
+			STATE="state.tzone.json"
+		;;
+		*"fabric/compute-managers"*)
+			STATE="state.cmanager.json"
+		;;
+		*"edge-clusters"*)
+			STATE="state.edge-clusters.json"
+		;;
+		*"cluster-profiles"*)
+			STATE="state.cluster-profiles.json"
+		;;
+		*"trust-management/certificates"*)
+			STATE="state.certificates.json"
+		;;
+		*"fabric/nodes"*)
+			REGEX='fabric/nodes/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.node.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.node.json"
+			fi
+		;;
+		*"host-switch-profiles"*)
+			STATE="state.profile.json"
+		;;
+		*"pools/ip-pools")
+			STATE="state.pool.json"
+		;;
+		*"pools/ip-blocks")
+			STATE="state.block.json"
+		;;
+		*"logical-routers"*)
+			STATE="state.router.json"
+		;;
+		*"logical-ports"*)
+			REGEX='logical-ports/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.port.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.ports.json"
+			fi
+		;;
+		*"logical-router-ports"*)
+			REGEX='logical-router-ports/([^\/]+)/([^\/]+)$'
+			if [[ ${ENDPOINT} =~ $REGEX ]]; then
+				local ITEMID=${BASH_REMATCH[1]}
+				local ITEMCM=${BASH_REMATCH[2]}
+				STATE="state.router-port.${ITEMID}.${ITEMCM}.json"
+			else
+				STATE="state.router-ports.json"
+			fi
+		;;
+		*"logical-switches"*)
+			STATE="state.switch.json"
+		;;
+		*"spec/openapi/nsx_api.json"*)
+			STATE="nsx-api.json"
+		;;
+		*)
+			STATE="other.json"
+		;;
+	esac
+	printf "state/$STATE"
+}
+
+function buildURL {
+	local ENDPOINT=${1}
+	local BASE="https://$NSXHOST/api/v1/"
+	if [[ "$NSXONLINE" == "true" ]]; then
+		nsxSession
+		URL="$BASE$ENDPOINT"
+	else
+		URL=$(getFile "${ENDPOINT}")
+	fi
+	printf "$URL"
+}
+
+function getThumbprint {
+	local HOST="${1}"
+	PAYLOAD=$(echo -n | openssl s_client -connect "${HOST}" 2>/dev/null)
+	PRINT=$(echo "$PAYLOAD" | openssl x509 -noout -fingerprint -sha256)
+	REGEX='^(.*)=(([0-9A-Fa-f]{2}[:])+([0-9A-Fa-f]{2}))$'
+	if [[ $PRINT =~ $REGEX ]]; then
+		TYPE=${BASH_REMATCH[1]}
+		CODE=${BASH_REMATCH[2]}
+	fi
+	printf "%s\n" "${CODE}" |  sed "s/\(.*\)/\L\1/g" | sed "s/://g"
+}
+
+function getCertificate {
+	local HOST="${1}"
+	PAYLOAD=$(echo -n | openssl s_client -connect "${HOST}" 2>/dev/null)
+	RESULT=$(echo "${PAYLOAD}" |  sed -e '1h;2,$H;$!d;g' -e 's/.*\(-----BEGIN\sCERTIFICATE-----.*-----END\sCERTIFICATE-----\).*/\1/g')
+	printf "%s\n" "$RESULT" | sed ':a;N;$!ba;s/\n/\\\\n/g'
+}

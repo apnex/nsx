@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "command": null,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/bash"
+  },
+  "stdout": [
+    [
+      0.06989,
+      "\u001b]777;notify;Command completed;./switch.list.sh\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007"
+    ],
+    [
+      0.000168,
+      "[root@obpc setup]# "
+    ],
+    [
+      1.193113,
+      "."
+    ],
+    [
+      0.088066,
+      "/"
+    ],
+    [
+      1.488018,
+      "r"
+    ],
+    [
+      0.13541,
+      "o"
+    ],
+    [
+      0.085981,
+      "u"
+    ],
+    [
+      0.17207,
+      "t"
+    ],
+    [
+      0.277035,
+      "e"
+    ],
+    [
+      0.087246,
+      "r"
+    ],
+    [
+      0.286136,
+      "."
+    ],
+    [
+      0.293636,
+      "l"
+    ],
+    [
+      0.244965,
+      "i"
+    ],
+    [
+      0.227672,
+      "s"
+    ],
+    [
+      0.119842,
+      "t"
+    ],
+    [
+      0.277804,
+      "."
+    ],
+    [
+      0.306906,
+      "s"
+    ],
+    [
+      0.199073,
+      "h"
+    ],
+    [
+      0.67891,
+      "\r\n"
+    ],
+    [
+      0.03295,
+      "[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mlist\u001b[0m] logical-routers [\u001b[0;32mstate/state.router.json\u001b[0m]... "
+    ],
+    [
+      0.000354,
+      "[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+    ],
+    [
+      0.011784,
+      "id                                    display_name  router_type\r\n"
+    ],
+    [
+      5.1e-05,
+      "-----                                 -----         -----\r\nafad9098-b299-4dac-b547-5cd24c0d88ce  t0-core       TIER0\r\n"
+    ],
+    [
+      1.8e-05,
+      "0cbab57b-89dd-4354-a28a-7fd75b552364  t1-pks        TIER1\r\n"
+    ],
+    [
+      0.002971,
+      "\u001b]777;notify;Command completed;./router.list.sh\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007"
+    ],
+    [
+      2.4e-05,
+      "[root@obpc setup]# "
+    ]
+  ],
+  "duration": 6.281274,
+  "width": 211,
+  "title": null,
+  "height": 52
+}

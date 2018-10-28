@@ -1,0 +1,110 @@
+{
+  "command": null,
+  "version": 1,
+  "width": 211,
+  "stdout": [
+    [
+      0.066718,
+      "\u001b]777;notify;Command completed;./tnode.status.sh\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007"
+    ],
+    [
+      0.000113,
+      "[root@obpc setup]# "
+    ],
+    [
+      1.260129,
+      "."
+    ],
+    [
+      0.142848,
+      "/"
+    ],
+    [
+      1.216404,
+      "s"
+    ],
+    [
+      0.166178,
+      "w"
+    ],
+    [
+      0.159681,
+      "i"
+    ],
+    [
+      0.204561,
+      "t"
+    ],
+    [
+      0.181177,
+      "c"
+    ],
+    [
+      0.158689,
+      "h"
+    ],
+    [
+      0.406367,
+      "."
+    ],
+    [
+      0.197565,
+      "l"
+    ],
+    [
+      0.189342,
+      "i"
+    ],
+    [
+      0.179695,
+      "s"
+    ],
+    [
+      0.135685,
+      "t"
+    ],
+    [
+      0.294027,
+      "."
+    ],
+    [
+      0.235067,
+      "s"
+    ],
+    [
+      0.198967,
+      "h"
+    ],
+    [
+      0.958139,
+      "\r\n"
+    ],
+    [
+      0.042785,
+      "[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mlist\u001b[0m] logical-switches [\u001b[0;32mstate/state.switch.json\u001b[0m]... "
+    ],
+    [
+      0.000355,
+      "[\u001b[0;36mOFFLINE\u001b[0m] - SUCCESS\r\n"
+    ],
+    [
+      0.011985,
+      "id                                    display_name  vni    vlan   admin_state\r\n-----                                 -----         -----  -----  -----\r\nc664ae05-6a7e-4fe7-8d54-fa3d743722c6  ls-test       48009         UP\r\n98e5aa11-f0e9-44d8-81f0-2e1635c2fd80  ls-uplink            5      UP\r\n"
+    ],
+    [
+      0.002919,
+      "\u001b]777;notify;Command completed;./switch.list.sh\u0007\u001b]0;apnex@obpc:/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007\u001b]7;file://obpc/home/apnex/vmware/lab/nuc/api-nsx/nsx/setup\u0007"
+    ],
+    [
+      2.5e-05,
+      "[root@obpc setup]# "
+    ]
+  ],
+  "title": null,
+  "height": 52,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/bash"
+  },
+  "duration": 6.410215
+}
