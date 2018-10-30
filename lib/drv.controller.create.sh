@@ -3,8 +3,8 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.core
-source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/drv.vsp.client
+source ${WORKDIR}/drv.nsx.client
 
 function getVC {
 	read -r -d '' JQSPEC <<-CONFIG

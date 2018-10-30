@@ -4,8 +4,8 @@ RUN apk --no-cache add \
 	util-linux \
 	curl \
 	jq
-COPY lib /root/vsp
-RUN ln -s /root/vsp/drv.core /usr/bin/vsp
+COPY lib /root/nsx
+RUN ln -s /root/nsx/drv.core /usr/bin/nsx-cli
 RUN mkdir -p /cfg
 ENV SDDCDIR "/cfg"
-ENTRYPOINT ["vsp"]
+ENTRYPOINT ["nsx-cli"]

@@ -45,7 +45,8 @@ if [[ -n "$1" ]]; then
 			printf "[apnex/${CALLED}] stopping\n" 1>&2
 			docker rm -f ${CALLED} 2>/dev/null
 		;;
-		*) ## launch + persist (run + exec)
+		*) ## cleanup stopped - then launch + persist (run + exec)
+			docker rm -v $(docker ps -qa -f name=${CALLED} -f status=exited) 2>/dev/null
 			RUNNING=$(docker ps -q -f name="${CALLED}")
 			if [[ -z "$RUNNING" ]]; then
 				printf "[apnex/${CALLED}] not running - now starting\n" 1>&2
@@ -53,7 +54,7 @@ if [[ -n "$1" ]]; then
 			fi
 			RUNNING=$(docker ps -q -f name="${CALLED}")
 			if [[ -n "$RUNNING" ]]; then
-				docker exec -t ${CALLED} vsp ${1} ${2} ${3}
+				docker exec -t ${CALLED} ${CALLED} ${1} ${2} ${3}
 			fi
 		;;
 	esac

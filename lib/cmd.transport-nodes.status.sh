@@ -8,17 +8,18 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.edge-cluster.list.sh)
+INPUT=$(${WORKDIR}/drv.transport-nodes.status.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	.results | map({
+	. | map({
 		"id": .id,
-		"name": .display_name,
-		"deployment_type": .deployment_type,
-		"members": (
-			.members[] | .transport_node_id
-		)
+		"name": .name,
+		"node_id": .node_id,
+		"host_switch": .host_switch,
+		"state": .state,
+		"device_name": .device_name,
+		"ip_address": .ip_address
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

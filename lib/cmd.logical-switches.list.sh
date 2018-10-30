@@ -8,17 +8,16 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.edge-cluster.list.sh)
+INPUT=$(${WORKDIR}/drv.logical-switches.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
 	.results | map({
 		"id": .id,
 		"name": .display_name,
-		"deployment_type": .deployment_type,
-		"members": (
-			.members[] | .transport_node_id
-		)
+		"vni": .vni,
+		"vlan": .vlan,
+		"admin_state": .admin_state
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
