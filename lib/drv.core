@@ -184,7 +184,6 @@ function filter {
 function setContext {
 	local INPUT="${1}"
 	local ITEM="${2}"
-	printf "%s\n" "${TYPE}" 1>&2
 	local STATE="${STATEDIR}/ctx.${ITEM}.json"
 	local PAYLOAD=$(echo "$INPUT" | jq --tab '.[0]')
 	if [[ ! "${PAYLOAD}" == null ]]; then
