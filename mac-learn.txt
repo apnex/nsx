@@ -25,4 +25,7 @@ netdbg vswitch mac-table port get -p 27 --dvs-alias fabric
 netdbg vswitch mac-table port get -p 28 --dvs-alias fabric
 
 #### note!
-If you 
+Original MAC address of ESX-VM vnic will be statically pinned to that vnic in mac-table.
+This means that vmk0 (mgmt) will only be accessible through vnic1 once mac-learn enabled.
+You must ensure that vmnic0 of ESX node remains attached to the outer VDS Trunk PG or connectivity will break.
+Alternative is to move all ports to an NSX NVDS

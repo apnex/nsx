@@ -55,7 +55,7 @@ function makeBody {
 			DEVICENAME="fp-eth0"
 		;;
 		"HostNode")
-			DEVICENAME="vmnic0"
+			DEVICENAME="vmnic1"
 		;;
 	esac
 

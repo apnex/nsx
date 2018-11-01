@@ -2,7 +2,7 @@
 if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to drv.core?
 	WORKDIR=${BASH_REMATCH[1]}
 	if [[ ${BASH_REMATCH[2]} =~ ^[^.]+[.](.+)[.]sh$ ]]; then
-		ITEM=${BASH_REMATCH[1]}
+		TYPE=${BASH_REMATCH[1]}
 	fi
 fi
 source ${WORKDIR}/drv.core

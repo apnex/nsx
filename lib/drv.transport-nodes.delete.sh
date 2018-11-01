@@ -17,5 +17,5 @@ if [[ -n "${ID}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "tnode.delete") $(ccyan "<tnode-uuid>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.delete") $(ccyan "<transport-nodes.id>")\n" 1>&2
 fi
