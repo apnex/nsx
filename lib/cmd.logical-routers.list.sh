@@ -8,7 +8,7 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.router.list.sh)
+INPUT=$(${WORKDIR}/drv.logical-routers.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG

@@ -10,25 +10,22 @@ function checkNodeType {
 	local NODE=${1}
 	PAYLOAD=$(./drv.node.list.sh 2>/dev/null)
 	read -r -d '' JQSPEC <<-CONFIG
-		.results[]
-			| select(.id=="${NODE}")
+		.results[] | select(.id=="${NODE}")
 	CONFIG
+
 	# add a check to see that node exists!
 	EDGENODE=$(echo "$PAYLOAD" | jq -r "$JQSPEC")
 	NODETYPE=$(echo "$EDGENODE" | jq -r ".resource_type")
 	NODENAME=$(echo "$EDGENODE" | jq -r ".display_name")
 	if [[ "$NODETYPE" == "EdgeNode" ]]; then
-		#echo "$NODETYPE"
 		read -r -d '' JQSPEC <<-CONFIG
 			.deployment_config.vm_deployment_config.vc_id
 		CONFIG
 		NODEVC=$(echo "$EDGENODE" | jq -r "$JQSPEC")
-		#echo "$NODEVC"
 		read -r -d '' JQSPEC <<-CONFIG
-			.results[]
-				| select(.id=="${NODEVC}")
+			.results[] | select(.id=="${NODEVC}")
 		CONFIG
-		CMANAGER=$(./drv.cmanager.list.sh 2>/dev/null | jq -r "$JQSPEC | .id")
+		CMANAGER=$(./drv.compute-manager.list.sh 2>/dev/null | jq -r "$JQSPEC | .id")
 		if [[ -n "${CMANAGER}" ]]; then
 			printf "[$(cgreen "INFO")]: found [$(cgreen "compute-manager")] name [$(cgreen "${VSPHOST}")] id [$(cgreen "${CMANAGER}")]\n" 1>&2
 		else

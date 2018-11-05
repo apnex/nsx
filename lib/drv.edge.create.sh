@@ -52,7 +52,7 @@ function buildSpec {
 
 ENAME=$1
 EADDRESS=$2
-function makeBody {
+function makeBody { ### need to update spec to enable SSH!
 	read -r -d '' BODY <<-CONFIG
 	{
 		"resource_type": "EdgeNode",
