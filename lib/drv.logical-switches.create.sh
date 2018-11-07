@@ -11,8 +11,8 @@ SWVLAN=${3}
 function makeBody {
 	read -r -d '' BODY <<-CONFIG
 	{
-		"display_name": "$SWNAME",
-		"description": "$SWNAME",
+		"display_name": "${SWNAME}",
+		"description": "${SWNAME}",
 		"transport_zone_id": "${SWTZ}",
 		"replication_mode": "MTEP",
 		"admin_state": "UP",

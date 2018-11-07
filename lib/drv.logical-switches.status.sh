@@ -5,14 +5,11 @@ fi
 source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
-## input driver
-NODES=$(${WORKDIR}/drv.node.list.sh)
-
-# re-base to drv.node....?
+## status of node
 function getStatus {
 	local NODEID=${1}
-	ITEM="fabric/nodes"
-	CALL="/${NODEID}/status"
+	ITEM="logical-switches"
+	CALL="/${NODEID}/state"
 	URL=$(buildURL "${ITEM}${CALL}")
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "status")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
@@ -33,8 +30,9 @@ function buildNode {
 		{
 			"id": .id,
 			"name": .display_name,
-			"resource_type": .resource_type,
-			"ip_address": .ip_addresses[0]
+			"vni": .vni,
+			"vlan": .vlan,
+			"admin_state": .admin_state
 		}
 	CONFIG
 	NEWNODE=$(echo "${NODE}" | jq -r "${NODESPEC}")
@@ -43,8 +41,7 @@ function buildNode {
 	RESULT=$(getStatus "$KEY")
 	read -r -d '' STATUSSPEC <<-CONFIG
 		{
-			"status": .host_node_deployment_status,
-			"version": .software_version
+			"state": .state
 		}
 	CONFIG
 	NEWSTAT=$(echo "${RESULT}" | jq -r "${STATUSSPEC}")
@@ -54,6 +51,10 @@ function buildNode {
 	printf "%s\n" "${MYNODE}"
 }
 
+## input driver
+NODES=$(${WORKDIR}/drv.logical-switches.list.sh)
+
+## build result
 FINAL="[]"
 for KEY in $(echo ${NODES} | jq -r '.results[] | .id'); do
 	MYNODE=$(buildNode "${KEY}")

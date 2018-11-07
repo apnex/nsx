@@ -40,7 +40,7 @@ function makeBody {
 
 	# determine node type
 	## CHANGE TO CORE FILTER ##
-	NODERESULT=$(./drv.node.list.sh json 2>/dev/null)
+	NODERESULT=$(./drv.nodes.list.sh json 2>/dev/null)
 	read -r -d '' JQSPEC <<-CONFIG # collapse into single line
 		.results
 			| map(select(.id=="${TNNODEID}").resource_type)

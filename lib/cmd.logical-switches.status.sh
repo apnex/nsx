@@ -8,18 +8,17 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.port.list.sh)
+INPUT=$(${WORKDIR}/drv.logical-switches.status.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	.results | map({
+	. | map({
 		"id": .id,
 		"name": .display_name,
-		"resource_type": .resource_type,
-		"logical_switch_id": .logical_switch_id,
+		"vni": .vni,
+		"vlan": .vlan,
 		"admin_state": .admin_state,
-		"attachment_type": .attachment.attachment_type,
-		"attachment_id": .attachment.id
+		"state" : .state
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

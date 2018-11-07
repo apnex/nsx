@@ -8,7 +8,7 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.node.status.sh)
+INPUT=$(${WORKDIR}/drv.nodes.status.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG

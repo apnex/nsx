@@ -6,12 +6,13 @@ source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 NODE=${1}
+## add name as an input!
 function makeBody {
 	local NODE=${1}
 	read -r -d '' PAYLOAD <<-CONFIG
 	{
 		"resource_type": "HostNode",
-		"display_name": "esx02.lab",
+		"display_name": "esx01.lab",
 		"ip_addresses": [
 			"${NODE}"
 		],

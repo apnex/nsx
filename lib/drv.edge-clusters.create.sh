@@ -40,16 +40,16 @@ function makeBody {
 	printf "${BODY}"
 }
 
+ITEM="edge-clusters"
 if [[ -n "${CLSTNAME}" && "${TNID}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody)
-		ITEM="edge-clusters"
 		URL=$(buildURL "${ITEM}")
 		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} - [$(cgreen "${URL}")]... " 1>&2
+			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
 			nsxPost "${URL}" "${BODY}"
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "edge-cluster.create") $(ccyan "<name> <tnode-uuid>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "${ITEM}.create") $(ccyan "<name> <tnode-uuid>")\n" 1>&2
 fi

@@ -4,4 +4,4 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 fi
 
 CLID=${1}
-${WORKDIR}/drv.edge-cluster.delete.sh "$1"
+${WORKDIR}/drv.edge-clusters.delete.sh "$1"

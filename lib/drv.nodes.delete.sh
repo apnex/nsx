@@ -8,7 +8,7 @@ source ${WORKDIR}/drv.nsx.client
 
 function checkNodeType {
 	local NODE=${1}
-	PAYLOAD=$(./drv.node.list.sh 2>/dev/null)
+	PAYLOAD=$(./drv.nodes.list.sh 2>/dev/null)
 	read -r -d '' JQSPEC <<-CONFIG
 		.results[] | select(.id=="${NODE}")
 	CONFIG
