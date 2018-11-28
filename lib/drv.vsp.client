@@ -3,13 +3,16 @@ if [ -z ${WORKDIR} ]; then
 	if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 		WORKDIR=${BASH_REMATCH[1]}
 	fi
+	if [[ $0 == "bash" ]]; then
+		WORKDIR="."
+	fi
 fi
 if [ -z ${SDDCDIR} ]; then
 	SDDCDIR=${WORKDIR}
 fi
 STATEDIR="${WORKDIR}/state"
 if [ ! -d ${STATEDIR} ]; then
-	mkdir ${STATEDIR}
+        mkdir ${STATEDIR}
 fi
 source ${WORKDIR}/drv.core
 
@@ -145,7 +148,7 @@ function vspDelete {
 function vspLogin {
 	local URL="https://${VSPHOST}/rest/com/vmware/cis/session"
 	local RESPONSE=$(curl -k -w "%{http_code}" -X POST \
-		-u ${VSPUSER}:${VSPPASS} \
+		--user ${VSPUSER}:${VSPPASS} \
 	"${URL}" 2>/dev/null)
 	local RESULT=$(isSuccess "${RESPONSE}")
 	local CODE=$(getCode "${RESPONSE}")
