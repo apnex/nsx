@@ -14,7 +14,7 @@ INPUT=$(${WORKDIR}/drv.logical-switches.status.sh)
 read -r -d '' INPUTSPEC <<-CONFIG
 	. | map({
 		"id": .id,
-		"name": .display_name,
+		"name": .name,
 		"vni": .vni,
 		"vlan": .vlan,
 		"admin_state": .admin_state,

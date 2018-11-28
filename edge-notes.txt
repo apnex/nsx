@@ -1,0 +1,43 @@
+## working edge configuration
+
+interfaces
+    interface   : 5a48af3b-c706-5fba-adad-fc6d5583e123
+    ifuid       : 277
+    mode        : cpu
+
+    interface   : 95b0df5b-1462-4271-bdbf-814bf1e213d4
+    ifuid       : 281
+    name        : bp-sr0-port
+    mode        : lif
+    IP/Mask     : 169.254.0.2/28
+    MAC         : 02:50:56:56:53:00
+    LS port     : 00000000-0000-0000-0000-000000000000
+    urpf-mode   : NONE
+    admin       : down
+    op_state    : up
+    MTU         : 1500
+
+    interface   : 4fc34c92-c2c1-4584-92f7-dca50e470371
+    ifuid       : 282
+    mode        : loopback
+    IP/Mask     : 127.0.0.1/8
+
+    interface   : 66d75005-b8c6-533c-8480-4e91bbe4546a
+    ifuid       : 278
+    mode        : blackhole
+
+    interface   : 6d6d1ee1-ae8a-4ee0-a2c7-37bcdb42e6ee
+    ifuid       : 280
+    name        : rp-uplink
+    mode        : lif
+    IP/Mask     : 172.16.5.2/24
+    MAC         : 00:50:56:90:b3:9f
+    LS port     : e96e1385-5d49-4964-bc7b-802ebd75b3b3
+    urpf-mode   : STRICT_MODE
+    admin       : up
+    op_state    : up
+    MTU         : 1500
+
+OP State not up until overlay is added as a transport zone
+
+need to confirm if fp0 or fp1 is used

@@ -6,7 +6,7 @@
 			"type": "nsx",
 			"hostname": "nsxm01",
 			"username": "admin",
-			"password": "VMwsare1!",
+			"password": "VMware1!",
 			"online": "false"
 		},
 		{

@@ -15,7 +15,8 @@ read -r -d '' INPUTSPEC <<-CONFIG
 	.results | map({
 		"id": .id,
 		"name": .display_name,
-		"router_type": .router_type
+		"router_type": .router_type,
+		"ha_mode": .high_availability_mode
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

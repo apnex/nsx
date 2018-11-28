@@ -80,5 +80,5 @@ for KEY in $(echo "$PARAMS" | jq -c '.endpoints[]'); do
 	FINAL+=$(buildItem "$KEY")
 	COMMA=","
 done
-printf "[${FINAL}]" | jq --tab . >"${STATEDIR}/sddc.status.json"
-printf "[${FINAL}]" | jq --tab .
+printf "%s\n" "[${FINAL}]" | jq --tab . >"${STATEDIR}/sddc.status.json"
+printf "%s\n" "[${FINAL}]" | jq --tab .
