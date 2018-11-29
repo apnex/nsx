@@ -147,17 +147,8 @@ function vspDelete {
 
 function vspLogin {
 	local URL="https://${VSPHOST}/rest/com/vmware/cis/session"
-
-	### DEBUG ###
-	printf "%s\n" "VSPUSER: ${VSPUSER}" 1>&2
-	printf "%s\n" "VSPPASS: ${VSPPASS}" 1>&2
-	curl -k --trace-ascii /dev/stdout -w "%  {http_code}" -X POST \
-		--user "${VSPUSER}:${VSPPASS}" \
-	"${URL}" 1>&2
-	### DEBUG ###
-
 	local RESPONSE=$(curl -k -w "%{http_code}" -X POST \
-		--user "${VSPUSER}:${VSPPASS}" \
+		--user ${VSPUSER}:${VSPPASS} \
 	"${URL}" 2>/dev/null)
 	local RESULT=$(isSuccess "${RESPONSE}")
 	local CODE=$(getCode "${RESPONSE}")
