@@ -74,6 +74,16 @@ function getBody {
 
 function nsxLogin {
 	local URL="https://${NSXHOST}/api/session/create"
+
+	### DEBUG ###
+	#printf "%s\n" "NSXUSER: ${NSXUSER}" 1>&2
+	#printf "%s\n" "NSXPASS: ${NSXPASS}" 1>&2
+	#curl -k --trace-ascii /dev/stdout -c "${STATEDIR}/nsx.cookies.txt" -D "${STATEDIR}/nsx.headers.txt" -w "%{http_code}" -X POST \
+	#	--data-urlencode "j_username=${NSXUSER}" \
+	#	--data-urlencode "j_password=${NSXPASS}" \
+	#"${URL}" 1>&2
+	### DEBUG ###
+
 	local RESPONSE=$(curl -k -c "${STATEDIR}/nsx.cookies.txt" -D "${STATEDIR}/nsx.headers.txt" -w "%{http_code}" -X POST \
 		--data-urlencode "j_username=${NSXUSER}" \
 		--data-urlencode "j_password=${NSXPASS}" \
