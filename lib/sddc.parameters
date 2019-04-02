@@ -6,15 +6,15 @@
 			"type": "nsx",
 			"hostname": "nsxm01",
 			"username": "admin",
-			"password": "VMware$a%C1",
-			"online": "true"
+			"password": "VMware1!",
+			"online": "false"
 		},
 		{
 			"type": "vsp",
 			"hostname": "vcenter",
 			"username": "administrator@vsphere.local",
-			"password": "VMware$a%C1",
-			"online": "true"
+			"password": "VMware1!",
+			"online": "false"
 		}
 	]
 }

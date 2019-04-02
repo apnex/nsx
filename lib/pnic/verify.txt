@@ -1,0 +1,83 @@
+# log onto esx node
+
+# show pnics
+esxcfg-nics -l
+
+[root@esx01:~] esxcli network nic list
+Name    PCI Device    Driver    Admin Status  Link Status  Speed  Duplex  MAC Address         MTU  Description
+------  ------------  --------  ------------  -----------  -----  ------  -----------------  ----  -----------------------------------------------
+vmnic0  0000:0b:00.0  nvmxnet3  Up            Up           10000  Full    00:de:ad:be:ef:11  9000  VMware Inc. vmxnet3 Virtual Ethernet Controller
+vmnic1  0000:13:00.0  nvmxnet3  Up            Up           10000  Full    00:de:ad:be:ef:12  1500  VMware Inc. vmxnet3 Virtual Ethernet Controller
+
+# show switch attachment
+[root@esx01:~] esxcfg-vswitch -l
+Switch Name      Num Ports   Used Ports  Configured Ports  MTU     Uplinks   
+vSwitch0         2560        1           128               1500              
+
+  PortGroup Name        VLAN ID  Used Ports  Uplinks   
+  VM Network            0        0                     
+  external              0        0                     
+
+Switch Name      Num Ports   Used Ports  Uplinks   
+hs-fabric        2560        8           vmnic0
+
+# show vmk interfaces
+[root@esx01:~] esxcli network ip interface list
+vmk0
+   Name: vmk0
+   MAC Address: 00:de:ad:be:ef:11
+   Enabled: true
+   Portset: DvsPortset-0
+   Portgroup: N/A
+   Netstack Instance: defaultTcpipStack
+   VDS Name: N/A
+   VDS UUID: N/A
+   VDS Port: N/A
+   VDS Connection: -1
+   Opaque Network ID: 9d6a01cf-1c74-422b-8ee4-0f422ea50297
+   Opaque Network Type: nsx.LogicalSwitch
+   External ID: 3727d8fb-3847-4958-b1e4-719d3f3bd5c3
+   MTU: 1500
+   TSO MSS: 65535
+   RXDispQueue Size: 1
+   Port ID: 50331652
+
+# show mac table
+
+# create new vmk interface
+esxcfg-vmknic -a -I <management IP> -n <netmask> -p ESXi_MGMT
+esxcfg-vmknic -a -i 172.16.10.111 -n 255.255.255.0 -M 00:12:34:ff:ab:de -p external
+
+# tag the interface for "management" access
+esxcli network ip interface tag add -i vmkN --tagname=Management
+
+# remove
+esxcli network ip interface remove --interface-name=vmk0
+
+# add
+esxcli network ip interface add --interface-name=vmk2 -p external
+
+# change IP address on VMK
+esxcli network ip interface ipv4 set --interface-name=vmk0 --ipv4=172.16.10.111 --netmask=255.255.255.0 --type=static
+
+# create default route
+esxcli network ip route ipv4 add -n default -g 172.16.10.1
+
+# mark for management
+esxcli network ip interface tag add -i vmk0 -t Management
+
+# check for management
+esxcli network ip interface tag get -i vmk0
+
+# check route
+[root@esx01:~] esxcli network ip route ipv4 list
+Network      Netmask        Gateway      Interface  Source
+-----------  -------------  -----------  ---------  ------
+default      0.0.0.0        172.16.10.1  vmk0       MANUAL
+172.16.10.0  255.255.255.0  0.0.0.0      vmk0       MANUAL
+
+## vcenter VUM denied error! fix
+## fix VUM access denied!
+service-control --stop vmware-updatemgr
+rm -rf /storage/updatemgr/patch-store/*
+service-control --start vmware-updatem

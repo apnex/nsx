@@ -1,0 +1,48 @@
+## fix discovered transport nodes
+## add "create transport-node" from discovered
+## add vmk migration scripts -> NVDS
+
+# vmk migration
+https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/installation/GUID-3770AA1C-DA79-4E95-960A-96DAC376242F.html
+
+# api workflow
+# get transport-nodes
+GET /api/v1/transport-nodes/<transportnode-id>
+
+# migrate vmk1
+PUT https://<NSXmgr>/api/v1/transport-nodes/<transportnode-id> ?if_id=<vmk>&esx_mgmt_if_migration_dest=<network>
+
+# check state
+GET /api/v1/transport-nodes/<transportnode-id>/state
+
+# example
+https://nsxt-mgr.primp-industries.com/api/v1/transport-nodes/dd923989-f17d-4b97-b115-87b37b788305?if_id=vmk0&esx_mgmt_if_migration_dest=3f17da92-63d4-4854-9e2b-49c345a62481
+
+# workflow
+requires 2 nics on esx host
+
+# before
+ESX host with:
+- vmnic0 -> VSS
+- vmnic1 -> VSS
+- vmk0 -> VM Network
+
+# after # phase 1 (like-for-like)
+ESX host with
+- VLAN TZ only
+- Uplink Profile
+- vmnic0 -> NVDS
+- vmnic1 -> NVDS
+- vmk0 -> ls-mgmt
+
+# after #2 phase 2 (added overlay)
+ESX host with
+- Add OVERLAY TZ only
+- Check TEP-POOL
+
+# create TZ + VDS
+# create ls-mgmt
+# install NSX on transport-node
+# migrate 1 nic to VDS
+# migrate vmk to VDS + ls-mgmt
+
