@@ -6,7 +6,7 @@ NIC="${2}"
 SWITCH="${3}"
 
 if [[ -n "${ID}" && "${NIC}" && "${SWITCH}" ]]; then
-	sshpass -p 'VMware1!' ssh -T -o StrictHostKeyChecking=no root@"${ID}" <<-EOF
+	sshpass -p 'VMware1!' ssh -T -o LogLevel=QUIET -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@"${ID}" <<-EOF
 		esxcli network vswitch standard uplink remove -u "${NIC}" -v "${SWITCH}"
 		esxcli network vswitch standard list
 	EOF

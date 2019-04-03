@@ -1,5 +1,5 @@
 {
-	"node_id": "256f16a1-1894-406e-bee2-31964363b358",
+	"node_id": "a20e53c6-b66d-4978-9600-ad444f4d474b",
 	"host_switches": [
 		{
 			"host_switch_name": "hs-fabric",
@@ -93,11 +93,11 @@
 		"os_type": "ESXI",
 		"os_version": "6.7.0",
 		"managed_by_server": "172.16.0.13",
-		"discovered_node_id": "ef350a25-0c77-4277-ab1b-791de2fc6967:host-3212",
+		"discovered_node_id": "ef350a25-0c77-4277-ab1b-791de2fc6967:host-3224",
 		"resource_type": "HostNode",
-		"id": "256f16a1-1894-406e-bee2-31964363b358",
+		"id": "a20e53c6-b66d-4978-9600-ad444f4d474b",
 		"display_name": "tn-esx02.lab",
-		"external_id": "256f16a1-1894-406e-bee2-31964363b358",
+		"external_id": "a20e53c6-b66d-4978-9600-ad444f4d474b",
 		"fqdn": "esx02.lab",
 		"ip_addresses": [
 			"172.16.10.102"
@@ -108,22 +108,22 @@
 			"169.254.1.1"
 		],
 		"_create_user": "admin",
-		"_create_time": 1554181088506,
+		"_create_time": 1554263086549,
 		"_last_modified_user": "admin",
-		"_last_modified_time": 1554182415715,
+		"_last_modified_time": 1554263515127,
 		"_protection": "NOT_PROTECTED",
-		"_revision": 3
+		"_revision": 2
 	},
 	"is_overridden": false,
 	"resource_type": "TransportNode",
-	"id": "256f16a1-1894-406e-bee2-31964363b358",
+	"id": "a20e53c6-b66d-4978-9600-ad444f4d474b",
 	"display_name": "tn-esx02.lab",
 	"description": "NSX configured Test Transport Node",
 	"_create_user": "admin",
-	"_create_time": 1554181088644,
+	"_create_time": 1554263086681,
 	"_last_modified_user": "admin",
-	"_last_modified_time": 1554182415720,
+	"_last_modified_time": 1554263515134,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
-	"_revision": 3
+	"_revision": 2
 }

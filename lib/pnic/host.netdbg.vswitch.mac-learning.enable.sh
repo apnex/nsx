@@ -11,7 +11,10 @@ function sshCmd {
 
 if [[ -n "${ID}" ]]; then
 	read -r -d '' COMMANDS <<-EOF
-		esxcli --formatter=keyvalue network vswitch standard list
+		netdbg vswitch mac-learning port set --dvs-alias fabric --dvport 25 --enable
+		netdbg vswitch mac-learning port set --dvs-alias fabric --dvport 26 --enable
+		netdbg vswitch mac-learning port set --dvs-alias fabric --dvport 27 --enable
+		netdbg vswitch mac-learning port set --dvs-alias fabric --dvport 28 --enable
 	EOF
 	sshCmd "${COMMANDS}"
 else

@@ -10,7 +10,7 @@ if [[ -n "${ID}" && "${VSWITCH}" && "${PGROUP}" ]]; then
 	if [[ -z "${VLAN}" ]]; then
 		VLAN="0"
 	fi
-	sshpass -p 'VMware1!' ssh -T -o StrictHostKeyChecking=no root@"${ID}" <<-EOF
+	sshpass -p 'VMware1!' ssh -T -o LogLevel=QUIET -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@"${ID}" <<-EOF
 		esxcli network vswitch standard portgroup add --vswitch-name "${VSWITCH}" --portgroup-name "${PGROUP}"
 		esxcli network vswitch standard portgroup set --vlan-id "${VLAN}" --portgroup-name "${PGROUP}"
 		esxcli network vswitch standard portgroup list

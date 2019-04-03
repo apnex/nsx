@@ -11,9 +11,9 @@ function sshCmd {
 
 if [[ -n "${ID}" ]]; then
 	read -r -d '' COMMANDS <<-EOF
-		esxcfg-vmknic -l
+		esxcli --formatter=keyvalue network vswitch dvs vmware list
 	EOF
 	sshCmd "${COMMANDS}"
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "node.interface.list") $(ccyan "<ip-address>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "host.netdbg.instance.list") $(ccyan "<ip-address>")\n" 1>&2
 fi
