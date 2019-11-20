@@ -8,18 +8,14 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.transport-nodes.new.sh)
+INPUT=$(${WORKDIR}/drv.pool.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	. | map({
+	.results | map({
 		"id": .id,
-		"name": .name,
-		"resource_type": .resource_type,
-		"ip_address": .ip_address,
-		"host_switch": .host_switch,
-		"status": .status,
-		"software_version": .software_version
+		"name": .display_name,
+		"cidr": .subnets[0].cidr
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

@@ -8,18 +8,16 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.transport-nodes.new.sh)
+INPUT=$(${WORKDIR}/drv.host-switch-profiles.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	. | map({
+	.results | map({
 		"id": .id,
-		"name": .name,
+		"name": .display_name,
 		"resource_type": .resource_type,
-		"ip_address": .ip_address,
-		"host_switch": .host_switch,
-		"status": .status,
-		"software_version": .software_version
+		"transport_vlan": .transport_vlan,
+		"mtu": .mtu
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

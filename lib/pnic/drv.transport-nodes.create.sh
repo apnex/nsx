@@ -32,7 +32,7 @@ function makeBody {
 
 	# get uplink profile
 	PFRESULT=$(./drv.host-switch-profiles.list.sh json 2>/dev/null)
-	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-uplink").id) | .[0]')
+	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-host").id) | .[0]')
 
 	# get tep pool
 	PLRESULT=$(./drv.pool.list.sh 2>/dev/null)
@@ -55,7 +55,7 @@ function makeBody {
 			DEVICENAME="fp-eth0"
 		;;
 		"HostNode")
-			DEVICENAME="vmnic0"
+			DEVICENAME="vmnic1"
 		;;
 	esac
 
@@ -79,7 +79,7 @@ function makeBody {
 					"pnics": [
 						{
 							"device_name": "${DEVICENAME}",
-							"uplink_name": "uplink1"
+							"uplink_name": "uplink2"
 						}
 					],
 					"ip_assignment_spec": {

@@ -21,8 +21,9 @@ function buildNode {
 		{
 			"id": .id,
 			"name": .display_name,
-			"node_id": .node_id,
-			"host_switch": .host_switch_spec.host_switches[0].host_switch_name
+			"resource_type": .node_deployment_info.resource_type,
+			"host_switch": .host_switch_spec.host_switches[0].host_switch_name,
+			"ip_address": .node_deployment_info.ip_addresses[0]
 		}
 	CONFIG
 	NEWNODE=$(echo "${NODE}" | jq -r "${NODESPEC}")

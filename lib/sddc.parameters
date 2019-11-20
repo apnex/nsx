@@ -6,8 +6,8 @@
 			"type": "nsx",
 			"hostname": "nsxm01",
 			"username": "admin",
-			"password": "VMware1!",
-			"online": "false"
+			"password": "VMware1!VMware1!",
+			"online": "true"
 		},
 		{
 			"type": "vsp",

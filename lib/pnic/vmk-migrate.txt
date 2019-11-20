@@ -1,5 +1,4 @@
 ## fix discovered transport nodes
-## add "create transport-node" from discovered
 ## add vmk migration scripts -> NVDS
 
 # vmk migration
@@ -42,6 +41,9 @@ ESX host with
 
 # create TZ + VDS
 # create ls-mgmt
+
+# remove uplink from vSwitch0
+c
 # install NSX on transport-node
 # migrate 1 nic to VDS
 # migrate vmk to VDS + ls-mgmt

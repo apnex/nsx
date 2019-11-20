@@ -10,7 +10,7 @@ LSID=$2
 
 # get latest revision
 function makeBody {
-	local BODY=$(./drv.transport-nodes.get.sh "$1")
+	local BODY=$(./drv.transport-nodes.list.sh "$1")
 	printf "${BODY}"
 }
 

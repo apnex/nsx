@@ -132,6 +132,7 @@ function nsxPost {
 	local BODY=${2}
 	if [[ "$NSXONLINE" == "true" ]]; then
 		RESPONSE=$(curl -k -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -X POST \
+			-H "X-Allow-Overwrite: true" \
 			-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
 			-H "Content-Type: application/json" \
 			-d "$BODY" \
@@ -148,6 +149,7 @@ function nsxPut {
 	local BODY=${2}
 	if [[ "$NSXONLINE" == "true" ]]; then
 		RESPONSE=$(curl -k -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -X PUT \
+			-H "X-Allow-Overwrite: true" \
 			-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
 			-H "Content-Type: application/json" \
 			-d "$BODY" \
@@ -164,10 +166,21 @@ function nsxDelete {
 	local BODY=${2}
 	if [[ "$NSXONLINE" == "true" ]]; then
 		STATE=$(getFile "${URL}")
+
+		### DEBUG ###
+		#curl -k --trace-ascii /dev/stdout -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -G -X DELETE \
+		#	-H "X-Allow-Overwrite: true" \
+		#	-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
+		#	-H "Content-Type: application/x-form-urlencoded" \
+		#	--data "${BODY}" \
+		#"${URL}" 1>&2
+		### DEBUG ###
+
 		RESPONSE=$(curl -k -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -G -X DELETE \
+			-H "X-Allow-Overwrite: true" \
 			-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
 			-H "Content-Type: application/x-form-urlencoded" \
-			--data-urlencode "$BODY" \
+			--data "$BODY" \
 		"$URL" 2>/dev/null)
 		RESULT=$(isSuccess "${RESPONSE}")
 	else

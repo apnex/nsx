@@ -13,6 +13,7 @@ if [[ -n "${ID}" ]]; then
 			-n nsx-esx-datapath \
 			-n nsx-exporter \
 			-n nsx-host \
+			-n nsx-hyperbus \
 			-n nsx-metrics-libs \
 			-n nsx-mpa \
 			-n nsx-nestdb-libs \

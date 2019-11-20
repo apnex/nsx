@@ -16,14 +16,14 @@ function makeBody {
 
 	# get uplink profile
 	PFRESULT=$(./drv.host-switch-profiles.list.sh json 2>/dev/null)
-	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-uplink").id) | .[0]')
+	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-host").id) | .[0]')
 
 	# get tep pool
 	PLRESULT=$(./drv.pool.list.sh 2>/dev/null)
 	PLTEP=$(echo "${PLRESULT}" | jq -r '.results | map(select(.display_name=="pool-tep").id) | .[0]')
 
 	## adjust to support multiple uplinks
-	DEVICENAME="vmnic1"
+	DEVICENAME="vmnic0"
 	read -r -d '' BODY <<-CONFIG
 	{
 		"display_name": "${TNNAME}",

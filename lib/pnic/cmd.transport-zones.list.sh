@@ -8,29 +8,27 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.host.switch.list.sh "${1}")
+INPUT=$(${WORKDIR}/drv.transport-zones.list.sh)
 
 ## build record structure
+#.id, .display_name, .host_switch_name, .transport_type
 read -r -d '' INPUTSPEC <<-CONFIG
-	. | map({
-		"name": .name,
-		"used_ports": .used_ports,
-		"configured_ports": .configured_ports,
-		"mtu": .mtu,
-		"cdp_status": .cdp_status,
-		"uplinks": .uplinks,
-		"portgroups": .portgroups
+	.results | map({
+		"id": .id,
+		"name": .display_name,
+		"host_switch_name": .host_switch_name,
+		"transport_type": .transport_type
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
 
 # build filter
-#FILTER=${1}
-#FORMAT=${2}
-#PAYLOAD=$(filter "${PAYLOAD}" "${FILTER}")
+FILTER=${1}
+FORMAT=${2}
+PAYLOAD=$(filter "${PAYLOAD}" "${FILTER}")
 
 ## cache context data record
-#setContext "$PAYLOAD" "$TYPE"
+setContext "$PAYLOAD" "$TYPE"
 
 ## output
 case "${FORMAT}" in
