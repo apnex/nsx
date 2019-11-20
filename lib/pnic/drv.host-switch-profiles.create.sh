@@ -20,6 +20,10 @@ function makeBody {
 				{
 					"uplink_name": "uplink1",
 					"uplink_type": "PNIC"
+				},
+				{
+					"uplink_name": "uplink2",
+					"uplink_type": "PNIC"
 				}
 			],
 			"policy": "FAILOVER_ORDER"

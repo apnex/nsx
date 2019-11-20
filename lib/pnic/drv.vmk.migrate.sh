@@ -17,8 +17,8 @@ function makeBody {
 if [[ -n "${TNID}" && "${LSID}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody "${TNID}")
-		NODEID=$(printf "${BODY}" | jq -r '.node_id')
-		ITEM="transport-nodes/${NODEID}"
+		#NODEID=$(printf "${BODY}" | jq -r '.node_id')
+		ITEM="transport-nodes/${TNID}"
 		URL=$(buildURL "${ITEM}")
 		URL+="?if_id=vmk0&esx_mgmt_if_migration_dest=${LSID}&ping_ip=172.16.10.1"
 		if [[ -n "${URL}" ]]; then
@@ -27,5 +27,5 @@ if [[ -n "${TNID}" && "${LSID}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.update") $(ccyan "<transport-node.id> <logical-switch.id>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "vmk.migrate") $(ccyan "<transport-node.id> <logical-switch.id>")\n" 1>&2
 fi

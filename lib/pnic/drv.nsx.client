@@ -148,11 +148,21 @@ function nsxPut {
 	local URL=${1}
 	local BODY=${2}
 	if [[ "$NSXONLINE" == "true" ]]; then
+
+		### DEBUG ###
+		#curl -k --trace-ascii /dev/stdout -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -X PUT \
+		#	-H "X-Allow-Overwrite: true" \
+		#	-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
+		#	-H "Content-Type: application/json" \
+		#	--data "${BODY}" \
+		#"${URL}" 1>&2
+		### DEBUG ###
+
 		RESPONSE=$(curl -k -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -X PUT \
 			-H "X-Allow-Overwrite: true" \
 			-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
 			-H "Content-Type: application/json" \
-			-d "$BODY" \
+			--data "${BODY}" \
 		"$URL" 2>/dev/null)
 		RESULT=$(isSuccess "${RESPONSE}")
 	else
