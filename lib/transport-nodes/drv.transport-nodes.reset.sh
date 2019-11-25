@@ -34,6 +34,6 @@ if [[ -n "${1}" ]]; then
 		./drv.transport-nodes.update.sh tn.spec
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.reset") $(ccyan "<node-uuid>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.reset") $(ccyan "<transport-node.id>")\n" 1>&2
 fi
 

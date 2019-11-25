@@ -33,5 +33,5 @@ if [[ -n "${SWNAME}" && "${SWTZ}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "logical-switches.create") $(ccyan "<name> <tz-uuid> [ <vlan> ]")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "logical-switches.create") $(ccyan "<name> <transport-zone.id> [ <vlan> ]")\n" 1>&2
 fi

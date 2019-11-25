@@ -33,6 +33,7 @@ function buildNode {
 	read -r -d '' STATUSSPEC <<-CONFIG
 		{
 			"status": .node_status.host_node_deployment_status,
+			"state": .status,
 			"software_version": .node_status.software_version
 		}
 	CONFIG

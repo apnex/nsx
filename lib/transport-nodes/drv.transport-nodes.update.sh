@@ -5,27 +5,24 @@ fi
 source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
-TNID=$1
-LSID=$2
-
+TNSPEC=$1
 # get latest revision
 function makeBody {
-	local BODY=$(./drv.transport-nodes.list.sh "$1")
+	BODY=$(cat "${TNSPEC}")
 	printf "${BODY}"
 }
 
-if [[ -n "${TNID}" && "${LSID}" ]]; then
+if [[ -n "${TNSPEC}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody "${TNID}")
-		#NODEID=$(printf "${BODY}" | jq -r '.node_id')
-		ITEM="transport-nodes/${TNID}"
+		BODY=$(makeBody)
+		NODEID=$(printf "${BODY}" | jq -r '.node_id')
+		ITEM="transport-nodes/${NODEID}"
 		URL=$(buildURL "${ITEM}")
-		URL+="?if_id=vmk0&esx_mgmt_if_migration_dest=${LSID}&ping_ip=172.16.10.1"
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "update")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 			nsxPut "${URL}" "${BODY}"
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "vmk.migrate") $(ccyan "<transport-node.id> <logical-switch.id>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.update") $(ccyan "<tn.spec>")\n" 1>&2
 fi

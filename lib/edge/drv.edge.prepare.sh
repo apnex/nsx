@@ -11,19 +11,20 @@ TNID=$2
 function makeBody {
 	# get vlan and overlay tzs
 	TZRESULT=$(./drv.transport-zones.list.sh 2>/dev/null)
-	TZVLAN=$(echo "${TZRESULT}" | jq -r '.results | map(select(.transport_type=="VLAN").id) | .[0]')
-	TZOVERLAY=$(echo "${TZRESULT}" | jq -r '.results | map(select(.transport_type=="OVERLAY").id) | .[0]')
+	TZVLAN=$(echo "${TZRESULT}" | jq -r '.results | map(select(.display_name=="tz-vlan").id) | .[0]')
+	TZOVERLAY=$(echo "${TZRESULT}" | jq -r '.results | map(select(.display_name=="tz-overlay").id) | .[0]')
 
 	# get uplink profile
 	PFRESULT=$(./drv.host-switch-profiles.list.sh json 2>/dev/null)
-	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-host").id) | .[0]')
+	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-edge").id) | .[0]')
 
 	# get tep pool
 	PLRESULT=$(./drv.pool.list.sh 2>/dev/null)
 	PLTEP=$(echo "${PLRESULT}" | jq -r '.results | map(select(.display_name=="pool-tep").id) | .[0]')
 
 	## adjust to support multiple uplinks
-	DEVICENAME="vmnic0"
+	#DEVICENAME="vmnic0"
+	DEVICENAME="fp-eth0"
 	read -r -d '' BODY <<-CONFIG
 	{
 		"display_name": "${TNNAME}",
@@ -65,6 +66,7 @@ function makeBody {
 	local BASEBODY=$(./drv.transport-nodes.get.sh "${TNID}" 2>/dev/null)
 	local MYNODE="$(echo "${BASEBODY}${BODY}" | jq -s '. | add')"
 	printf "${MYNODE}"
+	printf "${MYNODE}" >ttt
 }
 
 if [[ -n "${TNNAME}" && "${TNID}" ]]; then

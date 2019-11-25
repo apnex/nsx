@@ -8,18 +8,14 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.transport-nodes.list.sh)
+INPUT=$(${WORKDIR}/drv.cluster-profile.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
 	.results | map({
 		"id": .id,
 		"name": .display_name,
-		"resource_type": .node_deployment_info.resource_type,
-		"ip_address": .node_deployment_info.ip_addresses[0],
-		"os_type": .node_deployment_info.os_type,
-		"os_version": .node_deployment_info.os_version,
-		"host_switch": .host_switch_spec.host_switches[0].host_switch_name
+		"resource_type": .resource_type
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
