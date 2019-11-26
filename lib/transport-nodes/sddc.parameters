@@ -4,7 +4,7 @@
 	"endpoints": [
 		{
 			"type": "nsx",
-			"hostname": "nsxm01",
+			"hostname": "nsxm01.lab:9192",
 			"username": "admin",
 			"password": "VMware1!VMware1!",
 			"online": "true"
