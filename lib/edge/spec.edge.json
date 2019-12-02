@@ -1,7 +1,7 @@
 {
 	"node_deployment_info": {
 		"node_settings": {
-			"hostname": "nsx-edge01",
+			"hostname": "nsx-edge02",
 			"dns_servers": [
 				"172.16.0.1"
 			],
@@ -15,6 +15,7 @@
 			"vm_deployment_config": {
 				"vc_id": "<compute-manager.id>",
 				"compute_id": "domain-c666",
+				"host_id": "host-671",
 				"storage_id": "datastore-672",
 				"management_network_id": "dvportgroup-684",
 				"management_port_subnets": [
@@ -45,5 +46,5 @@
 		"resource_type": "EdgeNode"
 	},
 	"resource_type": "TransportNode",
-	"display_name": "nsx-edge01"
+	"display_name": "nsx-edge02"
 }

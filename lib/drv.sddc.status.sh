@@ -24,15 +24,23 @@ function buildItem {
 		local TYPE=$(echo "${SPEC}" | jq -r '.type')
 		local CHECKFWD=""
 		local CHECKREV=""
+		local NODE=""
+		local PORT=""
+		local SOCKET=""
 		if [[ "$HOST" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-			CHECKFWD="$HOST"
+			CHECKFWD="$HOST" # is IP
 		else
-			if [[ ! "$HOST" =~ [.] ]]; then
-				HOST+=".$DOMAIN"
+			if [[ "$HOST" =~ ^(.+):([0-9]+)$ ]]; then ## move SOCKET to CORE
+				NODE="${BASH_REMATCH[1]}"
+				PORT="${BASH_REMATCH[2]}"
+			else
+				NODE="${HOST}"
+				PORT="443"
 			fi
-			if [[ "$(host -t A -W 1 "$HOST" "$DNS" 2>/dev/null)" =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$ ]]; then
+			SOCKET="${NODE}:${PORT}"
+			if [[ "$(host -t A -W 1 "${NODE}" "${DNS}" 2>/dev/null)" =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$ ]]; then
 				CHECKFWD="${BASH_REMATCH[1]}"
-			fi
+			fi ## set default DNS server
 		fi
 
 		if [[ -n "$CHECKFWD" ]]; then
@@ -41,15 +49,15 @@ function buildItem {
 			fi
 		fi
 		printf "[$(cgreen "INFO")]: ${TYPE} [$(cgreen "status")] health [$(cgreen "${HOST}")]... [$(ccyan "SERVICES")] - SUCCESS\n" 1>&2
-		local PING=$(ping -W 1 -c 1 "$HOST" &>/dev/null && echo 1 || echo 0)
-		local PRINT=$(getThumbprint "$HOST":443 thumbprint 2>/dev/null)
+		local PING=$(ping -W 1 -c 1 "${NODE}" &>/dev/null && echo 1 || echo 0)
+		local PRINT=$(getThumbprint "${SOCKET}" thumbprint 2>/dev/null)
 		if [[ -n "${PRINT}" ]]; then
-			local CERT=$(getCertificate "$HOST":443 2>/dev/null)
+			local CERT=$(getCertificate "${SOCKET}" 2>/dev/null)
 		fi
 		read -r -d '' JQSPEC <<-CONFIG
 			{
 				"type": .type,
-				"hostname": "$HOST",
+				"hostname": "$SOCKET",
 				"username": .username,
 				"password": .password,
 				"online": .online,

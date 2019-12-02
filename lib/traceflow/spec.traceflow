@@ -1,0 +1,15 @@
+{
+	"packet": {
+		"resource_type": "FieldsPacketData",
+		"routed": 1,
+		"eth_header": {
+			"src_mac": "00:50:56:8d:f1:71",
+			"dst_mac": "00:50:56:8d:18:7d"
+		},
+		"ip_header": {
+			"src_ip": "172.20.10.11",
+			"dst_ip": "172.20.20.10"
+		}
+	},
+	"lport_id": "<logical-port.id>"
+}

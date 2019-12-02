@@ -4,17 +4,17 @@
 	"endpoints": [
 		{
 			"type": "nsx",
-			"hostname": "nsxm01",
+			"hostname": "nsxm01.lab:9192",
 			"username": "admin",
 			"password": "VMware1!VMware1!",
 			"online": "true"
 		},
 		{
 			"type": "vsp",
-			"hostname": "vcenter",
+			"hostname": "vcenter.lab",
 			"username": "administrator@vsphere.local",
 			"password": "VMware1!",
-			"online": "false"
+			"online": "true"
 		}
 	]
 }

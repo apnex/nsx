@@ -8,19 +8,20 @@ fi
 source ${WORKDIR}/mod.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.transport-nodes.new.sh)
+INPUT=$(${WORKDIR}/drv.virtual-machines.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	. | map({
-		"id": .id,
-		"name": .name,
+	.results | map({
+		"id": .external_id,
+		"name": .display_name,
+		"computer_name": .guest_info.computer_name,
 		"resource_type": .resource_type,
-		"ip_address": .ip_address,
-		"host_switch": .host_switch,
-		"status": .status,
-		"state": .state,
-		"software_version": .software_version
+		"os_name": .guest_info.os_name,
+		"tags": [.tags[] | [.tag, .scope] | join(":")] | join(","),
+		"power_state": .power_state,
+		"source_name": .source.target_display_name,
+		"source_type": .source.target_type
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
@@ -42,6 +43,10 @@ case "${FORMAT}" in
 	raw)
 		## build input json
 		echo "${INPUT}" | jq --tab .
+	;;
+	nc)
+		## build payload table
+		buildNoColour "${PAYLOAD}"
 	;;
 	*)
 		## build payload table

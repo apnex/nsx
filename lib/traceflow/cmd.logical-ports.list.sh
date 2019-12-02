@@ -8,19 +8,17 @@ fi
 source ${WORKDIR}/mod.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.transport-nodes.new.sh)
+INPUT=$(${WORKDIR}/drv.logical-ports.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	. | map({
+	.results | map({
 		"id": .id,
-		"name": .name,
+		"name": .display_name,
 		"resource_type": .resource_type,
-		"ip_address": .ip_address,
-		"host_switch": .host_switch,
-		"status": .status,
-		"state": .state,
-		"software_version": .software_version
+		"logical_switch_id": .logical_switch_id,
+		"admin_state": .admin_state,
+		"attachment_type": .attachment.attachment_type
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

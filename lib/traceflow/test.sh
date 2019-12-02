@@ -8,19 +8,14 @@ fi
 source ${WORKDIR}/mod.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.transport-nodes.new.sh)
+INPUT=$(cat moo)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	. | map({
+	.results | map({
 		"id": .id,
-		"name": .name,
-		"resource_type": .resource_type,
-		"ip_address": .ip_address,
-		"host_switch": .host_switch,
-		"status": .status,
-		"state": .state,
-		"software_version": .software_version
+		"operation_state": .operation_state,
+		"request_status": .request_status
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

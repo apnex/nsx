@@ -8,20 +8,22 @@ fi
 source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.logical-ports.list.sh)
+#INPUT=$(cat moo)
+INPUT=$(${WORKDIR}/drv.vifs.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
 	.results | map({
-		"id": .id,
-		"name": .display_name,
+		"id": .lport_attachment_id,
+		"name": .device_name,
 		"resource_type": .resource_type,
-		"logical_switch_id": .logical_switch_id,
-		"admin_state": .admin_state,
-		"attachment_type": .attachment.attachment_type,
-		"attachment_id": .attachment.id
+		"device_key": .device_key,
+		"ip_addresses": [.ip_address_info[].ip_addresses[]] | join(","),
+		"mac_address": .mac_address,
+		"owner_vm_id": .owner_vm_id
 	})
 CONFIG
+#		"ip_addresses": [.ip_address_info[].ip_addresses[] | [.tag, .scope] | join(",")] | join(","),
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
 
 # build filter

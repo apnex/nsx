@@ -5,22 +5,20 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to drv.core?
 		TYPE=${BASH_REMATCH[1]}
 	fi
 fi
-source ${WORKDIR}/mod.core
+source ${WORKDIR}/drv.core
 
 ## input driver
-INPUT=$(${WORKDIR}/drv.transport-nodes.new.sh)
+INPUT=$(${WORKDIR}/drv.virtual-machines.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	. | map({
-		"id": .id,
-		"name": .name,
+	.results | map({
+		"id": .external_id,
+		"display_name": .display_name,
+		"computer_name": .guest_info.computer_name,
 		"resource_type": .resource_type,
-		"ip_address": .ip_address,
-		"host_switch": .host_switch,
-		"status": .status,
-		"state": .state,
-		"software_version": .software_version
+		"os_name": .guest_info.os_name,
+		"power_state": .power_state
 	})
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")

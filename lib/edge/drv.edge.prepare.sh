@@ -66,7 +66,6 @@ function makeBody {
 	local BASEBODY=$(./drv.transport-nodes.get.sh "${TNID}" 2>/dev/null)
 	local MYNODE="$(echo "${BASEBODY}${BODY}" | jq -s '. | add')"
 	printf "${MYNODE}"
-	printf "${MYNODE}" >ttt
 }
 
 if [[ -n "${TNNAME}" && "${TNID}" ]]; then
