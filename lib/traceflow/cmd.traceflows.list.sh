@@ -5,18 +5,18 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to drv.core?
 		TYPE=${BASH_REMATCH[1]}
 	fi
 fi
-source ${WORKDIR}/drv.core
+source ${WORKDIR}/mod.core
 
 ## input driver
 INPUT=$(${WORKDIR}/drv.traceflows.list.sh)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	.results | map({
+	.results | if (. != null) then map({
 		"id": .id,
 		"operation_state": .operation_state,
 		"request_status": .request_status
-	})
+	}) else "" end
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
 

@@ -44,10 +44,6 @@ case "${FORMAT}" in
 		## build input json
 		echo "${INPUT}" | jq --tab .
 	;;
-	nc)
-		## build payload table
-		buildNoColour "${PAYLOAD}"
-	;;
 	*)
 		## build payload table
 		buildTable "${PAYLOAD}"

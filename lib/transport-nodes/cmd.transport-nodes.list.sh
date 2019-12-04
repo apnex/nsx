@@ -5,7 +5,7 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to drv.core?
 		TYPE=${BASH_REMATCH[1]}
 	fi
 fi
-source ${WORKDIR}/drv.core
+source ${WORKDIR}/mod.core
 
 ## input driver
 INPUT=$(${WORKDIR}/drv.transport-nodes.list.sh)
@@ -22,30 +22,31 @@ read -r -d '' INPUTSPEC <<-CONFIG
 		"host_switch": .host_switch_spec.host_switches[0].host_switch_name
 	})
 CONFIG
-if [[ -n "${INPUT}" ]]; then ## check if not null?
-	PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
 
-	# build filter
-	FILTER=${1}
-	FORMAT=${2}
-	PAYLOAD=$(filter "${PAYLOAD}" "${FILTER}")
+#if [[ -n "${INPUT}" ]]; then ## check if not null?
+PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
 
-	## cache context data record
-	setContext "$PAYLOAD" "$TYPE"
+# build filter
+FILTER=${1}
+FORMAT=${2}
+PAYLOAD=$(filter "${PAYLOAD}" "${FILTER}")
 
-	## output
-	case "${FORMAT}" in
-		json)
-			## build payload json
-			echo "${PAYLOAD}" | jq --tab .
-		;;
-		raw)
-			## build input json
-			echo "${INPUT}" | jq --tab .
-		;;
-		*)
-			## build payload table
-			buildTable "${PAYLOAD}"
-		;;
-	esac
-fi
+## cache context data record
+setContext "$PAYLOAD" "$TYPE"
+
+## output
+case "${FORMAT}" in
+	json)
+		## build payload json
+		echo "${PAYLOAD}" | jq --tab .
+	;;
+	raw)
+		## build input json
+		echo "${INPUT}" | jq --tab .
+	;;
+	*)
+		## build payload table
+		buildTable "${PAYLOAD}"
+	;;
+esac
+#fi

@@ -5,11 +5,11 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to drv.core?
 		TYPE=${BASH_REMATCH[1]}
 	fi
 fi
-source ${WORKDIR}/drv.core
+source ${WORKDIR}/mod.core
 
 ## input driver
-#INPUT=$(${WORKDIR}/drv.traceflows.observation.get.sh ${1})
-INPUT=$(cat moo)
+INPUT=$(${WORKDIR}/drv.traceflows.observation.get.sh ${1})
+#INPUT=$(cat moo)
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
