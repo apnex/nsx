@@ -27,7 +27,7 @@ commands() {
 	done
 	exit 1
 }
-if [[ -n "$1" && ${CALLED} == "drv.core" ]]; then
+if [[ -n "$1" && ${CALLED} == "mod.core" ]]; then
 	case "${1}" in
 		list) ## list commands
 			commands
@@ -247,14 +247,18 @@ function filter {
 		STRING=${STRING#*"${BASH_REMATCH[1]}"}
 		local FIELD="name"
 		local VALUE="."
-		if [[ $FILTER =~ ([^:]+):([^:]+) ]]; then
+		if [[ $FILTER =~ ([^:]+):([^:]*) ]]; then
 			FIELD=${BASH_REMATCH[1]}
 			VALUE=${BASH_REMATCH[2]}
 		else
 			VALUE="${FILTER}"
 		fi
 		read -r -d '' FILTERSPEC <<-CONFIG
-			map(select(."$FIELD"|test("$VALUE";"i")))
+			map(select(
+				."$FIELD" |
+					if (. != null) then . else "" end
+				| test("$VALUE";"i")
+			))
 		CONFIG
 		PAYLOAD=$(echo "$PAYLOAD" | jq -r "$FILTERSPEC")
 	done
@@ -267,7 +271,7 @@ function setContext {
 	local ITEM="${2}"
 	local STATE="${STATEDIR}/ctx.${ITEM}.json"
 	local PAYLOAD=$(echo "$INPUT" | jq --tab '.[0]')
-	if [[ ! "${PAYLOAD}" == null ]]; then
+	if [[ -n "${PAYLOAD}" && "${PAYLOAD}" != null ]]; then
 		printf "%s\n" "${PAYLOAD}" >"${STATE}"
 	fi
 }

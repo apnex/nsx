@@ -4,7 +4,7 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 fi
 source ${WORKDIR}/drv.nsx.client
 
-ITEM="traceflows"
+ITEM="pools/ip-pools"
 if [[ -n "${NSXHOST}" ]]; then
 	URL=$(buildURL "${ITEM}")
 	if [[ -n "${URL}" ]]; then

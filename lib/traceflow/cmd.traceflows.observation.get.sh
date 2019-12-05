@@ -13,7 +13,7 @@ INPUT=$(${WORKDIR}/drv.traceflows.observation.get.sh ${1})
 
 ## build record structure
 read -r -d '' INPUTSPEC <<-CONFIG
-	.results | map({
+	.results | if (. != null) then map({
 		"resource_type": .resource_type,
 		"transport_node_name": .transport_node_name,
 		"transport_node_type": .transport_node_type,
@@ -28,7 +28,7 @@ read -r -d '' INPUTSPEC <<-CONFIG
 				"Rule-id: " + (.acl_rule_id | tostring)
 			else "" end
 		)
-	})
+	}) else "" end
 CONFIG
 PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
 

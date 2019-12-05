@@ -6,17 +6,16 @@ source ${WORKDIR}/mod.command
 
 function run {
 	## input driver
-	INPUT=$(${WORKDIR}/drv.logical-ports.list.sh)
+	INPUT=$(${WORKDIR}/drv.logical-switches.list.sh)
 
 	## build record structure
 	read -r -d '' INPUTSPEC <<-CONFIG
 		.results | if (. != null) then map({
-			"id": .id,
-			"name": .display_name,
-			"resource_type": .resource_type,
-			"logical_switch_id": .logical_switch_id,
-			"admin_state": .admin_state,
-			"attachment_type": .attachment.attachment_type
+	                "id": .id,
+	                "name": .display_name,
+	                "vni": .vni,
+	                "vlan": .vlan,
+	                "admin_state": .admin_state
 		}) else "" end
 	CONFIG
 
