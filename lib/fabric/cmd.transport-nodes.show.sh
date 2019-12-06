@@ -6,15 +6,19 @@ source ${WORKDIR}/mod.command
 
 function run {
 	## input driver
-	INPUT=$(${WORKDIR}/drv.nodes.list.sh)
+	INPUT=$(${WORKDIR}/drv.${TYPE}.sh)
 
 	## build record structure
 	read -r -d '' INPUTSPEC <<-CONFIG
-		.results | if (. != null) then map({
+		. | if (. != null) then map({
 			"id": .id,
-			"name": .display_name,
+			"name": .name,
 			"resource_type": .resource_type,
-			"ip_addresses": .ip_addresses[0]
+			"ip_address": .ip_address,
+			"host_switch": .host_switch,
+			"status": .status,
+			"state": .state,
+			"software_version": .software_version
 		}) else "" end
 	CONFIG
 

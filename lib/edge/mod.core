@@ -256,7 +256,7 @@ function filter {
 		read -r -d '' FILTERSPEC <<-CONFIG
 			map(select(
 				."$FIELD" |
-					if (. != null) then . else "" end
+					if (. != null) then (. | tostring) else "" end
 				| test("$VALUE";"i")
 			))
 		CONFIG
