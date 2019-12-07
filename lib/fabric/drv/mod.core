@@ -11,7 +11,10 @@ else
 		CALLED="${BASH_REMATCH[2]}"
 	fi
 fi
-STATEDIR="${WORKDIR}/state"
+if [ -z ${STATEDIR} ]; then
+	STATEDIR="${WORKDIR}/state"
+fi
+#printf "0 ${0} state ${STATEDIR}\n" 1>&2
 if [ ! -d ${STATEDIR} ]; then
 	mkdir ${STATEDIR}
 fi
@@ -27,7 +30,7 @@ commands() {
 	done
 	exit 1
 }
-if [[ -n "$1" && ${CALLED} == "drv.core" ]]; then
+if [[ -n "$1" && ${CALLED} == "mod.core" ]]; then
 	case "${1}" in
 		list) ## list commands
 			commands
@@ -58,23 +61,34 @@ case "${OSNAME}" in
 esac
 
 # COLOURS
-NC='\033[0m' # no colour
+#RED=$'\e[31;1m'
+#CYAN=$'\e[36;1m'
+#GREEN='\e[32;1m' # light green
+#ORANGE=$'\e[33;1m' # orange
+#BLUE=$'\e[34;1m' # light blue
+#NC=$'\e[31;00m'
+
+#NC='\033[0;00m' # no colour
 BLACK='\033[0;30m' # black
 RED='\033[0;31m' # red
-GREEN='\033[0;32m' # green
-ORANGE='\033[0;33m' # orange
+#GREEN='\033[0;32m' # orange
+#ORANGE='\033[0;33m' # orange
 BLUE='\033[0;34m' # blue
 PURPLE='\033[0;35m' # purple
-CYAN='\033[0;36m' # cyan
-LIGHTGREY='\033[0;37m' # light grey
-DARKGREY='\033[0;30m' # dark grey
-LIGHTRED='\033[0;31m' # light red
-LIGHTGREEN='\033[0;32m' # light green
-YELLOW='\033[0;33m' # yellow
-LIGHTBLUE='\033[0;34m' # light blue
-LIGHTPURPLE='\033[0;35m' # light purple
-LIGHTCYAN='\033[0;36m' # light cyan
-WHITE='\033[0;37m' # white
+#CYAN='\033[0;36m' # cyan
+
+NC='\e[0;00m' # no colour
+GREEN='\e[0;32m' # orange
+ORANGE='\e[0;33m' # orange
+CYAN='\e[0;36m' # cyan
+#LIGHTGREY='\033[0;37m' # light grey
+#DARKGREY='\033[0;30m' # dark grey
+#LIGHTRED='\033[0;31m' # light red
+#LIGHTGREEN='\033[0;32m' # light green
+#YELLOW='\033[0;33m' # yellow
+#LIGHTBLUE='\033[0;34m' # light blue
+#LBLUE='\033[33;1m' ## test
+#WHITE='\033[0;37m' # white
 
 function corange {
 	local STRING=${1}
@@ -91,15 +105,49 @@ function ccyan {
 
 function isSuccess {
 	local STRING=${1}
+	local SESSION=${2}
+	local CODE=$(getCode "${STRING}")
+	local VALID
+	printf "[$(ccyan "${CODE}")] - " 1>&2
+	case $CODE in
+		2[0-9][0-9])
+			printf "SUCCESS\n" 1>&2
+			VALID="1"
+		;;
+		400)
+			printf "ERROR\n" 1>&2
+		;;
+		40[1-3])
+			printf "ERROR-AUTH\n" 1>&2
+		;;
+		404)
+			printf "ERROR-NOTFOUND\n" 1>&2
+		;;
+		*)
+			printf "ERROR\n" 1>&2
+		;;
+	esac
+	if [[ -z "${VALID}" && -f "${SESSION}" ]]; then
+		rm "${SESSION}" 2>/dev/null
+	fi
+	local BODY=$(getBody "${STRING}")
+	printf "%s\n" "${BODY}"
+}
+
+function getCode {
+	local STRING=${1}
 	if [[ $STRING =~ ^(.*)([0-9]{3})$ ]]; then
 		local BODY=${BASH_REMATCH[1]}
 		local CODE=${BASH_REMATCH[2]}
 	fi
-	printf "[$(ccyan "${CODE}")] - " 1>&2
-	if [[ $CODE =~ 2..$ ]]; then
-		printf "SUCCESS\n" 1>&2
-	else
-		printf "ERROR\n" 1>&2
+	printf "%s\n" "${CODE}"
+}
+
+function getBody {
+	local STRING=${1}
+	if [[ $STRING =~ ^(.*)([0-9]{3})$ ]]; then
+		local BODY=${BASH_REMATCH[1]}
+		local CODE=${BASH_REMATCH[2]}
 	fi
 	printf "%s\n" "${BODY}"
 }
@@ -141,20 +189,56 @@ function getCertificate {
 	printf "%s\n" "$RESULT" | sed ':a;N;$!ba;s/\n/\\\\n/g'
 }
 
-# build and output table from input dataset
 function buildTable {
-	local INPUT="${1}"
+	local INPUT="${1}" # change first entry to color, separate from data body
 	read -r -d '' JQTABLE <<-CONFIG
 		if (.[0]?) then
 			[(
-				[.[0] | to_entries[] | .key]
-				| ., map(length * "-")
+				[.[0] | to_entries[] | "<" + .key + ">"]
 			),(
 				.[] | [to_entries[] | .value]
 			)]
 		else . end
 	CONFIG
-	echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t'
+	local HEADER="1"
+	echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t' | while read -r LINE; do
+		if [[ -n $HEADER ]]; then
+			printf "${CYAN}${LINE}${NC}\n"
+			HEADER=""
+		else
+			printf "$LINE\n";
+		fi
+	done
+}
+
+function buildTest {
+	local INPUT="${1}" # change first entry to color, separate from data body
+	read -r -d '' JQTABLE <<-CONFIG
+		if (.[0]?) then
+			[(
+				[.[0] | to_entries[] | "${BLUE}<" + .key + ">${NC}"]
+			),(
+				.[] | [to_entries[] | "${NC}" + .value + "${NC}"]
+			)]
+		else . end
+	CONFIG
+	BODY=$(echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t')
+	printf "${BODY}\n"
+}
+
+function buildNoColour {
+	local INPUT="${1}" # change first entry to color, separate from data body
+	read -r -d '' JQTABLE <<-CONFIG
+		if (.[0]?) then
+			[(
+				[.[0] | to_entries[] | "<" + .key + ">"]
+			),(
+				.[] | [to_entries[] | .value]
+			)]
+		else . end
+	CONFIG
+	BODY=$(echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t')
+	printf "${BODY}\n"
 }
 
 ## filter payload with string
@@ -166,14 +250,18 @@ function filter {
 		STRING=${STRING#*"${BASH_REMATCH[1]}"}
 		local FIELD="name"
 		local VALUE="."
-		if [[ $FILTER =~ ([^:]+):([^:]+) ]]; then
+		if [[ $FILTER =~ ([^:]+):([^:]*) ]]; then
 			FIELD=${BASH_REMATCH[1]}
 			VALUE=${BASH_REMATCH[2]}
 		else
 			VALUE="${FILTER}"
 		fi
 		read -r -d '' FILTERSPEC <<-CONFIG
-			map(select(."$FIELD"|test("$VALUE";"i")))
+			map(select(
+				."$FIELD" |
+					if (. != null) then (. | tostring) else "" end
+				| test("$VALUE";"i")
+			))
 		CONFIG
 		PAYLOAD=$(echo "$PAYLOAD" | jq -r "$FILTERSPEC")
 	done
@@ -186,7 +274,7 @@ function setContext {
 	local ITEM="${2}"
 	local STATE="${STATEDIR}/ctx.${ITEM}.json"
 	local PAYLOAD=$(echo "$INPUT" | jq --tab '.[0]')
-	if [[ ! "${PAYLOAD}" == null ]]; then
+	if [[ -n "${PAYLOAD}" && "${PAYLOAD}" != null ]]; then
 		printf "%s\n" "${PAYLOAD}" >"${STATE}"
 	fi
 }

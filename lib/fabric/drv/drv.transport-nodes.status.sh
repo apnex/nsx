@@ -2,16 +2,15 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 ## inputs
 ID=${1}
 
 ## status of node
+ITEM="transport-nodes"
 function getStatus {
 	local NODEID=${1}
-	ITEM="transport-nodes"
 	CALL="/${NODEID}/status"
 	URL=$(buildURL "${ITEM}${CALL}")
 	if [[ -n "${URL}" ]]; then

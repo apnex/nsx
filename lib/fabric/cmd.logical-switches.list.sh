@@ -4,12 +4,8 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then
 fi
 source ${WORKDIR}/mod.command
 
-function run {
-	## input driver
-	INPUT=$(${WORKDIR}/drv.logical-switches.list.sh)
-
-	## build record structure
-	read -r -d '' INPUTSPEC <<-CONFIG
+function run { ## build record
+	read -r -d '' SPEC <<-CONFIG
 		.results | if (. != null) then map({
 	                "id": .id,
 	                "name": .display_name,
@@ -18,10 +14,7 @@ function run {
 	                "admin_state": .admin_state
 		}) else "" end
 	CONFIG
-
-	# output
-	PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
-	printf "${PAYLOAD}"
+	printf "${SPEC}"
 }
 
 ## cmd
