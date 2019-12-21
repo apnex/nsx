@@ -2,8 +2,7 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
+source ${WORKDIR}/mod.command
 
-TZNAME=$1
-TZSWITCH=$2
-TZTYPE=$3
-${WORKDIR}/drv.transport-zones.create.sh "$1" "$2" "$3"
+${WORKDIR}/drv/drv.${TYPE}.sh "$@"
+

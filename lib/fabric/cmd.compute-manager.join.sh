@@ -5,9 +5,10 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to drv.core?
 		TYPE=${BASH_REMATCH[1]}
 	fi
 fi
-source ${WORKDIR}/drv.core
-source ${WORKDIR}/drv.nsx.client
-source ${WORKDIR}/drv.vsp.client
+STATEDIR=${WORKDIR}/drv/state
+source ${WORKDIR}/drv/mod.core
+source ${WORKDIR}/drv/drv.nsx.client
+source ${WORKDIR}/drv/drv.vsp.client
 
 ## temp - move back to drv core - needed for : (colon) separation of {2} values
 PAYLOAD=$(echo -n | openssl s_client -connect "${VSPHOST}":443 2>/dev/null)
