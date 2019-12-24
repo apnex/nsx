@@ -13,7 +13,14 @@ function run {
 			"ip_address": .node_deployment_info.ip_addresses[0],
 			"os_type": .node_deployment_info.os_type,
 			"os_version": .node_deployment_info.os_version,
-			"host_switch": .host_switch_spec.host_switches[0].host_switch_name
+			"host_switch": .host_switch_spec.host_switches[0].host_switch_name,
+			"pnics": (.host_switch_spec.host_switches[0]? |
+				if (. != null) then
+					.pnics | map(
+						[.device_name, .uplink_name] | join(":")
+					) | join(",")
+				else "" end
+			)
 		}) else "" end
 	CONFIG
 	printf "${SPEC}"

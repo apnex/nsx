@@ -1,12 +1,12 @@
 {
 	"node_deployment_info": {
 		"node_settings": {
-			"hostname": "nsx-edge02",
+			"hostname": "nsx-edge01",
 			"dns_servers": [
-				"172.16.0.1"
+				"172.16.101.140"
 			],
 			"ntp_servers": [
-				"172.16.0.1"
+				"172.16.101.140"
 			],
 			"enable_ssh": true,
 			"allow_ssh_root_login": true
@@ -14,10 +14,10 @@
 		"deployment_config": {
 			"vm_deployment_config": {
 				"vc_id": "<compute-manager.id>",
-				"compute_id": "domain-c666",
-				"host_id": "host-671",
-				"storage_id": "datastore-672",
-				"management_network_id": "dvportgroup-684",
+				"compute_id": "domain-c7",
+				"host_id": "host-12",
+				"storage_id": "datastore-13",
+				"management_network_id": "dvportgroup-28",
 				"management_port_subnets": [
 					{
 						"ip_addresses": [
@@ -30,9 +30,9 @@
 					"172.16.10.1"
 				],
 				"data_network_ids": [
-					"dvportgroup-686",
-					"dvportgroup-686",
-					"dvportgroup-686"
+					"dvportgroup-29",
+					"dvportgroup-29",
+					"dvportgroup-29"
 				],
 				"placement_type": "VsphereDeploymentConfig"
 			},
@@ -46,5 +46,5 @@
 		"resource_type": "EdgeNode"
 	},
 	"resource_type": "TransportNode",
-	"display_name": "nsx-edge02"
+	"display_name": "nsx-edge01"
 }

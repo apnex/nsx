@@ -2,7 +2,6 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 TNID=${1}
@@ -24,10 +23,10 @@ CONFIG
 
 if [[ -n "${TNID}" && -n "${VMNIC}" && -n "${UPLINK}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(./drv.transport-nodes.get.sh ${1})
+		BODY=$(${WORKDIR}/drv.transport-nodes.list.sh 2>/dev/null | jq --tab '.results | map(select(.node_id=="'${TNID}'")) | .[0]')
 		NODE=$(echo "${BODY}" | jq -r "$JQSPEC")
-		printf "${NODE}" | jq --tab . >tn.spec
-		./drv.transport-nodes.update.sh tn.spec
+		printf "${NODE}" | jq --tab . >${WORKDIR}/tn.spec
+		${WORKDIR}/drv.transport-nodes.update.sh tn.spec
 	fi
 else
 	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.uplink.modfy") $(ccyan "<transport-node.id> <vmnic.id> <uplink.name>")\n" 1>&2

@@ -2,8 +2,7 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
+source ${WORKDIR}/mod.command
 
-LSNAME=$1
-LSTZONE=$2
-LSVLAN=$3
-${WORKDIR}/drv.logical-switches.create.sh "$1" "$2" "$3"
+${WORKDIR}/drv/drv.${TYPE}.sh "$@"
+

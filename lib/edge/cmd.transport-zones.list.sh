@@ -9,10 +9,8 @@ function run {
 		.results | if (. != null) then map({
 			"id": .id,
 			"name": .display_name,
-			"deployment_type": .deployment_type,
-			"members": (
-				.members[] | .transport_node_id
-			)
+			"host_switch_name": .host_switch_name,
+			"transport_type": .transport_type
 		}) else "" end
 	CONFIG
 	printf "${SPEC}"

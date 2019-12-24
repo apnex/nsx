@@ -1,53 +1,27 @@
 #!/bin/bash
-if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to drv.core?
-	WORKDIR=${BASH_REMATCH[1]}
-	if [[ ${BASH_REMATCH[2]} =~ ^[^.]+[.](.+)[.]sh$ ]]; then
-		TYPE=${BASH_REMATCH[1]}
-	fi
+if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then
+        WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
+source ${WORKDIR}/mod.command
 
-## input driver
-INPUT=$(${WORKDIR}/drv.compute-manager.list.sh)
+function run {
+	read -r -d '' SPEC <<-CONFIG
+		.results | if (. != null) then map({
+			"id": .id,
+			"name": .display_name,
+			"server": .server,
+			"origin": .origin_type,
+			"version": (
+				if (.origin_properties | length) != 0 then
+					(.origin_properties[] | select(.key=="version").value)
+				else
+					"not-registered"
+				end
+			)
+		}) else "" end
+	CONFIG
+	printf "${SPEC}"
+}
 
-## build record structure
-read -r -d '' INPUTSPEC <<-CONFIG
-	.results | map({
-		"id": .id,
-		"name": .display_name,
-		"server": .server,
-		"origin": .origin_type,
-		"version": (
-			if (.origin_properties | length) != 0 then
-				(.origin_properties[] | select(.key=="version").value)
-			else
-				"not-registered"
-			end
-		)
-	})
-CONFIG
-PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
-
-# build filter
-FILTER=${1}
-FORMAT=${2}
-PAYLOAD=$(filter "${PAYLOAD}" "${FILTER}")
-
-## cache context data record
-setContext "$PAYLOAD" "$TYPE"
-
-## output
-case "${FORMAT}" in
-	json)
-		## build payload json
-		echo "${PAYLOAD}" | jq --tab .
-	;;
-	raw)
-		## build input json
-		echo "${INPUT}" | jq --tab .
-	;;
-	*)
-		## build payload table
-		buildTable "${PAYLOAD}"
-	;;
-esac
+## cmd
+cmd "${@}"

@@ -2,7 +2,6 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 TNID=$1
@@ -12,14 +11,13 @@ GWPING="172.16.10.1"
 
 # get latest revision
 function makeBody {
-	local BODY=$(./drv.transport-nodes.list.sh "$1")
+	local BODY=$(${WORKDIR}/drv.transport-nodes.list.sh "${TNID}")
 	printf "${BODY}"
 }
 
 if [[ -n "${TNID}" && "${LSID}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
 		BODY=$(makeBody "${TNID}")
-		#NODEID=$(printf "${BODY}" | jq -r '.node_id')
 		ITEM="transport-nodes/${TNID}"
 		URL=$(buildURL "${ITEM}")
 		URL+="?if_id=${VMKID}&esx_mgmt_if_migration_dest=${LSID}&ping_ip=${GWPING}"

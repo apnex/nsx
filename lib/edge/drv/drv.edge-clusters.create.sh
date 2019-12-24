@@ -2,17 +2,16 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 CLSTNAME=$1
 TNID=$2
 function makeBody {
-	RESULT=$(./drv.cluster-profile.list.sh 2>/dev/null)
+	RESULT=$(${WORKDIR}/drv.cluster-profiles.list.sh 2>/dev/null)
 	PFCLST=$(echo "${RESULT}" | jq -r '.results | map(select(.resource_type=="EdgeHighAvailabilityProfile").id) | .[0]')
 
  	# determine node exists
-	NODERESULT=$(./drv.transport-nodes.list.sh 2>/dev/null)
+	NODERESULT=$(${WORKDIR}/drv.transport-nodes.list.sh 2>/dev/null)
 	read -r -d '' JQSPEC <<-CONFIG
 		.results
 			| map(select(.id=="${TNID}").name)

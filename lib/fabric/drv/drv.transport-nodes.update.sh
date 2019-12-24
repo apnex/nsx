@@ -2,13 +2,12 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 TNSPEC=$1
 # get latest revision
 function makeBody {
-	BODY=$(cat "${TNSPEC}")
+	BODY=$(cat ${WORKDIR}/${TNSPEC})
 	printf "${BODY}"
 }
 

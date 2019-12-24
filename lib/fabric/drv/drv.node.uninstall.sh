@@ -1,5 +1,5 @@
 #!/bin/bash
-source drv.core
+source mod.core
 ID=${1}
 
 if [[ -n "${ID}" ]]; then
