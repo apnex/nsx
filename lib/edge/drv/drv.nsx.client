@@ -71,7 +71,7 @@ function nsxSession {
 			fi
 		fi
 	fi
-	printf "%s\n" "$(cat "${SESSION}" 2>/dev/null)"
+	printf "%s\n" "$(<${SESSION})"
 	#printf "%s\n" "$(cat "${SESSION}")" 1>&2
 }
 
@@ -116,7 +116,7 @@ function nsxPut {
 	else
 		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
 	fi
-	#printf "%s\n" "${RESULT}" | jq --tab .
+	printf "%s\n" "${RESULT}" | jq --tab . 1>&2
 }
 
 function nsxDelete {

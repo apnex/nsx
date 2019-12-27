@@ -5,9 +5,9 @@ fi
 source ${WORKDIR}/drv.nsx.client
 
 ID=${1}
+ITEM="edge-clusters"
 if [[ -n "${ID}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
-		ITEM="edge-clusters"
 		CALL="/${ID}"
 		URL=$(buildURL "${ITEM}${CALL}")
 		if [[ -n "${URL}" ]]; then
@@ -16,5 +16,5 @@ if [[ -n "${ID}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "edge-cluster.delete") $(ccyan "<uuid>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen ${TYPE}) $(ccyan "<edge-cluster.id>")\n" 1>&2
 fi

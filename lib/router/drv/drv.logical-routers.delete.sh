@@ -2,7 +2,6 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 ID=${1}
@@ -18,5 +17,5 @@ if [[ -n "${ID}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "${ITEM}.delete") $(ccyan "<logical-router.id>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen ${TYPE}) $(ccyan "<logical-router.id>")\n" 1>&2
 fi

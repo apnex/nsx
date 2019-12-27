@@ -10,8 +10,10 @@ function run {
 			"id": .id,
 			"name": .display_name,
 			"deployment_type": .deployment_type,
-			"members": (
-				.members[] | .transport_node_id
+			"members": (.members? |
+				if (length > 0) then
+					.[] | .transport_node_id
+				else "" end
 			)
 		}) else "" end
 	CONFIG

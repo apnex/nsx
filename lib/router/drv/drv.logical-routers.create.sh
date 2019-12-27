@@ -2,15 +2,14 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
 source ${WORKDIR}/drv.nsx.client
 
 RTNAME=${1}
 RTTYPE=${2}
-function makeBody {
 
+function makeBody {
 	## get edge-cluster
-	local EDGECLUSTER=$(./drv.edge-clusters.list.sh 2>/dev/null)
+	local EDGECLUSTER=$(${WORKDIR}/drv.edge-clusters.list.sh 2>/dev/null)
 	local EDGEID=$(echo "${EDGECLUSTER}" | jq -r '.results | map(select(.display_name=="edge-cluster").id) | .[0]')
 
 	local TYPE=""
@@ -54,5 +53,5 @@ if [[ -n "${RTNAME}" && "${RTTYPE}" ]]; then
 		fi
 	fi
 else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "${ITEM}.create") $(ccyan "<name> <t0|t1>")\n" 1>&2
+	printf "[$(corange "ERROR")]: command usage: $(cgreen ${TYPE}) $(ccyan "<name> <t0|t1>")\n" 1>&2
 fi

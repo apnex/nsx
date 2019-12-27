@@ -4,13 +4,14 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then
 fi
 source ${WORKDIR}/mod.command
 
-function run {
+function run { ## build record
 	read -r -d '' SPEC <<-CONFIG
 		.results | if (. != null) then map({
-			"id": .id,
-			"name": .display_name,
-			"router_type": .router_type,
-			"ha_mode": .high_availability_mode
+	                "id": .id,
+	                "name": .display_name,
+	                "vni": .vni,
+	                "vlan": .vlan,
+	                "admin_state": .admin_state
 		}) else "" end
 	CONFIG
 	printf "${SPEC}"

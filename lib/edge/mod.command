@@ -1,10 +1,6 @@
 #!/bin/bash
-if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then ## offload to mod.header
-	WORKDIR=${BASH_REMATCH[1]}
-	FILE=${BASH_REMATCH[2]}
-	if [[ ${FILE} =~ ^[^.]+[.](.+)[.]sh$ ]]; then
-		TYPE=${BASH_REMATCH[1]}
-	fi
+if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then
+        WORKDIR=${BASH_REMATCH[1]}
 fi
 STATEDIR=${WORKDIR}/drv/state
 source ${WORKDIR}/drv/mod.core
