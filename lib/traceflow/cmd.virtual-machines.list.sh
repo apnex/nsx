@@ -14,7 +14,7 @@ function run {
 			"os_name": .guest_info.os_name,
 			"tags": (.tags? |
 				if (length > 0) then
-					map([.tag, .scope] | join(":")) | join(",")
+					map([.scope, .tag] | join(":")) | join(",")
 				else "" end
 			),
 			"power_state": .power_state,

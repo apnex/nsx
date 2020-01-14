@@ -1,17 +1,14 @@
 #!/bin/bash
-# detect and resolve symlink
-if [[ -L $0 ]]; then
-	if [[ $(readlink $0) =~ ^(.*)/([^/]+)$ ]]; then
-		WORKDIR="${BASH_REMATCH[1]}"
-		CALLED="${BASH_REMATCH[2]}"
-	fi
-else
-	if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then
-		WORKDIR="${BASH_REMATCH[1]}"
-		CALLED="${BASH_REMATCH[2]}"
+if [[ $(realpath $0) =~ ^(.*)/([^/]+)$ ]]; then
+	WORKDIR="${BASH_REMATCH[1]}"
+	FILE=${BASH_REMATCH[2]}
+	if [[ ${FILE} =~ ^[^.]+[.](.+)[.]sh$ ]]; then
+		TYPE=${BASH_REMATCH[1]}
 	fi
 fi
-STATEDIR="${WORKDIR}/state"
+if [ -z ${STATEDIR} ]; then
+	STATEDIR="${WORKDIR}/state"
+fi
 if [ ! -d ${STATEDIR} ]; then
 	mkdir ${STATEDIR}
 fi
@@ -27,7 +24,7 @@ commands() {
 	done
 	exit 1
 }
-if [[ -n "$1" && ${CALLED} == "mod.core" ]]; then
+if [[ -n "$1" && ${FILE} == "mod.core" ]]; then
 	case "${1}" in
 		list) ## list commands
 			commands
@@ -40,7 +37,7 @@ if [[ -n "$1" && ${CALLED} == "mod.core" ]]; then
 		;;
 		*) ## execute command
 			if [ -f "${WORKDIR}/cmd.${1}.sh" ]; then
-				eval "${WORKDIR}/cmd.${1}.sh ${2} ${3} ${4}"
+				eval "${WORKDIR}/cmd.${1}.sh $@"
 			fi
 		;;
 	esac

@@ -64,7 +64,7 @@ function nsxSession {
 	if [[ "$ONLINE" == "true" ]]; then
 		local RUNFIND="$(find ${SESSION} -mmin -10 2>/dev/null)"
 		if [[ -z ${RUNFIND} ]]; then
-			printf "No valid session found, authenticating... " 1>&2
+			printf "No valid session found for [$(cgreen "${NSXHOST}")], authenticating... " 1>&2
 			local LOGIN=$(nsxLogin)
 			if [[ -n ${LOGIN} ]]; then
 				echo "${LOGIN}" >"$SESSION"

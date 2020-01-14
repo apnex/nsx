@@ -4,11 +4,17 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 fi
 source ${WORKDIR}/drv.nsx.client
 
-if [[ -n "${NSXHOST}" ]]; then
-	ITEM="logical-ports"
+PORTID=$1
+
+ITEM="logical-ports"
+if [[ -n "${NSXHOST}" && -n "${PORTID}" ]]; then
 	URL=$(buildURL "${ITEM}")
+	URL+="/${PORTID}/mac-table?source=realtime"
+
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 		nsxGet "${URL}"
 	fi
+else
+	printf "[$(corange "ERROR")]: command usage: $(cgreen "${TYPE}") $(ccyan "<port.id>")\n" 1>&2
 fi

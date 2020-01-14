@@ -173,7 +173,7 @@ function vspSession {
 	if [[ "$ONLINE" == "true" ]]; then
 		local RUNFIND="$(find ${SESSION} -mmin -10 2>/dev/null)"
 		if [[ -z ${RUNFIND} ]]; then
-			printf "No valid session found, authenticating... " 1>&2
+			printf "No valid session found for [$(cgreen "${VSPHOST}")], authenticating... " 1>&2
 			local LOGIN=$(vspLogin)
 			if [[ -n ${LOGIN} ]]; then
 				echo "${LOGIN}" >"$SESSION"

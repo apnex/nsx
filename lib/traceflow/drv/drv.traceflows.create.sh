@@ -7,7 +7,7 @@ source ${WORKDIR}/drv.nsx.client
 SPEC=${1}
 PORT=${2}
 function makeBody {
-	MYSPEC=$(cat "${SPEC}")
+	MYSPEC=$(<${SPEC})
 	read -r -d '' JQSPEC <<-CONFIG
 		.lport_id = "${1}"
 	CONFIG
