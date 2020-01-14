@@ -13,10 +13,13 @@ function makeBody {
 	#local EDGECLUSTER=$(${WORKDIR}/drv.edge-clusters.list.sh 2>/dev/null)
 	#local EDGEID=$(echo "${EDGECLUSTER}" | jq -r '.results | map(select(.display_name=="edge-cluster").id) | .[0]')
 
+	# if LRID = TIER1? Change to DownLinkPort
+	local TYPE="LogicalRouterDownLinkPort"
+	#local TYPE="LogicalRouterUpLinkPort"
 	read -r -d '' BODY <<-CONFIG
 	{
 		"logical_router_id": "${LRID}",
-		"resource_type": "LogicalRouterUpLinkPort",
+		"resource_type": "${TYPE}",
 		"display_name": "${RPNAME}",
 		"linked_logical_switch_port_id": {
 			"target_type": "LogicalPort",
@@ -25,16 +28,16 @@ function makeBody {
 		"subnets": [
 			{
 				"ip_addresses": [
-					"172.16.5.2"
+					"172.20.10.1"
 				],
 				"prefix_length": 24
 			}
-		],
-		"edge_cluster_member_index": [
-			0
 		]
 	}
 	CONFIG
+	#	],
+	#	"edge_cluster_member_index": [
+	#		0
 	printf "${BODY}"
 }
 

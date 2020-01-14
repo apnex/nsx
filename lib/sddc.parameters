@@ -13,7 +13,7 @@
 			"type": "vsp",
 			"hostname": "vcenter.lab",
 			"username": "administrator@vsphere.local",
-			"password": "VMware1!",
+			"password": "ObiWan1!",
 			"online": "true"
 		}
 	]

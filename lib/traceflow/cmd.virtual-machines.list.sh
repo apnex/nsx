@@ -5,27 +5,24 @@ fi
 source ${WORKDIR}/mod.command
 
 function run {
-	## input driver
-	INPUT=$(${WORKDIR}/drv.virtual-machines.list.sh)
-
-	## build record structure
-	read -r -d '' INPUTSPEC <<-CONFIG
+	read -r -d '' SPEC <<-CONFIG
 		.results | if (. != null) then map({
 			"id": .external_id,
 			"name": .display_name,
 			"computer_name": .guest_info.computer_name,
 			"resource_type": .resource_type,
 			"os_name": .guest_info.os_name,
-			"tags": [.tags[] | [.tag, .scope] | join(":")] | join(","),
+			"tags": (.tags? |
+				if (length > 0) then
+					map([.tag, .scope] | join(":")) | join(",")
+				else "" end
+			),
 			"power_state": .power_state,
 			"source_name": .source.target_display_name,
 			"source_type": .source.target_type
 		}) else "" end
 	CONFIG
-
-	# output
-	PAYLOAD=$(echo "$INPUT" | jq -r "$INPUTSPEC")
-	printf "${PAYLOAD}"
+	printf "${SPEC}"
 }
 
 ## cmd

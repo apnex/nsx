@@ -22,12 +22,12 @@ function makeBody {
 		;;
 	esac
 
+	#"edge_cluster_id": "${EDGEID}",
 	read -r -d '' BODY <<-CONFIG
 	{
 		"resource_type": "LogicalRouter",
 		"description": "Logical router",
 		"display_name": "${RTNAME}",
-		"edge_cluster_id": "${EDGEID}",
 		"advanced_config": {
 			"external_transit_networks": [
 				"100.64.0.0/10"

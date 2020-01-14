@@ -8,9 +8,8 @@ ID=${1}
 ITEM="logical-routers"
 if [[ -n "${ID}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
-		CALL="/${ID}"
 		URL=$(buildURL "${ITEM}")
-		URL+="/${CALL}"
+		URL+="/${ID}"
 		if [[ -n "${URL}" ]]; then
 			printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
 			nsxDelete "${URL}"
