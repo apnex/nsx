@@ -1,0 +1,16 @@
+somehow tie back to dependency model
+JS?
+
+vm.status (include host name)
+vm.nic.attach (update to port-group / ls)
+vm.nic.detach (update to port-group / ls)
+host.vm.list
+cluster.vm.list
+
+logical-switches.list <name>
+context.resolve <tab?>
+- list resolveable entities?
+- resolve up / down?
+- tree cmd to display output to terminal?
+
+

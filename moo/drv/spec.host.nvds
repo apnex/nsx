@@ -1,0 +1,102 @@
+{
+	"host_switch_spec": {
+		"host_switches": [
+			{
+				"host_switch_name": "hs-fabric",
+				"host_switch_profile_ids": [
+					{
+						"key": "UplinkHostSwitchProfile",
+						"value": "4cc43e15-16fe-4031-882d-cda910f221e6"
+					},
+					{
+						"key": "LldpHostSwitchProfile",
+						"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb"
+					},
+					{
+						"key": "NiocProfile",
+						"value": "8cb3de94-2834-414c-b07d-c034d878db56"
+					}
+				],
+				"pnics": [
+					{
+						"device_name": "vmnic0",
+						"uplink_name": "uplink1"
+					},
+					{
+						"device_name": "vmnic1",
+						"uplink_name": "uplink2"
+					}
+				],
+				"is_migrate_pnics": false,
+				"ip_assignment_spec": {
+					"ip_pool_id": "4c6f32ec-29ff-4ede-9272-1cc3a578b78d",
+					"resource_type": "StaticIpPoolSpec"
+				},
+				"cpu_config": [],
+				"vmk_install_migration": [],
+				"pnics_uninstall_migration": [],
+				"vmk_uninstall_migration": [],
+				"not_ready": false
+			}
+		],
+		"resource_type": "StandardHostSwitchSpec"
+	},
+	"transport_zone_endpoints": [
+		{
+			"transport_zone_id": "3a041745-4612-4e67-8bd2-77cc2cfa02e8",
+			"transport_zone_profile_ids": [
+				{
+					"resource_type": "BfdHealthMonitoringProfile",
+					"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a"
+				}
+			]
+		},
+		{
+			"transport_zone_id": "ac6206d0-73e1-41a3-ad36-fdf3ea7f9629",
+			"transport_zone_profile_ids": [
+				{
+					"resource_type": "BfdHealthMonitoringProfile",
+					"profile_id": "52035bb3-ab02-4a08-9884-18631312e50a"
+				}
+			]
+		}
+	],
+	"maintenance_mode": "DISABLED",
+	"node_deployment_info": {
+		"os_type": "ESXI",
+		"os_version": "6.7.0",
+		"managed_by_server": "172.16.0.13",
+		"discovered_node_id": "ef350a25-0c77-4277-ab1b-791de2fc6967:host-3179",
+		"resource_type": "HostNode",
+		"id": "f9c74aee-96eb-433c-9d86-d728375e7fe5",
+		"display_name": "esx01.lab",
+		"external_id": "f9c74aee-96eb-433c-9d86-d728375e7fe5",
+		"fqdn": "esx01.lab",
+		"ip_addresses": [
+			"172.16.10.101"
+		],
+		"discovered_ip_addresses": [
+			"172.16.10.101",
+			"169.254.1.1",
+			"172.16.12.10"
+		],
+		"_create_user": "admin",
+		"_create_time": 1554098948428,
+		"_last_modified_user": "admin",
+		"_last_modified_time": 1554179713466,
+		"_protection": "NOT_PROTECTED",
+		"_revision": 4
+	},
+	"is_overridden": false,
+	"resource_type": "TransportNode",
+	"id": "f9c74aee-96eb-433c-9d86-d728375e7fe5",
+	"display_name": "tn-esx01.lab",
+	"description": "NSX configured Test Transport Node",
+	"_create_user": "admin",
+	"_create_time": 1554098948981,
+	"_last_modified_user": "admin",
+	"_last_modified_time": 1554179713469,
+	"_system_owned": false,
+	"_protection": "NOT_PROTECTED",
+	"_revision": 4
+}

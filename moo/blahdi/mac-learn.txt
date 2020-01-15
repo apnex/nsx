@@ -1,0 +1,31 @@
+## notes for configuration mac-learning on esx 6.7
+
+#### list switch ports
+esxcli network vswitch dvs vmware list 
+
+#### list switches
+netdbg vswitch instance list
+
+#### check mac-learn for ports
+netdbg vswitch mac-learning port get -p 25 --dvs-alias fabric
+netdbg vswitch mac-learning port get -p 26 --dvs-alias fabric
+netdbg vswitch mac-learning port get -p 27 --dvs-alias fabric
+netdbg vswitch mac-learning port get -p 28 --dvs-alias fabric
+
+#### enable mac-learn for ports
+netdbg vswitch mac-learning port set -p 25 --dvs-alias fabric
+netdbg vswitch mac-learning port set -p 26 --dvs-alias fabric
+netdbg vswitch mac-learning port set -p 27 --dvs-alias fabric
+netdbg vswitch mac-learning port set -p 28 --dvs-alias fabric
+
+#### check mac-learn table for ports
+netdbg vswitch mac-table port get -p 25 --dvs-alias fabric
+netdbg vswitch mac-table port get -p 26 --dvs-alias fabric
+netdbg vswitch mac-table port get -p 27 --dvs-alias fabric
+netdbg vswitch mac-table port get -p 28 --dvs-alias fabric
+
+#### note!
+Original MAC address of ESX-VM vmk0 will first inherit that of the vmnic0.
+This means that vmk0 (mgmt) will be statically pinned to that vnic in mac-table.
+vmk0 can be deleted an recreated to force a new unique MAC address.
+This is required for migration to 2-port NVDS
