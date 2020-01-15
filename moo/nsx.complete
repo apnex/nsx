@@ -1,0 +1,82 @@
+#!/bin/bash
+_temp_bind() {
+	## temporarily change a bunch of bind terminal settings
+	local OLDSETTINGS
+	local WIDTH=$(bind -v | sed -n 's/^set completion-display-width //p')
+	local POINT=$(bind -v | sed -n 's/^set history-preserve-point //p')
+	local AMBIG=$(bind -v | sed -n 's/^set show-all-if-ambiguous //p')
+	local UNMOD=$(bind -v | sed -n 's/^set show-all-if-unmodified //p')
+	local COLOR=$(bind -v | sed -n 's/^set colored-completion-prefix //p')
+	local PAGES=$(bind -v | sed -n 's/^set page-completions //p')
+	local QUERY=$(bind -v | sed -n 's/^set completion-query-items //p')
+	if [[ "${WIDTH}" -ne 0 ]]; then
+		bind "set completion-display-width 0"
+		OLDSETTINGS+="; bind 'set completion-display-width ${WIDTH}'"
+	fi
+	if [[ "${AMBIG}" == "off" ]]; then
+		bind "set show-all-if-ambiguous on"
+		OLDSETTINGS+="; bind 'set show-all-if-ambiguous ${AMBIG}'"
+	fi
+	if [[ "${POINT}" == "off" ]]; then
+		bind "set history-preserve-point on"
+		OLDSETTINGS+="; bind 'set history-preserve-point ${POINT}'"
+	fi
+	if [[ "${UNMOD}" == "off" ]]; then
+		bind "set show-all-if-unmodified on"
+		OLDSETTINGS+="; bind 'set show-all-if-unmodified ${UNMOD}'"
+	fi
+	if [[ "${COLOR}" == "off" ]]; then
+		bind "set colored-completion-prefix on"
+		OLDSETTINGS+="; bind 'set colored-completion-prefix ${COLOR}'"
+	fi
+	if [[ "${PAGES}" == "on" ]]; then
+		bind "set page-completions off"
+		OLDSETTINGS+="; bind 'set page-completions ${PAGES}'"
+	fi
+	if [[ "${QUERY}" -ne 0 ]]; then
+		bind "set completion-query-items 0"
+		OLDSETTINGS+="; bind 'set page-completions ${QUERY}'"
+	fi
+	if [[ -n "${OLDSETTINGS}" ]]; then # reset bind settings to previous
+		PROMPT_COMMAND="PROMPT_COMMAND=$(printf %q "${PROMPT_COMMAND}")"
+		PROMPT_COMMAND+="${OLDSETTINGS}"
+	fi
+}
+_temp_base_complete() {
+	local CMDFILE=$1
+	local CUR PRV
+	local ARRAY=()
+	COMPREPLY=()
+	CUR="${COMP_WORDS[COMP_CWORD]}"
+	PRV="${COMP_WORDS[COMP_CWORD-1]}"
+	CYAN='\033[0;36m' # cyan
+	NC='\033[0m' # no colour
+	BB='\u001B[94m' # blueBright
+	BBC='\u001B[39m' # close
+
+	_temp_bind
+	local IFS=$'\n'
+	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
+		ARRAY=($(./cmd list 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+	fi
+	local HEADER="${ARRAY[0]}"
+	local VALUES=("${ARRAY[@]:1}")
+	local SUGGESTIONS=($(compgen -W "${VALUES[*]}" -- "${CUR}"))
+	if [ "${#SUGGESTIONS[@]}" -ge "2" ]; then # print header/values
+		printf "\n${BB}${HEADER}${BBC}" 1>&2
+		for I in "${!SUGGESTIONS[@]}"; do
+			SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
+		done
+		COMPREPLY=("${SUGGESTIONS[@]}")
+	else
+		if [ "${#SUGGESTIONS[@]}" == "1" ]; then
+			local ID="${SUGGESTIONS[0]%%\ *}"
+			COMPREPLY=("$ID")
+		fi
+	fi
+	return 0
+}
+_nsx_complete() {
+	_temp_base_complete
+}
+complete -F _nsx_complete nsx
