@@ -1,0 +1,19 @@
+#!/bin/bash
+if [[ $(realpath $0) =~ ^(.*)/([^/]+)$ ]]; then
+        WORKDIR=${BASH_REMATCH[1]}
+fi
+
+link() {
+	if [[ ${1} =~ ^([^.]+) ]]; then
+		local ITEM="${BASH_REMATCH[1]}"
+	fi
+	local FILE="cmd.${ITEM}.list.sh"
+	if [ -f "${WORKDIR}/${FILE}" ]; then
+		eval "${WORKDIR}/${FILE}"
+	fi
+	exit 1
+}
+
+if [[ -n "$1" ]]; then
+	link ${@}
+fi

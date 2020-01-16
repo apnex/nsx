@@ -16,11 +16,24 @@ commands() {
 	exit 1
 }
 
+writejq() {
+	printf "%s\n" "list"
+	for FILE in ${JQDIR}/tpl.*.jq; do
+		if [[ $FILE =~ tpl[.](.+)[.]jq ]]; then
+			printf "%s\n" "${BASH_REMATCH[1]}"
+		fi
+	done
+	exit 1
+}
+
 # switch
 if [[ -n "$1" ]]; then
 	case "${1}" in
 		list)
 			commands
+		;;
+		write)
+			writejq
 		;;
 		*)
 			if [ -f "${WORKDIR}/cmd.${1}.sh" ]; then

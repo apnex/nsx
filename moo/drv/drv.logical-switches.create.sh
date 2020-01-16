@@ -33,5 +33,15 @@ if [[ -n "${SWNAME}" && "${SWTZ}" ]]; then
 		fi
 	fi
 else
+	INPUTS=()
+	INPUTS+=("name")
+	INPUTS+=("transport-zone.id")
+	INPUTS+=("vlan")
+	printf "%s\n" "<params>"
+	for PARAM in ${INPUTS[@]}; do
+		#if [[ $FILE =~ tpl[.](.+)[.]jq ]]; then
+			printf "%s\n" "${PARAM}" 1>&2
+		#fi
+	done
 	printf "[$(corange "ERROR")]: command usage: $(cgreen "logical-switches.create") $(ccyan "<name> <transport-zone.id> [ <vlan> ]")\n" 1>&2
 fi

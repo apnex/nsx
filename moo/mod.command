@@ -18,6 +18,10 @@ function cmd {
 			local PAYLOAD=$(payload)
 			echo "${PAYLOAD}" | jq --tab .
 		;;
+		raw)
+			local PAYLOAD=$(payload)
+			echo "${PAYLOAD}"
+		;;
 		filter)
 			FILTER=${2}
 			dofilter "${@}"
@@ -66,7 +70,7 @@ function template {
 function payload {
 	local PARAMS=(${@})
 	local PAYLOAD=$(eval $(drv "${TYPE}") ${PARAMS}) # link to drv
-	printf "${PAYLOAD}"
+	printf "%s" "${PAYLOAD}"
 }
 
 function drv {
