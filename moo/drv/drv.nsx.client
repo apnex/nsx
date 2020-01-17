@@ -149,23 +149,27 @@ function nsxDelete {
 }
 
 function nsxGet {
-	local URL=${1}
+	local URL=$(cacheURL "${1}")
 	local BASE=${NSXBASE}
 	local STATE
-	if [[ "$NSXONLINE" == "true" ]]; then
-		local FILE=$(getFile "${URL}" "${BASE}")
-		STATE="${STATEDIR}/nsx${FILE}"
-		RESPONSE=$(curl -k -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -X GET \
-			-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
-			-H "Content-Type: application/json" \
-		"$URL" 2>/dev/null)
-		RESULT=$(isSuccess "${RESPONSE}" "${NSXSESSION}")
+	if [[ $URL =~ ^http.* ]]; then
+		if [[ "$NSXONLINE" == "true" ]]; then
+			local FILE=$(getFile "${URL}" "${BASE}")
+			STATE="${STATEDIR}/nsx${FILE}"
+			RESPONSE=$(curl -k -b "${STATEDIR}/nsx.cookies.txt" -w "%{http_code}" -X GET \
+				-H "X-XSRF-TOKEN: $(cat ${NSXSESSION})" \
+				-H "Content-Type: application/json" \
+			"$URL" 2>/dev/null)
+			RESULT=$(isSuccess "${RESPONSE}" "${NSXSESSION}")
+			printf "%s\n" "${RESULT}" | jq --tab . >"${STATE}"
+		else
+			printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
+			RESULT=$(<"${URL}")
+		fi
 	else
-		printf "[$(ccyan "OFFLINE")] - SUCCESS\n" 1>&2
-		RESULT=$(cat "${URL}")
-		STATE="${URL}"
+		printf "[$(ccyan "CACHED")] - SUCCESS\n" 1>&2
+		RESULT=$(<"${URL}")
 	fi
-	printf "%s\n" "${RESULT}" | jq --tab . >"${STATE}"
 	printf "%s\n" "${RESULT}" | jq --tab .
 }
 
@@ -174,16 +178,39 @@ function buildURL {
 	local BASE="${NSXBASE}"
 	local STATE="${STATEDIR}"
 	local ONLINE="${NSXONLINE}"
+	local FILE=$(getFile "${ENDPOINT}")
+	local FURL="${STATE}/nsx${FILE}"
+
 	if [[ "$ONLINE" == "true" ]]; then
-		local SUCCESS=$(nsxSession)
-		if [[ -n ${SUCCESS} ]]; then
-			URL="$BASE$ENDPOINT"
-		else
-			URL="" #failed to obtain valid session
-		fi
+		#local RUNFIND="$(find ${FURL} -mmin -0.05 2>/dev/null)"
+		#if [[ -z ${RUNFIND} ]]; then
+			local SUCCESS=$(nsxSession)
+			if [[ -n ${SUCCESS} ]]; then
+				URL="$BASE$ENDPOINT"
+			else
+				URL="" #failed to obtain valid session
+			fi
+		#else
+		#	#printf "Last call less than 3 seconds - use local file...\n" 1>&2
+		#	URL="${FURL}"
+		#fi
 	else
-		local FILE=$(getFile "${ENDPOINT}")
-		URL="${STATE}/nsx${FILE}"
+		URL="${FURL}"
+	fi
+	printf "$URL"
+}
+
+function cacheURL {
+	local ENDPOINT="${1}"
+	local BASE="${NSXBASE}"
+	local FILE=$(getFile "${ENDPOINT}" "${BASE}")
+	local FURL="${STATEDIR}/nsx${FILE}"
+
+	local RUNFIND="$(find ${FURL} -mmin -0.05 2>/dev/null)"
+	if [[ -z ${RUNFIND} ]]; then
+		URL="$ENDPOINT"
+	else # less than 3 seconds - use local
+		URL="${FURL}"
 	fi
 	printf "$URL"
 }

@@ -11,6 +11,9 @@ function cmd {
 	local FILTER
 	local COMMAND=${1}
 	case "${COMMAND}" in
+		params)
+			$(drv "${TYPE}") "params" # link to drv
+		;;
 		watch)
 			watch -t -c -n 3 "${WORKDIR}/${FILE} 2>/dev/null"
 		;;
@@ -55,7 +58,7 @@ function dofilter {
 
 function template {
 	local PARAMS=(${@})
-	local INPUT=$(eval $(drv "${TYPE}") ${PARAMS}) # link to drv
+	local INPUT=$($(drv "${TYPE}") ${PARAMS}) # link to drv
 	local TEMPLATE="${JQDIR}/tpl.${TYPE}.jq"
 	if [[ -f "${TEMPLATE}" ]]; then
 		local PAYLOAD=$(echo "${INPUT}" | jq -f ${JQDIR}/tpl.${TYPE}.jq)

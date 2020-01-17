@@ -1,46 +1,31 @@
 #!/bin/bash
-_temp_bind() {
-	## temporarily change a bunch of bind terminal settings
+_bind_set() {
+	local REVERT=$(bind -v | sed -n "s/^set ${1} //p")
+	bind "set ${1} ${2}"
+	OLDSETTINGS+="; bind 'set ${1} ${REVERT}'"
+}
+_temp_bind() { ## temporarily change a bunch of bind terminal settings
 	local OLDSETTINGS
-	local WIDTH=$(bind -v | sed -n 's/^set completion-display-width //p')
-	local POINT=$(bind -v | sed -n 's/^set history-preserve-point //p')
-	local AMBIG=$(bind -v | sed -n 's/^set show-all-if-ambiguous //p')
-	local UNMOD=$(bind -v | sed -n 's/^set show-all-if-unmodified //p')
-	local COLOR=$(bind -v | sed -n 's/^set colored-completion-prefix //p')
-	local PAGES=$(bind -v | sed -n 's/^set page-completions //p')
-	local QUERY=$(bind -v | sed -n 's/^set completion-query-items //p')
-	if [[ "${WIDTH}" -ne 0 ]]; then
-		bind "set completion-display-width 0"
-		OLDSETTINGS+="; bind 'set completion-display-width ${WIDTH}'"
-	fi
-	if [[ "${AMBIG}" == "off" ]]; then
-		bind "set show-all-if-ambiguous on"
-		OLDSETTINGS+="; bind 'set show-all-if-ambiguous ${AMBIG}'"
-	fi
-	if [[ "${POINT}" == "off" ]]; then
-		bind "set history-preserve-point on"
-		OLDSETTINGS+="; bind 'set history-preserve-point ${POINT}'"
-	fi
-	if [[ "${UNMOD}" == "off" ]]; then
-		bind "set show-all-if-unmodified on"
-		OLDSETTINGS+="; bind 'set show-all-if-unmodified ${UNMOD}'"
-	fi
-	if [[ "${COLOR}" == "off" ]]; then
-		bind "set colored-completion-prefix on"
-		OLDSETTINGS+="; bind 'set colored-completion-prefix ${COLOR}'"
-	fi
-	if [[ "${PAGES}" == "on" ]]; then
-		bind "set page-completions off"
-		OLDSETTINGS+="; bind 'set page-completions ${PAGES}'"
-	fi
-	if [[ "${QUERY}" -ne 0 ]]; then
-		bind "set completion-query-items 0"
-		OLDSETTINGS+="; bind 'set page-completions ${QUERY}'"
-	fi
+	_bind_set "completion-display-width" "0"
+	_bind_set "history-preserve-point" "on"
+	_bind_set "show-all-if-ambiguous" "on"
+	_bind_set "show-all-if-unmodified" "on"
+	_bind_set "colored-completion-prefix" "on"
+	_bind_set "colored-stats" "on"
+	_bind_set "page-completions" "off"
+	_bind_set "completion-query-items" "0"
+	_bind_set "skip-completed-text" "on"
 	if [[ -n "${OLDSETTINGS}" ]]; then # reset bind settings to previous
 		PROMPT_COMMAND="PROMPT_COMMAND=$(printf %q "${PROMPT_COMMAND}")"
 		PROMPT_COMMAND+="${OLDSETTINGS}"
 	fi
+}
+_get_prompt() { ## re-print prompt
+	printf "\n${PS1@P}"
+	for ARG in ${COMP_WORDS[@]::${#COMP_WORDS[@]}-1}; do
+		printf "%s " "${ARG}" 1>&2
+	done
+	printf "${COMP_WORDS[-1]}"
 }
 _temp_base_complete() {
 	local CMDFILE=$1
@@ -54,15 +39,33 @@ _temp_base_complete() {
 	BB='\u001B[94m' # blueBright
 	BBC='\u001B[39m' # close
 
-	_temp_bind
+	#_temp_bind
 	local IFS=$'\n'
+
 	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
 		ARRAY=($(./cmd list 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+	else
+		local PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh params))
+		if [ "${#PARAMLIST[@]}" -ge 1 ]; then
+			local CURPARAM=${PARAMLIST[((COMP_CWORD-2))]}
+			if [[ -n ${CURPARAM} ]]; then
+				if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then # dynamic value
+					printf "${BB}${CURPARAM}${BBC}" 1>&2
+					local ITEM="${BASH_REMATCH[1]}"
+					ARRAY=($(./link ${ITEM} 2>/dev/null)) # handle CRLF in tty
+				else # not a dynamic value
+					printf "${BB}<${CURPARAM}>${BBC}" 1>&2
+					_get_prompt
+				fi
+			fi
+		fi
 	fi
+
 	local HEADER="${ARRAY[0]}"
 	local VALUES=("${ARRAY[@]:1}")
 	local SUGGESTIONS=($(compgen -W "${VALUES[*]}" -- "${CUR}"))
 	if [ "${#SUGGESTIONS[@]}" -ge "2" ]; then # print header/values
+		## printf "${BB}${CURPARAM}${BBC}" 1>&2 ##
 		printf "\n${BB}${HEADER}${BBC}" 1>&2
 		for I in "${!SUGGESTIONS[@]}"; do
 			SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
@@ -74,6 +77,8 @@ _temp_base_complete() {
 			COMPREPLY=("$ID")
 		fi
 	fi
+
+	# parse link and call cmd
 	return 0
 }
 _nsx_complete() {

@@ -3,11 +3,19 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="logical-switches"
+INPUTS=()
+INPUTS+=("logical-switch.name")
+INPUTS+=("<transport-zones.id>")
+INPUTS+=("vlan")
+
+# body
 SWNAME=${1}
 SWTZ=${2}
 SWVLAN=${3}
-
 function makeBody {
 	read -r -d '' BODY <<-CONFIG
 	{
@@ -22,26 +30,15 @@ function makeBody {
 	printf "${BODY}"
 }
 
-if [[ -n "${SWNAME}" && "${SWTZ}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		ITEM="logical-switches"
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
-			nsxPost "${URL}" "${BODY}"
-		fi
+# run
+run() {
+	BODY=$(makeBody)
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
+		nsxPost "${URL}" "${BODY}"
 	fi
-else
-	INPUTS=()
-	INPUTS+=("name")
-	INPUTS+=("transport-zone.id")
-	INPUTS+=("vlan")
-	printf "%s\n" "<params>"
-	for PARAM in ${INPUTS[@]}; do
-		#if [[ $FILE =~ tpl[.](.+)[.]jq ]]; then
-			printf "%s\n" "${PARAM}" 1>&2
-		#fi
-	done
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "logical-switches.create") $(ccyan "<name> <transport-zone.id> [ <vlan> ]")\n" 1>&2
-fi
+}
+
+# driver
+driver "${@}"

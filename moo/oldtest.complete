@@ -11,6 +11,7 @@ _temp_bind() { ## temporarily change a bunch of bind terminal settings
 	_bind_set "show-all-if-ambiguous" "on"
 	_bind_set "show-all-if-unmodified" "on"
 	_bind_set "colored-completion-prefix" "on"
+	_bind_set "colored-stats" "on"
 	_bind_set "page-completions" "off"
 	_bind_set "completion-query-items" "0"
 	_bind_set "skip-completed-text" "on"
@@ -19,7 +20,6 @@ _temp_bind() { ## temporarily change a bunch of bind terminal settings
 		PROMPT_COMMAND+="${OLDSETTINGS}"
 	fi
 }
-
 _temp_base_complete() {
 	local CMDFILE=$1
 	local CUR PRV
@@ -35,20 +35,24 @@ _temp_base_complete() {
 	_temp_bind
 	local IFS=$'\n'
 
-	local PARAMLIST=($(./cmd.test.create.sh raw))
-	local ARRAYLEN=${#COMP_WORDS[@]}
-	local CURPARAM=${PARAMLIST[((COMP_CWORD-1))]}
-	if [[ -n ${CURPARAM} ]]; then
-		if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then
-			local ITEM="${BASH_REMATCH[1]}"
-			ARRAY=($(./link ${ITEM} 2>/dev/null)) # handle CRLF in tty
-		else # print variable and repeat prompt + args - no completion match
-			printf "\n${BB}<${CURPARAM}>${BBC}\n" 1>&2
-			printf "${PS1@P}"
-			for ARG in ${COMP_WORDS[@]::${#COMP_WORDS[@]}-1}; do
-				printf "%s " "${ARG}" 1>&2
-			done
-			printf "${COMP_WORDS[-1]}"
+	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
+		ARRAY=($(./cmd list 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+	else
+		local PARAMLIST=($(./cmd.test.create.sh raw))
+		local ARRAYLEN=${#COMP_WORDS[@]}
+		local CURPARAM=${PARAMLIST[((COMP_CWORD-1))]}
+		if [[ -n ${CURPARAM} ]]; then
+			if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then
+				local ITEM="${BASH_REMATCH[1]}"
+				ARRAY=($(./link ${ITEM} 2>/dev/null)) # handle CRLF in tty
+			else # print variable and repeat prompt + args - no completion match
+				printf "\n${BB}<${CURPARAM}>${BBC}\n" 1>&2
+				printf "${PS1@P}"
+				for ARG in ${COMP_WORDS[@]::${#COMP_WORDS[@]}-1}; do
+					printf "%s " "${ARG}" 1>&2
+				done
+				printf "${COMP_WORDS[-1]}"
+			fi
 		fi
 	fi
 
