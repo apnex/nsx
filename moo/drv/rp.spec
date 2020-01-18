@@ -2,29 +2,26 @@
 	"subnets": [
 		{
 			"ip_addresses": [
-				"172.16.5.2"
+				"172.20.10.1"
 			],
 			"prefix_length": 24
 		}
 	],
-	"edge_cluster_member_index": [
-		0
-	],
 	"urpf_mode": "STRICT",
-	"mac_address": "00:50:56:aa:7f:df",
-	"resource_type": "LogicalRouterUpLinkPort",
-	"id": "099db16a-5b03-4b06-8eed-e5d5fe6d49bd",
-	"display_name": "rp-new",
-	"logical_router_id": "cfc070ea-9565-43cc-8ab5-2b0075c3a148",
+	"mac_address": "02:50:56:56:44:52",
+	"resource_type": "LogicalRouterDownLinkPort",
+	"id": "c7fb5d88-b8f3-4dbf-b3ba-2aa58c8b4ba2",
+	"display_name": "rp-web",
+	"logical_router_id": "1e17f51a-cc30-4307-9fdf-2927564db0a4",
 	"_create_user": "admin",
-	"_create_time": 1577416452519,
+	"_create_time": 1578449165304,
 	"_last_modified_user": "admin",
-	"_last_modified_time": 1577655337229,
+	"_last_modified_time": 1579333604647,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
-	"_revision": 7,
+	"_revision": 1,
 	"linked_logical_switch_port_id": {
 		"target_type": "LogicalPort",
-		"target_id": "fe04b003-4866-41e5-b5c5-0e0450835ee2"
+		"target_id": "f599a980-ac7d-440a-9706-085efdeb3a3e"
 	}
 }

@@ -15,7 +15,6 @@ ID=${1}
 
 # run
 run() {
-	#CALL="/${ID}"
 	URL=$(buildURL "${ITEM}")
 	URL+="/${ID}"
 	if [[ -n "${URL}" ]]; then

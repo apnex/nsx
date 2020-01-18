@@ -3,10 +3,21 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="logical-router-ports"
+INPUTS=()
+INPUTS+=("<logical-routers.id>")
+INPUTS+=("<logical-ports.id>")
+INPUTS+=("logical-router-port.prefix")
+INPUTS+=("logical-router-port.name")
+
+# body
 LRID=${1}
-RPNAME=${2}
-LPID=${3}
+LPID=${2}
+RPADDR=${3}
+RPNAME=${4}
 
 function makeBody {
 	## check existing port?
@@ -14,6 +25,10 @@ function makeBody {
 	#local EDGEID=$(echo "${EDGECLUSTER}" | jq -r '.results | map(select(.display_name=="edge-cluster").id) | .[0]')
 
 	# if LRID = TIER1? Change to DownLinkPort
+	if [[ $RPADDR =~ ^([.0-9]+)\/([0-9]+) ]]; then
+		local IPADDR="${BASH_REMATCH[1]}"
+		local PREFIX="${BASH_REMATCH[2]}"
+	fi
 	local TYPE="LogicalRouterDownLinkPort"
 	#local TYPE="LogicalRouterUpLinkPort"
 	read -r -d '' BODY <<-CONFIG
@@ -28,29 +43,25 @@ function makeBody {
 		"subnets": [
 			{
 				"ip_addresses": [
-					"172.20.10.1"
+					"${IPADDR}"
 				],
-				"prefix_length": 24
+				"prefix_length": "${PREFIX}"
 			}
 		]
 	}
 	CONFIG
-	#	],
-	#	"edge_cluster_member_index": [
-	#		0
 	printf "${BODY}"
 }
 
-ITEM="logical-router-ports"
-if [[ -n "${LRID}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
-			nsxPost "${URL}" "${BODY}"
-		fi
+# run
+run() {
+	BODY=$(makeBody)
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
+		nsxPost "${URL}" "${BODY}"
 	fi
-else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen ${TYPE}) $(ccyan "<logical-router.id> <name> <logical-port.id>")\n" 1>&2
-fi
+}
+
+# driver
+driver "${@}"

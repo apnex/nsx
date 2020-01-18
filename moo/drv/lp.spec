@@ -1,5 +1,5 @@
 {
-	"logical_switch_id": "8ce88a76-dfb3-44e4-8f85-86f97c9d4f71",
+	"logical_switch_id": "2eaa8fff-17f5-44b9-a02c-75d83f3f8f60",
 	"admin_state": "UP",
 	"address_bindings": [],
 	"switching_profile_ids": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"key": "IpDiscoverySwitchingProfile",
-			"value": "0c403bc9-7773-4680-a5cc-847ed0f9f52e"
+			"value": "64814784-7896-3901-9741-badeff705639"
 		},
 		{
 			"key": "MacManagementSwitchingProfile",
@@ -30,12 +30,12 @@
 	],
 	"ignore_address_bindings": [],
 	"resource_type": "LogicalPort",
-	"id": "fe04b003-4866-41e5-b5c5-0e0450835ee2",
-	"display_name": "lp-uplink",
+	"id": "f599a980-ac7d-440a-9706-085efdeb3a3e",
+	"display_name": "f599a980-ac7d-440a-9706-085efdeb3a3e",
 	"_create_user": "admin",
-	"_create_time": 1577417800109,
+	"_create_time": 1578448387702,
 	"_last_modified_user": "system",
-	"_last_modified_time": 1577655364651,
+	"_last_modified_time": 1579333677524,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
 	"_revision": 3

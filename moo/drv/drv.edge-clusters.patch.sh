@@ -3,26 +3,31 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
-ECSPEC=$1
+# inputs
+ITEM="edge-clusters"
+INPUTS=()
+INPUTS+=("edge-cluster.spec")
 
-# get latest revision
+# body
+SPEC=${1}
 function makeBody {
-	BODY=$(<${ECSPEC})
+	BODY=$(<${SPEC})
 	printf "${BODY}"
 }
 
-if [[ -n "${ECSPEC}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		NODEID=$(printf "${BODY}" | jq -r '.id')
-		ITEM="edge-clusters/${NODEID}"
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "update")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			nsxPut "${URL}" "${BODY}"
-		fi
+# run
+run() {
+	BODY=$(makeBody)
+	NODEID=$(printf "${BODY}" | jq -r '.id')
+	URL=$(buildURL "${ITEM}")
+	URL+="/${NODEID}"
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
+		nsxPut "${URL}" "${BODY}"
 	fi
-else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen ${TYPE}) $(ccyan "<ec.spec>")\n" 1>&2
-fi
+}
+
+# driver
+driver "${@}"

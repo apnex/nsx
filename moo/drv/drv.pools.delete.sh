@@ -6,9 +6,9 @@ source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/mod.driver
 
 # inputs
-ITEM="traceflows"
+ITEM="pools/ip-pools"
 INPUTS=()
-INPUTS+=("<traceflows.id>")
+INPUTS+=("<pools.id>")
 
 # body
 ID=${1}
@@ -18,8 +18,8 @@ run() {
 	URL=$(buildURL "${ITEM}")
 	URL+="/${ID}"
 	if [[ -n "${URL}" ]]; then
-		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
-		nsxGet "${URL}"
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "delete")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
+		nsxDelete "${URL}"
 	fi
 }
 

@@ -3,7 +3,16 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="host-switch-profiles"
+INPUTS=()
+INPUTS+=("host-switch-profile.name")
+INPUTS+=("host-switch-profile.mtu")
+INPUTS+=("tep.vlan")
+
+# body
 PFNAME=$1
 PFMTU=$2
 PFVLAN=$3
@@ -19,10 +28,6 @@ function makeBody {
 				{
 					"uplink_name": "uplink1",
 					"uplink_type": "PNIC"
-				},
-				{
-					"uplink_name": "uplink2",
-					"uplink_type": "PNIC"
 				}
 			],
 			"policy": "FAILOVER_ORDER"
@@ -33,16 +38,15 @@ function makeBody {
 	printf "${BODY}"
 }
 
-if [[ -n "${PFNAME}" && "${PFMTU}" && "${PFVLAN}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		ITEM="host-switch-profiles"
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} - [$(cgreen "$URL")]... " 1>&2
-			nsxPost "${URL}" "${BODY}"
-		fi
+# run
+run() {
+	BODY=$(makeBody)
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
+		nsxPost "${URL}" "${BODY}"
 	fi
-else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "profile.create") $(ccyan "<name> <mtu> <vlan>")\n" 1>&2
-fi
+}
+
+# driver
+driver "${@}"
