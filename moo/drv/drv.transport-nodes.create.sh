@@ -3,26 +3,16 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="transport-nodes"
+INPUTS=("transport-node.name")
+INPUTS=("<transport-nodes.id>")
+
+# body
 TNNAME=$1
 TNNODEID=$2
-
-# test model
-read -r -d '' CONTEXT <<-CONFIG
-{
-	"display_name": "${TNNAME}",
-	"host_switches": [
-		{
-			"host_switch_name": "hs-fabric"
-		}
-	],
-	"transport-zones": [
-		"${TZVLAN}",
-		"${TZOVERLAY}"
-	]
-}
-CONFIG
-
 function makeBody {
 	# get vlan and overlay tzs
 	TZRESULT=$(./drv.transport-zones.list.sh 2>/dev/null)
@@ -101,16 +91,15 @@ function makeBody {
 	printf "${BODY}"
 }
 
-if [[ -n "${TNNAME}" && "${TNNODEID}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		ITEM="transport-nodes"
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			nsxPost "${URL}" "${BODY}"
-		fi
+# run
+run() {
+	BODY=$(makeBody)
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
+		nsxPost "${URL}" "${BODY}"
 	fi
-else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.create") $(ccyan "<name> <node-uuid>")\n" 1>&2
-fi
+}
+
+# driver
+driver "${@}"

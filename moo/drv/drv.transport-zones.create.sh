@@ -3,7 +3,16 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="transport-zones"
+INPUTS=()
+INPUTS+=("transport-zone.name")
+INPUTS+=("host-switch.name")
+INPUTS+=("transport-zone.type")
+
+# body
 TZNAME=$1
 TZSWITCH=$2
 TZTYPE=$3
@@ -19,16 +28,15 @@ function makeBody {
 	printf "${BODY}"
 }
 
-if [[ -n "${TZNAME}" && "${TZSWITCH}" && "${TZTYPE}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		ITEM="transport-zones"
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			nsxPost "${URL}" "${BODY}"
-		fi
+# run
+run() {
+	BODY=$(makeBody)
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
+		nsxPost "${URL}" "${BODY}"
 	fi
-else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-zones.create") $(ccyan "<name> <hostswitch> <type>")\n" 1>&2
-fi
+}
+
+# driver
+driver "${@}"

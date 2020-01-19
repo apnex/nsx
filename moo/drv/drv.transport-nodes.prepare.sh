@@ -3,16 +3,17 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="transport-nodes"
+INPUTS=()
+INPUTS+=("transport-node.name")
+INPUTS+=("<transport-nodes.id>")
+
+# body
 TNNAME=$1
 TNID=$2
-
-function addTZ {
-	local TZID="${1}"
-	## code to add a TZ to a TransportNode
-	## leverage mod.core value obtain/resolve
-}
-
 function makeBody {
 	# get vlan and overlay tzs
 	TZRESULT=$(${WORKDIR}/drv.transport-zones.list.sh 2>/dev/null)
@@ -66,16 +67,21 @@ function makeBody {
 	printf "${MYNODE}"
 }
 
-if [[ -n "${TNNAME}" && "${TNID}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		ITEM="transport-nodes/${TNID}"
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "update")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			nsxPut "${URL}" "${BODY}"
-		fi
+# run
+run() { # switch to patch?
+	BODY=$(makeBody)
+	ITEM="transport-nodes/${TNID}"
+	URL=$(buildURL "${ITEM}")
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "update")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
+		nsxPut "${URL}" "${BODY}"
 	fi
-else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.update") $(ccyan "<name> <node.id>")\n" 1>&2
-fi
+
+	BODY=$(${WORKDIR}/drv.edge-clusters.list.sh 2>/dev/null | jq --tab '.results | map(select(.id=="'${ECID}'")) | .[0]')
+	NODE=$(echo "${BODY}" | jq -r "$JQSPEC")
+	printf "${NODE}" | jq --tab . >${WORKDIR}/ec.spec
+	${WORKDIR}/drv.edge-clusters.patch.sh ${WORKDIR}/ec.spec
+}
+
+# driver
+driver "${@}"

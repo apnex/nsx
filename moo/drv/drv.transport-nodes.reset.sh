@@ -27,10 +27,10 @@ CONFIG
 
 if [[ -n "${1}" ]]; then
 	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(./drv.transport-nodes.list.sh | jq '.results | map(select(.node_id=="'${1}'")) | .[0]')
+		BODY=$(${WORKDIR}/drv.transport-nodes.list.sh 2>/dev/null | jq --tab '.results | map(select(.node_id=="'${TNID}'")) | .[0]')
 		NODE=$(echo "${BODY}" | jq -r "$JQSPEC")
-		printf "${NODE}" | jq --tab . > tn.spec
-		./drv.transport-nodes.update.sh tn.spec
+		printf "${NODE}" | jq --tab . >${WORKDIR}/tn.spec
+		${WORKDIR}/drv.transport-nodes.update.sh ${WORKDIR}/tn.spec
 	fi
 else
 	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.reset") $(ccyan "<transport-node.id>")\n" 1>&2

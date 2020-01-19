@@ -6,9 +6,9 @@ source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/mod.driver
 
 # inputs
-ITEM="logical-ports"
+ITEM="transport-nodes"
 INPUTS=()
-INPUTS+=("logical-port.spec")
+INPUTS+=("transport-node.spec")
 
 # body
 SPEC=${1}
