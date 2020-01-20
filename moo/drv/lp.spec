@@ -5,7 +5,7 @@
 	"switching_profile_ids": [
 		{
 			"key": "SwitchSecuritySwitchingProfile",
-			"value": "47ffda0e-035f-4900-83e4-0a2086813ede"
+			"value": "fbc4fb17-83d9-4b53-a286-ccdf04301888"
 		},
 		{
 			"key": "SpoofGuardSwitchingProfile",
@@ -30,13 +30,13 @@
 	],
 	"ignore_address_bindings": [],
 	"resource_type": "LogicalPort",
-	"id": "f599a980-ac7d-440a-9706-085efdeb3a3e",
-	"display_name": "f599a980-ac7d-440a-9706-085efdeb3a3e",
-	"_create_user": "admin",
-	"_create_time": 1578448387702,
+	"id": "1d6144be-4899-45cb-a0f9-e617cee87bc7",
+	"display_name": "web03/web03.vmx@9c442210-85cb-4407-875f-a31a3818ace0",
+	"_create_user": "system",
+	"_create_time": 1578967443171,
 	"_last_modified_user": "system",
-	"_last_modified_time": 1579333677524,
+	"_last_modified_time": 1578967443171,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
-	"_revision": 3
+	"_revision": 0
 }

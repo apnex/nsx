@@ -14,4 +14,4 @@ if (length > 0) then map({
 			) | join(",")
 		else "" end
 	)
-}) else "" end
+}) | sort_by(.id) else "" end

@@ -11,8 +11,8 @@ ID=${1}
 ITEM="transport-nodes"
 function getStatus {
 	local NODEID=${1}
-	CALL="/${NODEID}/status"
-	URL=$(buildURL "${ITEM}${CALL}")
+	URL=$(buildURL "${ITEM}")
+	URL+="/${NODEID}/status"
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "status")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 		nsxGet "${URL}"

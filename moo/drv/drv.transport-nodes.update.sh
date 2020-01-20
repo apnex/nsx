@@ -5,9 +5,8 @@ fi
 source ${WORKDIR}/drv.nsx.client
 
 TNSPEC=$1
-# get latest revision
 function makeBody {
-	BODY=$(cat ${WORKDIR}/${TNSPEC})
+	BODY=$(<${TNSPEC})
 	printf "${BODY}"
 }
 

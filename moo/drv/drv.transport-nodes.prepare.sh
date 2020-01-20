@@ -8,12 +8,12 @@ source ${WORKDIR}/mod.driver
 # inputs
 ITEM="transport-nodes"
 INPUTS=()
-INPUTS+=("transport-node.name")
 INPUTS+=("<transport-nodes.id>")
+INPUTS+=("transport-node.name")
 
 # body
-TNNAME=$1
-TNID=$2
+TNID=${1}
+TNNAME=${2}
 function makeBody {
 	# get vlan and overlay tzs
 	TZRESULT=$(${WORKDIR}/drv.transport-zones.list.sh 2>/dev/null)
@@ -21,11 +21,11 @@ function makeBody {
 	TZOVERLAY=$(echo "${TZRESULT}" | jq -r '.results | map(select(.display_name=="tz-overlay").id) | .[0]')
 
 	# get uplink profile
-	PFRESULT=$(${WORKDIR}/drv.host-switch-profiles.list.sh json 2>/dev/null)
+	PFRESULT=$(${WORKDIR}/drv.host-switch-profiles.list.sh 2>/dev/null)
 	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-host").id) | .[0]')
 
 	# get tep pool
-	PLRESULT=$(${WORKDIR}/drv.pool.list.sh 2>/dev/null)
+	PLRESULT=$(${WORKDIR}/drv.pools.list.sh 2>/dev/null)
 	PLTEP=$(echo "${PLRESULT}" | jq -r '.results | map(select(.display_name=="pool-tep").id) | .[0]')
 
 	# prepare without pnic
@@ -76,11 +76,10 @@ run() { # switch to patch?
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "update")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
 		nsxPut "${URL}" "${BODY}"
 	fi
-
-	BODY=$(${WORKDIR}/drv.edge-clusters.list.sh 2>/dev/null | jq --tab '.results | map(select(.id=="'${ECID}'")) | .[0]')
-	NODE=$(echo "${BODY}" | jq -r "$JQSPEC")
-	printf "${NODE}" | jq --tab . >${WORKDIR}/ec.spec
-	${WORKDIR}/drv.edge-clusters.patch.sh ${WORKDIR}/ec.spec
+	#BODY=$(${WORKDIR}/drv.edge-clusters.list.sh 2>/dev/null | jq --tab '.results | map(select(.id=="'${ECID}'")) | .[0]')
+	#NODE=$(echo "${BODY}" | jq -r "$JQSPEC")
+	#printf "${NODE}" | jq --tab . >${WORKDIR}/ec.spec
+	#${WORKDIR}/drv.edge-clusters.patch.sh ${WORKDIR}/ec.spec
 }
 
 # driver

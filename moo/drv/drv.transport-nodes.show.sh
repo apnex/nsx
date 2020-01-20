@@ -3,10 +3,13 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
-## input driver
-NODES=$(${WORKDIR}/drv.transport-nodes.list.sh)
+# inputs
+ITEM="transport-nodes"
+INPUTS=()
 
+# body
 function buildNode {
 	local KEY=${1}
 
@@ -44,14 +47,20 @@ function buildNode {
 }
 
 # remove dangling records
-STT=${WORKDIR}/state
-for FILE in ${STT}/nsx.transport-nodes.*.status.json; do
-	rm ${FILE} 2>/dev/null
-done
+run() {
+	NODES=$(${WORKDIR}/drv.transport-nodes.list.sh)
+	STT=${WORKDIR}/state
+	for FILE in $(find ${STT}/nsx.transport-nodes.*status.json -mmin +1); do
+		rm ${FILE} 2>/dev/null
+	done
 
-FINAL="[]"
-for KEY in $(echo ${NODES} | jq -r '.results[] | .id'); do
-	MYNODE=$(buildNode "${KEY}")
-	FINAL="$(echo "${FINAL}[${MYNODE}]" | jq -s '. | add')"
-done
-printf "${FINAL}" | jq --tab .
+	FINAL="[]"
+	for KEY in $(echo ${NODES} | jq -r '.results[] | .id'); do
+		MYNODE=$(buildNode "${KEY}")
+		FINAL="$(echo "${FINAL}[${MYNODE}]" | jq -s '. | add')"
+	done
+	printf "${FINAL}" | jq --tab .
+}
+
+# driver
+driver "${@}"
