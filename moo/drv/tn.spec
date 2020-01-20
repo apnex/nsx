@@ -1,5 +1,5 @@
 {
-	"node_id": "711c88d4-da76-48a3-adb5-728dfaf4fc34",
+	"node_id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
 	"host_switches": [
 		{
 			"host_switch_name": "hs-fabric",
@@ -19,8 +19,8 @@
 			],
 			"pnics": [
 				{
-					"device_name": "vmnic0",
-					"uplink_name": "uplink1"
+					"device_name": "vmnic1",
+					"uplink_name": "uplink2"
 				}
 			],
 			"static_ip_pool_id": "495e5dcc-3478-4256-ae4d-04e7dc1ad83e"
@@ -46,12 +46,12 @@
 				],
 				"pnics": [
 					{
-						"device_name": "vmnic0",
-						"uplink_name": "uplink1"
-					},
-					{
 						"device_name": "vmnic1",
 						"uplink_name": "uplink2"
+					},
+					{
+						"device_name": "vmnic0",
+						"uplink_name": "uplink1"
 					}
 				],
 				"is_migrate_pnics": false,
@@ -93,36 +93,36 @@
 		"os_type": "ESXI",
 		"os_version": "6.7.0",
 		"managed_by_server": "172.16.100.45",
-		"discovered_node_id": "09c7e969-e0f4-4a7e-a880-cf710c9669ec:host-73",
+		"discovered_node_id": "09c7e969-e0f4-4a7e-a880-cf710c9669ec:host-115",
 		"resource_type": "HostNode",
-		"id": "711c88d4-da76-48a3-adb5-728dfaf4fc34",
-		"display_name": "tn-esx02.lab",
-		"external_id": "711c88d4-da76-48a3-adb5-728dfaf4fc34",
-		"fqdn": "esx02.lab",
+		"id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
+		"display_name": "tn-esx03.lab",
+		"external_id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
+		"fqdn": "esx03.lab",
 		"ip_addresses": [
-			"172.16.10.102"
+			"172.16.10.103"
 		],
 		"discovered_ip_addresses": [
-			"172.16.10.102",
-			"192.168.12.11",
-			"169.254.1.1"
+			"172.16.10.103",
+			"169.254.1.1",
+			"192.168.12.13"
 		],
 		"_create_user": "admin",
-		"_create_time": 1579499604497,
+		"_create_time": 1579500265415,
 		"_last_modified_user": "admin",
-		"_last_modified_time": 1579500045577,
+		"_last_modified_time": 1579501341964,
 		"_protection": "NOT_PROTECTED",
 		"_revision": 3
 	},
 	"is_overridden": false,
 	"resource_type": "TransportNode",
-	"id": "711c88d4-da76-48a3-adb5-728dfaf4fc34",
-	"display_name": "tn-esx02.lab",
+	"id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
+	"display_name": "tn-esx03.lab",
 	"description": "NSX configured Test Transport Node",
 	"_create_user": "admin",
-	"_create_time": 1579499604760,
+	"_create_time": 1579500265684,
 	"_last_modified_user": "admin",
-	"_last_modified_time": 1579500045631,
+	"_last_modified_time": 1579501341992,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
 	"_revision": 3
