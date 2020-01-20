@@ -2,7 +2,7 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
+source ${WORKDIR}/mod.command
 
-CLSTNAME=${1}
-TNID=${2}
-${WORKDIR}/drv.edge-clusters.create.sh "$1" "$2"
+${WORKDIR}/drv/drv.${TYPE}.sh "$@"
+
