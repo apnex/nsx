@@ -1,4 +1,5 @@
-.results | if (. != null) then map({
+.results? |
+if (length > 0) then map({
 	"id": .id,
 	"name": .display_name,
 	"server": .server,
@@ -10,4 +11,4 @@
 			"not-registered"
 		end
 	)
-}) else "" end
+}) sort_by(.id) else empty end

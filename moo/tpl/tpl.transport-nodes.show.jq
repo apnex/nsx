@@ -7,4 +7,4 @@
 	"status": .status,
 	"state": .state,
 	"software_version": .software_version
-}) else "" end
+}) else empty end

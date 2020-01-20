@@ -3,4 +3,4 @@
 	"name": .display_name,
 	"host_switch_name": .host_switch_name,
 	"transport_type": .transport_type
-}) else "" end
+}) else empty end

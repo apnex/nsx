@@ -12,6 +12,6 @@ if (length > 0) then map({
 			.pnics | map(
 				[.device_name, .uplink_name] | join(":")
 			) | join(",")
-		else "" end
+		else empty end
 	)
-}) | sort_by(.id) else "" end
+}) | sort_by(.id) else empty end

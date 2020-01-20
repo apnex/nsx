@@ -5,4 +5,4 @@
 	"vlan": .vlan,
 	"admin_state": .admin_state,
 	"state" : .state
-}) else "" end
+}) else empty end

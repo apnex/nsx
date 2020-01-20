@@ -2,4 +2,4 @@
 	"id": .id,
 	"operation_state": .operation_state,
 	"request_status": .request_status
-}) else "" end
+}) else empty end

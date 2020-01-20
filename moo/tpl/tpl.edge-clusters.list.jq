@@ -5,6 +5,6 @@
 	"members": (.members? |
 		if (length > 0) then
 			.[] | .transport_node_id
-		else "" end
+		else empty end
 	)
-}) else "" end
+}) else empty end

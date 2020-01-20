@@ -3,4 +3,4 @@
 	"name": .display_name,
 	"resource_type": .resource_type,
 	"ip_addresses": .ip_addresses[0]
-}) else "" end
+}) else empty end

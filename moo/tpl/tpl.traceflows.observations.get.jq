@@ -12,6 +12,6 @@ if (length > 0) then map({
 			"Remote: " + .remote_ip_address
 		elif (.resource_type == "TraceflowObservationForwardedLogical") and (.acl_rule_id | length) != 0 then
 			"Rule-id: " + (.acl_rule_id | tostring)
-		else "" end
+		else empty end
 	)
-}) else "" end
+}) else empty end

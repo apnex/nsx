@@ -7,4 +7,4 @@ if (length > 0) then map({
 	"ip_addresses": [.ip_address_info[].ip_addresses[]] | join(","),
 	"mac_address": .mac_address,
 	"owner_vm_id": .owner_vm_id
-}) else "" end
+}) else empty end

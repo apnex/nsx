@@ -4,4 +4,4 @@
 	"resource_type": .resource_type,
 	"transport_vlan": .transport_vlan,
 	"mtu": .mtu
-}) else "" end
+}) else empty end

@@ -6,4 +6,4 @@ if (length > 0) then map({
 	"logical_switch_id": .logical_switch_id,
 	"admin_state": .admin_state,
 	"attachment_type": .attachment.attachment_type
-}) | sort_by(.name) else "" end
+}) | sort_by(.name) else empty end

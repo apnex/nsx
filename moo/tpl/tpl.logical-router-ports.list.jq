@@ -6,4 +6,4 @@
 	"mac_address": .mac_address,
 	"ip_address": .subnets[0].ip_addresses[0],
 	"prefix_length": .subnets[0].prefix_length
-}) else "" end
+}) else empty end
