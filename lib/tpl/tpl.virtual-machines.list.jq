@@ -8,7 +8,7 @@ if (length > 0) then map({
 	"tags": (.tags? |
 		if (length > 0) then
 			map([.scope, .tag] | join(":")) | join(",")
-		else empty end
+		else "" end
 	),
 	"power_state": .power_state,
 	"source_name": .source.target_display_name,
