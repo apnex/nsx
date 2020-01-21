@@ -19,18 +19,15 @@ SRCVIFID=${2}
 DSTVMID=${3}
 DSTVIFID=${4}
 function makeBody {
+	local SRCLP=$(${WORKDIR}/drv.logical-ports.list.sh | jq -r '.results | map(select(.attachment.id=="'${SRCVIFID}'")) | .[0].id')
 	local SRCVIF=$(${WORKDIR}/drv.vifs.list.sh | jq -r '.results | map(select(.lport_attachment_id=="'${SRCVIFID}'")) | .[0]')
 	local DSTVIF=$(${WORKDIR}/drv.vifs.list.sh | jq -r '.results | map(select(.lport_attachment_id=="'${DSTVIFID}'")) | .[0]')
-	# src <virtual-machine>
-	# src <vif>
-	# dst <virtual-machine>
-	# dst <vif>
-	# update to <vifs.address>
+	# work out routed:boolean
 	read -r -d '' BODY <<-CONFIG
 	{
 		"packet": {
 			"resource_type": "FieldsPacketData",
-			"routed": 0,
+			"routed": 1,
 			"eth_header": {
 				"src_mac": "$(echo ${SRCVIF} | jq -r '.mac_address')",
 				"dst_mac": "$(echo ${DSTVIF} | jq -r '.mac_address')"
@@ -40,12 +37,10 @@ function makeBody {
 				"dst_ip": "$(echo ${DSTVIF} | jq -r '.ip_address_info[0].ip_addresses[0]')"
 			}
 		},
-		"lport_id": "<logical-port.id>"
+		"lport_id": "${SRCLP}"
 	}
 	CONFIG
-	printf "${SRCVIF}" | jq -r '.' 1>&2
-	printf "${DSTVIF}" | jq -r '.' 1>&2
-	printf "${BODY}" | jq -r '.' 1>&2
+	printf "${BODY}"
 }
 
 # run
@@ -54,7 +49,7 @@ run() {
 	URL=$(buildURL "${ITEM}")
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "create")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
-		#nsxPost "${URL}" "${BODY}"
+		nsxPost "${URL}" "${BODY}"
 	fi
 }
 

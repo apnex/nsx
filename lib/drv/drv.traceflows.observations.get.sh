@@ -16,7 +16,7 @@ ID=${1}
 # run
 run() {
 	URL=$(buildURL "${ITEM}")
-	URL+="/${ID}/observations""
+	URL+="/${ID}/observations"
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "${URL}")]... " 1>&2
 		nsxGet "${URL}"
