@@ -2,21 +2,17 @@
 if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
-source ${WORKDIR}/drv.core
-if [ -z ${SDDCDIR} ]; then
-	SDDCDIR=${WORKDIR}
-fi
+source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="sddc"
+INPUTS=()
+
+# body
 PARAMS=$(cat ${SDDCDIR}/sddc.parameters)
 DOMAIN=$(echo "$PARAMS" | jq -r .domain)
 DNS=$(echo "$PARAMS" | jq -r .dns)
-
-# 1 get the parameters
-# 2 get API endpoint (via drv.client?)
-# 3 resolve endpoint
-# 3 ping the hostname || or if IP - ping the IP address
-# 4 get the SSL thumbprint
-# 5 attempt auth? maybe default command
 function buildItem {
 	local SPEC=${1}
 	local HOST=$(echo "${SPEC}" | jq -r '.hostname')
@@ -80,13 +76,18 @@ function buildItem {
 	fi
 }
 
-# convert to jq merge
-FINAL=""
-COMMA=""
-for KEY in $(echo "$PARAMS" | jq -c '.endpoints[]'); do
-	FINAL+="$COMMA"
-	FINAL+=$(buildItem "$KEY")
-	COMMA=","
-done
-printf "%s\n" "[${FINAL}]" | jq --tab . >"${STATEDIR}/sddc.status.json"
-printf "%s\n" "[${FINAL}]" | jq --tab .
+# run
+run() {
+	FINAL=""
+	COMMA=""
+	for KEY in $(echo "$PARAMS" | jq -c '.endpoints[]'); do
+		FINAL+="$COMMA"
+		FINAL+=$(buildItem "$KEY")
+		COMMA=","
+	done
+	printf "%s\n" "[${FINAL}]" | jq --tab . >"${STATEDIR}/sddc.status.json"
+	printf "%s\n" "[${FINAL}]" | jq --tab .
+}
+
+# driver
+driver "${@}"

@@ -166,7 +166,7 @@ function getFile {
 
 function getThumbprint {
 	local HOST="${1}"
-	local PAYLOAD=$(echo -n | openssl s_client -connect "${HOST}" 2>/dev/null)
+	local PAYLOAD=$(echo -n | timeout 3 openssl s_client -connect "${HOST}" 2>/dev/null)
 	local PRINT=$(echo "$PAYLOAD" | openssl x509 -noout -fingerprint -sha256)
 	local REGEX='^(.*)=(([0-9A-Fa-f]{2}[:])+([0-9A-Fa-f]{2}))$'
 	if [[ $PRINT =~ $REGEX ]]; then
@@ -178,7 +178,7 @@ function getThumbprint {
 
 function getCertificate {
 	local HOST="${1}"
-	local PAYLOAD=$(echo -n | openssl s_client -connect "${HOST}" 2>/dev/null)
+	local PAYLOAD=$(echo -n | timeout 3 openssl s_client -connect "${HOST}" 2>/dev/null)
 	local RESULT=$(echo "${PAYLOAD}" |  sed -e '1h;2,$H;$!d;g' -e 's/.*\(-----BEGIN\sCERTIFICATE-----.*-----END\sCERTIFICATE-----\).*/\1/g')
 	printf "%s\n" "$RESULT" | sed ':a;N;$!ba;s/\n/\\\\n/g'
 }
