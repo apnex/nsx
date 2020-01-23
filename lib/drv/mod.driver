@@ -2,6 +2,7 @@
 if [[ $(realpath $0) =~ ^(.*)/([^/]+)$ ]]; then
         WORKDIR=${BASH_REMATCH[1]}
 fi
+source ${WORKDIR}/mod.vals
 
 driver() {
 	case "${1}" in # switch
@@ -9,6 +10,9 @@ driver() {
 			for PARAM in ${INPUTS[@]}; do
 				printf "%s\n" "${PARAM}"
 			done
+		;;
+		keys)
+			valkeys
 		;;
 		*) # validate inputs here before run?
 			if [[ -n "${NSXHOST}" ]]; then

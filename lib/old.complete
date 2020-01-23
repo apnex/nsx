@@ -1,0 +1,95 @@
+#!/bin/bash
+_get_prompt() { ## re-print prompt
+	printf "\n${PS1@P}"
+	for ARG in ${COMP_WORDS[@]::${#COMP_WORDS[@]}-1}; do
+		printf "%s " "${ARG}" 1>&2
+	done
+	printf "${COMP_WORDS[-1]}"
+}
+_bind_set() {
+	#local REVERT=$(bind -v | sed -n "s/^set ${1} //p")
+	bind "set ${1} ${2}"
+	#OLDSETTINGS+="; bind 'set ${1} ${REVERT}'"
+}
+_temp_bind() { ## temporarily change a bunch of bind terminal settings
+	#local OLDSETTINGS
+        set -o emacs
+        #bind -x '"\C-r"':reset
+        #bind -x '"\C-r"':clear
+        #echo -e '\0033\0143'
+        #clear
+        #_get_prompt
+	_bind_set "completion-display-width" "0"
+	_bind_set "history-preserve-point" "on"
+	_bind_set "show-all-if-ambiguous" "on"
+	_bind_set "show-all-if-unmodified" "on"
+	_bind_set "colored-completion-prefix" "on"
+	_bind_set "colored-stats" "on"
+	_bind_set "page-completions" "off"
+	_bind_set "completion-query-items" "0"
+	_bind_set "skip-completed-text" "on"
+	#if [[ -n "${OLDSETTINGS}" ]]; then # reset bind settings to previous
+	#	PROMPT_COMMAND="PROMPT_COMMAND=$(printf %q "${PROMPT_COMMAND}")"
+	#	PROMPT_COMMAND+="${OLDSETTINGS}"
+	#fi
+}
+_temp_base_complete() {
+	local CMDFILE=$1
+	local CUR PRV
+	local ARRAY=()
+	COMPREPLY=()
+	CUR="${COMP_WORDS[COMP_CWORD]}"
+	PRV="${COMP_WORDS[COMP_CWORD-1]}"
+	CYAN='\033[0;36m' # cyan
+	NC='\033[0m' # no colour
+	BB='\u001B[94m' # blueBright
+	BBC='\u001B[39m' # close
+
+	#_temp_bind
+	local IFS=$'\n'
+
+	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
+		ARRAY=($(./cmd list 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+	else
+		local PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh params))
+		if [ "${#PARAMLIST[@]}" -ge 1 ]; then
+			local CURPARAM=${PARAMLIST[((COMP_CWORD-2))]}
+			if [[ -n ${CURPARAM} ]]; then
+				if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then # dynamic value
+					#printf "${BB}${CURPARAM}${BBC}" 1>&2
+					local ITEM="${BASH_REMATCH[1]}"
+					ARRAY=($(./link ${ITEM} 2>/dev/null)) # handle CRLF in tty
+				else # not a dynamic value
+					printf "${BB}{${CURPARAM}}${BBC}" 1>&2
+					_get_prompt
+				fi
+			fi
+		fi
+	fi
+
+	local HEADER="${ARRAY[0]}"
+	local VALUES=("${ARRAY[@]:1}")
+	local SUGGESTIONS=($(compgen -W "${VALUES[*]}" -- "${CUR}"))
+	if [ "${#SUGGESTIONS[@]}" -ge "2" ]; then # print header/values
+		if [[ -n ${CURPARAM} ]]; then
+			printf "${BB}${CURPARAM}${BBC}" 1>&2
+		fi
+		printf "\n${BB}${HEADER}${BBC}" 1>&2
+		for I in "${!SUGGESTIONS[@]}"; do
+			SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
+		done
+		COMPREPLY=("${SUGGESTIONS[@]}")
+	else
+		if [ "${#SUGGESTIONS[@]}" == "1" ]; then
+			local ID="${SUGGESTIONS[0]%%\ *}"
+			COMPREPLY=("$ID")
+		fi
+	fi
+
+	# parse link and call cmd
+	return 0
+}
+_nsx_complete() {
+	_temp_base_complete
+}
+complete -F _nsx_complete nsx

@@ -1,24 +1,35 @@
 #!/bin/bash
 _get_prompt() { ## re-print prompt
 	printf "\n${PS1@P}"
-	for ARG in ${COMP_WORDS[@]::${#COMP_WORDS[@]}-1}; do
+	for ARG in "${COMP_WORDS[@]::${#COMP_WORDS[@]}-1}"; do
 		printf "%s " "${ARG}" 1>&2
 	done
 	printf "${COMP_WORDS[-1]}"
 }
+_get_params() { ## re-print params
+	COUNTER=2; echo
+	for ARG in "${PARAMLIST[@]}"; do
+		VALUE=${COMP_WORDS[$((COUNTER++))]}
+		echo "${ARG}:${VALUE}"
+	done
+}
+_get_param() { ## re-print params
+	local KEY=${1}
+	local VALS=($(_get_params))
+	for ARG in "${VALS[@]}"; do
+		if [[ ${ARG} =~ ^([^:]+)\:(.*) ]]; then
+			if [[ "${BASH_REMATCH[1]}" == "${KEY}" ]]; then
+				#echo "--${ARG}--${BASH_REMATCH[1]}--${BASH_REMATCH[2]}--" 1>&2
+				echo "${BASH_REMATCH[2]}"
+			fi
+		fi
+	done
+}
 _bind_set() {
-	#local REVERT=$(bind -v | sed -n "s/^set ${1} //p")
 	bind "set ${1} ${2}"
-	#OLDSETTINGS+="; bind 'set ${1} ${REVERT}'"
 }
 _temp_bind() { ## temporarily change a bunch of bind terminal settings
-	#local OLDSETTINGS
         set -o emacs
-        #bind -x '"\C-r"':reset
-        #bind -x '"\C-r"':clear
-        #echo -e '\0033\0143'
-        #clear
-        #_get_prompt
 	_bind_set "completion-display-width" "0"
 	_bind_set "history-preserve-point" "on"
 	_bind_set "show-all-if-ambiguous" "on"
@@ -28,10 +39,44 @@ _temp_bind() { ## temporarily change a bunch of bind terminal settings
 	_bind_set "page-completions" "off"
 	_bind_set "completion-query-items" "0"
 	_bind_set "skip-completed-text" "on"
-	#if [[ -n "${OLDSETTINGS}" ]]; then # reset bind settings to previous
-	#	PROMPT_COMMAND="PROMPT_COMMAND=$(printf %q "${PROMPT_COMMAND}")"
-	#	PROMPT_COMMAND+="${OLDSETTINGS}"
-	#fi
+}
+_aparams() {
+	local PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh params))
+	if [ "${#PARAMLIST[@]}" -ge 1 ]; then
+		local CURPARAM=${PARAMLIST[((COMP_CWORD-2))]}
+		if [[ -n ${CURPARAM} ]]; then
+			if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then # dynamic value
+				#printf "${BB}${CURPARAM}${BBC}" 1>&2
+				local ITEM="${BASH_REMATCH[1]}"
+				ARRAY=($(./link ${ITEM} 2>/dev/null)) # handle CRLF in tty
+			else # not a dynamic value
+				printf "${BB}{${CURPARAM}}${BBC}" 1>&2
+				_get_prompt
+			fi
+		fi
+	fi
+}
+_params() {
+	PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh keys))
+	if [ "${#PARAMLIST[@]}" -ge 1 ]; then
+		CURKEY=${PARAMLIST[((COMP_CWORD-2))]}
+		if [[ -n ${CURKEY} ]]; then
+			CURPARAM=$(./drv/mod.vals get "${CURKEY}")
+			if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then # dynamic value
+				local ITEM="${BASH_REMATCH[1]}"
+				local FILTER
+				if [[ ${CURKEY} == "src-vif" ]]; then
+					printf "${BB}MOOOO{${CURPARAM}}${BBC}" 1>&2
+					FILTER=$(_get_param "src-vm" 2>/dev/null)
+				fi
+				#ARRAY=($(./link ${ITEM} filter ${FILTER} 2>/dev/null)) # handle CRLF in tty
+				ARRAY=($(./link ${ITEM} filter "owner_vm_id:${FILTER}")) # handle CRLF in tty
+			else # not a dynamic value
+				printf "${BB}{${CURKEY}}${BBC}" 1>&2
+				_get_prompt
+			fi
+		fi
+	fi
 }
 _temp_base_complete() {
 	local CMDFILE=$1
@@ -45,36 +90,28 @@ _temp_base_complete() {
 	BB='\u001B[94m' # blueBright
 	BBC='\u001B[39m' # close
 
-	#_temp_bind
+	_temp_bind
 	local IFS=$'\n'
+	local PARAMLIST
+	local CURPARAM
+	local CURKEY
 
 	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
 		ARRAY=($(./cmd list 2>/dev/null | tr -d '\r')) # handle CRLF in tty
-	else
-		local PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh params))
-		if [ "${#PARAMLIST[@]}" -ge 1 ]; then
-			local CURPARAM=${PARAMLIST[((COMP_CWORD-2))]}
-			if [[ -n ${CURPARAM} ]]; then
-				if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then # dynamic value
-					#printf "${BB}${CURPARAM}${BBC}" 1>&2
-					local ITEM="${BASH_REMATCH[1]}"
-					ARRAY=($(./link ${ITEM} 2>/dev/null)) # handle CRLF in tty
-				else # not a dynamic value
-					printf "${BB}{${CURPARAM}}${BBC}" 1>&2
-					_get_prompt
-				fi
-			fi
-		fi
+	else # resolve params
+		_params
 	fi
 
 	local HEADER="${ARRAY[0]}"
 	local VALUES=("${ARRAY[@]:1}")
 	local SUGGESTIONS=($(compgen -W "${VALUES[*]}" -- "${CUR}"))
 	if [ "${#SUGGESTIONS[@]}" -ge "2" ]; then # print header/values
-		if [[ -n ${CURPARAM} ]]; then
-			printf "${BB}${CURPARAM}${BBC}" 1>&2
+		if [[ -n ${CURKEY} ]]; then
+			printf "${BB}<${CURKEY}>${BBC}" 1>&2
+			_get_params
 		fi
-		printf "\n${BB}${HEADER}${BBC}" 1>&2
+		#echo
+		printf "${BB}${HEADER}${BBC}" 1>&2
 		for I in "${!SUGGESTIONS[@]}"; do
 			SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
 		done

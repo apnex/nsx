@@ -6,14 +6,15 @@ fi
 link() {
 	if [[ ${1} =~ ^([^.]+) ]]; then
 		local ITEM="${BASH_REMATCH[1]}"
-	fi
-	local FILE="cmd.${ITEM}.list.sh"
-	if [ -f "${WORKDIR}/${FILE}" ]; then
-		eval "${WORKDIR}/${FILE}"
+		local FILE="cmd.${ITEM}.list.sh"
+		if [ -f "${WORKDIR}/${FILE}" ]; then
+			echo "INPUTTTTT ${@:2}" 1>&2
+			eval "${WORKDIR}/${FILE}" "${@:2}"
+		fi
 	fi
 	exit 1
 }
 
-if [[ -n "$1" ]]; then
-	link ${@}
+if [[ -n ${1} ]]; then
+	link "${@}"
 fi
