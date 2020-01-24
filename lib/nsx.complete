@@ -6,71 +6,57 @@ _get_prompt() { ## re-print prompt
 	done
 	printf "${COMP_WORDS[-1]}"
 }
-_get_params() { ## re-print params
+_get_params() {
 	COUNTER=2; echo
 	for ARG in "${PARAMLIST[@]}"; do
 		VALUE=${COMP_WORDS[$((COUNTER++))]}
 		echo "${ARG}:${VALUE}"
 	done
 }
-_get_param() { ## re-print params
+_get_param() {
 	local KEY=${1}
 	local VALS=($(_get_params))
 	for ARG in "${VALS[@]}"; do
 		if [[ ${ARG} =~ ^([^:]+)\:(.*) ]]; then
 			if [[ "${BASH_REMATCH[1]}" == "${KEY}" ]]; then
-				#echo "--${ARG}--${BASH_REMATCH[1]}--${BASH_REMATCH[2]}--" 1>&2
 				echo "${BASH_REMATCH[2]}"
 			fi
 		fi
 	done
 }
-_bind_set() {
-	bind "set ${1} ${2}"
+_replace() {
+	local STRING=${1}
+	local VALS=($(_get_params))
+	for ARG in "${VALS[@]}"; do
+		if [[ ${ARG} =~ ^([^:]+)\:(.*) ]]; then
+			STRING=$(printf "${STRING}" | sed "s/{${BASH_REMATCH[1]}}/${BASH_REMATCH[2]}/g")
+		fi
+	done
+	printf "${STRING}"
 }
 _temp_bind() { ## temporarily change a bunch of bind terminal settings
         set -o emacs
-	_bind_set "completion-display-width" "0"
-	_bind_set "history-preserve-point" "on"
-	_bind_set "show-all-if-ambiguous" "on"
-	_bind_set "show-all-if-unmodified" "on"
-	_bind_set "colored-completion-prefix" "on"
-	_bind_set "colored-stats" "on"
-	_bind_set "page-completions" "off"
-	_bind_set "completion-query-items" "0"
-	_bind_set "skip-completed-text" "on"
-}
-_aparams() {
-	local PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh params))
-	if [ "${#PARAMLIST[@]}" -ge 1 ]; then
-		local CURPARAM=${PARAMLIST[((COMP_CWORD-2))]}
-		if [[ -n ${CURPARAM} ]]; then
-			if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then # dynamic value
-				#printf "${BB}${CURPARAM}${BBC}" 1>&2
-				local ITEM="${BASH_REMATCH[1]}"
-				ARRAY=($(./link ${ITEM} 2>/dev/null)) # handle CRLF in tty
-			else # not a dynamic value
-				printf "${BB}{${CURPARAM}}${BBC}" 1>&2
-				_get_prompt
-			fi
-		fi
-	fi
+	bind "set completion-display-width 0"
+	bind "set history-preserve-point on"
+	bind "set show-all-if-ambiguous on"
+	bind "set show-all-if-unmodified on"
+	bind "set colored-completion-prefix on"
+	bind "set colored-stats on"
+	bind "set page-completions off"
+	bind "set completion-query-items 0"
+	bind "set skip-completed-text on"
 }
 _params() {
-	PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh keys))
+	$(./drv/mod.vals "clear")
+	local PARAMLIST=($(./cmd.${COMP_WORDS[1]}.sh keys))
 	if [ "${#PARAMLIST[@]}" -ge 1 ]; then
 		CURKEY=${PARAMLIST[((COMP_CWORD-2))]}
 		if [[ -n ${CURKEY} ]]; then
-			CURPARAM=$(./drv/mod.vals get "${CURKEY}")
-			if [[ ${CURPARAM} =~ ^[\<]([^.]+).*[\>]$ ]]; then # dynamic value
-				local ITEM="${BASH_REMATCH[1]}"
-				local FILTER
-				if [[ ${CURKEY} == "src-vif" ]]; then
-					printf "${BB}MOOOO{${CURPARAM}}${BBC}" 1>&2
-					FILTER=$(_get_param "src-vm" 2>/dev/null)
-				fi
-				#ARRAY=($(./link ${ITEM} filter ${FILTER} 2>/dev/null)) # handle CRLF in tty
-				ARRAY=($(./link ${ITEM} filter "owner_vm_id:${FILTER}")) # handle CRLF in tty
+			CURPARAM=$(./drv/mod.vals get "${CURKEY}") # remove??
+			if [[ ${CURPARAM} =~ ^[\<](.+)[\>]$ ]]; then # dynamic value
+				local STRING="${BASH_REMATCH[1]}"
+				FILTER=$(_replace "${STRING}")
+				ARRAY=($(./drv.filter "${FILTER}" 2>/dev/null)) # handle CRLF in tty
 			else # not a dynamic value
 				printf "${BB}{${CURKEY}}${BBC}" 1>&2
 				_get_prompt
@@ -108,10 +94,9 @@ _temp_base_complete() {
 	if [ "${#SUGGESTIONS[@]}" -ge "2" ]; then # print header/values
 		if [[ -n ${CURKEY} ]]; then
 			printf "${BB}<${CURKEY}>${BBC}" 1>&2
-			_get_params
+			#_get_params
 		fi
-		#echo
-		printf "${BB}${HEADER}${BBC}" 1>&2
+		printf "\n${BB}${HEADER}${BBC}" 1>&2
 		for I in "${!SUGGESTIONS[@]}"; do
 			SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
 		done

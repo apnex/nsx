@@ -7,7 +7,6 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="fabric/compute-managers"
-INPUTS=()
 
 # run
 run() {

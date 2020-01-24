@@ -7,8 +7,7 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="edge-clusters"
-INPUTS=()
-INPUTS+=("<edge-clusters.id>")
+valset "edge-cluster" "<edge-clusters.id>"
 
 # body
 ID=${1}

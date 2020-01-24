@@ -8,7 +8,6 @@ link() {
 		local ITEM="${BASH_REMATCH[1]}"
 		local FILE="cmd.${ITEM}.list.sh"
 		if [ -f "${WORKDIR}/${FILE}" ]; then
-			echo "INPUTTTTT ${@:2}" 1>&2
 			eval "${WORKDIR}/${FILE}" "${@:2}"
 		fi
 	fi

@@ -7,7 +7,6 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="fabric/discovered-nodes"
-INPUTS=()
 
 # run
 run() {

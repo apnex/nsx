@@ -7,7 +7,6 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="edge-clusters"
-INPUTS=()
 
 # run
 run() {

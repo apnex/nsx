@@ -10,6 +10,9 @@ ITEM="traceflows"
 INPUTS=()
 INPUTS+=("<traceflows.id>")
 
+valclear
+valset "traceflow.id" "<traceflows.id>"
+
 # body
 ID=${1}
 

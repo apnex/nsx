@@ -244,17 +244,22 @@ function filter {
 		STRING=${STRING#*"${BASH_REMATCH[1]}"}
 		local FIELD="name"
 		local VALUE="."
-		if [[ $FILTER =~ ([^:]+):([^:]*) ]]; then
+		if [[ $FILTER =~ ([^:]+):([!]?)([^,]*) ]]; then
 			FIELD=${BASH_REMATCH[1]}
-			VALUE=${BASH_REMATCH[2]}
+			if [[ -n "${BASH_REMATCH[2]}" ]]; then
+				NEGATE="| not"
+			fi
+			VALUE=${BASH_REMATCH[3]}
 		else
 			VALUE="${FILTER}"
 		fi
 		read -r -d '' FILTERSPEC <<-CONFIG
 			map(select(
 				."$FIELD" |
-					if (. != null) then (. | tostring) else "" end
-				| test("$VALUE";"i")
+					if (. != null) then
+						(. | tostring)
+					else "" end
+				| test("$VALUE";"i") ${NEGATE}
 			))
 		CONFIG
 		PAYLOAD=$(echo "$PAYLOAD" | jq -r "$FILTERSPEC")

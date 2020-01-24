@@ -7,8 +7,7 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="logical-switches"
-INPUTS=()
-INPUTS+=("<logical-switches.id>")
+valset "logical-switch" "<logical-switches.id>"
 
 # body
 ID=${1}

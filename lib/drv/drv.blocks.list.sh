@@ -7,7 +7,6 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="pools/ip-blocks"
-INPUTS=()
 
 # run
 run() {

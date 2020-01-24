@@ -1,0 +1,65 @@
+#!/bin/bash
+if [[ $(realpath $0) =~ ^(.*)/([^/]+)$ ]]; then
+        WORKDIR=${BASH_REMATCH[1]}
+	FILE=${BASH_REMATCH[2]}
+fi
+
+# input examples
+#<vifs.id>
+#VALUE="<vifs.id;owner_vm_id:50335931-ea48-b88d-22a9-75c8cc10fb42>"
+#VALUE="virtual-machines.id;id:50335931-ea48-b88d-22a9-75c8cc10fb42"
+#VALUE="virtual-machines;id:50335931-ea48-b88d-22a9-75c8cc10fb42"
+#VALUE="virtual-machines.id"
+#VALUE="[UP,DOWN]"
+#<vifs.id;owner_vm_id:{src-vm};name>
+#<vifs.id;owner_vm_id:{src-vm},id:moo;name>
+#<vifs.id;owner_vm_id:{src-vm},id:moo;name>
+#<vifs.id;;name>
+#<vifs>
+#<vifs.id;;id>
+#<[one,two,three]>
+#<vifs.id;owner_vm_id:{src-vm},id:moo;name>
+
+link() {
+	if [[ ${1} =~ ^([^.]+) ]]; then
+		local ITEM="${BASH_REMATCH[1]}"
+		local FILE="cmd.${ITEM}.list.sh"
+		if [ -f "${WORKDIR}/${FILE}" ]; then
+			eval "${WORKDIR}/${FILE}" "${@:2}"
+		fi
+	fi
+	exit 1
+}
+
+filterrun() {
+	local VALUE=${1}
+	if [[ ${VALUE} =~ ^[[](.*)[]]$ ]]; then
+		local IFS=',';
+		echo "<enum>"
+		for I in ${BASH_REMATCH[1]}; do
+			echo "${I}"
+		done
+	else
+		PATTERN="^[^;]+\;[^;]*$"
+		if [[ ! ${VALUE} =~ ${PATTERN} ]]; then
+			VALUE+=";"
+		fi
+		if [[ ${VALUE} =~ ^([^;]+)\;([^;]*)$ ]]; then
+			ITEM="${BASH_REMATCH[1]}"
+			FILTER="${BASH_REMATCH[2]}"
+			local TYPE
+			local KEY
+			PATTERN="^([^.]+)\.([^.]+)$"
+			if [[ ${ITEM} =~ ${PATTERN} ]]; then
+				TYPE="${BASH_REMATCH[1]}"
+				KEY="${BASH_REMATCH[2]}"
+			else
+				TYPE="${ITEM}"
+				KEY="id"
+			fi
+			link "${ITEM}" filter "${FILTER}"
+		fi
+	fi
+}
+
+filterrun "${1}"

@@ -8,18 +8,52 @@ source ${WORKDIR}/mod.driver
 # inputs
 ITEM="traceflows"
 INPUTS=()
-INPUTS+=("traceflow.spec")
-INPUTS+=("<logical-ports.id>")
+INPUTS+=("<virtual-machines.id>")
+INPUTS+=("<vifs.id>")
+INPUTS+=("<virtual-machines.id>")
+INPUTS+=("<vifs.id>")
+
+# input examples
+#<vifs.id>
+#<vifs.id;owner_vm_id:{src-vm}>
+#<vifs.id;owner_vm_id:{src-vm};name>
+#<vifs.id;owner_vm_id:{src-vm},id:moo;name>
+#<vifs.id;owner_vm_id:{src-vm},id:moo;name>
+#<vifs.id;;name>
+#<[one,two,three]>
+
+valset "src-vm" "<virtual-machines.id>"
+valset "src-vif" "<vifs.id;owner_vm_id:{src-vm}>"
+valset "dst-vm" "<virtual-machines.id;id:!{src-vm}>"
+valset "dst-vif" "<vifs.id;owner_vm_id:{dst-vm}>"
 
 # body
-SPEC=${1}
-PORT=${2}
+SRCVMID=${1}
+SRCVIFID=${2}
+DSTVMID=${3}
+DSTVIFID=${4}
 function makeBody {
-	MYSPEC=$(<${SPEC})
-	read -r -d '' JQSPEC <<-CONFIG
-		.lport_id = "${PORT}"
+	local SRCLP=$(${WORKDIR}/drv.logical-ports.list.sh 2>/dev/null | jq -r '.results | map(select(.attachment.id=="'${SRCVIFID}'")) | .[0].id')
+	local SRCVIF=$(${WORKDIR}/drv.vifs.list.sh 2>/dev/null | jq -r '.results | map(select(.lport_attachment_id=="'${SRCVIFID}'")) | .[0]')
+	local DSTVIF=$(${WORKDIR}/drv.vifs.list.sh 2>/dev/null | jq -r '.results | map(select(.lport_attachment_id=="'${DSTVIFID}'")) | .[0]')
+	# work out routed:boolean
+	read -r -d '' BODY <<-CONFIG
+	{
+		"packet": {
+			"resource_type": "FieldsPacketData",
+			"routed": 1,
+			"eth_header": {
+				"src_mac": "$(echo ${SRCVIF} | jq -r '.mac_address')",
+				"dst_mac": "$(echo ${DSTVIF} | jq -r '.mac_address')"
+			},
+			"ip_header": {
+				"src_ip": "$(echo ${SRCVIF} | jq -r '.ip_address_info[0].ip_addresses[0]')",
+				"dst_ip": "$(echo ${DSTVIF} | jq -r '.ip_address_info[0].ip_addresses[0]')"
+			}
+		},
+		"lport_id": "${SRCLP}"
+	}
 	CONFIG
-	local BODY=$(echo "${MYSPEC}" | jq -r "$JQSPEC")
 	printf "${BODY}"
 }
 

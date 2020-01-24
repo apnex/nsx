@@ -51,12 +51,12 @@ valset() {
 		echo "[]" >${FILE}
 	fi
 	local BODY=$(<${FILE})
-	read -r -d '' JQSPEC <<-CONFIG; BODY=$(printf "${BODY}" | jq --tab -r "${JQSPEC}")
-		. |= (
-			del(.[] | select(.name=="${NAME}"))
-		)
-	CONFIG
-	if [[ -n ${LINK} ]]; then
+	if [[ -n ${NAME} ]]; then
+		read -r -d '' JQSPEC <<-CONFIG; BODY=$(printf "${BODY}" | jq --tab -r "${JQSPEC}")
+			. |= (
+				del(.[] | select(.name=="${NAME}"))
+			)
+		CONFIG
 		read -r -d '' JQSPEC <<-CONFIG; BODY=$(printf "${BODY}" | jq --tab -r "${JQSPEC}")
 			. |= (
 				. += [{

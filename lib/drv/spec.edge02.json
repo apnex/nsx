@@ -1,0 +1,50 @@
+{
+	"node_deployment_info": {
+		"node_settings": {
+			"hostname": "nsx-edge02",
+			"dns_servers": [
+				"172.16.10.1"
+			],
+			"ntp_servers": [
+				"172.16.10.1"
+			],
+			"enable_ssh": true,
+			"allow_ssh_root_login": true
+		},
+		"deployment_config": {
+			"vm_deployment_config": {
+				"vc_id": "<compute-manager.id>",
+				"compute_id": "domain-c7",
+				"host_id": "host-54",
+				"storage_id": "datastore-55",
+				"management_network_id": "dvportgroup-22",
+				"management_port_subnets": [
+					{
+						"ip_addresses": [
+							"172.16.10.20"
+						],
+						"prefix_length": 24
+					}
+				],
+				"default_gateway_addresses": [
+					"172.16.10.1"
+				],
+				"data_network_ids": [
+					"dvportgroup-23",
+					"dvportgroup-23",
+					"dvportgroup-23"
+				],
+				"placement_type": "VsphereDeploymentConfig"
+			},
+			"form_factor": "SMALL",
+			"node_user_settings": {
+				"cli_username": "admin",
+				"root_password": "VMware1!VMware1!",
+				"cli_password": "VMware1!VMware1!"
+			}
+		},
+		"resource_type": "EdgeNode"
+	},
+	"resource_type": "TransportNode",
+	"display_name": "nsx-edge02"
+}

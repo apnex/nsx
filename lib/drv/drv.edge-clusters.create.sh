@@ -7,8 +7,7 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="edge-clusters"
-INPUTS=()
-INPUTS+=("edge-cluster.name")
+valset "edge-cluster.name"
 
 # body
 CLSTNAME=$1

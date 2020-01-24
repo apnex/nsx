@@ -3,10 +3,10 @@
 		"node_settings": {
 			"hostname": "nsx-edge01",
 			"dns_servers": [
-				"172.16.101.140"
+				"172.16.10.1"
 			],
 			"ntp_servers": [
-				"172.16.101.140"
+				"172.16.10.1"
 			],
 			"enable_ssh": true,
 			"allow_ssh_root_login": true
@@ -15,13 +15,13 @@
 			"vm_deployment_config": {
 				"vc_id": "<compute-manager.id>",
 				"compute_id": "domain-c7",
-				"host_id": "host-12",
-				"storage_id": "datastore-13",
-				"management_network_id": "dvportgroup-28",
+				"host_id": "host-54",
+				"storage_id": "datastore-55",
+				"management_network_id": "dvportgroup-22",
 				"management_port_subnets": [
 					{
 						"ip_addresses": [
-							"172.16.10.19"
+							"172.16.10.20"
 						],
 						"prefix_length": 24
 					}
@@ -30,9 +30,9 @@
 					"172.16.10.1"
 				],
 				"data_network_ids": [
-					"dvportgroup-29",
-					"dvportgroup-29",
-					"dvportgroup-29"
+					"dvportgroup-23",
+					"dvportgroup-23",
+					"dvportgroup-23"
 				],
 				"placement_type": "VsphereDeploymentConfig"
 			},

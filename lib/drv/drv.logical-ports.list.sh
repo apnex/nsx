@@ -7,7 +7,6 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="logical-ports"
-INPUTS=()
 
 # run
 run() {

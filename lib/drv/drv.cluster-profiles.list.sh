@@ -7,7 +7,6 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="cluster-profiles"
-INPUTS=()
 
 # run
 run() {

@@ -7,10 +7,9 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="logical-switches"
-INPUTS=()
-INPUTS+=("logical-switch.name")
-INPUTS+=("<transport-zones.id>")
-INPUTS+=("vlan")
+valset "logical-switch.name"
+valset "transport-zone" "<transport-zones.id>"
+valset "vlan"
 
 # body
 SWNAME=${1}

@@ -14,6 +14,9 @@ function cmd {
 		params)
 			$(drv "${TYPE}") "params" # link to drv
 		;;
+		keys)
+			$(drv "${TYPE}") "keys" # link to drv
+		;;
 		watch)
 			watch -t -c -n 3 "${WORKDIR}/${FILE} 2>/dev/null"
 		;;
