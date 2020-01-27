@@ -3,6 +3,7 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.vsp.client
+source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/mod.driver
 
 # inputs
@@ -15,7 +16,7 @@ function getVC {
 	read -r -d '' JQSPEC <<-CONFIG
 		.results[] | select(.server=="${VSPHOST}").id
 	CONFIG
-	local CMANAGER=$(${WORKDIR}/drv.compute-manager.list.sh 2>/dev/null | jq -r "$JQSPEC")
+	local CMANAGER=$(${WORKDIR}/drv.compute-managers.list.sh 2>/dev/null | jq -r "$JQSPEC")
 	if [[ -n "${CMANAGER}" ]]; then
 		printf "[$(cgreen "INFO")]: found [$(cgreen "compute-manager")] name [$(cgreen "${VSPHOST}")] uuid [$(cgreen "${CMANAGER}")]\n" 1>&2
 		printf "${CMANAGER}"
@@ -24,7 +25,7 @@ function getVC {
 	fi
 }
 function makeBody {
-	MYSPEC=$(cat "${SPEC}")
+	MYSPEC=$(<${SPEC})
 	read -r -d '' JQSPEC <<-CONFIG
 		.node_deployment_info.deployment_config.vm_deployment_config.vc_id = "${1}"
 	CONFIG

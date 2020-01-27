@@ -7,8 +7,7 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="logical-routers"
-INPUTS=()
-INPUTS+=("<logical-routers.id>")
+valset "logical-router" "<logical-routers.id>"
 
 # body
 ID=${1}

@@ -3,4 +3,4 @@
 	"name": .display_name,
 	"router_type": .router_type,
 	"ha_mode": .high_availability_mode
-}) else empty end
+}) | sort_by(.name) else empty end

@@ -1,0 +1,10 @@
+[
+	{
+		"name": "logical-router.name",
+		"link": ""
+	},
+	{
+		"name": "logical-router.type",
+		"link": "<[t0,t1]>"
+	}
+]

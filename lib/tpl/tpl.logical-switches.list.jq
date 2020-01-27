@@ -5,4 +5,4 @@ if (length > 0) then map({
 	"vni": .vni,
 	"vlan": .vlan,
 	"admin_state": .admin_state
-}) else empty end
+}) | sort_by(.name) else empty end

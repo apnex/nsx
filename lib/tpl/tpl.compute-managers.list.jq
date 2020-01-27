@@ -11,4 +11,4 @@ if (length > 0) then map({
 			"not-registered"
 		end
 	)
-}) sort_by(.id) else empty end
+}) | sort_by(.id) else empty end

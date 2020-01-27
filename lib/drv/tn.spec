@@ -1,26 +1,22 @@
 {
-	"node_id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
+	"node_id": "4de31359-6846-4e3f-b3b7-83fa2bf6a308",
 	"host_switches": [
 		{
 			"host_switch_name": "hs-fabric",
 			"host_switch_profile_ids": [
 				{
 					"key": "UplinkHostSwitchProfile",
-					"value": "5f8dfef2-fa80-4f7e-bc23-70692cb0dbba"
+					"value": "f48d95b9-f3cd-49d3-9778-755cb486cc2b"
 				},
 				{
 					"key": "LldpHostSwitchProfile",
 					"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb"
-				},
-				{
-					"key": "NiocProfile",
-					"value": "8cb3de94-2834-414c-b07d-c034d878db56"
 				}
 			],
 			"pnics": [
 				{
-					"device_name": "vmnic1",
-					"uplink_name": "uplink2"
+					"device_name": "fp-eth0",
+					"uplink_name": "uplink1"
 				}
 			],
 			"static_ip_pool_id": "495e5dcc-3478-4256-ae4d-04e7dc1ad83e"
@@ -33,24 +29,16 @@
 				"host_switch_profile_ids": [
 					{
 						"key": "UplinkHostSwitchProfile",
-						"value": "5f8dfef2-fa80-4f7e-bc23-70692cb0dbba"
+						"value": "f48d95b9-f3cd-49d3-9778-755cb486cc2b"
 					},
 					{
 						"key": "LldpHostSwitchProfile",
 						"value": "9e0b4d2d-d155-4b4b-8947-fbfe5b79f7cb"
-					},
-					{
-						"key": "NiocProfile",
-						"value": "8cb3de94-2834-414c-b07d-c034d878db56"
 					}
 				],
 				"pnics": [
 					{
-						"device_name": "vmnic1",
-						"uplink_name": "uplink2"
-					},
-					{
-						"device_name": "vmnic0",
+						"device_name": "fp-eth0",
 						"uplink_name": "uplink1"
 					}
 				],
@@ -90,40 +78,83 @@
 	],
 	"maintenance_mode": "DISABLED",
 	"node_deployment_info": {
-		"os_type": "ESXI",
-		"os_version": "6.7.0",
-		"managed_by_server": "172.16.100.45",
-		"discovered_node_id": "09c7e969-e0f4-4a7e-a880-cf710c9669ec:host-115",
-		"resource_type": "HostNode",
-		"id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
-		"display_name": "tn-esx03.lab",
-		"external_id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
-		"fqdn": "esx03.lab",
+		"deployment_type": "VIRTUAL_MACHINE",
+		"deployment_config": {
+			"vm_deployment_config": {
+				"vc_id": "09c7e969-e0f4-4a7e-a880-cf710c9669ec",
+				"compute_id": "domain-c7",
+				"storage_id": "datastore-55",
+				"host_id": "host-54",
+				"management_network_id": "dvportgroup-22",
+				"management_port_subnets": [
+					{
+						"ip_addresses": [
+							"172.16.10.19"
+						],
+						"prefix_length": 24
+					}
+				],
+				"default_gateway_addresses": [
+					"172.16.10.1"
+				],
+				"hostname": "nsx-edge02",
+				"data_network_ids": [
+					"dvportgroup-23",
+					"dvportgroup-23",
+					"dvportgroup-23"
+				],
+				"ntp_servers": [
+					"172.16.10.1"
+				],
+				"dns_servers": [
+					"172.16.10.1"
+				],
+				"enable_ssh": true,
+				"allow_ssh_root_login": true,
+				"placement_type": "VsphereDeploymentConfig"
+			},
+			"form_factor": "SMALL",
+			"node_user_settings": {
+				"cli_username": "admin"
+			}
+		},
+		"node_settings": {
+			"hostname": "nsx-edge02",
+			"ntp_servers": [
+				"172.16.10.1"
+			],
+			"dns_servers": [
+				"172.16.10.1"
+			],
+			"enable_ssh": true,
+			"allow_ssh_root_login": true
+		},
+		"resource_type": "EdgeNode",
+		"id": "4de31359-6846-4e3f-b3b7-83fa2bf6a308",
+		"display_name": "tn-edge02",
+		"external_id": "4de31359-6846-4e3f-b3b7-83fa2bf6a308",
 		"ip_addresses": [
-			"172.16.10.103"
-		],
-		"discovered_ip_addresses": [
-			"172.16.10.103",
-			"169.254.1.1",
-			"192.168.12.13"
+			"172.16.10.19"
 		],
 		"_create_user": "admin",
-		"_create_time": 1579500265415,
+		"_create_time": 1580117211117,
 		"_last_modified_user": "admin",
-		"_last_modified_time": 1579501341964,
+		"_last_modified_time": 1580118047228,
+		"_system_owned": false,
 		"_protection": "NOT_PROTECTED",
 		"_revision": 3
 	},
 	"is_overridden": false,
+	"failure_domain_id": "4fc1e3b0-1cd4-4339-86c8-f76baddbaafb",
 	"resource_type": "TransportNode",
-	"id": "e57c57de-50ad-4a8a-bed0-c4055c3c4ffe",
-	"display_name": "tn-esx03.lab",
+	"id": "4de31359-6846-4e3f-b3b7-83fa2bf6a308",
+	"display_name": "tn-edge02",
 	"description": "NSX configured Test Transport Node",
 	"_create_user": "admin",
-	"_create_time": 1579500265684,
+	"_create_time": 1580117211184,
 	"_last_modified_user": "admin",
-	"_last_modified_time": 1579501341992,
+	"_last_modified_time": 1580118047256,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
-	"_revision": 3
+	"_revision": 2
 }

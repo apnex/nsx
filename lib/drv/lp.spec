@@ -1,11 +1,11 @@
 {
-	"logical_switch_id": "2eaa8fff-17f5-44b9-a02c-75d83f3f8f60",
+	"logical_switch_id": "4ce44ac3-3499-4573-9e84-a8151d4ab4be",
 	"admin_state": "UP",
 	"address_bindings": [],
 	"switching_profile_ids": [
 		{
 			"key": "SwitchSecuritySwitchingProfile",
-			"value": "fbc4fb17-83d9-4b53-a286-ccdf04301888"
+			"value": "47ffda0e-035f-4900-83e4-0a2086813ede"
 		},
 		{
 			"key": "SpoofGuardSwitchingProfile",
@@ -30,12 +30,14 @@
 	],
 	"ignore_address_bindings": [],
 	"resource_type": "LogicalPort",
-	"id": "1d6144be-4899-45cb-a0f9-e617cee87bc7",
-	"display_name": "web03/web03.vmx@9c442210-85cb-4407-875f-a31a3818ace0",
-	"_create_user": "system",
-	"_create_time": 1578967443171,
-	"_last_modified_user": "system",
-	"_last_modified_time": 1578967443171,
+	"id": "5ad46741-443e-471c-b026-6ea2de2f700b",
+	"display_name": "ls-app - DHCP Server Port",
+	"description": "",
+	"tags": [],
+	"_create_user": "admin",
+	"_create_time": 1579501787858,
+	"_last_modified_user": "admin",
+	"_last_modified_time": 1579501787858,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
 	"_revision": 0

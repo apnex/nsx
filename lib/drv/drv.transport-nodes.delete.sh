@@ -7,8 +7,7 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="transport-nodes"
-INPUTS=()
-INPUTS+=("<transport-nodes.id.id>")
+valset "transport-node" "<transport-nodes.id>"
 
 # body
 ID=${1}

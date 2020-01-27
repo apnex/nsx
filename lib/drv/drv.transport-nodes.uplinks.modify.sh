@@ -7,10 +7,9 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="transport-nodes"
-INPUTS=()
-INPUTS+=("<transport-nodes.id>")
-INPUTS+=("vmnic.id")
-INPUTS+=("uplink.name")
+valset "transport-node" "<transport-nodes.id>"
+valset "vmnic.id"
+valset "uplink.name"
 
 # body
 TNID=${1}

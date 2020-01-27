@@ -6,7 +6,7 @@ source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/mod.driver
 
 # inputs
-ITEM="logical-routers"
+ITEM="dhcp/servers"
 
 # run
 run() {

@@ -97,9 +97,9 @@ _temp_base_complete() {
 			#_get_params
 		fi
 		printf "\n${BB}${HEADER}${BBC}" 1>&2
-		for I in "${!SUGGESTIONS[@]}"; do
-			SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
-		done
+		#for I in "${!SUGGESTIONS[@]}"; do
+		#	SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
+		#done
 		COMPREPLY=("${SUGGESTIONS[@]}")
 	else
 		if [ "${#SUGGESTIONS[@]}" == "1" ]; then
@@ -107,11 +107,9 @@ _temp_base_complete() {
 			COMPREPLY=("$ID")
 		fi
 	fi
-
-	# parse link and call cmd
 	return 0
 }
 _nsx_complete() {
 	_temp_base_complete
 }
-complete -F _nsx_complete nsx
+complete -o nosort -F _nsx_complete nsx

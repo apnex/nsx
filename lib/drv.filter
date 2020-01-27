@@ -21,7 +21,8 @@ fi
 #<vifs.id;owner_vm_id:{src-vm},id:moo;name>
 
 link() {
-	if [[ ${1} =~ ^([^.]+) ]]; then
+	#if [[ ${1} =~ ^([^.]+) ]]; then
+	if [[ ${1} =~ ^(.+)([.][^.]*)$ ]]; then
 		local ITEM="${BASH_REMATCH[1]}"
 		local FILE="cmd.${ITEM}.list.sh"
 		if [ -f "${WORKDIR}/${FILE}" ]; then
@@ -49,7 +50,7 @@ filterrun() {
 			FILTER="${BASH_REMATCH[2]}"
 			local TYPE
 			local KEY
-			PATTERN="^([^.]+)\.([^.]+)$"
+			PATTERN="^(.+)\.([^.]+)$"
 			if [[ ${ITEM} =~ ${PATTERN} ]]; then
 				TYPE="${BASH_REMATCH[1]}"
 				KEY="${BASH_REMATCH[2]}"
@@ -57,6 +58,7 @@ filterrun() {
 				TYPE="${ITEM}"
 				KEY="id"
 			fi
+			ITEM="${TYPE}.${KEY}"
 			link "${ITEM}" filter "${FILTER}"
 		fi
 	fi

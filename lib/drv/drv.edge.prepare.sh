@@ -3,16 +3,16 @@ if [[ $0 =~ ^(.*)/[^/]+$ ]]; then
 	WORKDIR=${BASH_REMATCH[1]}
 fi
 source ${WORKDIR}/drv.nsx.client
+source ${WORKDIR}/mod.driver
 
+# inputs
+ITEM="transport-nodes"
+valset "transport-node.name"
+valset "transport-node.id" "<nodes.id>"
+
+# body
 TNNAME=$1
 TNID=$2
-
-function addTZ {
-	local TZID="${1}"
-	## code to add a TZ to a TransportNode
-	## leverage mod.core value obtain/resolve
-}
-
 function makeBody {
 	# get vlan and overlay tzs
 	TZRESULT=$(${WORKDIR}/drv.transport-zones.list.sh 2>/dev/null)
@@ -24,7 +24,7 @@ function makeBody {
 	PFUPLINK=$(echo "${PFRESULT}" | jq -r '.results | map(select(.display_name=="pf-edge").id) | .[0]')
 
 	# get tep pool
-	PLRESULT=$(${WORKDIR}/drv.pool.list.sh 2>/dev/null)
+	PLRESULT=$(${WORKDIR}/drv.pools.list.sh 2>/dev/null)
 	PLTEP=$(echo "${PLRESULT}" | jq -r '.results | map(select(.display_name=="pool-tep").id) | .[0]')
 
 	# prepare with single pnic
@@ -69,19 +69,17 @@ function makeBody {
 	local BASEBODY=$(${WORKDIR}/drv.transport-nodes.list.sh 2>/dev/null | jq --tab '.results | map(select(.node_id=="'${TNID}'")) | .[0]')
 	local MYNODE="$(echo "${BASEBODY}${BODY}" | jq -s '. | add')"
 	printf "${MYNODE}"
-	printf "%s\n" "${MYNODE}" 1>&2
 }
 
-if [[ -n "${TNNAME}" && "${TNID}" ]]; then
-	if [[ -n "${NSXHOST}" ]]; then
-		BODY=$(makeBody)
-		ITEM="transport-nodes/${TNID}"
-		URL=$(buildURL "${ITEM}")
-		if [[ -n "${URL}" ]]; then
-			printf "[$(cgreen "INFO")]: nsx [$(cgreen "update")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-			nsxPut "${URL}" "${BODY}"
-		fi
+run() {
+	BODY=$(makeBody)
+	URL=$(buildURL "${ITEM}")
+	URL+="/${TNID}"
+	if [[ -n "${URL}" ]]; then
+		printf "[$(cgreen "INFO")]: nsx [$(cgreen "update")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
+		nsxPut "${URL}" "${BODY}"
 	fi
-else
-	printf "[$(corange "ERROR")]: command usage: $(cgreen "transport-nodes.prepare") $(ccyan "<transport-node.name> <transport-node.id>")\n" 1>&2
-fi
+}
+
+# driver
+driver "${@}"

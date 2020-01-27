@@ -7,8 +7,7 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="logical-ports"
-INPUTS=()
-INPUTS+=("<logical-ports.id>")
+valset "logical-port" "<logical-ports.id;attachment_type:.>"
 
 # body
 RPID=${1}

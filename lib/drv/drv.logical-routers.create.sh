@@ -7,9 +7,8 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="logical-routers"
-INPUTS=()
-INPUTS+=("logical-router.name")
-INPUTS+=("logical-router.type")
+valset "logical-router.name"
+valset "logical-router.type" "<[TIER0,TIER1]>"
 
 # body
 RTNAME=${1}
@@ -19,15 +18,15 @@ function makeBody {
 	local EDGECLUSTER=$(${WORKDIR}/drv.edge-clusters.list.sh 2>/dev/null)
 	local EDGEID=$(echo "${EDGECLUSTER}" | jq -r '.results | map(select(.display_name=="edge-cluster").id) | .[0]')
 
-	local TYPE=""
-	case "${RTTYPE}" in
-		"t0")
-			TYPE="TIER0"
-		;;
-		"t1")
-			TYPE="TIER1"
-		;;
-	esac
+	#local TYPE=""
+	#case "${RTTYPE}" in
+	#	"t0")
+	#		TYPE="TIER0"
+	#	;;
+	#	"t1")
+	#		TYPE="TIER1"
+	#	;;
+	#esac
 	read -r -d '' BODY <<-CONFIG
 	{
 		"resource_type": "LogicalRouter",
@@ -39,8 +38,9 @@ function makeBody {
 			],
 			"internal_transit_network": "169.254.0.0/28"
 		},
-		"router_type": "${TYPE}",
-		"high_availability_mode": "ACTIVE_STANDBY"
+		"router_type": "${RTTYPE}",
+		"high_availability_mode": "ACTIVE_STANDBY",
+		"edge_cluster_id": "${EDGEID}"
 	}
 	CONFIG
 	printf "${BODY}"
