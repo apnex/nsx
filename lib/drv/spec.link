@@ -1,10 +1,6 @@
 [
 	{
-		"name": "logical-router.name",
-		"link": ""
-	},
-	{
-		"name": "logical-router.type",
-		"link": "<[t0,t1]>"
+		"name": "tier1-router",
+		"link": "<logical-routers.id;router_type:TIER1>"
 	}
 ]

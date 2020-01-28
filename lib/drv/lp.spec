@@ -1,5 +1,5 @@
 {
-	"logical_switch_id": "4ce44ac3-3499-4573-9e84-a8151d4ab4be",
+	"logical_switch_id": "2eaa8fff-17f5-44b9-a02c-75d83f3f8f60",
 	"admin_state": "UP",
 	"address_bindings": [],
 	"switching_profile_ids": [
@@ -30,15 +30,13 @@
 	],
 	"ignore_address_bindings": [],
 	"resource_type": "LogicalPort",
-	"id": "5ad46741-443e-471c-b026-6ea2de2f700b",
-	"display_name": "ls-app - DHCP Server Port",
-	"description": "",
-	"tags": [],
+	"id": "f599a980-ac7d-440a-9706-085efdeb3a3e",
+	"display_name": "f599a980-ac7d-440a-9706-085efdeb3a3e",
 	"_create_user": "admin",
-	"_create_time": 1579501787858,
-	"_last_modified_user": "admin",
-	"_last_modified_time": 1579501787858,
+	"_create_time": 1578448387702,
+	"_last_modified_user": "system",
+	"_last_modified_time": 1579333677524,
 	"_system_owned": false,
 	"_protection": "NOT_PROTECTED",
-	"_revision": 0
+	"_revision": 3
 }

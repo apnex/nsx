@@ -8,7 +8,7 @@ source ${WORKDIR}/mod.driver
 # inputs
 ITEM="edge-clusters"
 valset "edge-cluster" "<edge-clusters.id>"
-valset "edge-node" "<nodes.id>"
+valset "edge-node" "<transport-nodes.id;resource_type:EdgeNode>"
 
 # body
 ECID=${1}

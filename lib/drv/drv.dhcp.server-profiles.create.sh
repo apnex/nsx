@@ -6,22 +6,19 @@ source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/mod.driver
 
 # inputs
-ITEM="logical-ports"
-valset "logical-switch" "<logical-switches.id>"
-valset "admin.state" "<[UP,DOWN]>"
-valset "logical-port.name"
+ITEM="dhcp/server-profiles"
+valset "edge-cluster" "<edge-clusters.id>"
+valset "dhcp-profile.name"
 
 # body
-LSID=${1}
-ADMINSTATE=${2}
-LPNAME=${3}
+CLSTID=${1}
+NAME=${2}
 function makeBody {
-	## check existing port?
 	read -r -d '' BODY <<-CONFIG
 	{
-		"logical_switch_id": "${LSID}",
-		"admin_state": "${ADMINSTATE}",
-		"display_name": "${LPNAME}"
+		"display_name" : "${NAME}",
+		"edge_cluster_id" : "${CLSTID}",
+		"enable_standby_relocation" : true
 	}
 	CONFIG
 	printf "${BODY}"

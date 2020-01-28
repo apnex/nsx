@@ -7,18 +7,20 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="logical-router-ports"
-INPUTS=()
-INPUTS+=("<logical-routers.id>")
-INPUTS+=("<logical-ports.id>")
-INPUTS+=("logical-router-port.prefix")
-INPUTS+=("logical-router-port.name")
+valset "logical-router" "<logical-routers.id>"
+valset "logical-port" "<logical-ports.id;attachment_type:^$>"
+valset "router-port.type" "<[LogicalRouterUpLinkPort,LogicalRouterDownLinkPort]>"
+valset "edge.index" "<[0,1]>"
+valset "router-port.prefix"
+valset "router-port.name"
 
 # body
 LRID=${1}
 LPID=${2}
-RPADDR=${3}
-RPNAME=${4}
-
+RPTYPE=${3}
+EINDEX=${4}
+RPADDR=${5}
+RPNAME=${6}
 function makeBody {
 	## check existing port?
 	#local EDGECLUSTER=$(${WORKDIR}/drv.edge-clusters.list.sh 2>/dev/null)
@@ -29,12 +31,10 @@ function makeBody {
 		local IPADDR="${BASH_REMATCH[1]}"
 		local PREFIX="${BASH_REMATCH[2]}"
 	fi
-	local TYPE="LogicalRouterDownLinkPort"
-	#local TYPE="LogicalRouterUpLinkPort"
 	read -r -d '' BODY <<-CONFIG
 	{
 		"logical_router_id": "${LRID}",
-		"resource_type": "${TYPE}",
+		"resource_type": "${RPTYPE}",
 		"display_name": "${RPNAME}",
 		"linked_logical_switch_port_id": {
 			"target_type": "LogicalPort",
@@ -47,6 +47,9 @@ function makeBody {
 				],
 				"prefix_length": "${PREFIX}"
 			}
+		],
+		"edge_cluster_member_index": [
+			"${EINDEX}"
 		]
 	}
 	CONFIG
