@@ -42,7 +42,7 @@ _temp_bind() { ## temporarily change a bunch of bind terminal settings
 	bind "set show-all-if-unmodified on"
 	bind "set colored-completion-prefix on"
 	bind "set colored-stats on"
-	bind "set page-completions off"
+	#bind "set page-completions off"
 	bind "set completion-query-items 0"
 	bind "set skip-completed-text on"
 }

@@ -7,10 +7,9 @@ source ${WORKDIR}/mod.driver
 
 # inputs
 ITEM="transport-zones"
-INPUTS=()
-INPUTS+=("transport-zone.name")
-INPUTS+=("host-switch.name")
-INPUTS+=("transport-zone.type")
+valset "transport-zone.name"
+valset "host-switch.name"
+valset "transport-zone.type" "<[OVERLAY,VLAN]>"
 
 # body
 TZNAME=$1

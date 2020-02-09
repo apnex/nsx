@@ -1,6 +1,6 @@
 [
 	{
-		"name": "tier1-router",
-		"link": "<logical-routers.id;router_type:TIER1>"
+		"name": "transport-zone",
+		"link": "<transport-zones.id>"
 	}
 ]

@@ -13,21 +13,21 @@ _bind_set() {
 }
 _temp_bind() { ## temporarily change a bunch of bind terminal settings
 	#local OLDSETTINGS
-        set -o emacs
+        #set -o emacs
         #bind -x '"\C-r"':reset
         #bind -x '"\C-r"':clear
         #echo -e '\0033\0143'
         #clear
         #_get_prompt
-	_bind_set "completion-display-width" "0"
-	_bind_set "history-preserve-point" "on"
-	_bind_set "show-all-if-ambiguous" "on"
-	_bind_set "show-all-if-unmodified" "on"
-	_bind_set "colored-completion-prefix" "on"
-	_bind_set "colored-stats" "on"
-	_bind_set "page-completions" "off"
-	_bind_set "completion-query-items" "0"
-	_bind_set "skip-completed-text" "on"
+	#_bind_set "completion-display-width" "0"
+	#_bind_set "history-preserve-point" "on"
+	#_bind_set "show-all-if-ambiguous" "on"
+	#_bind_set "show-all-if-unmodified" "on"
+	#_bind_set "colored-completion-prefix" "on"
+	#_bind_set "colored-stats" "on"
+	#_bind_set "page-completions" "off"
+	#_bind_set "completion-query-items" "0"
+	#_bind_set "skip-completed-text" "on"
 	#if [[ -n "${OLDSETTINGS}" ]]; then # reset bind settings to previous
 	#	PROMPT_COMMAND="PROMPT_COMMAND=$(printf %q "${PROMPT_COMMAND}")"
 	#	PROMPT_COMMAND+="${OLDSETTINGS}"

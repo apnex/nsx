@@ -14,7 +14,7 @@ commands() {
 	#bind "set show-all-if-unmodified on"
 	#bind "set colored-completion-prefix on"
 	#bind "set colored-stats on"
-	bind "set page-completions off"
+	#bind "set page-completions off"
 	#bind "set completion-query-items 0"
 	#bind "set skip-completed-text on"
 	printf "%s\n" "<cmd>"
@@ -23,7 +23,7 @@ commands() {
 			printf "%s\n" "${BASH_REMATCH[1]}"
 		fi
 	done
-	bind -v | grep page
+	#bind -v | grep page
 	bind -x '"\C-r"':reset;
 	exit 1
 }
