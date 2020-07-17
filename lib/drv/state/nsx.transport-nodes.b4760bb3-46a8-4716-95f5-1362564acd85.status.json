@@ -1,0 +1,184 @@
+{
+	"node_uuid": "b4760bb3-46a8-4716-95f5-1362564acd85",
+	"node_display_name": "tn-esx04",
+	"status": "UP",
+	"pnic_status": {
+		"status": "UP",
+		"up_count": 1,
+		"down_count": 0,
+		"degraded_count": 0
+	},
+	"mgmt_connection_status": "UP",
+	"control_connection_status": {
+		"status": "UP",
+		"up_count": 1,
+		"down_count": 0,
+		"degraded_count": 0
+	},
+	"tunnel_status": {
+		"bfd_status": {
+			"bfd_admin_down_count": 0,
+			"bfd_down_count": 0,
+			"bfd_init_count": 0,
+			"bfd_up_count": 2
+		},
+		"bfd_diagnostic": {
+			"no_diagnostic_count": 2,
+			"control_detection_time_expired_count": 0,
+			"echo_function_failed_count": 0,
+			"forwarding_plane_reset_count": 0,
+			"path_down_count": 0,
+			"concatenated_path_down_count": 0,
+			"administratively_down_count": 0,
+			"reverse_concatenated_path_down_count": 0,
+			"neighbor_signaled_session_down_count": 0
+		},
+		"status": "UP",
+		"up_count": 2,
+		"down_count": 0
+	},
+	"agent_status": {
+		"status": "UP",
+		"up_count": 3,
+		"down_count": 0,
+		"agents": [
+			{
+				"status": "UP",
+				"name": "NSX_OPS_AGENT"
+			},
+			{
+				"status": "UP",
+				"name": "NSX_CFG_AGENT"
+			},
+			{
+				"status": "UP",
+				"name": "NSX_NESTDB"
+			}
+		]
+	},
+	"node_status": {
+		"last_heartbeat_timestamp": 1587970758007,
+		"last_sync_time": 1591076237915,
+		"mpa_connectivity_status": "UP",
+		"mpa_connectivity_status_details": "Client is responding to heartbeats",
+		"lcp_connectivity_status": "UP",
+		"lcp_connectivity_status_details": [
+			{
+				"control_node_ip": "172.16.10.17",
+				"status": "UP"
+			}
+		],
+		"host_node_deployment_status": "INSTALL_SUCCESSFUL",
+		"inventory_sync_paused": false,
+		"software_version": "3.0.0.0.0.15945993",
+		"system_status": {
+			"cpu_cores": 4,
+			"file_systems": [
+				{
+					"file_system": "root",
+					"mount": "/",
+					"total": 32768,
+					"type": "ramdisk",
+					"used": 8056
+				},
+				{
+					"file_system": "etc",
+					"mount": "/etc",
+					"total": 28672,
+					"type": "ramdisk",
+					"used": 672
+				},
+				{
+					"file_system": "opt",
+					"mount": "/opt",
+					"total": 32768,
+					"type": "ramdisk",
+					"used": 1636
+				},
+				{
+					"file_system": "var",
+					"mount": "/var",
+					"total": 49152,
+					"type": "ramdisk",
+					"used": 12616
+				},
+				{
+					"file_system": "tmp",
+					"mount": "/tmp",
+					"total": 262144,
+					"type": "ramdisk",
+					"used": 4
+				},
+				{
+					"file_system": "iofilters",
+					"mount": "/var/run/iofilters",
+					"total": 32768,
+					"type": "ramdisk",
+					"used": 0
+				},
+				{
+					"file_system": "shm",
+					"mount": "/var/run/shm",
+					"total": 1048576,
+					"type": "ramdisk",
+					"used": 0
+				},
+				{
+					"file_system": "crx",
+					"mount": "/var/run/crx",
+					"total": 1048576,
+					"type": "ramdisk",
+					"used": 0
+				},
+				{
+					"file_system": "configstore",
+					"mount": "/etc/vmware/configstore",
+					"total": 32768,
+					"type": "ramdisk",
+					"used": 44
+				},
+				{
+					"file_system": "configstorebkp",
+					"mount": "/var/lib/vmware/configstore/backup",
+					"total": 32768,
+					"type": "ramdisk",
+					"used": 44
+				},
+				{
+					"file_system": "hostdstats",
+					"mount": "/var/lib/vmware/hostd/stats",
+					"total": 210944,
+					"type": "ramdisk",
+					"used": 2348
+				},
+				{
+					"file_system": "nestdb",
+					"mount": "/var/lib/vmware/nsx/nestdb/db",
+					"total": 524288,
+					"type": "ramdisk",
+					"used": 5284
+				},
+				{
+					"file_system": "nsx-idps",
+					"mount": "/etc/nsx-idps/rules",
+					"total": 65536,
+					"type": "ramdisk",
+					"used": 0
+				}
+			],
+			"load_average": [
+				0.04,
+				0.04,
+				0.04
+			],
+			"mem_cache": 0,
+			"mem_total": 16776632,
+			"mem_used": 4313312,
+			"source": "cached",
+			"swap_total": 0,
+			"swap_used": 0,
+			"system_time": 1589077674000,
+			"uptime": 1370381000
+		}
+	}
+}

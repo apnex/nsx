@@ -1,0 +1,11 @@
+PATCH https://<policy-mgr>/policy/api/v1/infra/segments/web-tier
+{
+	"display_name":"web-tier",
+	"subnets": [
+		{
+			"gateway_address": "40.1.1.1/16",
+			"dhcp_ranges": [ "40.1.2.0/24" ]
+		}
+	],
+	"connectivity_path": "/infra/tier-1s/mgw"
+}

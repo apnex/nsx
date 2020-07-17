@@ -1,0 +1,159 @@
+{
+	"results": [
+		{
+			"external_id": "5003b4d6-2fe4-a58a-bf10-b95051ae61a8-4000",
+			"owner_vm_id": "5003b4d6-2fe4-a58a-bf10-b95051ae61a8",
+			"owner_vm_type": "REGULAR",
+			"host_id": "3c87d49f-9b8f-4857-aa86-26d2b0d1c0d1",
+			"vm_local_id_on_host": "8",
+			"device_key": "4000",
+			"device_name": "Network adapter 1",
+			"mac_address": "00:50:56:83:6b:d2",
+			"lport_attachment_id": "81bf7113-5201-49c7-8617-eadd441efd81",
+			"ip_address_info": [
+				{
+					"source": "VM_TOOLS",
+					"ip_addresses": [
+						"172.20.10.22"
+					]
+				}
+			],
+			"resource_type": "VirtualNetworkInterface",
+			"display_name": "Network adapter 1",
+			"_last_sync_time": 1592784716539
+		},
+		{
+			"external_id": "50038a53-6cd7-9bde-1d53-fdf2469c0079-4000",
+			"owner_vm_id": "50038a53-6cd7-9bde-1d53-fdf2469c0079",
+			"owner_vm_type": "REGULAR",
+			"host_id": "b4760bb3-46a8-4716-95f5-1362564acd85",
+			"vm_local_id_on_host": "23",
+			"device_key": "4000",
+			"device_name": "Network adapter 1",
+			"mac_address": "00:50:56:83:ba:1a",
+			"lport_attachment_id": "468c5b52-f419-4a3f-80e2-b891c3bcadce",
+			"ip_address_info": [
+				{
+					"source": "VM_TOOLS",
+					"ip_addresses": [
+						"172.20.10.21"
+					]
+				}
+			],
+			"resource_type": "VirtualNetworkInterface",
+			"display_name": "Network adapter 1",
+			"_last_sync_time": 1592796544944
+		},
+		{
+			"external_id": "50030301-2bbe-28d1-467d-06d3f1a1e4b8-4000",
+			"owner_vm_id": "50030301-2bbe-28d1-467d-06d3f1a1e4b8",
+			"owner_vm_type": "REGULAR",
+			"host_id": "3c87d49f-9b8f-4857-aa86-26d2b0d1c0d1",
+			"vm_local_id_on_host": "15",
+			"device_key": "4000",
+			"device_name": "Network adapter 1",
+			"mac_address": "00:50:56:83:3e:a9",
+			"lport_attachment_id": "a0d40b92-a7db-482a-863e-89897ae5345f",
+			"ip_address_info": [
+				{
+					"source": "VM_TOOLS",
+					"ip_addresses": [
+						"172.20.10.20"
+					]
+				}
+			],
+			"resource_type": "VirtualNetworkInterface",
+			"display_name": "Network adapter 1",
+			"_last_sync_time": 1592796319468
+		},
+		{
+			"external_id": "500388b9-9fd2-bd95-7bb9-3a4e15e688f1-4000",
+			"owner_vm_id": "500388b9-9fd2-bd95-7bb9-3a4e15e688f1",
+			"owner_vm_type": "REGULAR",
+			"host_id": "3c87d49f-9b8f-4857-aa86-26d2b0d1c0d1",
+			"vm_local_id_on_host": "9",
+			"device_key": "4000",
+			"device_name": "Network adapter 1",
+			"mac_address": "00:50:56:83:56:00",
+			"lport_attachment_id": "85fcb718-4863-4ac6-8d63-0f4ce9410d2f",
+			"ip_address_info": [
+				{
+					"source": "VM_TOOLS",
+					"ip_addresses": [
+						"172.20.12.20"
+					]
+				}
+			],
+			"resource_type": "VirtualNetworkInterface",
+			"display_name": "Network adapter 1",
+			"_last_sync_time": 1592791990586
+		},
+		{
+			"external_id": "50031e2c-a690-b3cb-9c0e-34a3b088dc40-4000",
+			"owner_vm_id": "50031e2c-a690-b3cb-9c0e-34a3b088dc40",
+			"owner_vm_type": "REGULAR",
+			"host_id": "b4760bb3-46a8-4716-95f5-1362564acd85",
+			"vm_local_id_on_host": "17",
+			"device_key": "4000",
+			"device_name": "Network adapter 1",
+			"mac_address": "00:50:56:83:e5:ae",
+			"lport_attachment_id": "9639f936-d894-4795-97b7-02659f4a1399",
+			"ip_address_info": [
+				{
+					"source": "VM_TOOLS",
+					"ip_addresses": [
+						"172.20.11.22"
+					]
+				}
+			],
+			"resource_type": "VirtualNetworkInterface",
+			"display_name": "Network adapter 1",
+			"_last_sync_time": 1592526268667
+		},
+		{
+			"external_id": "500337aa-db03-f328-649e-2427cc2b4792-4000",
+			"owner_vm_id": "500337aa-db03-f328-649e-2427cc2b4792",
+			"owner_vm_type": "REGULAR",
+			"host_id": "3c87d49f-9b8f-4857-aa86-26d2b0d1c0d1",
+			"vm_local_id_on_host": "4",
+			"device_key": "4000",
+			"device_name": "Network adapter 1",
+			"mac_address": "00:50:56:83:fe:66",
+			"lport_attachment_id": "6266c9cf-9bba-4093-8483-3351aa4f1d5a",
+			"ip_address_info": [
+				{
+					"source": "VM_TOOLS",
+					"ip_addresses": [
+						"172.20.11.21"
+					]
+				}
+			],
+			"resource_type": "VirtualNetworkInterface",
+			"display_name": "Network adapter 1",
+			"_last_sync_time": 1592784479168
+		},
+		{
+			"external_id": "5003340c-610f-0a2e-0e58-18c2e6a5fbc1-4000",
+			"owner_vm_id": "5003340c-610f-0a2e-0e58-18c2e6a5fbc1",
+			"owner_vm_type": "REGULAR",
+			"host_id": "b4760bb3-46a8-4716-95f5-1362564acd85",
+			"vm_local_id_on_host": "9",
+			"device_key": "4000",
+			"device_name": "Network adapter 1",
+			"mac_address": "00:50:56:83:58:19",
+			"lport_attachment_id": "e3443ac2-f589-4cee-bcc6-a451cb246d91",
+			"ip_address_info": [
+				{
+					"source": "VM_TOOLS",
+					"ip_addresses": [
+						"172.20.11.20"
+					]
+				}
+			],
+			"resource_type": "VirtualNetworkInterface",
+			"display_name": "Network adapter 1",
+			"_last_sync_time": 1590998133707
+		}
+	],
+	"result_count": 7
+}

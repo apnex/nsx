@@ -1,6 +1,14 @@
 [
 	{
+		"name": "logical-switch.name",
+		"link": ""
+	},
+	{
 		"name": "transport-zone",
 		"link": "<transport-zones.id>"
+	},
+	{
+		"name": "vlan",
+		"link": ""
 	}
 ]

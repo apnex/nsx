@@ -1,0 +1,446 @@
+{
+  "resource_type": "Infra",
+  "children": [
+    {
+      "resource_type": "ChildTier1",
+      "marked_for_delete": "{{marked_for_delete}}",
+      "Tier1": {
+        "resource_type": "Tier1",
+        "id": "{{Tier1-name}}",
+        "tags": [
+          {
+            "scope": "{{scope-01}}",
+            "tag": "{{tag-01}}"
+          },
+          {
+            "scope": "{{scope-02}}",
+            "tag": "{{tag-02}}"
+          }
+        ],
+        "description": "{{Tier1-description}}",
+        "display_name": "{{Tier1-name}}",
+        "failover_mode": "{{Tier1-failover_mode}}",
+        "tier0_path":"/infra/tier-0s/{{Tier0-name}}",
+        "route_advertisement_types": [
+          "TIER1_LB_SNAT",
+          "TIER1_NAT",
+          "TIER1_CONNECTED",
+          "TIER1_LB_VIP"
+        ],
+        "children": [
+          {
+           "resource_type":"ChildLocaleServices",
+           "LocaleServices":{
+               "resource_type":"LocaleServices",
+               "id":  "{{domain_id}}",
+               "marked_for_delete": "{{marked_for_delete}}",
+               "tags": [
+                 {
+                   "scope": "{{scope-01}}",
+                   "tag": "{{tag-01}}"
+                 },
+                 {
+                   "scope": "{{scope-02}}",
+                   "tag": "{{tag-02}}"
+                 }
+               ],
+                "edge_cluster_path": "/infra/sites/default/enforcement-points/default/edge-clusters/{{edge-cluster-id}}"
+                }
+        },
+          {
+            "resource_type": "ChildSegment",
+            "Segment": {
+              "resource_type": "Segment",
+              "id": "{{Segment1-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "description": "{{Segment1-description}}",
+              "display_name": "{{Segment1-id}}",
+              "transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/{{Segment-TZid}}",
+              "subnets": [
+                {
+                  "gateway_address": "{{Segment1-gw}}"
+                }
+              ]
+            }
+          },
+          {
+            "resource_type": "ChildSegment",
+            "Segment": {
+              "resource_type": "Segment",
+              "id": "{{Segment2-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "description": "{{Segment2-description}}",
+              "display_name": "{{Segment2-id}}",
+              "transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/{{Segment-TZid}}",
+              "subnets": [
+                {
+                  "gateway_address": "{{Segment2-gw}}"
+                }
+              ]
+            }
+          },
+          {
+            "resource_type": "ChildSegment",
+            "Segment": {
+              "resource_type": "Segment",
+              "id": "{{Segment3-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "description": "{{Segment3-description}}",
+              "display_name": "{{Segment3-id}}",
+              "transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/{{Segment-TZid}}",
+              "subnets": [
+                {
+                  "gateway_address": "{{Segment3-gw}}"
+                }
+              ]
+            }
+          }
+       ]
+      }
+    },
+    {
+      "resource_type": "ChildDomain",
+      "marked_for_delete": "{{marked_for_delete}}",
+      "Domain": {
+        "id": "{{domain_id}}",
+        "tags": [
+          {
+            "scope": "{{scope-01}}",
+            "tag": "{{tag-01}}"
+          },
+          {
+            "scope": "{{scope-02}}",
+            "tag": "{{tag-02}}"
+          }
+        ],
+        "resource_type": "Domain",
+        "description": "{{domain_id}}",
+        "display_name": "{{domain_id}}",
+        "marked_for_delete": "{{marked_for_delete}}",
+        "children": [
+          {
+            "resource_type": "ChildGroup",
+            "Group": {
+              "resource_type": "Group",
+              "marked_for_delete": "{{marked_for_delete}}",
+              "description": "{{secgroup1-id}}",
+              "display_name": "{{secgroup1-id}}",
+              "id": "{{secgroup1-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "expression": [
+                {
+                  "member_type": "VirtualMachine",
+                  "value": "{{scope}}|{{sectag1}}",
+                  "key": "Tag",
+                  "operator": "EQUALS",
+                  "resource_type": "Condition"
+                }
+              ]
+            }
+          },
+          {
+            "resource_type": "ChildGroup",
+            "Group": {
+              "resource_type": "Group",
+              "marked_for_delete": "{{marked_for_delete}}",
+              "description": "{{secgroup2-id}}",
+              "display_name": "{{secgroup2-id}}",
+              "id": "{{secgroup2-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "expression": [
+                {
+                  "member_type": "VirtualMachine",
+                  "value": "{{scope}}|{{sectag2}}",
+                  "key": "Tag",
+                  "operator": "EQUALS",
+                  "resource_type": "Condition"
+                }
+              ]
+            }
+          },
+          {
+            "resource_type": "ChildGroup",
+            "Group": {
+              "resource_type": "Group",
+              "marked_for_delete": "{{marked_for_delete}}",
+              "description": "{{secgroup3-id}}",
+              "display_name": "{{secgroup3-id}}",
+              "id": "{{secgroup3-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "expression": [
+                {
+                  "member_type": "VirtualMachine",
+                  "value": "{{scope}}|{{sectag3}}",
+                  "key": "Tag",
+                  "operator": "EQUALS",
+                  "resource_type": "Condition"
+                }
+              ]
+            }
+          },
+          {
+            "resource_type": "ChildGroup",
+            "Group": {
+              "resource_type": "Group",
+              "marked_for_delete": "{{marked_for_delete}}",
+              "description": "{{secgroupblanket-id}}",
+              "display_name": "{{secgroupblanket-id}}",
+              "id": "{{secgroupblanket-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "expression": [
+                {
+                  "member_type": "VirtualMachine",
+                  "value": "{{scope}}|{{sectagblanket}}",
+                  "key": "Tag",
+                  "operator": "EQUALS",
+                  "resource_type": "Condition"
+                }
+              ]
+            }
+          },
+          {
+            "resource_type": "ChildSecurityPolicy",
+            "marked_for_delete": "{{marked_for_delete}}",
+            "SecurityPolicy": {
+              "id": "{{EW-securitypolicy-section-id}}",
+              "tags": [
+                {
+                  "scope": "{{scope-01}}",
+                  "tag": "{{tag-01}}"
+                },
+                {
+                  "scope": "{{scope-02}}",
+                  "tag": "{{tag-02}}"
+                }
+              ],
+              "resource_type": "SecurityPolicy",
+              "description": "communication map",
+              "display_name": "{{EW-securitypolicy-section-id}}",
+              "rules": [
+                {
+                  "resource_type": "Rule",
+                  "description": "Communication Entry",
+                  "display_name": "{{Rule1-id}}",
+                  "sequence_number": 1,
+                  "logged": true,
+                  "source_groups": [
+                    "ANY"
+                  ],
+                  "destination_groups": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroup1-id}}"
+                  ],
+                  "services": [
+                    "/infra/services/HTTP",
+                    "/infra/services/HTTPS"
+                  ],
+                  "scope": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroupblanket-id}}"
+                  ],
+                  "action": "ALLOW"
+                },
+                {
+                  "resource_type": "Rule",
+                  "description": "Communication Entry 2",
+                  "display_name": "{{Rule2-id}}",
+                  "sequence_number": 2,
+                  "logged": true,
+                  "source_groups": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroup1-id}}"
+                  ],
+                  "destination_groups": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroup2-id}}"
+                  ],
+                  "services": [
+                    "/infra/services/TCP_8443"
+                  ],
+                  "scope": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroupblanket-id}}"
+                  ],
+                  "action": "ALLOW"
+                },
+                {
+                  "resource_type": "Rule",
+                  "description": "Communication Entry 3",
+                  "display_name": "{{Rule3-id}}",
+                  "sequence_number": 3,
+                  "logged": true,
+                  "source_groups": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroup2-id}}"
+                  ],
+                  "destination_groups": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroup3-id}}"
+                  ],
+                  "services": [
+                    "/infra/services/MySQL"
+                  ],
+                  "scope": [
+                    "/infra/domains/{{domain_id}}/groups/{{secgroupblanket-id}}"
+                  ],
+                  "action": "ALLOW"
+                }
+              ]
+            }
+          }
+          ]
+        }
+    },
+    {
+      "resource_type": "ChildLBAppProfile",
+      "LBAppProfile": {
+        "resource_type": "LBHttpProfile",
+        "id": "batchSetupHttpAppProfile",
+        "marked_for_delete": "{{marked_for_delete}}",
+        "tags": [
+          {
+            "scope": "{{scope-01}}",
+            "tag": "{{tag-01}}"
+          },
+          {
+            "scope": "{{scope-02}}",
+            "tag": "{{tag-02}}"
+          }
+        ],
+        "x_forwarded_for": "INSERT"
+      }
+    },
+    {
+      "resource_type": "ChildLBService",
+      "LBService": {
+        "resource_type": "LBService",
+        "id": "{{lb-id}}",
+        "marked_for_delete": "{{marked_for_delete}}",
+        "tags": [
+          {
+            "scope": "{{scope-01}}",
+            "tag": "{{tag-01}}"
+          },
+          {
+            "scope": "{{scope-02}}",
+            "tag": "{{tag-02}}"
+          }
+        ],
+        "connectivity_path": "/infra/tier-1s/{{Tier1-name}}",
+        "error_log_level": "DEBUG",
+        "access_log_enabled": true
+      }
+    },
+    {
+      "resource_type": "ChildLBVirtualServer",
+      "LBVirtualServer": {
+        "resource_type": "LBVirtualServer",
+        "id": "{{vs-id}}",
+        "marked_for_delete": "{{marked_for_delete}}",
+        "tags": [
+          {
+            "scope": "{{scope-01}}",
+            "tag": "{{tag-01}}"
+          },
+          {
+            "scope": "{{scope-02}}",
+            "tag": "{{tag-02}}"
+          }
+        ],
+        "lb_service_path": "/infra/lb-services/{{lb-id}}",
+        "ip_address": "{{vs-ip}}",
+        "ports": [
+          "443"
+        ],
+        "pool_path": "/infra/lb-pools/{{pool-id}}",
+        "application_profile_path": "/infra/lb-app-profiles/default-tcp-lb-app-profile"
+        }
+      },
+    {
+      "resource_type": "ChildLBPool",
+      "LBPool":
+      {
+        "id": "{{pool-id}}",
+        "marked_for_delete": "{{marked_for_delete}}",
+        "tags": [
+          {
+            "scope": "{{scope-01}}",
+            "tag": "{{tag-01}}"
+          },
+          {
+            "scope": "{{scope-02}}",
+            "tag": "{{tag-02}}"
+          }
+        ],
+        "resource_type": "LBPool",
+        "active_monitor_paths": [
+          "/infra/lb-monitor-profiles/default-https-lb-monitor"
+        ],
+            "algorithm": "ROUND_ROBIN",
+            "member_group": {
+                "group_path": "/infra/domains/{{domain_id}}/groups/{{secgroup1-id}}",
+                "ip_revision_filter": "IPV4"
+            },
+            "snat_translation": {
+                "type": "LBSnatAutoMap"
+            }
+      }
+    }
+  ]
+}

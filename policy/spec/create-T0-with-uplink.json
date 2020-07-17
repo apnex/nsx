@@ -1,0 +1,148 @@
+{
+  "resource_type": "Infra",
+  "children": [
+    {
+      "resource_type": "ChildTier0",
+      "marked_for_delete": "{{marked_for_delete}}",
+      "Tier0": {
+        "resource_type": "Tier0",
+        "id": "{{Tier0-name}}",
+        "description": "{{Tier0-description}}",
+        "display_name": "{{Tier0-name}}",
+        "ha_mode": "{{Tier0-ha_mode}}",
+        "failover_mode": "{{Tier0-failover_mode}}",
+        "children": [
+          {
+           "resource_type":"ChildLocaleServices",
+           "LocaleServices":{
+               "resource_type":"LocaleServices",
+               "id":  "{{locale-services-id}}",
+               "edge_cluster_path": "/infra/sites/default/enforcement-points/default/edge-clusters/{{edge-cluster-id}}",
+               "route_redistribution_types": [
+                  "TIER1_LB_SNAT",
+                  "TIER0_NAT",
+                  "TIER0_CONNECTED",
+                  "TIER1_NAT",
+                  "TIER1_CONNECTED",
+                  "TIER1_LB_VIP"
+                  ],
+               "children":[
+                 {
+                   "resource_type":"ChildTier0Interface",
+                   "Tier0Interface":{
+                     "mtu": "{{T0-Uplink01-MTU}}",
+                     "edge_path": "/infra/sites/default/enforcement-points/default/edge-clusters/{{edge-cluster-id}}/edge-nodes/{{edge-node-01-id}}",
+                     "segment_path": "/infra/segments/{{Segment-id}}",
+                     "type": "EXTERNAL",
+                     "resource_type": "Tier0Interface",
+                     "id": "{{Uplink01-id}}",
+                     "display_name": "{{Uplink01-id}}",
+                     "path": "/infra/tier-0s/{{Tier0-name}}/locale-services/{{locale-services-id}}/interfaces/{{Uplink01-id}}",
+                     "relative_path": "{{Uplink01-id}}",
+                     "parent_path": "/infra/tier-0s/{{Tier0-name}}/locale-services/{{locale-services-id}}",
+                     "marked_for_delete": "{{marked_for_delete}}",
+                     "subnets": [
+                       {
+                         "ip_addresses": [
+                           "{{Uplink-01-ip}}"
+                         ],
+                         "prefix_len": "{{Uplink-01-prefix-len}}"
+                       }
+                     ]
+                   }
+                 },
+                 {
+                   "resource_type":"ChildTier0Interface",
+                   "Tier0Interface":{
+                     "mtu": "{{T0-Uplink02-MTU}}",
+                     "edge_path": "/infra/sites/default/enforcement-points/default/edge-clusters/{{edge-cluster-id}}/edge-nodes/{{edge-node-02-id}}",
+                     "segment_path": "/infra/segments/{{Segment-id}}",
+                     "type": "EXTERNAL",
+                     "resource_type": "Tier0Interface",
+                     "id": "{{Uplink02-id}}",
+                     "display_name": "{{Uplink02-id}}",
+                     "path": "/infra/tier-0s/{{Tier0-name}}/locale-services/{{locale-services-id}}/interfaces/{{Uplink02-id}}",
+                     "relative_path": "{{Uplink02-id}}",
+                     "parent_path": "/infra/tier-0s/{{Tier0-name}}/locale-services/{{locale-services-id}}",
+                     "marked_for_delete": "{{marked_for_delete}}",
+                     "subnets": [
+                       {
+                         "ip_addresses": [
+                           "{{Uplink-02-ip}}"
+                         ],
+                         "prefix_len": "{{Uplink-02-prefix-len}}"
+                       }
+                     ]
+                   }
+                 },
+                 {
+                   "resource_type":"ChildBgpRoutingConfig",
+                   "BgpRoutingConfig":{
+                   	  "id": "bgp",
+                   	  "resource_type":"BgpRoutingConfig",
+                      "local_as_num": "{{bgp-asn}}",
+                      "enabled": "{{is-enabled}}",
+                      "ecmp": "{{is-ecmp}}",
+                      "multipath_relax": "{{is-multipath}}",
+                      "graceful_restart_config": {
+                        "mode": "HELPER_ONLY",
+                        "timer": {
+                          "restart_timer": 180,
+                          "stale_route_timer": 600
+                        }
+                      },
+                      "children":[
+                        {
+                          "resource_type":"ChildBgpNeighborConfig",
+                          "BgpNeighborConfig":{
+                          	"resource_type":"BgpNeighborConfig",
+                            "id":"peer1",
+                            "source_addresses": [
+                              "{{Uplink-01-ip}}",
+                              "{{Uplink-02-ip}}"
+                            ],
+                            "neighbor_address": "{{neighbor-address}}",
+                            "remote_as_num": "{{remote-asn}}",
+                            "route_filtering": [
+                              {
+                                "enabled": true,
+                                "address_family": "IPV4"
+                              }
+                            ],
+                            "keep_alive_time": 60,
+                            "hold_down_time": 180,
+                            "bfd": {
+                              "enabled": "{{bfd-enabled}}",
+                              "interval": 1000,
+                              "multiple": 3
+                            },
+                            "allow_as_in": false,
+                            "maximum_hop_limit": 1
+                          }
+                        }
+                      ]
+                   }
+                 }
+               ]
+               }
+          }
+       ]
+      }
+    },
+    {
+      "resource_type": "ChildSegment",
+      "Segment": {
+        "resource_type": "Segment",
+        "marked_for_delete": "{{marked_for_delete}}",
+        "id": "{{Segment-id}}",
+        "description": "{{Segment-description}}",
+        "display_name": "{{Segment-id}}",
+        "transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/{{Segment-TZid}}",
+        "type": "DISCONNECTED",
+        "vlan_ids": [
+          "0"
+        ]
+        }
+    }
+  ]
+}

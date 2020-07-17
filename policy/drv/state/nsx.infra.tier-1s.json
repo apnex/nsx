@@ -1,0 +1,81 @@
+{
+	"results": [
+		{
+			"tier0_path": "/infra/tier-0s/t0-core",
+			"failover_mode": "NON_PREEMPTIVE",
+			"enable_standby_relocation": false,
+			"dhcp_config_paths": [
+				"/infra/dhcp-server-configs/dhcp-server"
+			],
+			"route_advertisement_types": [
+				"TIER1_LB_SNAT",
+				"TIER1_CONNECTED",
+				"TIER1_LB_VIP",
+				"TIER1_IPSEC_LOCAL_ENDPOINT"
+			],
+			"force_whitelisting": false,
+			"default_rule_logging": false,
+			"disable_firewall": false,
+			"ipv6_profile_paths": [
+				"/infra/ipv6-ndra-profiles/default",
+				"/infra/ipv6-dad-profiles/default"
+			],
+			"pool_allocation": "ROUTING",
+			"resource_type": "Tier1",
+			"id": "t1-tenantA",
+			"display_name": "t1-tenantA",
+			"path": "/infra/tier-1s/t1-tenantA",
+			"relative_path": "t1-tenantA",
+			"parent_path": "/infra",
+			"unique_id": "a61a249a-f217-4898-872e-76aeadf452ce",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1588635889609,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1592281527452,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 5
+		},
+		{
+			"tier0_path": "/infra/tier-0s/t0-core",
+			"failover_mode": "NON_PREEMPTIVE",
+			"enable_standby_relocation": false,
+			"dhcp_config_paths": [
+				"/infra/dhcp-server-configs/dhcp-server"
+			],
+			"route_advertisement_types": [
+				"TIER1_IPSEC_LOCAL_ENDPOINT",
+				"TIER1_CONNECTED"
+			],
+			"force_whitelisting": false,
+			"default_rule_logging": false,
+			"disable_firewall": false,
+			"ipv6_profile_paths": [
+				"/infra/ipv6-ndra-profiles/default",
+				"/infra/ipv6-dad-profiles/default"
+			],
+			"pool_allocation": "ROUTING",
+			"resource_type": "Tier1",
+			"id": "t1-tenantB",
+			"display_name": "t1-tenantB",
+			"path": "/infra/tier-1s/t1-tenantB",
+			"relative_path": "t1-tenantB",
+			"parent_path": "/infra",
+			"unique_id": "3663d6c2-779d-4da3-9c2a-6a58c9aa4531",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1590558407823,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1590558576919,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 1
+		}
+	],
+	"result_count": 2,
+	"sort_by": "display_name",
+	"sort_ascending": true
+}

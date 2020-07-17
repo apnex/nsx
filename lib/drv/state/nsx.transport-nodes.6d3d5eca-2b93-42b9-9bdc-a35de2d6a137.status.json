@@ -1,0 +1,178 @@
+{
+	"node_uuid": "6d3d5eca-2b93-42b9-9bdc-a35de2d6a137",
+	"node_display_name": "tn-edge01",
+	"status": "UP",
+	"pnic_status": {
+		"status": "UP",
+		"up_count": 3,
+		"down_count": 0,
+		"degraded_count": 0
+	},
+	"mgmt_connection_status": "UP",
+	"control_connection_status": {
+		"status": "UP",
+		"up_count": 1,
+		"down_count": 0,
+		"degraded_count": 0
+	},
+	"tunnel_status": {
+		"bfd_status": {
+			"bfd_admin_down_count": 0,
+			"bfd_down_count": 0,
+			"bfd_init_count": 0,
+			"bfd_up_count": 2
+		},
+		"bfd_diagnostic": {
+			"no_diagnostic_count": 2,
+			"control_detection_time_expired_count": 0,
+			"echo_function_failed_count": 0,
+			"forwarding_plane_reset_count": 0,
+			"path_down_count": 0,
+			"concatenated_path_down_count": 0,
+			"administratively_down_count": 0,
+			"reverse_concatenated_path_down_count": 0,
+			"neighbor_signaled_session_down_count": 0
+		},
+		"status": "UP",
+		"up_count": 2,
+		"down_count": 0
+	},
+	"node_status": {
+		"last_heartbeat_timestamp": 1590979897796,
+		"mpa_connectivity_status": "UP",
+		"mpa_connectivity_status_details": "Client is responding to heartbeats",
+		"lcp_connectivity_status": "UP",
+		"lcp_connectivity_status_details": [
+			{
+				"control_node_ip": "172.16.10.17",
+				"status": "UP"
+			}
+		],
+		"host_node_deployment_status": "NODE_READY",
+		"software_version": "3.0.0.0.0.15946012",
+		"system_status": {
+			"cpu_cores": 4,
+			"dpdk_cpu_cores": 3,
+			"non_dpdk_cpu_cores": 1,
+			"file_systems": [
+				{
+					"file_system": "udev",
+					"mount": "/dev",
+					"total": 1894852,
+					"type": "devtmpfs",
+					"used": 0
+				},
+				{
+					"file_system": "tmpfs",
+					"mount": "/run",
+					"total": 383416,
+					"type": "tmpfs",
+					"used": 6384
+				},
+				{
+					"file_system": "/dev/sda2",
+					"mount": "/",
+					"total": 19554584,
+					"type": "ext4",
+					"used": 3639908
+				},
+				{
+					"file_system": "tmpfs",
+					"mount": "/dev/shm",
+					"total": 1917064,
+					"type": "tmpfs",
+					"used": 3736
+				},
+				{
+					"file_system": "tmpfs",
+					"mount": "/run/lock",
+					"total": 5120,
+					"type": "tmpfs",
+					"used": 0
+				},
+				{
+					"file_system": "tmpfs",
+					"mount": "/sys/fs/cgroup",
+					"total": 1917064,
+					"type": "tmpfs",
+					"used": 0
+				},
+				{
+					"file_system": "/dev/sda1",
+					"mount": "/boot",
+					"total": 967320,
+					"type": "ext4",
+					"used": 8420
+				},
+				{
+					"file_system": "/dev/sda3",
+					"mount": "/os_bak",
+					"total": 19554584,
+					"type": "ext4",
+					"used": 44992
+				},
+				{
+					"file_system": "/dev/mapper/nsx-config__bak",
+					"mount": "/config_bak",
+					"total": 19551512,
+					"type": "ext4",
+					"used": 44992
+				},
+				{
+					"file_system": "/dev/mapper/nsx-tmp",
+					"mount": "/tmp",
+					"total": 3869352,
+					"type": "ext4",
+					"used": 7812
+				},
+				{
+					"file_system": "/dev/mapper/nsx-var+log",
+					"mount": "/var/log",
+					"total": 40246648,
+					"type": "ext4",
+					"used": 4640944
+				},
+				{
+					"file_system": "/dev/mapper/nsx-image",
+					"mount": "/image",
+					"total": 19551512,
+					"type": "ext4",
+					"used": 44992
+				},
+				{
+					"file_system": "/dev/mapper/nsx-config",
+					"mount": "/config",
+					"total": 19551512,
+					"type": "ext4",
+					"used": 58124
+				},
+				{
+					"file_system": "/dev/mapper/nsx-var+dump",
+					"mount": "/var/dump",
+					"total": 58634428,
+					"type": "ext4",
+					"used": 53068
+				}
+			],
+			"load_average": [
+				2.27,
+				2.4,
+				2.62
+			],
+			"cpu_usage": {
+				"highest_cpu_core_usage_dpdk": 66.23,
+				"avg_cpu_core_usage_dpdk": 57.21,
+				"highest_cpu_core_usage_non_dpdk": 49.67,
+				"avg_cpu_core_usage_non_dpdk": 49.67
+			},
+			"mem_cache": 761056,
+			"mem_total": 3834128,
+			"mem_used": 2626380,
+			"source": "cached",
+			"swap_total": 0,
+			"swap_used": 0,
+			"system_time": 1591077411000,
+			"uptime": 97572000
+		}
+	}
+}

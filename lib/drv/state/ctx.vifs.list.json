@@ -1,0 +1,9 @@
+{
+	"id": "a3b341a8-bb6a-487e-9254-cb5d74c858e4",
+	"name": "Network adapter 1",
+	"resource_type": "VirtualNetworkInterface",
+	"device_key": "4000",
+	"ip_addresses": "172.20.10.20",
+	"mac_address": "00:50:56:83:3e:a9",
+	"owner_vm_id": "50030301-2bbe-28d1-467d-06d3f1a1e4b8"
+}

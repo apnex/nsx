@@ -1,0 +1,47 @@
+children": [
+		{
+			"Segment": {
+				"type": "ROUTED",
+				"subnets": [
+					{
+						"gateway_address": "172.20.10.1/24",
+						"dhcp_config": {
+							"resource_type": "SegmentDhcpV4Config",
+							"lease_time": 86400
+						},
+						"network": "172.20.10.0/24"
+					}
+				],
+				"connectivity_path": "/infra/tier-1s/t1-tenantA",
+				"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/de4c4833-609a-4ca3-9981-c318358a5ef5",
+				"advanced_config": {
+					"address_pool_paths": [],
+					"hybrid": false,
+					"local_egress": false,
+					"connectivity": "ON"
+				},
+				"admin_state": "UP",
+				"replication_mode": "MTEP",
+				"resource_type": "Segment",
+				"id": "ls-web-W1vZuz1oV",
+				"display_name": "ls-web",
+				"path": "/infra/segments/ls-web-W1vZuz1oV",
+				"relative_path": "ls-web-W1vZuz1oV",
+				"parent_path": "/infra",
+				"unique_id": "a74041fb-dc2b-4b7a-aeba-ab52158959fa",
+				"resource_type": "ChildSegmentPort",
+				"marked_for_delete": false,
+				"_protection": "NOT_PROTECTED"
+			}
+		],
+		"marked_for_delete": false,
+		"overridden": false,
+		"_create_user": "admin",
+		"_create_time": 1591186697297,
+		"_last_modified_user": "admin",
+		"_last_modified_time": 1591186697309,
+		"_system_owned": false,
+		"_protection": "NOT_PROTECTED",
+		"_revision": 0
+	},
+}

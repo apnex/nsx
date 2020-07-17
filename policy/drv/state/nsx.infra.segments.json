@@ -1,0 +1,192 @@
+{
+	"results": [
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "172.20.11.1/24",
+					"dhcp_ranges": [
+						"172.20.11.30-172.20.11.99"
+					],
+					"dhcp_config": {
+						"resource_type": "SegmentDhcpV4Config",
+						"lease_time": 86400,
+						"dns_servers": [
+							"172.16.10.1"
+						]
+					},
+					"network": "172.20.11.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1-tenantA",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/de4c4833-609a-4ca3-9981-c318358a5ef5",
+			"advanced_config": {
+				"address_pool_paths": [],
+				"hybrid": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "ls-app",
+			"display_name": "ls-app",
+			"path": "/infra/segments/ls-app",
+			"relative_path": "ls-app",
+			"parent_path": "/infra",
+			"unique_id": "0a1f7e49-3bb6-4562-9aed-24fefe0746d9",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1590558042025,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1590558042029,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "172.20.12.1/24",
+					"dhcp_ranges": [
+						"172.20.12.30-172.20.12.99"
+					],
+					"dhcp_config": {
+						"resource_type": "SegmentDhcpV4Config",
+						"lease_time": 86400,
+						"dns_servers": [
+							"172.16.10.1"
+						]
+					},
+					"network": "172.20.12.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1-tenantB",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/de4c4833-609a-4ca3-9981-c318358a5ef5",
+			"advanced_config": {
+				"address_pool_paths": [],
+				"hybrid": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "ls-db",
+			"display_name": "ls-db",
+			"path": "/infra/segments/ls-db",
+			"relative_path": "ls-db",
+			"parent_path": "/infra",
+			"unique_id": "60610178-d4b6-4b8a-9e6f-b634bbfad744",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1590558675557,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1590558675566,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "DISCONNECTED",
+			"vlan_ids": [
+				"5"
+			],
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/706a21fe-7001-4fa1-9468-d2968be15e47",
+			"advanced_config": {
+				"address_pool_paths": [],
+				"hybrid": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "ls-uplink",
+			"display_name": "ls-uplink",
+			"path": "/infra/segments/ls-uplink",
+			"relative_path": "ls-uplink",
+			"parent_path": "/infra",
+			"unique_id": "6de81c91-b20b-42c1-baa2-4248c487536a",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1588638930586,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1588638930589,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "172.20.10.1/24",
+					"dhcp_config": {
+						"resource_type": "SegmentDhcpV4Config",
+						"lease_time": 86400
+					},
+					"network": "172.20.10.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1-tenantA",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/de4c4833-609a-4ca3-9981-c318358a5ef5",
+			"advanced_config": {
+				"address_pool_paths": [],
+				"hybrid": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "ls-web-W1vZuz1oV",
+			"display_name": "ls-web",
+			"path": "/infra/segments/ls-web-W1vZuz1oV",
+			"relative_path": "ls-web-W1vZuz1oV",
+			"parent_path": "/infra",
+			"unique_id": "a74041fb-dc2b-4b7a-aeba-ab52158959fa",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1591186697297,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1591186697309,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "DISCONNECTED",
+			"vlan_ids": [
+				"0"
+			],
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "mytestseg",
+			"display_name": "mytestseg",
+			"description": "Testicle",
+			"path": "/infra/segments/mytestseg",
+			"relative_path": "mytestseg",
+			"parent_path": "/infra",
+			"unique_id": "08ddaf83-0869-472b-a48b-5133e1853fca",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1592803763873,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1592803763882,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		}
+	],
+	"result_count": 5,
+	"sort_by": "display_name",
+	"sort_ascending": true
+}

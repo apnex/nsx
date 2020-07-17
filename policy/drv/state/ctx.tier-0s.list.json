@@ -1,0 +1,6 @@
+{
+	"id": "t0-core",
+	"resource_type": "Tier0",
+	"name": "t0-core",
+	"ha_mode": "ACTIVE_STANDBY"
+}

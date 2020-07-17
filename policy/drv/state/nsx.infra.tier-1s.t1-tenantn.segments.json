@@ -1,0 +1,6 @@
+{
+	"httpStatus": "BAD_REQUEST",
+	"error_code": 500012,
+	"module_name": "Policy",
+	"error_message": "The path=[/infra/tier-1s/t1-tenantn] is invalid"
+}

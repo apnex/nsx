@@ -1,0 +1,10 @@
+{
+	"id": "6d3d5eca-2b93-42b9-9bdc-a35de2d6a137",
+	"name": "tn-edge01",
+	"resource_type": "EdgeNode",
+	"ip_address": "172.16.10.18",
+	"host_switch": "hs-edge",
+	"status": "NODE_READY",
+	"state": "UP",
+	"software_version": "3.0.0.0.0.15946012"
+}

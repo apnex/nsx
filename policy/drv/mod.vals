@@ -1,0 +1,101 @@
+#!/bin/bash
+if [[ $(realpath $0) =~ ^(.*)/([^/]+)$ ]]; then
+        WORKDIR=${BASH_REMATCH[1]}
+	FILE=${BASH_REMATCH[2]}
+fi
+
+valprint() {
+	local FILE=${WORKDIR}/spec.link
+	read -r -d '' JQSPEC <<-CONFIG
+		(. |
+			if (length > 0) then
+				.[] | [.name, .link] | join(":")
+			else "" end
+		)
+	CONFIG
+	if [[ -f "${FILE}" ]]; then
+		for VAL in $(jq -r "${JQSPEC}" "${FILE}"); do
+			echo "${VAL}"
+		done
+	fi
+}
+
+valkeys() {
+	local FILE=${WORKDIR}/spec.link
+	read -r -d '' JQSPEC <<-CONFIG
+		(. |
+			if (length > 0) then
+				.[] | .name
+			else "" end
+		)
+	CONFIG
+	if [[ -f "${FILE}" ]]; then
+		for VAL in $(jq -r "${JQSPEC}" "${FILE}"); do
+			echo "${VAL}"
+		done
+	fi
+}
+
+valget() {
+	local FILE=${WORKDIR}/spec.link
+	if [[ -f "${FILE}" ]]; then
+	 	jq -r 'map(select(.name=="'${1}'")) | .[0].link' ${WORKDIR}/spec.link
+	fi
+}
+
+valset() {
+	local NAME=${1}
+	local LINK=${2}
+	local FILE=${WORKDIR}/spec.link
+	if [[ ! -f "${FILE}" ]]; then
+		echo "[]" >${FILE}
+	fi
+	local BODY=$(<${FILE})
+	if [[ -n ${NAME} ]]; then
+		read -r -d '' JQSPEC <<-CONFIG; BODY=$(printf "${BODY}" | jq --tab -r "${JQSPEC}")
+			. |= (
+				del(.[] | select(.name=="${NAME}"))
+			)
+		CONFIG
+		read -r -d '' JQSPEC <<-CONFIG; BODY=$(printf "${BODY}" | jq --tab -r "${JQSPEC}")
+			. |= (
+				. += [{
+					"name": "${NAME}",
+					"link": "${LINK}"
+				}]
+			)
+		CONFIG
+	fi
+	printf "${BODY}" >${FILE}
+}
+
+valclear() {
+	local FILE=${WORKDIR}/spec.link
+	if [[ -f "${FILE}" ]]; then
+		rm "${FILE}"
+	fi
+}
+
+# switch
+if [[ -n ${1} && ${FILE} == "mod.vals" ]]; then
+	case "${1}" in
+		"set")
+			if [[ -n ${2} ]]; then
+				valset "${@:2}"
+			fi
+		;;
+		"get")
+			if [[ -n ${2} ]]; then
+				valget "${@:2}"
+			else
+				valprint
+			fi
+		;;
+		"keys")
+			valkeys
+		;;
+		"clear")
+			valclear
+		;;
+	esac
+fi

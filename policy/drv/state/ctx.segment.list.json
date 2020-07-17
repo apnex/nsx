@@ -1,0 +1,7 @@
+{
+	"id": "ls-app",
+	"resource_type": "Segment",
+	"name": "ls-app",
+	"type": "ROUTED",
+	"admin_state": "UP"
+}
