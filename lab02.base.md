@@ -21,9 +21,11 @@
 vcenter.lab02
   +- sddc
       +- sddc
-&#2521;
+:&#2521:
+:u2521:
 </pre>
-&#2521;
+:&#2521:
+:u2521:
 
 ### Licenses
 Apply correct vCenter and vSphere licenses to **Assets**
