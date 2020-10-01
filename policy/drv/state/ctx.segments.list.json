@@ -1,7 +1,7 @@
 {
-	"id": "ls-app",
+	"id": "k8s-mgmt",
 	"resource_type": "Segment",
-	"name": "ls-app",
+	"name": "k8s-mgmt",
 	"type": "ROUTED",
 	"admin_state": "UP"
 }

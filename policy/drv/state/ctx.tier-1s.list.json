@@ -1,5 +1,5 @@
 {
-	"id": "t1-tenantA",
+	"id": "lb_k8s-cluster_0_ttqoh",
 	"resource_type": "Tier1",
-	"name": "t1-tenantA"
+	"name": "lb-k8s-cluster-0"
 }

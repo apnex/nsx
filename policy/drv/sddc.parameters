@@ -4,16 +4,16 @@
 	"endpoints": [
 		{
 			"type": "nsx",
-			"hostname": "nsxm04.lab",
+			"hostname": "nsxm.lab02",
 			"username": "admin",
-			"password": "VMware1!VMware1!",
+			"password": "VMware1!SDDC",
 			"online": "true"
 		},
 		{
 			"type": "vsp",
-			"hostname": "vcenter7.lab",
+			"hostname": "vcenter.lab02",
 			"username": "administrator@vsphere.local",
-			"password": "ObiWan1!",
+			"password": "VMware1!SDDC",
 			"online": "true"
 		}
 	]

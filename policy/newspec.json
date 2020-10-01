@@ -1,0 +1,15 @@
+
+{
+	"resource_type": "Infra",
+	"children": [
+		{
+			"resource_type": "ChildSegment",
+			"Segment": {
+				"resource_type": "Segment",
+				"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/2a1dd409-208f-465c-9e19-5b5f797523b6",
+				"id": "Overlay_Segment",
+				"display_name": "MYOVERLAY-SEG"
+			}
+		}
+	]
+}

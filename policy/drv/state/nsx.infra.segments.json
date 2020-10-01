@@ -4,43 +4,75 @@
 			"type": "ROUTED",
 			"subnets": [
 				{
-					"gateway_address": "172.20.11.1/24",
+					"gateway_address": "172.20.16.1/24",
 					"dhcp_ranges": [
-						"172.20.11.30-172.20.11.99"
+						"172.20.16.50-172.20.16.99"
 					],
 					"dhcp_config": {
 						"resource_type": "SegmentDhcpV4Config",
+						"server_address": "172.20.16.2/24",
 						"lease_time": 86400,
 						"dns_servers": [
-							"172.16.10.1"
+							"10.30.0.30"
 						]
 					},
-					"network": "172.20.11.0/24"
+					"network": "172.20.16.0/24"
 				}
 			],
-			"connectivity_path": "/infra/tier-1s/t1-tenantA",
-			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/de4c4833-609a-4ca3-9981-c318358a5ef5",
+			"connectivity_path": "/infra/tier-1s/t1-mgmt",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
 			"advanced_config": {
 				"address_pool_paths": [],
 				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"dhcp_config_path": "/infra/dhcp-server-configs/dhcp-server",
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "k8s-mgmt",
+			"display_name": "k8s-mgmt",
+			"path": "/infra/segments/k8s-mgmt",
+			"relative_path": "k8s-mgmt",
+			"parent_path": "/infra",
+			"unique_id": "d8ef30e5-bd81-47c7-b4b5-74aa94db33dc",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1597794082357,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1597797916076,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 2
+		},
+		{
+			"type": "DISCONNECTED",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [],
+				"hybrid": false,
+				"inter_router": false,
 				"local_egress": false,
 				"connectivity": "ON"
 			},
 			"admin_state": "UP",
 			"replication_mode": "MTEP",
 			"resource_type": "Segment",
-			"id": "ls-app",
-			"display_name": "ls-app",
-			"path": "/infra/segments/ls-app",
-			"relative_path": "ls-app",
+			"id": "k8s-transport",
+			"display_name": "k8s-transport",
+			"path": "/infra/segments/k8s-transport",
+			"relative_path": "k8s-transport",
 			"parent_path": "/infra",
-			"unique_id": "0a1f7e49-3bb6-4562-9aed-24fefe0746d9",
+			"unique_id": "391e68f6-9317-4a1c-b1b1-7d036084f6e4",
 			"marked_for_delete": false,
 			"overridden": false,
 			"_create_user": "admin",
-			"_create_time": 1590558042025,
+			"_create_time": 1597893912122,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1590558042029,
+			"_last_modified_time": 1597893912125,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
@@ -49,43 +81,35 @@
 			"type": "ROUTED",
 			"subnets": [
 				{
-					"gateway_address": "172.20.12.1/24",
-					"dhcp_ranges": [
-						"172.20.12.30-172.20.12.99"
-					],
-					"dhcp_config": {
-						"resource_type": "SegmentDhcpV4Config",
-						"lease_time": 86400,
-						"dns_servers": [
-							"172.16.10.1"
-						]
-					},
-					"network": "172.20.12.0/24"
+					"gateway_address": "172.20.21.1/24",
+					"network": "172.20.21.0/24"
 				}
 			],
-			"connectivity_path": "/infra/tier-1s/t1-tenantB",
-			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/de4c4833-609a-4ca3-9981-c318358a5ef5",
+			"connectivity_path": "/infra/tier-0s/core-t0",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
 			"advanced_config": {
 				"address_pool_paths": [],
 				"hybrid": false,
+				"multicast": true,
+				"inter_router": false,
 				"local_egress": false,
 				"connectivity": "ON"
 			},
 			"admin_state": "UP",
 			"replication_mode": "MTEP",
 			"resource_type": "Segment",
-			"id": "ls-db",
-			"display_name": "ls-db",
-			"path": "/infra/segments/ls-db",
-			"relative_path": "ls-db",
+			"id": "ls-external",
+			"display_name": "ls-external",
+			"path": "/infra/segments/ls-external",
+			"relative_path": "ls-external",
 			"parent_path": "/infra",
-			"unique_id": "60610178-d4b6-4b8a-9e6f-b634bbfad744",
+			"unique_id": "1c942e3e-d313-4755-b859-9ae284d91384",
 			"marked_for_delete": false,
 			"overridden": false,
 			"_create_user": "admin",
-			"_create_time": 1590558675557,
+			"_create_time": 1597905489581,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1590558675566,
+			"_last_modified_time": 1597905489590,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
@@ -93,12 +117,13 @@
 		{
 			"type": "DISCONNECTED",
 			"vlan_ids": [
-				"5"
+				"307"
 			],
-			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/706a21fe-7001-4fa1-9468-d2968be15e47",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/7ebf86c0-2b81-4e11-afba-5a1d8e1249c1",
 			"advanced_config": {
 				"address_pool_paths": [],
 				"hybrid": false,
+				"inter_router": false,
 				"local_egress": false,
 				"connectivity": "ON"
 			},
@@ -110,13 +135,13 @@
 			"path": "/infra/segments/ls-uplink",
 			"relative_path": "ls-uplink",
 			"parent_path": "/infra",
-			"unique_id": "6de81c91-b20b-42c1-baa2-4248c487536a",
+			"unique_id": "6c379871-e16a-4c22-91d9-235776c6078a",
 			"marked_for_delete": false,
 			"overridden": false,
 			"_create_user": "admin",
-			"_create_time": 1588638930586,
+			"_create_time": 1597558395941,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1588638930589,
+			"_last_modified_time": 1597558395945,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
@@ -125,68 +150,488 @@
 			"type": "ROUTED",
 			"subnets": [
 				{
-					"gateway_address": "172.20.10.1/24",
-					"dhcp_config": {
-						"resource_type": "SegmentDhcpV4Config",
-						"lease_time": 86400
-					},
-					"network": "172.20.10.0/24"
+					"gateway_address": "10.4.6.1/24",
+					"network": "10.4.6.0/24"
 				}
 			],
-			"connectivity_path": "/infra/tier-1s/t1-tenantA",
-			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/de4c4833-609a-4ca3-9981-c318358a5ef5",
+			"connectivity_path": "/infra/tier-1s/t1_04df3513-04d7-4534-9fff-6d25ccb73d98_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
 			"advanced_config": {
-				"address_pool_paths": [],
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_04df3513-04d7-4534-9fff-6d25ccb73d98_0"
+				],
 				"hybrid": false,
+				"inter_router": false,
 				"local_egress": false,
 				"connectivity": "ON"
 			},
 			"admin_state": "UP",
 			"replication_mode": "MTEP",
 			"resource_type": "Segment",
-			"id": "ls-web-W1vZuz1oV",
-			"display_name": "ls-web",
-			"path": "/infra/segments/ls-web-W1vZuz1oV",
-			"relative_path": "ls-web-W1vZuz1oV",
+			"id": "seg_04df3513-04d7-4534-9fff-6d25ccb73d98_0",
+			"display_name": "seg-k8s-cluster-argocd-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "argocd"
+				},
+				{
+					"scope": "external_id",
+					"tag": "04df3513-04d7-4534-9fff-6d25ccb73d98"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "04df3513-04d7-4534-9fff-6d25ccb73d98"
+				}
+			],
+			"path": "/infra/segments/seg_04df3513-04d7-4534-9fff-6d25ccb73d98_0",
+			"relative_path": "seg_04df3513-04d7-4534-9fff-6d25ccb73d98_0",
 			"parent_path": "/infra",
-			"unique_id": "a74041fb-dc2b-4b7a-aeba-ab52158959fa",
+			"unique_id": "0248fd7f-e2f1-4682-be9b-7bd407172e17",
 			"marked_for_delete": false,
 			"overridden": false,
 			"_create_user": "admin",
-			"_create_time": 1591186697297,
+			"_create_time": 1597926946744,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1591186697309,
+			"_last_modified_time": 1597926946751,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
 		},
 		{
-			"type": "DISCONNECTED",
-			"vlan_ids": [
-				"0"
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "10.4.1.1/24",
+					"network": "10.4.1.0/24"
+				}
 			],
+			"connectivity_path": "/infra/tier-1s/t1_29cc6700-7fb9-4363-b69f-3f0750975cb9_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_29cc6700-7fb9-4363-b69f-3f0750975cb9_0"
+				],
+				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
 			"admin_state": "UP",
 			"replication_mode": "MTEP",
 			"resource_type": "Segment",
-			"id": "mytestseg",
-			"display_name": "mytestseg",
-			"description": "Testicle",
-			"path": "/infra/segments/mytestseg",
-			"relative_path": "mytestseg",
+			"id": "seg_29cc6700-7fb9-4363-b69f-3f0750975cb9_0",
+			"display_name": "seg-k8s-cluster-default-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "default"
+				},
+				{
+					"scope": "external_id",
+					"tag": "29cc6700-7fb9-4363-b69f-3f0750975cb9"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "29cc6700-7fb9-4363-b69f-3f0750975cb9"
+				}
+			],
+			"path": "/infra/segments/seg_29cc6700-7fb9-4363-b69f-3f0750975cb9_0",
+			"relative_path": "seg_29cc6700-7fb9-4363-b69f-3f0750975cb9_0",
 			"parent_path": "/infra",
-			"unique_id": "08ddaf83-0869-472b-a48b-5133e1853fca",
+			"unique_id": "ed816134-ff39-4f89-9225-97782219c519",
 			"marked_for_delete": false,
 			"overridden": false,
 			"_create_user": "admin",
-			"_create_time": 1592803763873,
+			"_create_time": 1597926929848,
 			"_last_modified_user": "admin",
-			"_last_modified_time": 1592803763882,
+			"_last_modified_time": 1597926929887,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "10.4.0.1/24",
+					"network": "10.4.0.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1_e3f3e991-d04f-455a-9601-3618dbbeb0da_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_e3f3e991-d04f-455a-9601-3618dbbeb0da_0"
+				],
+				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "seg_e3f3e991-d04f-455a-9601-3618dbbeb0da_0",
+			"display_name": "seg-k8s-cluster-kube-node-lease-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "kube-node-lease"
+				},
+				{
+					"scope": "external_id",
+					"tag": "e3f3e991-d04f-455a-9601-3618dbbeb0da"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "e3f3e991-d04f-455a-9601-3618dbbeb0da"
+				}
+			],
+			"path": "/infra/segments/seg_e3f3e991-d04f-455a-9601-3618dbbeb0da_0",
+			"relative_path": "seg_e3f3e991-d04f-455a-9601-3618dbbeb0da_0",
+			"parent_path": "/infra",
+			"unique_id": "6ac2a679-c989-4794-bf7f-a2640c12348a",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1597926928138,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1597926928178,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "10.4.5.1/24",
+					"network": "10.4.5.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1_db17e4e9-c093-4618-8b49-a87ee5a5334d_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_db17e4e9-c093-4618-8b49-a87ee5a5334d_0"
+				],
+				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "seg_db17e4e9-c093-4618-8b49-a87ee5a5334d_0",
+			"display_name": "seg-k8s-cluster-kube-public-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "kube-public"
+				},
+				{
+					"scope": "external_id",
+					"tag": "db17e4e9-c093-4618-8b49-a87ee5a5334d"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "db17e4e9-c093-4618-8b49-a87ee5a5334d"
+				}
+			],
+			"path": "/infra/segments/seg_db17e4e9-c093-4618-8b49-a87ee5a5334d_0",
+			"relative_path": "seg_db17e4e9-c093-4618-8b49-a87ee5a5334d_0",
+			"parent_path": "/infra",
+			"unique_id": "424fb14e-2a1f-4e88-9ee3-0d865fe6280f",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1597926942965,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1597926943059,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "10.4.2.1/24",
+					"network": "10.4.2.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1_1c761cbe-198f-4bf8-9d2c-ba17a88a1142_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_1c761cbe-198f-4bf8-9d2c-ba17a88a1142_0"
+				],
+				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "seg_1c761cbe-198f-4bf8-9d2c-ba17a88a1142_0",
+			"display_name": "seg-k8s-cluster-kube-system-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "kube-system"
+				},
+				{
+					"scope": "external_id",
+					"tag": "1c761cbe-198f-4bf8-9d2c-ba17a88a1142"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "1c761cbe-198f-4bf8-9d2c-ba17a88a1142"
+				}
+			],
+			"path": "/infra/segments/seg_1c761cbe-198f-4bf8-9d2c-ba17a88a1142_0",
+			"relative_path": "seg_1c761cbe-198f-4bf8-9d2c-ba17a88a1142_0",
+			"parent_path": "/infra",
+			"unique_id": "33054eae-161b-4a80-96d5-588afd9d86ee",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1597926933186,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1597926933234,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "10.4.4.1/24",
+					"network": "10.4.4.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1_27cb3619-9df6-4bed-862f-f1ce1cd664aa_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_27cb3619-9df6-4bed-862f-f1ce1cd664aa_0"
+				],
+				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "seg_27cb3619-9df6-4bed-862f-f1ce1cd664aa_0",
+			"display_name": "seg-k8s-cluster-nsx-system-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "nsx-system"
+				},
+				{
+					"scope": "external_id",
+					"tag": "27cb3619-9df6-4bed-862f-f1ce1cd664aa"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "27cb3619-9df6-4bed-862f-f1ce1cd664aa"
+				}
+			],
+			"path": "/infra/segments/seg_27cb3619-9df6-4bed-862f-f1ce1cd664aa_0",
+			"relative_path": "seg_27cb3619-9df6-4bed-862f-f1ce1cd664aa_0",
+			"parent_path": "/infra",
+			"unique_id": "db466091-56ad-412a-85ac-8a78f49f568d",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1597926937405,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1597926937456,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "10.4.3.1/24",
+					"network": "10.4.3.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1_7ee85113-b560-4008-ba5e-6937f4ab2f43_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_7ee85113-b560-4008-ba5e-6937f4ab2f43_0"
+				],
+				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "seg_7ee85113-b560-4008-ba5e-6937f4ab2f43_0",
+			"display_name": "seg-k8s-cluster-planespotter-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "planespotter"
+				},
+				{
+					"scope": "external_id",
+					"tag": "7ee85113-b560-4008-ba5e-6937f4ab2f43"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "7ee85113-b560-4008-ba5e-6937f4ab2f43"
+				}
+			],
+			"path": "/infra/segments/seg_7ee85113-b560-4008-ba5e-6937f4ab2f43_0",
+			"relative_path": "seg_7ee85113-b560-4008-ba5e-6937f4ab2f43_0",
+			"parent_path": "/infra",
+			"unique_id": "dceafee3-d51b-4466-ac0f-a82bd2744b18",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1597926932258,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1597926932304,
+			"_system_owned": false,
+			"_protection": "NOT_PROTECTED",
+			"_revision": 0
+		},
+		{
+			"type": "ROUTED",
+			"subnets": [
+				{
+					"gateway_address": "10.4.8.1/24",
+					"network": "10.4.8.0/24"
+				}
+			],
+			"connectivity_path": "/infra/tier-1s/t1_687ccb6a-5400-402b-b729-86b727595ea1_rtr",
+			"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+			"advanced_config": {
+				"address_pool_paths": [
+					"/infra/ip-pools/ipp_687ccb6a-5400-402b-b729-86b727595ea1_0"
+				],
+				"hybrid": false,
+				"inter_router": false,
+				"local_egress": false,
+				"connectivity": "ON"
+			},
+			"admin_state": "UP",
+			"replication_mode": "MTEP",
+			"resource_type": "Segment",
+			"id": "seg_687ccb6a-5400-402b-b729-86b727595ea1_0",
+			"display_name": "seg-k8s-cluster-storageos-0",
+			"tags": [
+				{
+					"scope": "ncp/version",
+					"tag": "1.2.0"
+				},
+				{
+					"scope": "ncp/cluster",
+					"tag": "k8s-cluster"
+				},
+				{
+					"scope": "ncp/project",
+					"tag": "storageos"
+				},
+				{
+					"scope": "external_id",
+					"tag": "687ccb6a-5400-402b-b729-86b727595ea1"
+				},
+				{
+					"scope": "ncp/project_uid",
+					"tag": "687ccb6a-5400-402b-b729-86b727595ea1"
+				},
+				{
+					"scope": "app",
+					"tag": "storageos"
+				}
+			],
+			"path": "/infra/segments/seg_687ccb6a-5400-402b-b729-86b727595ea1_0",
+			"relative_path": "seg_687ccb6a-5400-402b-b729-86b727595ea1_0",
+			"parent_path": "/infra",
+			"unique_id": "f5cdaed9-d4ed-485e-b707-a29c157fea60",
+			"marked_for_delete": false,
+			"overridden": false,
+			"_create_user": "admin",
+			"_create_time": 1598681878411,
+			"_last_modified_user": "admin",
+			"_last_modified_time": 1598681878439,
 			"_system_owned": false,
 			"_protection": "NOT_PROTECTED",
 			"_revision": 0
 		}
 	],
-	"result_count": 5,
+	"result_count": 12,
 	"sort_by": "display_name",
 	"sort_ascending": true
 }
