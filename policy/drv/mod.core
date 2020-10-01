@@ -183,58 +183,6 @@ function getCertificate {
 	printf "%s\n" "$RESULT" | sed ':a;N;$!ba;s/\n/\\\\n/g'
 }
 
-function buildTable {
-	local INPUT="${1}" # change first entry to color, separate from data body
-	read -r -d '' JQTABLE <<-CONFIG
-		if (.[0]?) then
-			[(
-				[.[0] | to_entries[] | "<" + .key + ">"]
-			),(
-				.[] | [to_entries[] | .value]
-			)]
-		else . end
-	CONFIG
-	local HEADER="1"
-	echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t' | while read -r LINE; do
-		if [[ -n $HEADER ]]; then
-			printf "${CYAN}${LINE}${NC}\n"
-			HEADER=""
-		else
-			printf "$LINE\n";
-		fi
-	done
-}
-
-function buildTest {
-	local INPUT="${1}" # change first entry to color, separate from data body
-	read -r -d '' JQTABLE <<-CONFIG
-		if (.[0]?) then
-			[(
-				[.[0] | to_entries[] | "${BLUE}<" + .key + ">${NC}"]
-			),(
-				.[] | [to_entries[] | "${NC}" + .value + "${NC}"]
-			)]
-		else . end
-	CONFIG
-	BODY=$(echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t')
-	printf "${BODY}\n"
-}
-
-function buildNoColour {
-	local INPUT="${1}" # change first entry to color, separate from data body
-	read -r -d '' JQTABLE <<-CONFIG
-		if (.[0]?) then
-			[(
-				[.[0] | to_entries[] | "<" + .key + ">"]
-			),(
-				.[] | [to_entries[] | .value]
-			)]
-		else . end
-	CONFIG
-	BODY=$(echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t')
-	printf "${BODY}\n"
-}
-
 ## filter payload with string
 function filter {
 	local PAYLOAD=${1}

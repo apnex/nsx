@@ -38,6 +38,28 @@ function cmd {
 	esac
 }
 
+function buildTable {
+	local INPUT="${1}" # change first entry to color, separate from data body
+	read -r -d '' JQTABLE <<-CONFIG
+		if (.[0]?) then
+			[(
+				[.[0] | to_entries[] | .key | ascii_upcase]
+			),(
+				.[] | [to_entries[] | .value]
+			)]
+		else . end
+	CONFIG
+	local HEADER="1"
+	echo "$INPUT" | jq -r "$JQTABLE | .[] | @tsv" | column -t -s $'\t' | while read -r LINE; do
+		if [[ -n $HEADER ]]; then
+			printf "${CYAN}${LINE}${NC}\n"
+			HEADER=""
+		else
+			printf "$LINE\n";
+		fi
+	done
+}
+
 function dofilter {
 	local PARAMS=(${@})
 	local INPUT=$(eval $(drv "${TYPE}")) # link to drv
@@ -47,10 +69,10 @@ function dofilter {
 		local TPLJSON=$(echo "${INPUT}" | jq -f ${JQDIR}/tpl.${TYPE}.jq)
 		if [[ -n ${FILTER} ]]; then
 			local PAYLOAD=$(filter "${TPLJSON}" "${FILTER}")
-			setContext "${PAYLOAD}" "${TYPE}"
+			#setContext "${PAYLOAD}" "${TYPE}"
 			buildTable "${PAYLOAD}"
 		else
-			setContext "${TPLJSON}" "${TYPE}"
+			#setContext "${TPLJSON}" "${TYPE}"
 			buildTable "${TPLJSON}"
 		fi
 	else
@@ -65,7 +87,7 @@ function template {
 	local TEMPLATE="${JQDIR}/tpl.${TYPE}.jq"
 	if [[ -f "${TEMPLATE}" ]]; then
 		local PAYLOAD=$(echo "${INPUT}" | jq -f ${JQDIR}/tpl.${TYPE}.jq)
-		setContext "${PAYLOAD}" "${TYPE}"
+		#setContext "${PAYLOAD}" "${TYPE}"
 		buildTable "${PAYLOAD}"
 	else
 		echo "[$(corange "WARN")]: template [$(cgreen "${TEMPLATE}")] not found" 1>&2

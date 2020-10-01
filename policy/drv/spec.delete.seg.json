@@ -4,6 +4,7 @@
 	"children": [
 		{
 			"resource_type": "ChildSegment",
+			"marked_for_delete": "true",
 			"Segment": {
 				"resource_type": "Segment",
 				"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",

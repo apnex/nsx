@@ -1,7 +1,7 @@
 {
-	"id": "k8s-mgmt",
+	"id": "Overlay_Segment",
 	"resource_type": "Segment",
-	"name": "k8s-mgmt",
-	"type": "ROUTED",
+	"name": "MYOVERLAY-SEG",
+	"type": "DISCONNECTED",
 	"admin_state": "UP"
 }

@@ -1,6 +1,6 @@
 HTTP/1.1 200 
-Set-Cookie: JSESSIONID=6D0DF190CBDA0326918921D978D7CCDA; Path=/; Secure; HttpOnly
-X-XSRF-TOKEN: 7b86c074-28d7-4272-8b9c-ba2c7e254c84
+Set-Cookie: JSESSIONID=BB9839D240D0E93837E267E4F0195561; Path=/; Secure; HttpOnly
+X-XSRF-TOKEN: fa6c7cd6-eb07-43ae-a227-01a6a57d0e58
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
@@ -10,6 +10,6 @@ X-Frame-Options: SAMEORIGIN
 X-Content-Type-Options: nosniff
 Content-Type: application/json
 Content-Length: 107
-Date: Thu, 01 Oct 2020 22:14:15 GMT
+Date: Thu, 01 Oct 2020 23:12:11 GMT
 Server: NSX
 
