@@ -1,0 +1,314 @@
+{
+	"stdout": [
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"/"
+		],
+		[
+			0.1,
+			"c"
+		],
+		[
+			0.1,
+			"o"
+		],
+		[
+			0.1,
+			"n"
+		],
+		[
+			0.1,
+			"t"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"o"
+		],
+		[
+			0.1,
+			"l"
+		],
+		[
+			0.1,
+			"l"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"c"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"a"
+		],
+		[
+			0.1,
+			"t"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"h"
+		],
+		[
+			0.1,
+			" "
+		],
+		[
+			0.1,
+			"V"
+		],
+		[
+			0.1,
+			"M"
+		],
+		[
+			0.1,
+			"w"
+		],
+		[
+			0.1,
+			"a"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"1"
+		],
+		[
+			0.1,
+			"!"
+		],
+		[
+			0.1,
+			"\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mstatus\u001b[0m] health [\u001b[0;32mnsxm01.lab\u001b[0m]... [\u001b[0;36mSERVICES\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: vsp [\u001b[0;32mstatus\u001b[0m] health [\u001b[0;32mvcenter.lab\u001b[0m]... [\u001b[0;36mSERVICES\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: found [\u001b[0;32mcompute-manager\u001b[0m] name [\u001b[0;32mvcenter.lab\u001b[0m]\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mcreate\u001b[0m] controller-node [\u001b[0;32mhttps://nsxm01.lab/api/v1/cluster/nodes/deployments\u001b[0m]... "
+		],
+		[
+			0.1,
+			"[\u001b[0;36m201\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"\u001b[1;39m{\r\n\t\u001b[0m\u001b[34;1m\"result_count\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;39m1\u001b[0m\u001b[1;39m,\r\n\t\u001b[0m\u001b[34;1m\"results\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m[\r\n\t\t\u001b[1;39m{\r\n\t\t\t\u001b[0m\u001b[34;1m\"user_settings\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m{\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"cli_password\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"[redacted]\"\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"root_password\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"[redacted]\"\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"cli_username\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"admin\"\u001b[0m\u001b[1;39m\r\n\t\t\t\u001b[1;39m}\u001b[0m\u001b[1;39m,\r\n"
+		],
+		[
+			0.1,
+			"\t\t\t\u001b[0m\u001b[34;1m\"vm_id\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"1ee273dd-59d8-47fb-9128-8a444df1cddb\"\u001b[0m\u001b[1;39m,\r\n\t\t\t\u001b[0m\u001b[34;1m\"roles\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m[\r\n\t\t\t\t\u001b[0;32m\"CONTROLLER\"\u001b[0m\u001b[1;39m\r\n\t\t\t\u001b[1;39m]\u001b[0m\u001b[1;39m,\r\n\t\t\t\u001b[0m\u001b[34;1m\"deployment_config\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m{\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"placement_type\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"VsphereClusterNodeVMDeploymentConfig\"\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"vc_id\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"0dee84ba-c224-4057-ac6a-269588bc95f6\"\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"management_network_id\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"dvportgroup-62\"\u001b[0m\u001b[1;39m,"
+		],
+		[
+			0.1,
+			"\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"enable_ssh\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;39mtrue\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"default_gateway_addresses\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m[\r\n"
+		],
+		[
+			0.1,
+			"\t\t\t\t\t\u001b[0;32m\"172.16.10.1\"\u001b[0m\u001b[1;39m\r\n\t\t\t\t\u001b[1;39m]\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"hostname\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"controller-1\"\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"compute_id\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"domain-c7\"\u001b[0m\u001b[1;39m,\r\n"
+		],
+		[
+			0.1,
+			"\t\t\t\t\u001b[0m\u001b[34;1m\"storage_id\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"datastore-11\"\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"allow_ssh_root_login\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;39mtrue\u001b[0m\u001b[1;39m,\r\n\t\t\t\t\u001b[0m\u001b[34;1m\"management_port_subnets\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m[\r\n"
+		],
+		[
+			0.1,
+			"\t\t\t\t\t\u001b[1;39m{\r\n\t\t\t\t\t\t\u001b[0m\u001b[34;1m\"ip_addresses\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[1;39m[\r\n"
+		],
+		[
+			0.1,
+			"\t\t\t\t\t\t\t\u001b[0;32m\"172.16.10.16\"\u001b[0m\u001b[1;39m\r\n\t\t\t\t\t\t\u001b[1;39m]\u001b[0m\u001b[1;39m,"
+		],
+		[
+			0.1,
+			"\r\n\t\t\t\t\t\t\u001b[0m\u001b[34;1m\"prefix_length\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;39m24\u001b[0m\u001b[1;39m\r\n\t\t\t\t\t\u001b[1;39m}\u001b[0m\u001b[1;39m\r\n"
+		],
+		[
+			0.1,
+			"\t\t\t\t\u001b[1;39m]\u001b[0m\u001b[1;39m\r\n\t\t\t\u001b[1;39m}\u001b[0m\u001b[1;39m,\r\n\t\t\t\u001b[0m\u001b[34;1m\"form_factor\"\u001b[0m\u001b[1;39m: \u001b[0m\u001b[0;32m\"SMALL\"\u001b[0m\u001b[1;39m\r\n\t"
+		],
+		[
+			0.1,
+			"\t\u001b[1;39m}\u001b[0m\u001b[1;39m\r\n\t\u001b[1;39m]\u001b[0m\u001b[1;39m\r\n\u001b[1;39m}\u001b[0m\r\n"
+		],
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			3,
+			"."
+		],
+		[
+			0.1,
+			"/"
+		],
+		[
+			0.1,
+			"c"
+		],
+		[
+			0.1,
+			"o"
+		],
+		[
+			0.1,
+			"n"
+		],
+		[
+			0.1,
+			"t"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"o"
+		],
+		[
+			0.1,
+			"l"
+		],
+		[
+			0.1,
+			"l"
+		],
+		[
+			0.1,
+			"e"
+		],
+		[
+			0.1,
+			"r"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"l"
+		],
+		[
+			0.1,
+			"i"
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"t"
+		],
+		[
+			0.1,
+			"."
+		],
+		[
+			0.1,
+			"s"
+		],
+		[
+			0.1,
+			"h"
+		],
+		[
+			0.1,
+			"\r\n"
+		],
+		[
+			0.1,
+			"[\u001b[0;32mINFO\u001b[0m]: nsx [\u001b[0;32mlist\u001b[0m] cluster/nodes/deployments [\u001b[0;32mhttps://nsxm01.lab/api/v1/cluster/nodes/deployments\u001b[0m]... "
+		],
+		[
+			0.1,
+			"[\u001b[0;36m200\u001b[0m] - SUCCESS\r\n"
+		],
+		[
+			0.1,
+			"id                                    hostname      role        form_factor  ip_address\r\n-----                                 -----         -----       -----        -----\r\n1ee273dd-59d8-47fb-9128-8a444df1cddb  controller-1  CONTROLLER  SMALL        172.16.10.16\r\n"
+		],
+		[
+			0.1,
+			"[root@obpc nsx]# "
+		],
+		[
+			5,
+			""
+		]
+	],
+	"env": {
+		"SHELL": "/bin/bash",
+		"TERM": "xterm-256color"
+	},
+	"command": null,
+	"width": 282,
+	"title": null,
+	"height": 74,
+	"version": 1,
+	"duration": 1
+}
