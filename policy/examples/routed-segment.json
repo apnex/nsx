@@ -1,0 +1,32 @@
+{
+	"Segment": {
+		"resource_type": "Segment",
+		"id": "test-segment-mgmt",
+		"display_name": "test-segment-mgmt",
+		"type": "ROUTED",
+		"subnets": [
+			{
+				"gateway_address": "172.20.25.1/24",
+				"dhcp_ranges": [
+					"172.20.25.50-172.20.25.99"
+				],
+				"dhcp_config": {
+					"resource_type": "SegmentDhcpV4Config",
+					"server_address": "172.20.25.2/24",
+					"lease_time": 86400,
+					"dns_servers": [
+						"10.30.0.30"
+					]
+				},
+				"network": "172.20.25.0/24"
+			}
+		],
+		"connectivity_path": "/infra/tier-1s/t1-mgmt",
+		"transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/3a066c4c-ab53-4edb-925b-996954286133",
+		"dhcp_config_path": "/infra/dhcp-server-configs/dhcp-server",
+		"admin_state": "UP",
+		"path": "/infra/segments/k8s-mgmt",
+		"relative_path": "k8s-mgmt",
+		"parent_path": "/infra"
+	}
+}

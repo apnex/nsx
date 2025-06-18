@@ -1,0 +1,23 @@
+{
+	"resource_type": "Infra",
+	"display_name": "infra",
+	"children": [
+		{
+			"resource_type": "ChildTier1",
+			"Tier1": {
+				"resource_type": "Tier1",
+				"display_name": "my-Tier-1-GW-Prod",
+				"id": "my-Tier-1-GW-Prod",
+				"tier0_path": "/infra/tier-0s/Tier-0-GW-West-01"
+			}
+		},
+		{
+			"resource_type": "ChildTier0",
+			"Tier0": {
+				"resource_type": "Tier0",
+				"display_name": "Tier-0-GW-West-01",
+				"id": "Tier-0-GW-West-01"
+			}
+		}
+	]
+}
