@@ -1,7 +1,0 @@
-{
-	"id": "Overlay_Segment",
-	"resource_type": "Segment",
-	"name": "MYOVERLAY-SEG",
-	"type": "DISCONNECTED",
-	"admin_state": "UP"
-}

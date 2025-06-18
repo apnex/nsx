@@ -23,13 +23,13 @@ ovftool \
 	--prop:nsx_cli_passwd_0="VMware1!VMware1!" \
 	--prop:nsx_hostname=nsx-manager \
 nsx-unified-appliance-2.5.0.0.0.14663978.ova \
-vi://administrator@vsphere.local:ObiWan1%21@vcenter.lab/?ip=172.16.100.38
+vi://administrator@vsphere.local:MyPassword@vcenter.lab/?ip=172.16.100.38
 
 ##
 #vi://administrator@vsphere.local:VMware1%21@vcenter.lab/?ip=172.16.101.130
 
 ## buildweb links
-BASEURL="http://build-squid.eng.vmware.com/build/mts/release/bora-12456646/publish/nsx-unified-appliance/exports/ova"
+BASEURL="http://web-server-hosting-ova"
 MGROVA="${BASEURL}"/nsx-unified-appliance-2.4.0.0.0.12456291.ova
 EDGOVA="${BASEURL}"/nsx-edge-2.4.0.0.0.12454265.ova
 

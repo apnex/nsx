@@ -6,23 +6,22 @@ source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/mod.driver
 
 # inputs
-ITEM="infra/segments"
+#ITEM="infra?filter=Type-Tier1"
+#ITEM="infra?filter=Type-Segment"
+ITEM="batch"
 INPUTS=()
-INPUTS+=("<segments.id>")
 
-#valclear
-#valset "segment" "<segments.id>"
-
-# body
-ID=${1}
+REQUESTS=$1
 
 # run
 run() {
-        URL=$(buildURL "${ITEM}")
-        URL+="/${ID}"
+	BODY=${REQUESTS}
+	#echo "MOOOO"
+	#printf "%s\n" "${BODY}"
+	URL=$(buildURL "${ITEM}")
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-		nsxDelete "${URL}"
+		nsxPost "${URL}" "${BODY}"
 	fi
 }
 

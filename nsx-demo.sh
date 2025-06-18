@@ -23,25 +23,25 @@ enterPrompt() {
 }
 
 header "***** Node Status *****"
-/home/smitah5/nsx/lib/cmd.nodes.status.sh
+/home/nsx/lib/cmd.nodes.status.sh
 enterPrompt "Press ENTER to list logical switches "
 
 header "***** Logical Switches *****"
-/home/smitah5/nsx/lib/cmd.logical-switches.list.sh
+/home/nsx/lib/cmd.logical-switches.list.sh
 enterPrompt "Press ENTER to create 10x demo logical switches "
 
 for SWITCH_NUM in `seq 1 10`; do
-  /home/smitah5/nsx/lib/cmd.logical-switches.create.sh $SWITCH_PREFIX-$SWITCH_NUM $TZ_UUID
+  /home/nsx/lib/cmd.logical-switches.create.sh $SWITCH_PREFIX-$SWITCH_NUM $TZ_UUID
 done
 
 header "***** Logical Switches *****"
-/home/smitah5/nsx/lib/cmd.logical-switches.list.sh
+/home/nsx/lib/cmd.logical-switches.list.sh
 enterPrompt "Press ENTER to delete all demo switches "
 
 for UUID in `/home/smitah5/nsx/lib/cmd.logical-switches.list.sh | grep demo | cut -d' ' -f1`; do
-  /home/smitah5/nsx/lib/cmd.logical-switches.delete.sh $UUID
+  /home/nsx/lib/cmd.logical-switches.delete.sh $UUID
 done
 
 header "***** Logical Switches *****"
-/home/smitah5/nsx/lib/cmd.logical-switches.list.sh
+/home/nsx/lib/cmd.logical-switches.list.sh
 echo

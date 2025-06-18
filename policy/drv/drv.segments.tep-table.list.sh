@@ -10,19 +10,19 @@ ITEM="infra/segments"
 INPUTS=()
 INPUTS+=("<segments.id>")
 
-#valclear
-#valset "segment" "<segments.id>"
+valclear
+valset "segments.id" "<segments.id>"
 
 # body
 ID=${1}
 
 # run
 run() {
-        URL=$(buildURL "${ITEM}")
-        URL+="/${ID}"
+	URL=$(buildURL "${ITEM}")
+	URL+="/${ID}/tep-table"
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-		nsxDelete "${URL}"
+		nsxGet "${URL}"
 	fi
 }
 

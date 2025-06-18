@@ -1,11 +1,19 @@
-PATCH https://<policy-mgr>/policy/api/v1/infra/segments/web-tier
 {
-	"display_name":"web-tier",
-	"subnets": [
+	"resource_type":"Infra",
+	"children":[
 		{
-			"gateway_address": "40.1.1.1/16",
-			"dhcp_ranges": [ "40.1.2.0/24" ]
+			"resource_type": "ChildSegment",
+			"Segment": {
+				"resource_type": "Segment",
+				"id": "mytestseg",
+				"description": "MyTestSeg",
+				"display_name": "mytestseg",
+				"type": "DISCONNECTED",
+				"vlan_ids": [
+					"0"
+				]
+			}
 		}
-	],
-	"connectivity_path": "/infra/tier-1s/mgw"
+	]
 }
+

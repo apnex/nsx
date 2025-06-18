@@ -81,9 +81,14 @@ function dofilter {
 	fi
 }
 
+function drv {
+	local DRIVER=${1}
+	printf "${WORKDIR}/drv/drv.${DRIVER}.sh"
+}
+
 function template {
 	local PARAMS=(${@})
-	local INPUT=$($(drv "${TYPE}") ${PARAMS}) # link to drv
+	local INPUT=$($(drv "${TYPE}") "${PARAMS}") # execute driver
 	local TEMPLATE="${JQDIR}/tpl.${TYPE}.jq"
 	if [[ -f "${TEMPLATE}" ]]; then
 		local PAYLOAD=$(echo "${INPUT}" | jq -f ${JQDIR}/tpl.${TYPE}.jq)
@@ -99,9 +104,4 @@ function payload {
 	local PARAMS=(${@})
 	local PAYLOAD=$(eval $(drv "${TYPE}") ${PARAMS}) # link to drv
 	printf "%s" "${PAYLOAD}"
-}
-
-function drv {
-	local DRIVER=${1}
-	printf "${WORKDIR}/drv/drv.${DRIVER}.sh"
 }

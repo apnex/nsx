@@ -1,0 +1,12 @@
+{
+	"attachment": {
+		"id": "80bf08c6-3b5d-4ef0-8300-a405182f2e23",
+		"type": "PARENT",
+		"traffic_tag": 0,
+		"hyperbus_mode": "DISABLE"
+	},
+	"admin_state": "UP",
+	"resource_type": "SegmentPort",
+	"display_name": "mynewtestport",
+	"parent_path": "/infra/segments/seg-givr-palo-trunk"
+}

@@ -1,6 +1,0 @@
-{
-	"id": "1b3a2f36-bfd1-443e-a0f6-4de01abc963e",
-	"name": "nsx-overlay-transportzone",
-	"host_switch_name": "nsxHostSwitch",
-	"transport_type": "OVERLAY"
-}

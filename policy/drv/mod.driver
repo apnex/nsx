@@ -16,7 +16,7 @@ driver() {
 		;;
 		*) # validate inputs here before run?
 			if [[ -n "${NSXHOST}" ]]; then
-				run
+				run "${@}"
 			fi
 		;;
 	esac

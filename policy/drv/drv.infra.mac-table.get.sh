@@ -6,23 +6,21 @@ source ${WORKDIR}/drv.nsx.client
 source ${WORKDIR}/mod.driver
 
 # inputs
-ITEM="infra/segments"
+#ITEM="infra?filter=Type-Tier1"
+#ITEM="infra?type_filter=Segment"
+ITEM="infra?base_path=/infra/segments/seg-givr-palo-vlan100/ports"
+#/${SEGMENT_ID}/ports/${PORT_ID}/mac-table
+
 INPUTS=()
-INPUTS+=("<segments.id>")
-
-#valclear
-#valset "segment" "<segments.id>"
-
-# body
-ID=${1}
 
 # run
 run() {
-        URL=$(buildURL "${ITEM}")
-        URL+="/${ID}"
+	#BODY=$(<spec.delete.seg.json)
+	#printf "%s\n" "${BODY}"
+	URL=$(buildURL "${ITEM}")
 	if [[ -n "${URL}" ]]; then
 		printf "[$(cgreen "INFO")]: nsx [$(cgreen "list")] ${ITEM} [$(cgreen "$URL")]... " 1>&2
-		nsxDelete "${URL}"
+		nsxGet "${URL}" "${BODY}"
 	fi
 }
 

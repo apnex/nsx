@@ -1,0 +1,13 @@
+
+{
+	"requests": [
+		{
+			"method": "GET",
+			"uri":"/v1/infra/segments/seg-givr-palo-vlan100/ports"
+		},
+		{
+			"method": "GET",
+			"uri":"/v1/infra/segments/seg-givr-palo-vlan100/ports/attachment-seg-givr-palo-vlan100-100-1/mac-table"
+		}
+	]
+}

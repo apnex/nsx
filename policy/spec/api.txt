@@ -1,0 +1,4 @@
+https://developer.broadcom.com/xapis/nsx-t-data-center-rest-api/latest/policy_networking_connectivity_segments_ports.html
+
+# a note on policy api
+https://blogs.vmware.com/networkvirtualization/2020/06/navigating-nsxt-policy-apis.html/

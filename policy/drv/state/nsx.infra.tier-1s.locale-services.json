@@ -1,5 +1,0 @@
-{
-	"module_name": "common-services",
-	"error_message": "The request was rejected because the URL was not normalized.",
-	"error_code": 400
-}
