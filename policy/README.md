@@ -4,7 +4,7 @@ Currently, these have been tested on Centos.
 
 ##### Rocky / RHEL / Fedora
 ```shell
-dns install -y curl jq
+dnf install -y curl jq
 ```
 
 ##### Ubuntu
@@ -73,24 +73,24 @@ Should you require "raw" API response body (and not a table) you can run these d
 #### Quiet
 Commands display an api request log to `stderr` to allow you to filter these out to `/dev/null`.  
 Removing shell logs from `cmd.transport-zones.list.sh` for example:  
-<pre>
-<b>./cmd.transport-zones.list.sh 2>/dev/null</b>
-</pre>
+```shell
+./cmd.transport-zones.list.sh 2>/dev/null
+```
 
 #### Filter
 Any command can be combined with standard shell tooling for filtering output.  
 For example using `grep` to filter for a specific `transport-zone`:  
-<pre>
-<b>./cmd.transport-zones.list.sh | grep TZ-OVERLAY</b>
-</pre>
+```shell
+./cmd.transport-zones.list.sh | grep TZ-OVERLAY
+```
 
 #### Watch
 `watch` can also be used to "live monitor" an API response from a command.  
 This can be combined with removing `stderr` for neat output.  
 For example, you may wish to `watch` the "live" `mac-table` of a `segment` as follows;  
-<pre>
-<b>watch -cn 3 "./cmd.segments.mac-table.list.sh seg-givr-palo-vlan100 2>/dev/null"</b>
-</pre>
+```shell
+watch -cn 3 "./cmd.segments.mac-table.list.sh seg-givr-palo-vlan100 2>/dev/null"
+```
 
 This will show the `mac-table` output and `watch` (with colours enabled) on a 3-second interval.  
 
@@ -99,53 +99,53 @@ This will show the `mac-table` output and `watch` (with colours enabled) on a 3-
 Included cmdlets are as follows:  
 
 #### <b>cmd.transport-zones.list.sh</b>
-<pre>
-<b>./cmd.transport-zones.list.sh</b>
-</pre>
+```shell
+./cmd.transport-zones.list.sh
+```
 
 ### CLI CMD Examples
 The following examples show use of some of the CLI commands included against the policy api.  
 
 #### <b>cmd.transport-zones.list.sh</b>
-<pre>
-<b>./cmd.transport-zones.list.sh</b>
-</pre>
+```shell
+./cmd.transport-zones.list.sh
+```
 
 ![transport-zones](../images/transport-zones.png)
 
 This command lists available transport zones  
 
 #### <b>cmd.transport-nodes.list.sh</b>
-<pre>
-<b>./cmd.transport-nodes.list.sh</b>
-</pre>
+```shell
+./cmd.transport-nodes.list.sh
+```
 
 ![transport-nodes](../images/transport-nodes.png)
 
 This command lists available transport nodes  
 
 #### <b>cmd.segments.list.sh</b>
-<pre>
-<b>./cmd.segments.list.sh</b>
-</pre>
+```shell
+./cmd.segments.list.sh
+```
 
 ![segments](../images/segments.png)
 
 This command lists configured segments  
 
 #### <b>cmd.segments.ports.list.sh</b> {<b>segment.id</b>}
-<pre>
-<b>./cmd.segments.ports.list.sh seg-givr-palo-vlan100</b>
-</pre>
+```shell
+./cmd.segments.ports.list.sh seg-givr-palo-vlan100
+```
 
 ![segment-ports](../images/segment-ports.png)
 
 This command lists ports within a specified segment
 
 #### <b>cmd.segments.mac-table.list.sh</b> {<b>segment.id</b>}
-<pre>
-<b>./cmd.segments.mac-table.list.sh seg-givr-palo-vlan100</b>
-</pre>
+```shell
+./cmd.segments.mac-table.list.sh seg-givr-palo-vlan100
+```
 
 ![segments-mac-table](../images/mac-table.png)
 
